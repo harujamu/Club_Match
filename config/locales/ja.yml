@@ -116,3 +116,19 @@ ja:
         match_rejected: "マッチ不成立"
         cancel: "応募取消"
         done: "完了"
+        
+    recruit:
+      age_group:
+        unspecified: "指定なし"
+        junior_school_student: "小学生"
+        secondary_school_student: "中学生"
+        high_school_student: "高校生"
+        college_student: "大学生"
+        adult: "社会人"
+      
+      recruit_status:
+        recruiting: "募集中"
+        having_candidates: "候補者あり"
+        match: "マッチ！"
+        decline: "断る"
+        done: "完了"
