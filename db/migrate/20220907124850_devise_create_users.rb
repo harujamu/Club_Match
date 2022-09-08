@@ -34,6 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
 
       t.string :club_name, null: false
+      t.integer :genre_id, null: false
       t.integer :prefecture, null: false
       t.string :municipality, null: false
       t.string :address, null: false

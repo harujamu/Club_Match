@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2022_09_08_021050) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "club_name", null: false
+    t.integer "genre_id", null: false
     t.integer "prefecture", null: false
     t.string "municipality", null: false
     t.string "address", null: false
