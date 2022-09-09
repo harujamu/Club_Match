@@ -4,5 +4,5 @@ class Recruit < ApplicationRecord
   
   belongs_to :user
   has_many :sites
-  
+
 end

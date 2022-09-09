@@ -12,6 +12,6 @@ class User < ApplicationRecord
                      saga: 40, nagasaki: 41, oita: 42, kumamoto: 43, miiyazaki: 44, kagoshima: 45, okinawa: 46 }
 
 
-  has_many:
+  has_one :genre
 
 end
