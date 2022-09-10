@@ -26,15 +26,13 @@
           </tr>
           <tr>
             <td><%= f.label :主な活動場所 %></td>
-            <!--placeholder: "都道府県"-->
-            <td><%= f.select :prefecture, placeholder: "都道府県" %></td>
+            <td><%= f.select :prefecture, User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
             <td><%= f.text_field :municipality, placeholder: "市区町村" %></td>
             <td><%= f.text_field :address, placeholder: "番地" %></td>
           </tr>
           <tr>
             <td><%= f.label :年齢層 %></td>
-            <!--placeholder: "選択してください"-->
-            <td><%= f.select :age_group, placeholder: "選択してください" %></td>
+            <td><%= f.select :age_group, User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
             <td></td>
             <td></td>
           </tr>

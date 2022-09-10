@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   
   # ユーザー画面のルーティング設定
   # Homesコントローラ
-  get "/about" => "homes/about#about", as: "about"
+  get "/about" => "homes#about", as: "about"
   
   # Recruitsコントローラ
   get "/recruits" => "recruits#index"
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   
   # Sitesコントローラ
   get "/sites" => "sites#index"
-  post "/sites" => "sites"
+  post "/sites" => "sites#create"
   delete "sites/:id" => "sites#destroy"  
   
   # Messagesコントローラ
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     # Genresコントローラ
     get "admin/genres" => "genres#index"
     post "admin/genres" => "genres#create"
-    get "admin/genres/:id/edit"
+    get "admin/genres/:id/edit" => "genres#edit"
     patch "admin/genres/:id" =>"genres#update"
     
     # Uersコンロローラ
