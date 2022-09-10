@@ -37,6 +37,12 @@
             <td></td>
           </tr>
           <tr>
+            <td><%= f.label :ジャンル %></td>
+            <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blanck:"選択してください" %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
             <td><%= f.label :メールアドレス %></td>
             <td><%= f.email_field :email, autofocus: true, placeholder: "sample@email.com" %></td>
             <td></td>
