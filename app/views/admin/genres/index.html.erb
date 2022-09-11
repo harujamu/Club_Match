@@ -20,6 +20,7 @@
           <tr>
           <th>ジャンルID</th>
           <th>ジャンル名</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
           <tr>
             <td><%= genre.id %></td>
             <td><%= genre.name %></td>
+            <td><%= link_to '編集',admin_edit_genres_path(genre.id), class:"btn btn-success" %></td>
           </tr>
         <% end %>
         </tbody>

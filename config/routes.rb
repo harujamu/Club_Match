@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     
     # Genresコントローラ
     get "/genres" => "genres#index"
-    post "/genres" => "genres#create", as: "create_genres"
+    post "/genres" => "genres#create"
     get "/genres/:id/edit" => "genres#edit", as: "edit_genres"
     patch "/genres/:id" =>"genres#update", as: "update_genres"
     
