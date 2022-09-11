@@ -1,0 +1,40 @@
+<p></p>
+
+<div class ="container">
+  <div class ="row">
+    <div class ="col-md-8">
+      <h3>ジャンル登録</h3>
+    <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
+      <%=f.text_field :name %>
+      <%= f.submit "登録", class:"btn btn-success" %>
+    <% end %>
+    </div>
+  </div>
+  
+  <div class ="row">
+    <div class ="col-md-8">
+      <h3>ジャンル一覧</h3>
+      
+      <table class ="table table-bordered">
+        <thead>
+          <tr>
+          <th>ジャンルID</th>
+          <th>ジャンル名</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+          <tr>
+            <td><%= genre.id %></td>
+            <td><%= genre.name %></td>
+          </tr>
+        <% end %>
+        </tbody>
+        
+      </table>
+      
+    </div>
+    
+  </div>
+  
+</div>
