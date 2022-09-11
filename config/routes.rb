@@ -19,52 +19,52 @@ Rails.application.routes.draw do
   # Recruitsコントローラ
   get "/recruits" => "recruits#index"
   get "recruits/new" => "recruits#new"
-  post "/recruits" => "recruits#create"
-  get "recruits/:id" => "recruits#show"
-  get "recruits/:id/edit" => "recruits#edit"
-  patch "recruits/:id" => "recruits#update"
+  post "/recruits" => "recruits#create", as: "create_recruits"
+  get "recruits/:id" => "recruits#show", as: "show_recruits"
+  get "recruits/:id/edit" => "recruits#edit", as: "edit_recruits"
+  patch "recruits/:id" => "recruits#update", as: "update_recruits"
   
   # Usersコントローラ
-  get "users/:id" => "users#show"
-  get "users/:id/edit" => "users#edit"
-  patch "users/:id" => "users#update"
-  get "users/unsubscribe" => "users#unsubscribe_confirm"
-  patch "users/unsubscribe/:id" => "users#unsubscribe"
+  get "users/:id" => "users#show", as: "users_show"
+  get "users/:id/edit" => "users#edit", as: "users_edit"
+  patch "users/:id" => "users#update", as: "users_update"
+  get "users/unsubscribe" => "users#unsubscribe_confirm", as: "users_unsubscribe_confirm"
+  patch "users/unsubscribe/:id" => "users#unsubscribe", as: "users_unsubscribe"
   
   # Entriesコントローラ
   get "/entries" => "entries#index"
-  get "entries/:id" => "entries#show"
+  get "entries/:id" => "entries#show", as: "show_entries"
   
   # Notifiesコントローラ
-  get "users/:user_id/notifies" => "notifies#index"
+  get "users/:user_id/notifies" => "notifies#index", as: "notifies"
   
   # Sitesコントローラ
   get "/sites" => "sites#index"
-  post "/sites" => "sites#create"
-  delete "sites/:id" => "sites#destroy"  
+  post "/sites" => "sites#create", as: "create_sites"
+  delete "sites/:id" => "sites#destroy" , as: "destroy_sites"
   
   # Messagesコントローラ
-  post "messages" => "messages#create"
+  post "messages" => "messages#create", as: "create_messages"
   
   # Roomsコントローラ
-  get "rooms/:id" => "room#show"
+  get "rooms/:id" => "room#show", as: "show_romms"
   post "rooms" => "rooms#create"
   
   # 管理者画面のルーティング設定
   namespace :admin do
     # Homesコントローラ
-    get "/admin" => "homes#top"
+    get "/" => "homes#top"
     
     # Genresコントローラ
-    get "admin/genres" => "genres#index"
-    post "admin/genres" => "genres#create"
-    get "admin/genres/:id/edit" => "genres#edit"
-    patch "admin/genres/:id" =>"genres#update"
+    get "/genres" => "genres#index"
+    post "/genres" => "genres#create", as: "create_genres"
+    get "/genres/:id/edit" => "genres#edit", as: "edit_genres"
+    patch "/genres/:id" =>"genres#update", as: "update_genres"
     
     # Uersコンロローラ
-    get "users/:id" => "users#show"
-    get "users/:id/edit" => "users#edit"
-    patch "users/:id" => "users#update"
+    get "users/:id" => "users#show", as: "show_users"
+    get "users/:id/edit" => "users#edit", as: "edit_users"
+    patch "users/:id" => "users#update", as: "update_users"
     
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
