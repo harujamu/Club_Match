@@ -25,11 +25,11 @@ Rails.application.routes.draw do
   patch "recruits/:id" => "recruits#update", as: "update_recruits"
   
   # Usersコントローラ
-  get "users/:id" => "users#show", as: "show_users"
-  get "users/:id/edit" => "users#edit", as: "edit_users"
-  patch "users/:id" => "users#update", as: "update_users"
-  get "users/unsubscribe" => "users#unsubscribe_confirm", as: "users_unsubscribe_confirm"
-  patch "users/unsubscribe/:id" => "users#unsubscribe", as: "users_unsubscribe"
+  get "users/:id" => "users#show", as: "show_user"
+  get "users/:id/edit" => "users#edit", as: "edit_user"
+  patch "users/:id" => "users#update", as: "update_user"
+  get "users/unsubscribe" => "users#unsubscribe_confirm", as: "user_unsubscribe_confirm"
+  patch "users/unsubscribe/:id" => "users#unsubscribe", as: "user_unsubscribe"
   
   # Entriesコントローラ
   get "/entries" => "entries#index"
