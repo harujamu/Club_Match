@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
+
   # ルートパス設定
   root to: "public/homes#top"
   
@@ -66,7 +67,5 @@ Rails.application.routes.draw do
     get "users/:id" => "users#show", as: "show_users"
     get "users/:id/edit" => "users#edit", as: "edit_users"
     patch "users/:id" => "users#update", as: "update_users"
-    
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
