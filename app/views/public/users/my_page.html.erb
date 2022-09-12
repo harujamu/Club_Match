@@ -6,6 +6,8 @@
       <div>
       <% if image.attached? %>
       <%= image_tag user.image, size: "100 X 100" %>
+      <% else %>
+      <i class="fa-light fa-face-smile"></i>
       <% end %>
       <p><%= @user.club_name %></p>
       <p><%= link_to '編集', edit_users_path,class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', users_unsubscribe_confirm_path, class:"btn btn-deanger btn-sm" %></p>
