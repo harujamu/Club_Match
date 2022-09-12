@@ -2,11 +2,12 @@ class Public::UsersController < ApplicationController
   
   def my_page
     @user = current_user
+    @genre = Genre.find(@user.genre_id)
   end
   
   def show
     @user = User.find(params[:id])
-    
+    @genre = Genre.find(@user.genre_id)
   end
   
   def edit
@@ -31,6 +32,10 @@ class Public::UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:id, :club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction)
+  end
+  
+  def genre_params
+    params.require(:genre).permit(:name, :id)
   end
   
 end

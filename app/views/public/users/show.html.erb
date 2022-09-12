@@ -3,11 +3,13 @@
 <div class="container">
   <div class="row">
     <div class ="col-md-4">
-      <div>
-      <% if image.attached? %>
-      <%= image_tag user.image, size: "100 X 100" %>
-      <% end %>
+      <%# if image.attached? %>
+      <%#= image_tag user.image, size: "100 X 100" %>
+      <%#= else %>
+      <i class="fa-regular fa-face-smile"></i>
+      <%# end %>
       <p><%= @user.club_name %></p>
+
     </div>
     <div class="col-md-8">
       <table>
@@ -17,7 +19,7 @@
         </tr>
         <tr>
           <td>ジャンル</td>
-          <td><%= @user.genre.name %></td>
+          <td><%= @genre.name %></td>
         </tr>
         <tr>
           <td>チームの年齢層</td>
