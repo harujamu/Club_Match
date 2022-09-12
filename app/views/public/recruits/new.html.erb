@@ -6,7 +6,7 @@
     <div class ="col-md-8">
       <table>
         <tbody>
-          <%= form_with model:@recruit, url: recruits_new_path, method: :post do |f| %>
+          <%= form_with model: @recruit, url: recruits_new_path, method: :post do |f| %>
           <tr>
             <td>タイトル</td>
             <td colspan = "4"><%= f.text_field :title %></td>
@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <td>年齢層</td>
-            <td><%= f.select :age_group, User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
+            <td><%= f.select :age_group, Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
             <td></td>
             <td></td>
             <td></td>
