@@ -18,7 +18,7 @@
           <%= image_tag('club_match_logo.png') %>
           <% end %>
         </div>
-        
+
         <div class ="container col-md-8 mt-0 flex-column">
           <% if user_signed_in? %>
           <div class ="row">
@@ -37,7 +37,7 @@
               </li>
             </ul>
           </div>
-          
+
           <% elsif admin_signed_in? %>
           <div class ="row">
             <ul class ="navbar-nav justify-content-felx-end">
@@ -52,7 +52,7 @@
               </li>
             </ul>
           </div>
-          
+
           <% else %>
           <div class ="row">
             <ul class ="navbar-nav justify-content-felx-end">
@@ -74,11 +74,11 @@
         </div>
       </nav>
     </header>
-    
+
     <main>
       <%= yield %>
     </main>
-    
+
     <footer>
     </footer>
   </body>
