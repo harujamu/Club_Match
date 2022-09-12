@@ -8,6 +8,17 @@
       <%= image_tag user.image, size: "100 X 100" %>
       <% end %>
       <p><%= @user.club_name %></p>
+      <p><%= link_to '編集', edit_users_path,class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', users_unsubscribe_confirm_path, class:"btn btn-deanger btn-sm" %></p>
+      <p><i class="fa-solid fa-envelope"></i>お知らせ○件</p>
+      </div>
+      <div class="mt-2">
+        <ul>
+          <li><%= link_to '練習場所一覧', sites_path %></li>
+          <li>応募履歴を確認 </li>
+          <li>募集履歴を確認</li>
+        </ul>
+      </div>
+
     </div>
     <div class="col-md-8">
       <table>
@@ -25,7 +36,7 @@
         </tr>
         <tr>
           <td>主な活動地域</td>
-          <td><%= @user.prefecture %></td>
+          <td><%= @user.prefecture %><%= @user.municipality %><%= @user.address %></td>
         </tr>
         <tr>
           <td>クラブ紹介</td>
