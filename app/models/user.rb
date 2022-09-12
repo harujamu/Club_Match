@@ -13,5 +13,6 @@ class User < ApplicationRecord
 
 
   has_one :genre
+  has_one_attached :image
 
 end

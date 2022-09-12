@@ -1,0 +1,47 @@
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class ="col-md-4">
+      <div>
+        <% if image.attached? %>
+      <%= image_tag user.image, size: "100 X 100" %>
+      <% end %>
+      <p><%= @user.club_name %></p>
+      <p><%= link_to '編集', edit_users_path,class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', users_unsubscribe_confirm_path, class:"btn btn-deanger btn-sm" %></p>
+      <p><i class="fa-solid fa-envelope">お知らせ○件</i></p>
+      </div>
+      <div class="mt-2">
+        <ul>
+          <li><%= link_to '練習場所一覧', sites_path %></li>
+          <li>応募履歴を確認 </li>
+          <li>募集履歴を確認</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <table>
+        <tr>
+          <td>代表者氏名</td>
+          <td><%= @user.captain_last_name %><%= @user.captain_first_name %></td>
+        </tr>
+        <tr>
+          <td>ジャンル</td>
+          <td><%= @user.genre.name %></td>
+        </tr>
+        <tr>
+          <td>チームの年齢層</td>
+          <td><%= @user.age_group_i18n %></td>
+        </tr>
+        <tr>
+          <td>主な活動地域</td>
+          <td><%= @user.prefecture %></td>
+        </tr>
+        <tr>
+          <td>クラブ紹介</td>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
