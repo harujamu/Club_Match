@@ -9,10 +9,12 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
+
   # ルートパス設定
   root to: "public/homes#top"
   
   # ユーザー画面のルーティング設定
+  scope module: :public do
   # Homesコントローラ
   get "/about" => "homes#about", as: "about"
   
@@ -25,15 +27,17 @@ Rails.application.routes.draw do
   patch "recruits/:id" => "recruits#update", as: "update_recruits"
   
   # Usersコントローラ
-  get "users/:id" => "users#show", as: "show_users"
-  get "users/:id/edit" => "users#edit", as: "edit_users"
-  patch "users/:id" => "users#update", as: "update_users"
-  get "users/unsubscribe" => "users#unsubscribe_confirm", as: "users_unsubscribe_confirm"
-  patch "users/unsubscribe/:id" => "users#unsubscribe", as: "users_unsubscribe"
+  get "users/my_page" => "users#my_page" , as: "my_page"
+  get "users/:id/edit" => "users#edit", as: "edit_user"
+  get "users/:id" => "users#show", as: "show_user"
+  patch "users/:id" => "users#update", as: "update_user"
+  get "users/unsubscribe" => "users#unsubscribe_confirm", as: "user_unsubscribe_confirm"
+  patch "users/unsubscribe/:id" => "users#unsubscribe", as: "user_unsubscribe"
   
   # Entriesコントローラ
   get "/entries" => "entries#index"
   get "entries/:id" => "entries#show", as: "show_entries"
+  delete "entries/:id" => "entries#destroy", as: "destroy_entries"
   
   # Notifiesコントローラ
   get "users/:user_id/notifies" => "notifies#index", as: "notifies"
@@ -50,6 +54,8 @@ Rails.application.routes.draw do
   get "rooms/:id" => "room#show", as: "show_romms"
   post "rooms" => "rooms#create"
   
+  end
+  
   # 管理者画面のルーティング設定
   namespace :admin do
     # Homesコントローラ
@@ -65,7 +71,5 @@ Rails.application.routes.draw do
     get "users/:id" => "users#show", as: "show_users"
     get "users/:id/edit" => "users#edit", as: "edit_users"
     patch "users/:id" => "users#update", as: "update_users"
-    
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

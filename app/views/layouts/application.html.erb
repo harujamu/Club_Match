@@ -10,7 +10,81 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class ="d-flex flex-column vh-100">
+    <header>
+      <!--ロゴ-->
+      <nav class ="navbar", style="background-color: #ffffff;">
+        <div class ="nav-brand">
+          <%= link_to root_path do %>
+          <%= image_tag('club_match_logo.png') %>
+          <% end %>
+        </div>
+
+        <div class ="container col-md-8 mt-0 flex-column">
+          
+          <!--ユーザーログイン後のナビゲーションバー-->
+          <% if user_signed_in? %>
+          <div class ="row">
+            <ul class ="navbar-nav justify-content-felx-end">
+              <li class ="nav-item"> 
+                <%= link_to '応募履歴', entries_path, class:"btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to '募集する', recruits_new_path, class:"btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'マイページ', my_page_path, class:"btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class:"btn" %>
+              </li>
+            </ul>
+          </div>
+
+          <!--管理者ログイン後のナビゲーションバー-->
+          <% elsif admin_signed_in? %>
+          <div class ="row">
+            <ul class ="navbar-nav justify-content-felx-end">
+              <li class ="nav-item"> 
+                <%= link_to 'ジャンル管理', admin_genres_path, class:"btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'ユーザー一覧', admin_path, class: "btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"btn" %>
+              </li>
+            </ul>
+          </div>
+
+          <!--ログアウト後(サインイン前)のナビゲーションバー-->
+          <% else %>
+          <div class ="row">
+            <ul class ="navbar-nav justify-content-felx-end">
+              <li class ="nav-item"> 
+                <%= link_to 'About', about_path, class:"btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to '募集一覧', recruits_path, class:"btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to '新規登録', new_user_registration_path, class: "btn" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'ログイン', new_user_session_path, class:"btn" %>
+              </li>
+            </ul>
+          </div>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+    </footer>
   </body>
 </html>

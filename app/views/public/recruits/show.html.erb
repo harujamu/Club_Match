@@ -1,0 +1,37 @@
+<p></p>
+
+<div class="container">
+  <div class = "row">
+    <div class="col-md-4">
+      <!--ユーザー画像-->
+      <%= @user.club_name %>
+    </div>
+    <div class="com-md-8">
+      <div>
+        <h2><%= @recruit.title %></h2>
+        <h3><%= @recruit.date %>に<%= @recruit.site.site_name %>で<%= @recruit.practice_type %>ができる相手を募集しています</h3>
+        <% if @recruit.age_group.key != 0 %>
+        <p>※この募集対象は、<%= @recruit.age_group %>に限ります。</p>
+        <% end %>
+      </div>
+      <div>
+        <h2>練習内容</h2>
+        <%= @recruit.detail %>
+        <% if @user == current_user? %>
+        <%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %>
+        <% end %>
+        <%= link_to '応募する', entries_path, class:"btn brn-primary" %>
+        <% if @user != current_user? %>
+        <%= link_to '応募取消', destroy_entries_path, method: :delete, class:"btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class = "row">
+    <% if @user == current_user? %>
+    <h3>応募者一覧(ステータス：<%= @recruit.recruit_status_i18n %>)</h3>
+    <% else %>
+    <p>応募ステータス：<%= @entry.entry_status_i18n %></p>
+    <% end %>
+  </div>
+</div>
