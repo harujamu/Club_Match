@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
   
   # ユーザー画面のルーティング設定
+  scope module: :public do
   # Homesコントローラ
   get "/about" => "homes#about", as: "about"
   
@@ -52,6 +53,8 @@ Rails.application.routes.draw do
   # Roomsコントローラ
   get "rooms/:id" => "room#show", as: "show_romms"
   post "rooms" => "rooms#create"
+  
+  end
   
   # 管理者画面のルーティング設定
   namespace :admin do
