@@ -13,6 +13,7 @@ class Public::RecruitsController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @recruit = Recruit.find(params[:id])
   end
   
   def edit
