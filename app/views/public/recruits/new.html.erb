@@ -1,0 +1,50 @@
+<p></p>
+
+<div class ="container">
+  <div class ="row">
+    <h3>募集記事作成</h3>
+    <div class ="col-md-8">
+      <table>
+        <tbody>
+          <%= form_with model:@recruit, url: recruits_new_path, method: :post do |f| %>
+          <tr>
+            <td>タイトル</td>
+            <td colspan = "4"><%= f.text_field :title %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td><%= @user.genre.name %></td>
+            <td>開催地</td>
+            <td colspan ="2"><%= f.sellect :site_id, options_from_collection_for_select(Site.all, :id, :site_name), include_blank:"選択してください" %></td>
+          </tr>
+          <tr>
+            <td>日程</td>
+            <td><%=f.date_field :date, class:"form-control" %></td>
+            <td>練習形式</td>
+            <td><%= f.radio_button :practice_type, false %><%= f.label :"合同練習" %></td>
+            <td><%= f.radio_button :practice_type, true %><%= f.label :"練習試合" %></td>
+          </tr>
+          <tr>
+            <td>年齢層</td>
+            <td><%= f.select :age_group, User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr rowspan="3">
+            <td>当日の活動内容</td>
+            <td colspan = "4"><%= f.text_field :detail %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= f.submit '募集する', class:"btn btn-success" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
