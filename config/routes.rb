@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   # Entriesコントローラ
   get "/entries" => "entries#index"
   get "entries/:id" => "entries#show", as: "show_entries"
+  delete "entries/:id" => "entries#destroy", as: "destroy_entries"
   
   # Notifiesコントローラ
   get "users/:user_id/notifies" => "notifies#index", as: "notifies"

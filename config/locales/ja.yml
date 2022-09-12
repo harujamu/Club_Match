@@ -114,7 +114,6 @@ ja:
         entered : "応募済"
         match: "マッチ！"
         match_rejected: "マッチ不成立"
-        cancel: "応募取消"
         done: "完了"
         
     recruit:
