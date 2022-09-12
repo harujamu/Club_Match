@@ -8,8 +8,13 @@ class Site < ApplicationRecord
 
   belongs_to:user
   # , dependent: :destroy必要？論理削除でも必要かどうか調べる
+<<<<<<< Updated upstream
   
   
+=======
+
+
+>>>>>>> Stashed changes
  def site_name
    prefecture_i18n + '' +  municipality + '' + address
  end
