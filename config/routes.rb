@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   
   # Entriesコントローラ
   get "/entries" => "entries#index"
+  post "entries/:id" => "entries#create", as: "create_entries"
   get "entries/:id" => "entries#show", as: "show_entries"
   delete "entries/:id" => "entries#destroy", as: "destroy_entries"
   

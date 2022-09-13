@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 2022_09_09_115922) do
   create_table "entries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "recruit_id", null: false
-    t.integer "entry_status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "entry_status", null: false
   end
 
   create_table "genres", force: :cascade do |t|

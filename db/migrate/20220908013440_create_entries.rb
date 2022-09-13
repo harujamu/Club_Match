@@ -4,7 +4,7 @@ class CreateEntries < ActiveRecord::Migration[6.1]
 
       t.integer :user_id, null: false
       t.integer :recruit_id, null: false
-      t.integer :entry_status, null: false
+      t.integer :entry_status, null: false, default: 
       t.timestamps
     end
   end

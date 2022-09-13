@@ -18,6 +18,9 @@ class Public::RecruitsController < ApplicationController
   def show
     @user = User.find(params[:id])
     @recruit = Recruit.find(params[:id])
+    @site = Site.find(@recruit.site_id)
+    @entry = Entry.new
+    
   end
   
   def edit
@@ -38,6 +41,8 @@ class Public::RecruitsController < ApplicationController
     params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
   
-  
+  def entry_params
+    params.require(:entry).permit(:user_id, :recruit_id, :entry_status)
+  end
   
 end
