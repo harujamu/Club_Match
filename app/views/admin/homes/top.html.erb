@@ -4,10 +4,10 @@
   <div class ="row">
     <h2>ユーザー一覧</h2>
     <div class ="col-md-10">
-      <table>
+      <table class="table table-bordered">
         <thead>
           <tr>
-            <th>ユーザーID</th>
+            <th>No.</th>
             <th>クラブ名</th>
             <th>代表者氏名</th>
             <th>e-mail</th>
@@ -17,7 +17,7 @@
         <% @users.each do |user| %>
         <tbody>
           <tr>
-            <td><%= user.id %></td>
+            <td><%= link_to admin_show_users_path(user.id) do %><%= user.id %><% end %></td>
             <td><%= user.club_name %></td>
             <td><%= user.captain_name %></td>
             <td><%= user.email %></td>
