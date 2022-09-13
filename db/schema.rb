@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_115922) do
     t.date "date", null: false
     t.boolean "practice_type", default: true, null: false
     t.integer "age_group", null: false
-    t.integer "recruit_status", null: false
+    t.integer "recruit_status", default: 0, null: false
     t.boolean "open_status", default: true, null: false
     t.text "title", null: false
     t.text "detail", null: false

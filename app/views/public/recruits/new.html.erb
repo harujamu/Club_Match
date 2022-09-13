@@ -5,8 +5,8 @@
     <h3>募集記事作成</h3>
     <div class ="col-md-8">
       <table>
+        <%= form_with model: @recruit, url: create_recruits_path, method: :post do |f| %>
         <tbody>
-          <%= form_with model: @recruit, url: recruits_new_path, method: :post do |f| %>
           <tr>
             <td>タイトル</td>
             <td colspan = "4"><%= f.text_field :title %></td>
@@ -42,8 +42,8 @@
             <td></td>
             <td><%= f.submit '募集する', class:"btn btn-success" %></td>
           </tr>
-          <% end %>
         </tbody>
+        <% end %>
       </table>
     </div>
   </div>

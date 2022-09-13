@@ -3,13 +3,16 @@ class Public::RecruitsController < ApplicationController
   def new
     @user = current_user
     @recruit = Recruit.new
+    @recruit.user_id = @user.id
     @genre = Genre.find(@user.genre_id)
   end
   
   def create
     @recruit = Recruit.new(recruit_params)
+    @user = current_user
+    @recruit.user_id = @user.id
     @recruit.save
-    redirect_to show_recruit_path(@recruit.id)
+    redirect_to show_recruits_path(@recruit.id)
   end
   
   def show
@@ -26,13 +29,13 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruit = Recruit.find(params[:id])
     @recruit.update(recruit_params)
-    redirect_to show_recruit_path(@recruit.id)
+    redirect_to show_recruits_path(@recruit.id)
   end
   
   private
   
   def recruit_params
-    params.require(:recruit).permit(:id, :user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
+    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
   
   
