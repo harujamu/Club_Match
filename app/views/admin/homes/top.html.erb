@@ -1,1 +1,31 @@
-<p>admin/top</p>
+<p></p>
+
+<div class ="container">
+  <div class ="row">
+    <h2>ユーザー一覧</h2>
+    <div class ="col-md-10">
+      <table>
+        <thead>
+          <tr>
+            <th>ユーザーID</th>
+            <th>クラブ名</th>
+            <th>代表者氏名</th>
+            <th>e-mail</th>
+            <th>活動ステータス</th>
+          </tr>
+        </thead>
+        <% @users.each do |user| %>
+        <tbody>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.club_name %></td>
+            <td><%= user.captain_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.active_status %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

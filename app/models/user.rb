@@ -13,6 +13,11 @@ class User < ApplicationRecord
 
 
   has_one :genre
+  
+  def captain_name
+   captain_last_name + '' + captain_first_name
+  end
+  
   has_one_attached :image
 
 end
