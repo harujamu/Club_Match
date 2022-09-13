@@ -3,6 +3,7 @@ class Public::RecruitsController < ApplicationController
   def new
     @user = current_user
     @recruit = Recruit.new
+    @genre = Genre.find(@user.genre_id)
   end
   
   def create
@@ -18,6 +19,7 @@ class Public::RecruitsController < ApplicationController
   
   def edit
     @user = current_user
+    @genre = Genre.find(@user.genre_id)
   end
 
   def update
