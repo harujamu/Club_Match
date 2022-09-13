@@ -1,0 +1,34 @@
+<p></p>
+
+<div class="container">
+  <div class ="row">
+    <h3>練習場所登録</h3>
+    <div class ="col-md-8">
+      <%= form_with model: @site, url: create_sites_path, method: :post do |f| %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.select :prefecture, Site.prefectures_i18n.keys.map{|k| [I18n.t("enums.site.prefecture.#{k}"), k] }, {include_blanck: t("選択してください")}, class:"mr-2" %><%= f.text_field :municipality, class:"mr-2" %><%= f.text_field :address, class:"mr-2" %><%= f.submit '登録', class:"btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+  <div class ="row">
+    <h3>登録済練習場所一覧</h3>
+    <div class ="col-md-8">
+      <table class="table-bordered">
+        <thead>
+          <tr>
+            <th>練習場所ID</th>
+            <th>住所</th>
+          </tr>
+        </thead>
+        <% @sites.each do |site| %>
+        <tbody>
+          <tr>
+            <td><%= site.id %></td>
+            <td><%= site.site_name %><%= link_to '削除',destroy_sites_path(site.id), method: :delete, class:"btn btn-danger ml-2" %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
