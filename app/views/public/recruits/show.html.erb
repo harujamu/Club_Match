@@ -6,31 +6,39 @@
       <!--ユーザー画像-->
       <%= @user.club_name %>
     </div>
+    
     <div class="com-md-8">
       <div>
         <h2><%= @recruit.title %></h2>
         <h3><%= @recruit.date %>に<%= @site.site_name %>で<%= @recruit.practice_type %>ができる相手を募集しています</h3>
-        <% if @recruit.age_group_i18n != "指定なし" %>
+      <% if @recruit.age_group_i18n != "指定なし" %>
         <p>※この募集対象は、<%= @recruit.age_group %>に限ります。</p>
-        <% end %>
+      <% end %>
       </div>
+      
       <div>
         <h2>練習内容</h2>
         <%= @recruit.detail %>
       </div>
+      
       <div>
-        <% if @user == current_user ? %>
-          <%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %>
-        <% else %>
-          <%= form_with model: @entry, url: create_entries_path(@entry.id), method: :post do |f| %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-          <%= f.submit '応募する', class:"btn brn-primary" %>
-          <% if @entry.exist ? %>
-            <%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %>
-          <% end %>
+      <% if @user == current_user ? %>
+        <%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %>
+      <% end %>
+      
+      <% if @user != current_user ? %>
+        <%= form_with model: @entry, url: create_entries_path(@entry.id), method: :post do |f| %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :recruit_id, :value => @recruit.id %>
+        <%= f.submit '応募する', class:"btn brn-primary" %>
+        
+        <% if @entry.exist ? %>
+          <%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %>
         <% end %>
+        
+      <% end %>
       </div>
+      
     </div>
   </div>
   

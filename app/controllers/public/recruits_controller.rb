@@ -5,6 +5,7 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.new
     @recruit.user_id = @user.id
     @genre = Genre.find(@user.genre_id)
+    @sites = @user.sites 
   end
   
   def create
@@ -35,6 +36,10 @@ class Public::RecruitsController < ApplicationController
     redirect_to show_recruits_path(@recruit.id)
   end
   
+  def index
+    @recruits = Recruit.all
+  end
+  
   private
   
   def recruit_params
@@ -43,6 +48,14 @@ class Public::RecruitsController < ApplicationController
   
   def entry_params
     params.require(:entry).permit(:user_id, :recruit_id, :entry_status)
+  end
+  
+  def user_params
+    params.require(:user).permit(:id, :club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :image, :email)
+  end
+  
+  def site_params
+    params.require(:site).permit(:prefecture, :municipality, :address, :id, :user_id)
   end
   
 end

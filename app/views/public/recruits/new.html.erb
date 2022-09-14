@@ -15,7 +15,7 @@
             <td>ジャンル</td>
             <td><%= @genre.name %></td>
             <td>開催地</td>
-            <td colspan ="2"><%= f.select :site_id, options_from_collection_for_select(Site.all, :id, :site_name), include_blank:"選択してください" %></td>
+            <td colspan ="2"><%= f.select :site_id, options_from_collection_for_select(@sites, :id, :site_name), include_blank:"選択してください" %></td>
           </tr>
           <tr>
             <td>日程</td>
