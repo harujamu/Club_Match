@@ -23,7 +23,8 @@ class User < ApplicationRecord
   end
   
   
-   has_one :genre
+  has_one :genre
+  has_many :sites
   has_one_attached :image
 
 end

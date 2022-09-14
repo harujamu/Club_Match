@@ -9,11 +9,14 @@ class Public::SitesController < ApplicationController
   
   def index
     @site = Site.new
-    @sites = Site.all
+    @site.user_id = current_user.id
+    @sites = current_user.sites
   end
   
   def destroy
     @site = Site.find(params[:id])
+    @site.destroy
+    redirect_to sites_path
   end
   
   private
