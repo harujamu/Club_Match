@@ -11,7 +11,7 @@
       <div class="mt-5 d-flex flex-wrap">
         <% @recruits.each do |recruit| %>
         <div class="mr-3">
-          <%= image_tag @user.image, size: "150 X 150" %>
+          <%= link_to show_recruits_path(recruit.id) do %><%= image_tag @user.image, size: "150 X 150" %><% end %>
           <p><%= recruit.title %></p>
           <% if recruit.liked_by?(current_user) %>
           <p><%= link_to recruit_destroy_likes(recruit), method: :delete do %><i class="fas fa-heart"></i><%= recruit.likes.count %><% end %></p>
