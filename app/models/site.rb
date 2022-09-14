@@ -11,7 +11,7 @@ class Site < ApplicationRecord
 
 
  def site_name
-   prefecture_i18n + '' +  municipality + '' + address
+   prefecture_i18n + ' ' +  municipality + ' ' + address
  end
 
 end
