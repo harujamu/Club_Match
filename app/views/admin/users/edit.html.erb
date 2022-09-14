@@ -2,10 +2,9 @@
 <div class ="container">
   <h2>ユーザー情報編集</h2>
   <div class ="row">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
     <table>
         <tbody>
+          <%= form_with model: @user, url: admin_update_users_path(@user), method: :patch do |f| %>
           <tr>
             <td><%= f.label :クラブ名 %></td>
             <td><%= f.text_field :club_name, autofocus: true, autocomplete: "" %></td>
@@ -13,7 +12,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= f.label :代表者名 %></td>
+            <td><%= f.label :代表者氏名 %></td>
             <td><%= f.text_field :captain_last_name, autofocus: true, placeholder: "代表者姓" %></td>
             <td><%= f.text_field :captain_first_name, autofocus: true, placeholder: "代表者名" %></td>
             <td></td>
@@ -32,8 +31,8 @@
           </tr>
           <tr>
             <td>活動ステータス</td>
-            <td></td>
-            <td></td>
+            <td><%= f.radio_button :active_status, true %><%= f.label :活動中 %></td>
+            <td><%= f.radio_button :active_status, false %><%= f.label :退会済 %></td>
             <td></td>
           </tr>
           <tr>
@@ -42,9 +41,9 @@
             <td></td>
             <td><%= f.submit "更新", class:"btn btn-primary btn-lg" %></td>
           </tr>
+          <% end %>
         </tbody>
       </table>
-    <% end %>
 
   </div>
 </div>
