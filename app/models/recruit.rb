@@ -6,3 +6,4 @@ class Recruit < ApplicationRecord
   has_many :sites
 
 end
+Footer
