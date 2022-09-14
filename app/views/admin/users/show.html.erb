@@ -1,0 +1,38 @@
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class ="col-md-4">
+      <%# if image.attached? %>
+      <%#= image_tag user.image, size: "100 X 100" %>
+      <%#= else %>
+      <i class="fa-regular fa-face-smile"></i>
+      <%# end %>
+
+    </div>
+    <div class="col-md-8">
+      <table class="table">
+        <tr>
+          <td>クラブ名</td>
+          <td><%= @user.club_name %></td>
+        </tr>
+        <tr>
+          <td>代表者氏名</td>
+          <td><%= @user.captain_name %></td>
+        </tr>
+        <tr>
+          <td>主な活動場所</td>
+          <td><%= @user.user_address %></td>
+        </tr>
+        <tr>
+          <td>e-mail</td>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <td>活動ステータス</td>
+          <td><% if @user.active_status == true %>活動中<% else %>退会済<% end %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -12,12 +12,18 @@ class User < ApplicationRecord
                      saga: 40, nagasaki: 41, oita: 42, kumamoto: 43, miiyazaki: 44, kagoshima: 45, okinawa: 46 }
 
 
-  has_one :genre
+ 
   
   def captain_name
-   captain_last_name + '' + captain_first_name
+   captain_last_name + ' ' + captain_first_name
   end
   
+  def user_address
+      prefecture_i18n + ' ' + municipality + ' ' + address
+  end
+  
+  
+   has_one :genre
   has_one_attached :image
 
 end
