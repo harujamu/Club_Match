@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
   def my_page
     @user = current_user
     @genre = Genre.find(@user.genre_id)
+    @notifies = Notify.all
   end
   
   def show

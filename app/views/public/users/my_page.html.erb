@@ -6,12 +6,12 @@
       <div>
       <% if @user.image.attached? %>
       <%= image_tag @user.image, size: "100 X 100" %>
-      <%# else %>
-      <!--<i class="fa-regular fa-face-smile"></i>-->
+      <% else %>
+      <i class="far fa-smile"></i></i>
       <% end %>
       <p><%= @user.club_name %></p>
       <p><%= link_to '編集', edit_user_path(@user.id),class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', user_unsubscribe_confirm_path(@user.id), class:"btn btn-danger btn-sm" %></p>
-      <p><i class="fa-regular fa-envelope"></i>お知らせ○件</p>
+      <p><i class="fas fa-bell"></i>お知らせ<%= @notifies.count %>件</p>
       </div>
       <div class="mt-2">
         <ul>
