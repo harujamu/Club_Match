@@ -2,6 +2,7 @@ class Public::SitesController < ApplicationController
   
   def create
     @site = Site.new(site_params)
+    @site.user_id = current_user.id
     @site.save
     redirect_to sites_path
   end
