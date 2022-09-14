@@ -2,12 +2,20 @@
 
 <div class ="container">
   <div class ="row">
-    <div class ="com-md-4">
+    <div class ="com-md-4 border-right">
       <h2>募集<%= @recruits.count %>件</h2>
     </div>
     
     <div class ="com-md-8">
       <h2>練習相手募集一覧</h2>
+      <div class="mt-5 d-flex flex-wrap">
+        <% @recruits.each do |recruit| %>
+        <div class="mr-3">
+          <%= image_tag @user.image, size: "150 X 150" %>
+          <p><%= recruit.title %></p>
+        </div>
+        <% end %>
+      </div>
     </div>
   </div>
   

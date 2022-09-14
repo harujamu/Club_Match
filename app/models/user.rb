@@ -25,6 +25,7 @@ class User < ApplicationRecord
   
   has_one :genre
   has_many :sites
+  has_many :recruits
   has_one_attached :image
 
 end
