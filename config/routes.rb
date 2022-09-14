@@ -55,6 +55,10 @@ Rails.application.routes.draw do
   get "rooms/:id" => "room#show", as: "show_romms"
   post "rooms" => "rooms#create"
   
+  # Likesコントローラ
+  post "recruit/likes" => "likes#create", as: "recruit_likes"
+  delete "recruit/likes" => "likes#destroy", as: "recruit_destroy_likes"
+  
   end
   
   # 管理者画面のルーティング設定
