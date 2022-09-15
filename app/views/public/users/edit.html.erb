@@ -1,9 +1,9 @@
 <p></p>
 <div class ="container">
-  <h2>ユーザー情報編集</h2>
-  <div class ="row">
+  <h3><%= image_tag @user.image, size: "80 X 80" %> ユーザー情報編集</h3>
+  <div class ="row mt-5">
   <%= form_with model: @user, url: update_user_path(@user.id), method: :patch do |f| %>
-    <table>
+    <table class="table table-borderless">
         <tbody>
           <tr>
             <td><%= f.label :クラブ名 %></td>
@@ -51,7 +51,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><%= f.submit "更新", class:"btn btn-primary btn-lg" %></td>
+            <td><%= f.submit "更新", class:"btn btn-primary" %></td>
           </tr>
         </tbody>
       </table>

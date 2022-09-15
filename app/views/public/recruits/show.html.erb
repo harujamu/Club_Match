@@ -3,8 +3,8 @@
 <div class="container">
   <div class = "row">
     <div class="col-md-4">
-      <!--ユーザー画像-->
-      <%= @user.club_name %>
+      <%= image_tag @user.image, size: "100 X 100" %>
+      <p><%= @user.club_name %></p>
     </div>
     
     <div class="col-md-8">
@@ -16,22 +16,22 @@
       <% end %>
       </div>
       
-      <div>
+      <div class="mt-5">
         <h5>練習内容</h5>
         <%= @recruit.detail %>
       </div>
       
-      <div>
+      <div class="mt-2">
       <% if @user == current_user %>
-        <%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %>
+        <p><%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %></p>
       <% else %>
         <%= form_with model: @entry, url: create_entries_path(@entry.id), method: :post do |f| %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-        <%= f.submit '応募する', class:"btn btn-primary" %>
+        <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
         <% end %>
         <% if @entry.exist? %>
-          <%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %>
+          <p><%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %></p>
         <% end %>
         
       <% end %>
@@ -42,9 +42,9 @@
   
   <div class = "row">
     <% if @user == current_user %>
-    <h3>応募者一覧(ステータス <%= @recruit.recruit_status_i18n %>)</h3>
+    <h5>応募者一覧(応募ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
     <% else %>
-    <p>応募ステータス </p><%= @entry.entry_status_i18n %>
+    <p>応募ステータス: </p><%= @entry.entry_status_i18n %>
     <% end %>
   </div>
 </div>
