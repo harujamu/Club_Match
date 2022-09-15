@@ -22,6 +22,14 @@ class User < ApplicationRecord
       prefecture_i18n + ' ' + municipality + ' ' + address
   end
   
+  # def image
+    # if image.attached?
+      # image
+    # else
+    # end
+  # end      
+  
+  
   
   has_one :genre
   has_many :sites

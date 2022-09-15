@@ -1,6 +1,12 @@
 <p></p>
 <div class ="container">
-  <h3><%= image_tag @user.image, size: "80 X 80" %> ユーザー情報編集</h3>
+  <h3>
+    <% if @user.image.attached? %>
+    <%= image_tag @user.image, size: "100 X 100" %>
+    <% else %>
+    <i class="far fa-smile"></i>
+    <% end %> ユーザー情報編集
+  </h3>
   <div class ="row mt-5">
   <%= form_with model: @user, url: update_user_path(@user.id), method: :patch do |f| %>
     <table class="table table-borderless">
@@ -28,6 +34,10 @@
             <td><%= f.select :prefecture, User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
             <td><%= f.text_field :municipality, placeholder: "市区町村" %></td>
             <td><%= f.text_field :address, placeholder: "番地" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :クラブ紹介 %></td>
+            <td colspan="3"><%= f.text_field :introduction %></td>
           </tr>
           <tr>
             <td><%= f.label :年齢層 %></td>
