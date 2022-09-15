@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:id, :club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :email, :active_status)
+    params.require(:user).permit(:club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :email, :active_status)
   end
   
 end

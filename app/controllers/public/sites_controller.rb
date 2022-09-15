@@ -22,7 +22,7 @@ class Public::SitesController < ApplicationController
   private
   
   def site_params
-    params.require(:site).permit(:prefecture, :municipality, :address, :id, :user_id)
+    params.require(:site).permit(:prefecture, :municipality, :address, :user_id)
   end
   
 end

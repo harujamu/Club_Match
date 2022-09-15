@@ -56,11 +56,11 @@ class Public::RecruitsController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:id, :club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :image, :email)
+    params.require(:user).permit(:club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :image, :email)
   end
   
   def site_params
-    params.require(:site).permit(:prefecture, :municipality, :address, :id, :user_id)
+    params.require(:site).permit(:prefecture, :municipality, :address, :user_id)
   end
   
 end
