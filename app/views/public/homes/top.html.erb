@@ -11,17 +11,17 @@
       <div class="mt-5 d-flex flex-wrap">
         <% @recruits.each do |recruit| %>
         <div class="mr-3">
-          <%= link_to show_recruits_path(recruit.id) do %>
+          <%= link_to recruit_path(recruit.id) do %>
             <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150 X 150" %>
             <% else %><i class="far fa-smile"></i>
             <% end %>
           <% end %>
           <p><%= recruit.title %></p>
-          <%# if recruit.liked_by?(current_user) %>
-          <p><%#= link_to recruit_destroy_likes(recruit), method: :delete do %><i class="fas fa-heart"></i><%#= recruit.likes.count %><%# end %></p>
-          <%# else %>
-          <p><%#= link_to recruit_likes_path(recruit), method: :post do %><i class="far fa-heart"></i><%# end %><%#= recruit.likes.count %></p>
-          <%# end %>
+          <% if recruit.liked_by?(current_user) %>
+          <p><%= link_to recruit_destroy_likes(recruit), method: :delete do %><i class="fas fa-heart"></i><%= recruit.likes.count %><% end %></p>
+          <% else %>
+          <p><%= link_to recruit_likes_path(recruit), method: :post do %><i class="far fa-heart"></i><% end %><%= recruit.likes.count %></p>
+          <% end %>
         </div>
         <% end %>
       </div>

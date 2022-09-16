@@ -5,7 +5,7 @@ class Public::EntriesController < ApplicationController
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.user_id = current_user.id
     @entry.save
-    redirect_to show_recruits_path(@recruit.id)
+    redirect_to recruit_path(@recruit.id)
   end
   
   def destroy
