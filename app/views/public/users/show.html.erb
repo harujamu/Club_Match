@@ -3,8 +3,8 @@
 <div class="container">
   <div class="row">
     <div class ="col-md-4">
-      <% if @user.image_attached? %>
-      <%= image_tag user.image, size: "100 X 100" %>
+      <% if @user.image.attached? %>
+      <%= image_tag @user.image, size: "100 X 100" %>
       <% else %>
       <i class="far fa-smile"></i>
       <% end %>

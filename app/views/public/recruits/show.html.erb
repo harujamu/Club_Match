@@ -8,7 +8,11 @@
       <% else %>
       <i class="far fa-smile"></i>
       <% end %>
-      <p><%= @user.club_name %></p>
+      <% if @user != current_user %>
+      <p><%= link_to show_user_path(@user.id) do %><%= @user.club_name %><% end %></p>
+      <% else %>
+      <p><%= link_to my_page_path do %><%= @user.club_name %><% end %></p>
+      <% end %>
     </div>
     
     <div class="col-md-8">
@@ -29,14 +33,14 @@
       <% if @user == current_user %>
         <p><%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %></p>
       <% else %>
-        <%= form_with model: @entry, url:create_entries_path(@entry.id), method: :post do |f| %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-          <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
-        <% end %>
-        <% if @entry.exist? %>
-          <p><%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %></p>
-        <% end %>
+        <%#= form_with model: @entry, url:create_entries_path(@entry.id), method: :post do |f| %>
+          <%#= f.hidden_field :user_id, :value => current_user.id %>
+          <%#= f.hidden_field :recruit_id, :value => @recruit.id %>
+          <p><%#= f.submit '応募する', class:"btn btn-primary" %></p>
+        <%# end %>
+        <%# if @entry.exist? %>
+          <p><%#= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %></p>
+        <%# end %>
       <% end %>
       </div>
       
