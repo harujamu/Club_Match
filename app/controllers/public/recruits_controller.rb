@@ -3,7 +3,7 @@ class Public::RecruitsController < ApplicationController
   def new
     @user = current_user
     @recruit = Recruit.new
-    @recruit.user_id = @user.id
+    @recruit.user_id = current_user.id
     @genre = Genre.find(@user.genre_id)
     @sites = @user.sites 
   end
@@ -21,6 +21,7 @@ class Public::RecruitsController < ApplicationController
     @user = User.find(@recruit.user_id)
     @site = Site.find(@recruit.site_id)
     @entry = Entry.new
+    @entry.user_id = current_user.id
     
   end
   
