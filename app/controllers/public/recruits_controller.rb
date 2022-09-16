@@ -25,6 +25,7 @@ class Public::RecruitsController < ApplicationController
   end
   
   def edit
+    @recruit = Recruit.find(params[:id])
     @user = current_user
     @genre = Genre.find(@user.genre_id)
   end
