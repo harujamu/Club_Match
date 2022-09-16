@@ -3,7 +3,11 @@
 <div class="container">
   <div class = "row">
     <div class="col-md-4">
+      <% if @user.image.attached? %>
       <%= image_tag @user.image, size: "100 X 100" %>
+      <% else %>
+      <i class="far fa-smile"></i>
+      <% end %>
       <p><%= @user.club_name %></p>
     </div>
     
@@ -25,15 +29,14 @@
       <% if @user == current_user %>
         <p><%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %></p>
       <% else %>
-        <%= form_with model: @entry, url: create_entries_path(@entry.id), method: :post do |f| %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-        <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
+        <%= form_with model: @entry, url:create_entries_path(@entry.id), method: :post do |f| %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.hidden_field :recruit_id, :value => @recruit.id %>
+          <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
         <% end %>
         <% if @entry.exist? %>
           <p><%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %></p>
         <% end %>
-        
       <% end %>
       </div>
       

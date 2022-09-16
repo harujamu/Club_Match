@@ -5,7 +5,7 @@
     <h3>募集記事作成</h3>
     <div class ="col-md-8">
       <table>
-        <%= form_with model: @recruit, url: create_recruits_path(@recruit.id), method: :post do |f| %>
+        <%= form_with model: @recruit, url:create_recruits_path(@recruit.id), method: :post do |f| %>
         <tbody>
           <tr>
             <td>タイトル</td>
