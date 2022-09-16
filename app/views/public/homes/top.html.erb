@@ -11,7 +11,7 @@
       <div class="mt-5 d-flex flex-wrap">
         <% @recruits.each do |recruit| %>
         <div class="mr-3">
-          <%= link_to show_recruits_path(recruit.id) do %>
+          <%= link_to recruit_path(recruit.id) do %>
             <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150 X 150" %>
             <% else %><i class="far fa-smile"></i>
             <% end %>

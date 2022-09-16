@@ -27,16 +27,18 @@
       
       <div class="mt-2">
       <% if @user == current_user %>
-        <p><%= link_to '編集する', edit_recruits_path(@recruit.id), class:"btn btn-success mr-2" %></p>
+        <p><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2" %></p>
       <% else %>
-        <%= form_with model: @entry, url:create_entries_path(@entry.id), method: :post do |f| %>
+        <%= form_with model: @entry do |f| %>
+        <!--, url:create_entries_path(@entry.id), method: :post-->
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.hidden_field :recruit_id, :value => @recruit.id %>
           <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
         <% end %>
-        <% if @entry.exist? %>
-          <p><%= link_to '応募取消', destroy_entries_path(@entry.id), method: :delete, class:"btn btn-danger" %></p>
-        <% end %>
+        <%# if @entry.exist? %>
+          <p><%= link_to '応募取消', method: :delete, class:"btn btn-danger" %></p>
+          <!--destroy_entries_path(@entry.id),-->
+        <%# end %>
       <% end %>
       </div>
       

@@ -6,7 +6,8 @@
     <div class ="col-md-8">
       <table>
         <tbody>
-          <%= form_with model: @recruit, url: update_recruits_path(@recruit.id), method: :patch do |f| %>
+          <%= form_with model: @recruit do |f| %>
+          <!--, url: update_recruits_path(@recruit.id), method: :patch -->
           <tr>
             <td>タイトル</td>
             <td colspan = "4"><%= f.text_field :title %></td>
