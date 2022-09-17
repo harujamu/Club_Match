@@ -2,11 +2,11 @@
 
 <div class ="container">
   <div class ="row">
-    <div class ="com-md-4 border-right">
+    <div class ="col-md-4 border-right">
       <h2>募集<%= @recruits.count %>件</h2>
     </div>
     
-    <div class ="com-md-8">
+    <div class ="col-md-8">
       <h2>練習相手募集一覧</h2>
       <div class="mt-5 d-flex flex-wrap">
         <% @recruits.each do |recruit| %>
@@ -19,7 +19,7 @@
             <% end %>
             <p><%= recruit.title %></p>
             <% if recruit.liked_by?(current_user) %>
-            <p><%= link_to recruit_destroy_likes(recruit), method: :delete do %><i class="fas fa-heart"></i><%= recruit.likes.count %><% end %></p>
+            <p><%= link_to recruit_likes_path(recruit), method: :delete do %><i class="fas fa-heart"></i><%= recruit.likes.count %><% end %></p>
             <% else %>
             <p><%= link_to recruit_likes_path(recruit), method: :post do %><i class="far fa-heart"></i><% end %><%= recruit.likes.count %></p>
             <% end %>

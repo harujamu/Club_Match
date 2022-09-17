@@ -1,19 +1,19 @@
 class Public::LikesController < ApplicationController
   
   def create
-    like = Like.new(like_params)
-    like.user_id = current_user.id
-    like.recruit_id = recruit.id
+    recruit = Recruit.find(params[:recruit_id])
+    like = current_user.likes.new(recruit_id: recruit.id)
     like.save
-    redirect_to recruits_path
+    redirect_to recruit_path(recruit)
   end
 
   def destroy
-    like = likes.find_by(recruit_id: recruit.id)
-    like.user_id = current_user.id
+    recruit = Recruit.find(params[:recruit_id])
+    like = current_user.likes.find_by(recruit_id: recruit.id)
     like.destroy
-    redirect_to recruits_path
+    redirect_to recruit_path(recruit)
   end
+
   
   private
   
