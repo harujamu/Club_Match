@@ -3,7 +3,7 @@
   <h2>ユーザー情報編集</h2>
   <div class ="row">
     <div class ="col-md-4">
-      <% if @user.image_attached? %>
+      <% if @user.image.attached? %>
       <%= image_tag @user.image, size: "100 X 100" %>
       <% else %>
       <i class="fa-regular fa-face-smile"></i>
@@ -13,7 +13,8 @@
     <div class="col-md-8">
       <table>
         <tbody>
-          <%= form_with model: @user, url: admin_update_users_path(@user.id), method: :patch do |f| %>
+          <%= form_with model: @user, method: :patch do |f| %>
+          <!--, url: admin_update_users_path(@user.id)-->
           <tr>
             <td><%= f.label :クラブ名 %></td>
             <td><%= f.text_field :club_name, autofocus: true, autocomplete: "" %></td>
