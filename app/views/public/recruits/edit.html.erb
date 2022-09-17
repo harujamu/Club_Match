@@ -1,8 +1,8 @@
 <p></p>
 
 <div class ="container">
+  <h3>募集記事作成</h3>
   <div class ="row">
-    <h3>募集記事作成</h3>
     <div class ="col-md-8">
       <table>
         <tbody>
@@ -37,9 +37,9 @@
             <td colspan = "4"><%= f.text_field :detail %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>公開ステータス</td>
+            <td><%= f.radio_button :open_status, true %><%= f.label :"公開" %></td>
+            <td><%= f.radio_button :open_status, false %><%= f.label :"公開停止" %></td>
             <td></td>
             <td><%= f.submit '更新する', class:"btn btn-success" %></td>
           </tr>

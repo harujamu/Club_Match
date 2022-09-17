@@ -13,8 +13,8 @@
     <div class="col-md-8">
       <table>
         <tbody>
-          <%= form_with model: @user, method: :patch do |f| %>
-          <!--, url: admin_update_users_path(@user.id)-->
+          <%= form_with model: @user do |f| %>
+          <!--, url: admin_update_users_path(@user.id, method: :patch)-->
           <tr>
             <td><%= f.label :クラブ名 %></td>
             <td><%= f.text_field :club_name, autofocus: true, autocomplete: "" %></td>
