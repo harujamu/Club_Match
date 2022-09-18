@@ -13,7 +13,7 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruit.user_id = @user.id
     @recruit.save
-    redirect_to recruit_path(@recruit.id)
+    redirect_to root_path
   end
   
   def show
@@ -35,7 +35,7 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruit = Recruit.find(params[:id])
     @recruit.update(recruit_params)
-    redirect_to recruit_path(@recruit.id)
+    redirect_to root_path
   end
   
   def index

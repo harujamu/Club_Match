@@ -4,14 +4,14 @@ class Public::LikesController < ApplicationController
     recruit = Recruit.find(params[:recruit_id])
     like = current_user.likes.new(recruit_id: recruit.id)
     like.save
-    redirect_to recruit_path(recruit)
+    redirect_to root_path
   end
 
   def destroy
     recruit = Recruit.find(params[:recruit_id])
     like = current_user.likes.find_by(recruit_id: recruit.id)
     like.destroy
-    redirect_to recruit_path(recruit)
+    redirect_to root_path
   end
 
   
