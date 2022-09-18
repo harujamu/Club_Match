@@ -13,6 +13,10 @@ class Public::EntriesController < ApplicationController
     @entry.destroy
   end
   
+  def index
+    @entries = Entry.all
+  end
+  
   private
   
   def entry_params

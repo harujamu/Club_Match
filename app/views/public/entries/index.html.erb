@@ -1,0 +1,31 @@
+<p></p>
+
+<div class ="container">
+  <h3>応募履歴</h3>
+  <div class ="row">
+    <div class ="col-md-10">
+      <table class ="table table-bordered">
+        <thead>
+          <tr>
+            <th>応募日</th>
+            <th>募集タイトル</th>
+            <th>練習形式</th>
+            <th>練習日</th>
+            <th>応募ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @entries.each do |entry| %>
+          <tr>
+            <td><%= entry.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to recruit_path(entry.recruit.id) do %><%= entry.recruit.title %><% end %></td>
+            <td><%if entry.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
+            <td><%= entry.recruit.date.strftime('%Y/%m/%d') %></td>
+            <td><%= entry.entry_status_i18n %></td>
+          </tr>
+          <% end %>
+        </tbody
+      </table>
+    </div>
+  </div>
+</div>
