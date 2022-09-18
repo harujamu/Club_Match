@@ -30,7 +30,7 @@ class User < ApplicationRecord
   # end      
   
   
-  
+  has_many :entries
   has_one :genre
   has_many :sites
   has_many :recruits

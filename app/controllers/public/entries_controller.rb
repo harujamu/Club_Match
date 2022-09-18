@@ -11,10 +11,18 @@ class Public::EntriesController < ApplicationController
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
+    redirect_to recruit_path(@recruit.id)
   end
   
   def index
-    @entries = Entry.all
+    @user = current_user
+    @entries = @user.entries
+  end
+  
+  def update
+    @entry = Entry.find(params[:id])
+    @entry.update(entry_params)
+    redirect_to recruit_path(@recruit.id)
   end
   
   private

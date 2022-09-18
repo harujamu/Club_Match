@@ -34,7 +34,7 @@ Rails.application.routes.draw do
    patch "users/unsubscribe/:id" => "users#unsubscribe", as: "user_unsubscribe"
   
   # Entriesコントローラ
-  resources :entries, :only => [:index, :create, :show, :destroy]
+  resources :entries, :only => [:index, :create, :show, :destroy, :update]
   
   # Notifiesコントローラ
   resources :notifies, :only => :index

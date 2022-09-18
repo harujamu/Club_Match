@@ -22,12 +22,14 @@ class Public::RecruitsController < ApplicationController
     @site = Site.find(@recruit.site_id)
     @entry = Entry.new
     @entry.user_id = current_user.id
-    
+    @entries = @recruit.entries
+    @user_entry = current_user.entries.find_by(recruit_id: @recruit.id)
   end
   
   def edit
-    @recruit = Recruit.find(params[:id])
     @user = current_user
+    @sites = @user.sites 
+    @recruit = Recruit.find(params[:id])
     @genre = Genre.find(@user.genre_id)
   end
 
@@ -39,7 +41,8 @@ class Public::RecruitsController < ApplicationController
   end
   
   def index
-    @recruits = Recruit.all
+    @user = current_user
+    @recruits = @user.recruits
   end
   
   private

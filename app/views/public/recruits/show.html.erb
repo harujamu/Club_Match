@@ -39,21 +39,32 @@
           <%= f.hidden_field :recruit_id, :value => @recruit.id %>
           <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
         <% end %>
-        <%# if @entry.exist? %>
-          <p><%= link_to '応募取消', method: :delete, class:"btn btn-danger" %></p>
+        <% if @user_entry.present? %>
+          <%= link_to '応募取消', method: :delete, class:"btn btn-danger" %>
           <!--destroy_entries_path(@entry.id),-->
-        <%# end %>
+        <% end %>
       <% end %>
       </div>
       
     </div>
   </div>
   
+  <% if @user == current_user %>
+  <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
   <div class = "row">
-    <% if @user == current_user %>
-    <h5>応募者一覧(応募ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
+    <div class="d-flex flex-wrap" >
+    <% @entries.each do |entry| %>
+      <div class="mr-2">
+        <%= link_to show_user_path(entry.user.id) do %><%= image_tag entry.user.image, size: '70 X 70' %><% end %>
+        <p><%= entry.user.club_name %>
+        <%= link_to entry_path(entry.id), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
+        <%= link_to entry_path(entry.id), method: :patch do %><i class="fas fa-times-circle"></i><% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
     <% else %>
-    <p>応募ステータス: </p><%= @entry.entry_status_i18n %>
+    <% if @user_entry.present? %><p>応募ステータス: <%= @user_entry.entry_status_i18n %></p><% end %>
     <% end %>
   </div>
 </div>

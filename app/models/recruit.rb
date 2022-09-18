@@ -5,6 +5,7 @@ class Recruit < ApplicationRecord
   belongs_to :user
   has_many :sites
   has_many :likes, dependent: :destroy
+  has_many :entries
   
   def liked_by?(user)
     likes.exists?(user_id: user.id)
