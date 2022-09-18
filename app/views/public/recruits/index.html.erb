@@ -1,0 +1,33 @@
+<p></p>
+
+<div class ="container">
+  <h3>募集履歴</h3>
+  <div class ="row">
+    <div class ="col-md-10">
+      <table class ="table table-bordered">
+        <thead>
+          <tr>
+            <th>募集記事作成日</th>
+            <th>募集タイトル</th>
+            <th>練習形式</th>
+            <th>練習日</th>
+            <th>募集ステータス</th>
+            <th>公開ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recruits.each do |recruit| %>
+          <tr>
+            <td><%= recruit.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to recruit_path(recruit.id) do %><%= recruit.title %><% end %></td>
+            <td><%if recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
+            <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
+            <td><%= recruit.recruit_status_i18n %></td>
+            <td><% if recruit.open_status == true %>公開中<% else %>公開停止中<% end %></td>
+          </tr>
+          <% end %>
+        </tbody
+      </table>
+    </div>
+  </div>
+</div>
