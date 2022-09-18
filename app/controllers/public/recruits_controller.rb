@@ -40,11 +40,6 @@ class Public::RecruitsController < ApplicationController
   
   def index
     @recruits = Recruit.all
-    like = Like.new
-    @recruits.each do |recruit|
-      @user = User.find(recruit.user_id)
-    end
-    
   end
   
   private
