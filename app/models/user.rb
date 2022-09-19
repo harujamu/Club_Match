@@ -29,8 +29,8 @@ class User < ApplicationRecord
     # end
   # end      
   
-  has_many :active_notifications, class_name: 'Notify', foreign_key: 'checker_id'
-  has_many :passive_notifications, class_name: 'Notify', foreign_key: 'notifer_id'
+  has_many :active_notifications, class_name: 'Notify', foreign_key: 'notifier_id'
+  has_many :passive_notifications, class_name: 'Notify', foreign_key: 'checker_id'
   has_many :entries
   has_one :genre
   has_many :sites

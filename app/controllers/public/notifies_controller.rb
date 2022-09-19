@@ -8,4 +8,10 @@ class Public::NotifiesController < ApplicationController
     end
   end
   
+  private
+  
+  def notify_params
+    params.require(:notify).permit(:notifier_id, :checker_id, :like_id, :recruit_id, :entry_id, :message_id, :checked_status)
+  end
+  
 end

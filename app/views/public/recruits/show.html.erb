@@ -57,7 +57,7 @@
       <div class="mr-2">
         <%= link_to show_user_path(entry.user.id) do %><%= image_tag entry.user.image, size: '70 X 70' %><% end %>
         <p><%= entry.user.club_name %>
-        <%= link_to entry_path(entry.id), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
+        <%= link_to entry_path(entry.id), method: :patch, data:{entry_status: 1} do %><i class="fas fa-check-circle"></i><% end %>
         </p>
       </div>
     <% end %>

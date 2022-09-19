@@ -6,6 +6,7 @@ class CreateNotifies < ActiveRecord::Migration[6.1]
       t.integer :entry_id
       t.integer :like_id
       t.integer :message_id
+      t.string :action, null: false
       t.integer :notifier_id, null: false
       t.integer :checker_id, null: false
       t.boolean :checked_status, null: false, default: false

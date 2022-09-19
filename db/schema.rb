@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_021221) do
     t.integer "entry_id"
     t.integer "like_id"
     t.integer "message_id"
+    t.string "action", null: false
     t.integer "notifier_id", null: false
     t.integer "checker_id", null: false
     t.boolean "checked_status", default: false, null: false
