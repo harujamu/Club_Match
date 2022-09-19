@@ -11,7 +11,7 @@ class Public::EntriesController < ApplicationController
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
-    redirect_to recruit_path(@recruit.id)
+    redirect_to entries_path
   end
   
   def index
@@ -22,6 +22,7 @@ class Public::EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(entry_params)
+    @recruit = Recruit.find(@entry.recruit_id)
     redirect_to recruit_path(@recruit.id)
   end
   
