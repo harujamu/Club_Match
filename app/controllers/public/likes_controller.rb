@@ -4,6 +4,8 @@ class Public::LikesController < ApplicationController
     recruit = Recruit.find(params[:recruit_id])
     like = current_user.likes.new(recruit_id: recruit.id)
     like.save
+    # いいね通知メソッド追加
+    recruit.create_norification_like(current_user)
     redirect_to root_path
   end
 
