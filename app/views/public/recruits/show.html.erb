@@ -37,7 +37,9 @@
         <!--, url:create_entries_path(@entry.id), method: :post-->
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.hidden_field :recruit_id, :value => @recruit.id %>
+          <%# if @entry.blank? %>
           <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
+          <%# end %>
         <% end %>
         <% if @user_entry.present? %>
           <%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger" %>
