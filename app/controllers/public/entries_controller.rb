@@ -5,7 +5,8 @@ class Public::EntriesController < ApplicationController
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.user_id = current_user.id
     @entry.save
-    @recruit.create_nortification_entry(current_user)
+    @recruit.create_nortification_entry(current_user,@entry)
+    # recruit_status =recruiting ??
     redirect_to recruit_path(@recruit.id)
   end
   

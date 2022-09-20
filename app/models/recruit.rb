@@ -14,7 +14,7 @@ class Recruit < ApplicationRecord
 
   def create_nortification_like(current_user)
     # いいねされてるか調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and action = ?", current_user.id, user_id, id, 'like'])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, 'like', false])
     # いいねされてなければ通知レコード作成
     if temp.blank?
     notify = current_user.active_notifications.new(
@@ -31,12 +31,12 @@ class Recruit < ApplicationRecord
   end
   
   
-  def create_nortification_entry(current_user)
+  def create_nortification_entry(current_user,entry)
     # ステータスが”応募済”か調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id ? and action = ?", current_user.id, user_id, id, recruit.entry.id, 'entry'])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ?", current_user.id, user_id, id, entry.id, 'entry'])
     #応募済なら通知レコード作成
-    if temp.entry_status == 1
-    notify = current_user.active_notifications.new(
+    if temp.blank?
+      notify = current_user.active_notifications.new(
       recruit_id: id,
       checker_id: user_id,
       action: 'entry'

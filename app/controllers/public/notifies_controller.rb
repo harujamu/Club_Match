@@ -1,10 +1,12 @@
 class Public::NotifiesController < ApplicationController
   
   def index
-    @notifies = current_user.passive_notifications
-    @notifies.where(checked_status: false).each do |notify|
+    notifies = current_user.passive_notifications.where(checked_status: false)
+    ids = notifies.pluck(:id)
+    notifies.each do |notify|
       notify.update(checked_status: true)
     end
+    @notifies = Notify.where(id: ids)
   end
   
   private

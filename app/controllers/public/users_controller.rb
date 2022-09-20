@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
   def my_page
     @user = current_user
     @genre = Genre.find(@user.genre_id)
-    @notifies = Notify.all
+    @notifies = current_user.passive_notifications.where(checked_status: false)
   end
   
   def show
