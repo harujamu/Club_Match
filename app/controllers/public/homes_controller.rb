@@ -2,6 +2,11 @@ class Public::HomesController < ApplicationController
   
   def top
     @recruits = Recruit.all
+    @recruits.each do |recruit|
+      if recruit.date.before? Date.today
+        recruit.update(open_status: false)
+      end
+    end
     like = Like.new
     @recruits.each do |recruit|
       @user = User.find(recruit.user_id)
