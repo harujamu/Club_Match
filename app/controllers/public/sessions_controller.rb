@@ -2,7 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :er_state, only: [:create]
+  before_action :user_state, only: [:create]
   # GET /resource/sign_in
   # def new
   #   super
@@ -29,7 +29,7 @@ class Public::SessionsController < Devise::SessionsController
   protected
   
   def user_state
-    @user = User.find_by(email: params[:user][:email], club_name: params[:user][:club_name], captain_last_name: params[:user][:captain_last_name], captain_first_name: prams[:user][:captain_first_name])
+    @user = User.find_by(email: params[:user][:email])
     return if !@user
     if @user.valid_password?(params[:user][:password]) && @user.active_status == false
       redirect_to new_user_registration_path and return
