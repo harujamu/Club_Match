@@ -17,7 +17,7 @@
         <% @users.each do |user| %>
         <tbody>
           <tr>
-            <td><%= link_to admin_show_users_path(user.id) do %><%= user.id %><% end %></td>
+            <td><%= link_to admin_user_path(user.id) do %><%= user.id %><% end %></td>
             <td><%= user.club_name %></td>
             <td><%= user.captain_name %></td>
             <td><%= user.email %></td>

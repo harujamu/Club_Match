@@ -13,7 +13,7 @@
     <div class="col-md-8">
       <table>
         <tbody>
-          <%= form_with model: @user do |f| %>
+          <%= form_with model: @user,url: admin_user_path(@user), method: :patch do |f| %>
           <!--, url: admin_update_users_path(@user.id, method: :patch)-->
           <tr>
             <td><%= f.label :クラブ名 %></td>

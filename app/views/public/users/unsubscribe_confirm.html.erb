@@ -1,0 +1,14 @@
+<p></p>
+
+<div class="container">
+  <h2>退会します。よろしいですか？</h2>
+  <div class ="row">
+    <h4>退会すると、会員登録情報やこれまでの募集・応募記録が閲覧できなくなります。</h4>
+    <h4>退会する場合は、『退会する』をクリックしてください。</h4>
+  <div class ="mt-5">
+    <%= link_to '退会を辞める', my_page_path, class:"btn btn-primary" %>
+    <%= link_to '退会する', user_unsubscribe_path(@user, user: {active_status: false}), method: :patch, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger" %>
+  </div>
+  
+  </div>
+</div>

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
    get "users/:id/edit" => "users#edit", as: "edit_user"
    get "users/:id" => "users#show", as: "show_user"
    patch "users/:id" => "users#update", as: "update_user"
-   get "users/unsubscribe" => "users#unsubscribe_confirm", as: "user_unsubscribe_confirm"
+   get "users/unsubscribe/:id" => "users#unsubscribe_confirm", as: "user_unsubscribe_confirm"
    patch "users/unsubscribe/:id" => "users#unsubscribe", as: "user_unsubscribe"
   
   # Entriesコントローラ
