@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   # ルートパス設定
   root to: "public/homes#top"
   
+  # ゲストログイン
+  devise_scope :user do
+  post '/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+  
   # ユーザー画面のルーティング設定
   scope module: :public do
   # Homesコントローラ

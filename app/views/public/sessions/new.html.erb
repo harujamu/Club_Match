@@ -19,7 +19,7 @@
         <tr>
           <td></td>
           <td><%= f.submit "ログイン" %></td>
-          <td><%= f.submit " ゲストログイン" %></td>
+          <td><%= link_to " ゲストログイン", guest_sign_in_path, method: :post, class:"btn btn-primary" %></td>
         </tr>
       </tbody>
     </table>

@@ -10,6 +10,7 @@
       <i class="far fa-smile"></i>
       <% end %>
       <p><%= @user.club_name %></p>
+      <% if @user.club_name != "Example_Club" %>
       <p><%= link_to '編集', edit_user_path(@user.id),class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', user_unsubscribe_confirm_path(@user.id), class:"btn btn-danger btn-sm" %></p>
       <p><i class="fas fa-bell"></i>お知らせ<%= @notifies.count %>件</p>
       </div>
@@ -19,6 +20,7 @@
           <li><%= link_to '応募履歴を確認', entries_path %> </li>
           <li><%= link_to '募集履歴を確認', recruits_path %></li>
         </ul>
+      <% end %>
       </div>
 
     </div>

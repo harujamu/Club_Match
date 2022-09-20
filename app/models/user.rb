@@ -22,6 +22,21 @@ class User < ApplicationRecord
       prefecture_i18n + ' ' + municipality + ' ' + address
   end
   
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.club_name = 'Example_Club'
+      user.captain_first_name = 'Match'
+      user.captain_last_name = 'Club'
+      user.prefecture = 12
+      user.municipality = 'Example City'
+      user.address = 'Example Address'
+      user.age_group = 1
+      user.genre_id = 1
+    end
+  end
+  
+  
   # def image
     # if image.attached?
       # image
