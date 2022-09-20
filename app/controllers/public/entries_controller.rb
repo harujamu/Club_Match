@@ -5,6 +5,7 @@ class Public::EntriesController < ApplicationController
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.user_id = current_user.id
     @entry.save
+    @recruit.create_nortification_entry(current_user)
     redirect_to recruit_path(@recruit.id)
   end
   
@@ -21,8 +22,8 @@ class Public::EntriesController < ApplicationController
   
   def update
     @entry = Entry.find(params[:id])
-    @entry.update(entry_params)
     @recruit = Recruit.find(@entry.recruit_id)
+    @entry.update(entry_params)
     redirect_to recruit_path(@recruit.id)
   end
   
