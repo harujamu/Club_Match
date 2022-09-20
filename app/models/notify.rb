@@ -4,6 +4,6 @@ class Notify < ApplicationRecord
   belongs_to :like, optional: true
   belongs_to :entry, optional: true
   belongs_to :message, optional: true
-  belongs_to :notifier, class_name: 'User', foreign_key: 'notifer_id', optional: true
+  belongs_to :notifier, class_name: 'User', foreign_key: 'notifier_id', optional: true
   belongs_to :checker, class_name: 'User', foreign_key: 'checker_id', optional: true
 end

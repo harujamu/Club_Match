@@ -3,24 +3,43 @@
 <div class ="container">
   <h3>通知一覧</h3>
   <div class="row">
-    <% if @unchecked_notifies.exists? %>
-      <% @unchecked_notifies.each do |notify| %>
-      <div class="my-2">
+    <% if @notifies.exists? %>
+    <div class="my-5 mx-auto">
+      <% @notifies.each do |notify| %>
+      <table class="table table-borderless">
         <% if notify.action == "like" %>
-        <p><%= notify.notifier.club_name %>が<%= notify.recruit.title %>に いいね しました</p>
+        <tr>
+          <td><%= link_to show_user_path(notify.notifier.id) do %><%= image_tag notify.notifier.image, size:'60 X 60' %><% end %></td>
+          <th><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id) do %><%= notify.recruit.title %><% end %>"　に いいね しました</th>
+        </tr>
         <% elsif notify.action == "message" %>
-        <p><%= notify.notifier.club_name %>から メッセージ が届きました</p>
+        <tr>
+          <td><%= link_to show_user_path(notify.notifier.id) do %><%= image_tag notify.notifier.image, size:'60 X 60' %><% end %></td>
+          <th><%= notify.notifier.club_name %>から メッセージ が届きました</th>
+        </tr>
         <% elsif notify.action == "entry" %>
-        <p><%= notify.notifier.club_name %>が<%= notify.recruit.title %>に応募しました</p>
+        <tr>
+          <td><%= link_to show_user_path(notify.notifier.id) do %><%= image_tag notify.notifier.image, size:'60 X 60' %><% end %></td>
+          <th><%= notify.notifier.club_name %>が"　<%= notify.recruit.title %>"　に応募しました</th>
+        </tr>
         <% elsif notify.aciton == "match" %>
-        <p><%= notify.recruit.title %>で<% notify.notifier.club_name %>とマッチしました！</p>
+        <tr>
+          <td></td>
+          <th>"<%= notify.recruit.title %>"　で<% notify.notifier.club_name %>とマッチしました！</th>
+        </tr>
         <% else %>
-        <p><%= notify.recruit.title %>でのマッチは不成立でした。</p>
+        <tr>
+          <td></td>
+          <th>"<%= notify.recruit.title %>"　でのマッチは不成立でした。</th>
+        </tr>
         <% end %>
-      </div>
+      </table>
       <% end %>
+    </div>
     <% else %>
-    <p>通知はありません</p>
+    <div>
+      <p>通知はありません</p>
+    </div>
     <% end %>
   </div>
 </div>

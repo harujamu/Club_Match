@@ -35,14 +35,7 @@ class User < ApplicationRecord
       user.genre_id = 1
     end
   end
-  
-  
-  # def image
-    # if image.attached?
-      # image
-    # else
-    # end
-  # end      
+     
   
   has_many :active_notifications, class_name: 'Notify', foreign_key: 'notifier_id'
   has_many :passive_notifications, class_name: 'Notify', foreign_key: 'checker_id'
