@@ -23,9 +23,6 @@ class Public::RecruitsController < ApplicationController
     @entry = Entry.new
     @entry.user_id = current_user.id
     @entries = @recruit.entries
-    @entries.each do |entry|
-      @each_entry = entry
-    end
     @user_entry = current_user.entries.find_by(recruit_id: @recruit.id)
   end
   

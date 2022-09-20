@@ -21,8 +21,8 @@ class Public::EntriesController < ApplicationController
   
   def update
     @entry = Entry.find(params[:id])
-    @entry.update(entry_params)
     @recruit = Recruit.find(@entry.recruit_id)
+    @entry.update(entry_params)
     redirect_to recruit_path(@recruit.id)
   end
   
