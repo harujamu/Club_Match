@@ -5,8 +5,12 @@ class Public::EntriesController < ApplicationController
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.user_id = current_user.id
     @entry.save
+    # 応募ステータスが応募済になったら、募集ステータスも候補者ありに更新
+    if @entry.entry_status == "entered"
+      @recruit.update(recruit_status: "having_candidates")
+    end
     @recruit.create_nortification_entry(current_user,@entry)
-    # recruit_status =recruiting ??
+    # recruit_status = recruiting ?
     redirect_to recruit_path(@recruit.id)
   end
   
@@ -25,6 +29,12 @@ class Public::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.update(entry_params)
+    # 応募ステータスがマッチになったら、募集ステータスもマッチに更新
+    # if @entry.entry_status == "match"
+      # @recruit.update(recruit_status: "match" )
+    # elsif @entry.entry_status == "match_rejected"
+      # @recruit.update(recruit_status: "decline" )
+    # end
     redirect_to recruit_path(@recruit.id)
   end
   
