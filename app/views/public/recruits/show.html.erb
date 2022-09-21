@@ -37,9 +37,9 @@
         <!--, url:create_entries_path(@entry.id), method: :post-->
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-          <%# if @entry.blank? %>
+          <% if @entry.blank? && ( @recruit.recruit_status == "recruiting" || "having_candidates" ) %>
           <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
-          <%# end %>
+          <% end %>
         <% end %>
         <% if @user_entry.present? %>
           <%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger" %>
@@ -55,7 +55,7 @@
   <div class = "row">
     <div class="d-flex flex-wrap" >
     <% @entries.each do |entry| %>
-      <%# if entry.entry_status == 0 %>
+      <% if entry.entry_status == "recruiting" || "having_candidates" %>
       <div class="mr-2">
         <%= link_to show_user_path(entry.user.id) do %><%= image_tag entry.user.image, size: '70 X 70' %><% end %>
         <p><%= entry.user.club_name %>
@@ -63,7 +63,7 @@
         <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle"></i><% end %>
         </p>
       </div>
-      <%# end %> 
+      <% end %> 
     <% end %>
     </div>
   <% else %>
