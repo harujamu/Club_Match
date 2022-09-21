@@ -32,10 +32,15 @@
           <td></td>
           <th><%= notify.notifier.club_name %>との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>はキャンセルされました。</th>
         </tr>
+        <elsif notify.action == "match_rejected" %>
+          <tr>
+          <td></td>
+          <th><%= notify.notifier.club_name %>との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>はマッチ不成立した。</th>
+        </tr>
         <% else %>
         <tr>
           <td></td>
-          <th>"<%= notify.recruit.title %>"　でのマッチは不成立でした。</th>
+          <th>"<%= notify.recruit.title %>"　の募集期限が過ぎたため、応募は削除されました。</th>
         </tr>
         <% end %>
       </table>

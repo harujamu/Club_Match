@@ -9,7 +9,10 @@ class Public::EntriesController < ApplicationController
     if @entry.entry_status == "entered"
       @recruit.update(recruit_status: "having_candidates")
     end
-    @recruit.create_nortification_entry(current_user,@entry)
+    @recruit.create_nortification_entry(current_user, @entry)
+    @recruit.create_nortification_match(current_user, @entry)
+    @recruit.create_nortification_cancel(current_user, @entry)
+    @recruit.create_nortification_match_rejected(current_user, @entry)
     # recruit_status = recruiting ?
     redirect_to recruit_path(@recruit.id)
   end
