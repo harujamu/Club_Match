@@ -47,7 +47,7 @@ class Recruit < ApplicationRecord
   
   def create_nortification_match
     # 応募ステータスが"マッチ"か調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and entry_id = ? and action = ?", current_user.id, user_id, entry.id, 'match' ])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ?", current_user.id, user_id, id, entry.id, 'match' ])
     # マッチなら通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
@@ -61,7 +61,7 @@ class Recruit < ApplicationRecord
   
   def create_nortification_cancel
     # 応募ステータスが"キャンセル"か調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and entry_id = ? and action = ?", current_user.id, user_id, entry.id, 'cancel' ])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ?", current_user.id, user_id, id, entry.id, 'cancel' ])
     # キャンセルなら通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
@@ -75,7 +75,7 @@ class Recruit < ApplicationRecord
   
   def create_nortification_match_rejected
     # 応募ステータスが"マッチ不成立"か調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and entry_id = ? and action = ?", current_user.id, user_id, entry.id, 'match_rejected' ])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ?", current_user.id, user_id, id, entry.id, 'match_rejected' ])
     # マッチ不成立なら通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
