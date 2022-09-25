@@ -9,19 +9,6 @@ class Public::EntriesController < ApplicationController
     if @entry.entry_status == "entered"
       @recruit.update(recruit_status: "having_candidates")
       @recruit.create_nortification_entry(current_user, @entry)
-      
-    # 応募ステータスがマッチになったら、応募者にマッチ通知作成
-    elsif @entry.entry_status == "match"
-       @recruit.create_nortification_match(current_user, @entry）
-       
-    # 応募ステータスがマッチ不成立になったら応募者に不成立通知作成
-    elsif @entry.entry_status == "match_rejected"
-       @recruit.create_nortification_match_rejected(current_user, @entry)
-     
-    # 募集期間がオーバーしたら、応募ステータスを完了にする
-    elsif @recruit.date after? Date.today
-      @recruit.update(recruit_status: "done")
-      @entry.update(entry_status: "done")
     end
  
     # recruit_status = recruiting ?
@@ -43,13 +30,17 @@ class Public::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.update(entry_params)
-    # 応募ステータスがマッチになったら、募集ステータスもマッチに更新
-    # if @entry.entry_status == "match"
-      # @recruit.update(recruit_status: "match" )
-    # elsif @entry.entry_status == "match_rejected"
-      # @recruit.update(recruit_status: "decline" )
-    # end
-    redirect_to recruit_path(@recruit.id)
+        
+    # 応募ステータスがマッチ不成立になったら応募者に不成立通知作成
+    if @entry.entry_status == "match_rejected"
+      @recruit.create_nortification_match_rejected(current_user, @entry)
+     
+    # 応募ステータスがマッチになったら、応募者にマッチ通知作成
+    elsif @entry.entry_status == "match"
+      @recruit.create_nortification_match(current_user, @entry)
+      
+    # 募集期間がオーバーしたら、応募ステータスを完了にする
+    end
   end
   
   private
