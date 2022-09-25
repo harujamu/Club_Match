@@ -1,8 +1,8 @@
 <p></p>
 <div class ="container">
   <h2>ユーザー情報編集</h2>
-  <div class ="row">
-    <div class ="col-md-4">
+  <div class ="row mt-5">
+    <div class ="col-md-2">
       <% if @user.image.attached? %>
       <%= image_tag @user.image, size: "100 X 100" %>
       <% else %>
@@ -10,50 +10,38 @@
       <% end %>
     </div>
     
-    <div class="col-md-8">
+    <div class="col-md-10">
     <%= form_with model: @user,url: admin_user_path(@user), method: :patch do |f| %>  
-      <table>
+      <table class="table table-borderless">
         <tbody>
-          <%= form_with model: @user,url: admin_user_path(@user), method: :patch do |f| %>
           <tr>
             <td><%= f.label :クラブ名 %></td>
-            <td><%= f.text_field :club_name, autofocus: true, autocomplete: "" %></td>
-            <td></td>
-            <td></td>
+            <td colspan="2"><%= f.text_field :club_name, autofocus: true, autocomplete: "", size:"50" %></td>
           </tr>
           <tr>
             <td><%= f.label :代表者氏名 %></td>
-            <td><%= f.text_field :captain_last_name, autofocus: true, placeholder: "代表者姓" %></td>
-            <td><%= f.text_field :captain_first_name, autofocus: true, placeholder: "代表者名" %></td>
-            <td></td>
+            <td colspan="2"><%= f.text_field :captain_last_name, autofocus: true, placeholder: "代表者姓", size:"23" %> <%= f.text_field :captain_first_name, autofocus: true, placeholder: "代表者名", size:"23", class:"ml-3" %></td>
           </tr>
           <tr>
             <td><%= f.label :主な活動場所 %></td>
-            <td><%= f.select :prefecture, User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
-            <td><%= f.text_field :municipality, placeholder: "市区町村" %></td>
-            <td><%= f.text_field :address, placeholder: "番地" %></td>
+            <td colspan="2">
+            <%= f.select :prefecture, User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, {include_blanck: t("選択してください")}, class:"mr-2" %>
+            <%= f.text_field :municipality, placeholder: "市区町村", class:"mr-2", size:"27" %><%= f.text_field :address, placeholder: "番地", size:"40" %>
+            </td>
           </tr>
           <tr>
             <td><%= f.label :メールアドレス %></td>
-            <td><%= f.email_field :email, autofocus: true, placeholder: "sample@email.com" %></td>
-            <td></td>
-            <td></td>
+            <td colspan="2"><%= f.email_field :email, autofocus: true, placeholder: "sample@email.com", size:"39" %></td>
           </tr>
           <tr>
             <td>活動ステータス</td>
-            <td><%= f.radio_button :active_status, true %><%= f.label :活動中 %></td>
-            <td><%= f.radio_button :active_status, false %><%= f.label :退会済 %></td>
-            <td></td>
+            <td><%= f.radio_button :active_status, true, class:"mr-2" %><%= f.label :活動中 %> <%= f.radio_button :active_status, false, class:"ml-5 mr-2" %><%= f.label :退会済 %></td>
+            <td><%= f.submit "更新", class:"btn btn-primary w-75" %></td>
           </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><%= f.submit "更新", class:"btn btn-primary btn-lg" %></td>
-          </tr>
+
         </tbody>
       </table>
-    
+    <% end %>
     </div>
     
   </div>
