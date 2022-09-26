@@ -5,28 +5,28 @@
     <div class ="col-md-4">
       <div>
       <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "100 X 100" %>
+      <%= image_tag @user.image, size: "100 X 100", class:"rounded-circle mb-2" %>
       <% else %>
       <i class="far fa-smile"></i>
       <% end %>
       <p><%= @user.club_name %></p>
       <% if @user.club_name != "Example_Club" %>
       <p><%= link_to '編集', edit_user_path(@user.id),class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', user_unsubscribe_confirm_path(@user), class:"btn btn-danger btn-sm" %></p>
-      <p><%= link_to notifies_path do %><i class="fas fa-bell"></i>お知らせ<%= @notifies.count %>件<% end %></p>
+      <p><%= link_to notifies_path, class:"text-dark" do %><i class="fas fa-bell" style="color: orange;"></i> 通知<%= @notifies.count %>件<% end %></p>
       </div>
       <div class="mt-2">
-        <ul>
-          <li><%= link_to '練習場所一覧', sites_path %></li>
-          <li><%= link_to '応募履歴を確認', entries_path %> </li>
-          <li><%= link_to '募集履歴を確認', recruits_path %></li>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-map-pin"></i><%= link_to '　 練習場所一覧', sites_path, class:"text-dark" %></li>
+          <li><i class="fas fa-thumbtack"></i>　<%= link_to '  応募履歴', entries_path, class:"text-dark" %> </li>
+          <li><i class="fas fa-bullhorn"></i><%= link_to '　募集履歴', recruits_path, class:"text-dark" %></li>
         </ul>
       <% end %>
       </div>
 
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 mb-5">
       <table class="table table-borderless">
-        <tr>
+        <tr class="table-info">
           <td>代表者氏名</td>
           <td><%= @user.captain_last_name %><%= @user.captain_first_name %></td>
         </tr>
@@ -34,7 +34,7 @@
           <td>ジャンル</td>
           <td><%= @genre.name %></td>
         </tr>
-        <tr>
+        <tr class="table-info">
           <td>チームの年齢層</td>
           <td><%= @user.age_group_i18n %></td>
         </tr>
@@ -42,7 +42,7 @@
           <td>主な活動地域</td>
           <td><%= @user.user_address %></td>
         </tr>
-        <tr>
+        <tr class="table-info">
           <td>クラブ紹介</td>
           <td><%= @user.introduction %></td>
         </tr>
