@@ -27,12 +27,12 @@
           <td></td>
           <th>"<%= link_to recruit_path(notify.recruit.id) do %><%= notify.recruit.title %><% end %>"　で<% notify.notifier.club_name %>とマッチしました！</th>
         </tr>
-        <elsif notify.action == "cancel" %>
+        <% elsif notify.action == "cancel" %>
           <tr>
           <td></td>
           <th><%= notify.notifier.club_name %>との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>(<%= link_to recruit_path(notify.recruit.id) do %><%= notify.recruit.title %><% end %>)はキャンセルされました。</th>
         </tr>
-        <elsif notify.action == "match_rejected" %>
+        <% elsif notify.action == "match_rejected" %>
           <tr>
           <td></td>
           <th><%= notify.notifier.club_name %>との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>(<%= link_to recruit_path(notify.recruit.id) do %><%= notify.recruit.title %><% end %>)はマッチ不成立した。</th>

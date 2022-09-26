@@ -50,13 +50,16 @@ class Recruit < ApplicationRecord
     temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, entry.id, 'match', false ])
     # マッチなら通知レコード作成
     if temp.blank?
+      # current_user（= notifier_id）は通知送る人（募集者）
       notify = current_user.active_notifications.new(
       recruit_id: id,
-      checker_id: user_id,
+      # checkerは通知受ける人(応募者)
+      checker_id: entry.user_id,
       action: 'match'
       )
       notify.save if notify.valid?
     end
+  
   end
   
   def create_nortification_cancel(current_user,entry)
@@ -66,7 +69,7 @@ class Recruit < ApplicationRecord
     if temp.blank?
       notify = current_user.active_notifications.new(
       recruit_id: id,
-      checker_id: user_id,
+      checker_id: entry.user_id,
       action: 'cancel'
       )
       notify.save if notify.valid?
@@ -80,7 +83,7 @@ class Recruit < ApplicationRecord
     if temp.blank?
       notify = current_user.active_notifications.new(
       recruit_id: id,
-      checker_id: user_id,
+      checker_id: entry.user_id,
       action: 'match_rejected'
       )
       notify.save if notify.valid?
