@@ -1,16 +1,15 @@
 <p></p>
 
 <div class ="container">
-  <div class ="row">
-    <h3>募集記事作成</h3>
+  <h3>募集記事作成</h3>
+  <div class ="row mt-5">
     <div class ="col-md-8">
-      <table>
+      <table class="table table-borderless">
         <%= form_with model: @recruit do |f| %>
-        <!--, url:create_recruits_path(@recruit.id), method: :post-->
         <tbody>
           <tr>
             <td>タイトル</td>
-            <td colspan = "4"><%= f.text_field :title %></td>
+            <td colspan = "4"><%= f.text_field :title, size:"60" %></td>
           </tr>
           <tr>
             <td>ジャンル</td>
@@ -34,7 +33,7 @@
           </tr>
           <tr rowspan="3">
             <td>当日の活動内容</td>
-            <td colspan = "4"><%= f.text_field :detail %></td>
+            <td colspan = "4"><%= f.text_field :detail, size:"60" %></td>
           </tr>
           <tr>
             <td></td>
