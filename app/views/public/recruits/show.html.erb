@@ -2,9 +2,9 @@
 
 <div class="container">
   <div class = "row">
-    <div class="col-md-4">
+    <div class="col-md-2">
       <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "100 X 100" %>
+      <%= image_tag @user.image, size: "100 X 100", class:"rounded-circle" %>
       <% else %>
       <i class="far fa-smile"></i>
       <% end %>
@@ -15,21 +15,21 @@
       <% end %>
     </div>
     
-    <div class="col-md-8">
+    <div class="col-md-9 mx-auto">
       <div>
-        <h3><%= @recruit.title %></h3><span><i class="fas fa-heart"></i><%= @recruit.likes.count %></span>
-        <h5><%= @recruit.date %>に<%= @site.site_name %>で<% if @recruit.practice_type == false %>合同練習<% else %>練習試合<% end %> ができる相手を募集しています</h5>
+        <h3 class="border-bottom border-secondary"><%= @recruit.title %> <i class="fas fa-heart fa-xs", style="color: FF6388;"></i><span class="h5"><%= @recruit.likes.count %></span></h3>
+        <h5 class=" mt-4"><%= @recruit.date.strftime('%Y/%m/%d') %> に @<%= @site.site_name %> で『<% if @recruit.practice_type == false %>合同練習<% else %>練習試合<% end %>』 ができる相手を募集しています</h5>
       <% if @recruit.age_group_i18n != "指定なし" %>
         <p>※この募集対象は、<%= @recruit.age_group_i18n %>に限ります。</p>
       <% end %>
       </div>
       
-      <div class="mt-5">
-        <h5>練習内容</h5>
-        <%= @recruit.detail %>
+      <div class="mt-4">
+        <h5 class="mb-4">練習内容</h5>
+        <span class="border p-3 border-secondary"><%= @recruit.detail %></span>
       </div>
       
-      <div class="mt-2">
+      <div class="mt-5">
       <% if @user == current_user %>
         <p><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2" %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-warning" %></p>
       <% else %>
