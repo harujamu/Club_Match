@@ -1,0 +1,17 @@
+<p></p>
+Room#show
+<div class="container">
+  
+  <div class="row">
+    <h3><%= @recruit.title %></h3>
+    <p><% if recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @site.site_name %>(<%= @recruit.date.strftime('%Y/%m/%d') %>) </p>
+    <div class="col-md-10">
+      <% @messages.each do |message| %>
+      <%= image_tag message.user.image, size: "10 X 10", class:"rounded-circle" %><%= message.message %>
+      <% end %>
+
+    </div>
+
+  </div>
+  
+</div>

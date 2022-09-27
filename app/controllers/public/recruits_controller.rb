@@ -24,6 +24,7 @@ class Public::RecruitsController < ApplicationController
     @entry.user_id = current_user.id
     @entries = @recruit.entries
     @user_entry = current_user.entries.find_by(recruit_id: @recruit.id)
+    room = Room.new
   end
   
   def edit
@@ -62,5 +63,6 @@ class Public::RecruitsController < ApplicationController
   def site_params
     params.require(:site).permit(:prefecture, :municipality, :address, :user_id)
   end
+
   
 end
