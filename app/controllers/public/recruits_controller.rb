@@ -44,6 +44,12 @@ class Public::RecruitsController < ApplicationController
   def index
     @user = current_user
     @recruits = @user.recruits
+    user = User.find(params[:id])
+    @recruits.each do |recruit|
+    users = User.all
+    @room_members = users.where(user.entry.recruit_id: recruit.id && userentry.entry_status == "match")
+    end
+    ids = @room_members.pluck(:id)
   end
   
   private

@@ -24,7 +24,7 @@
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
             <td>
             <%= recruit.recruit_status_i18n %> <% if recruit.recruit_status == "match" %>
-            <%= link_to rooms_path(room:{user_id: current_user.id}), method: :post do %>
+            <%= link_to rooms_path(user_ids: [current_user.id, ids]), method: :post do %>
             <i class="far fa-comment"></i>DM
             <% end %>
             <% end %>
