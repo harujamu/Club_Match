@@ -2,6 +2,9 @@ class Public::MessagesController < ApplicationController
   
   def create
     @message = Message.new(message_params)
+    @message.save
+    @room = Room.find(params[:id])
+    redirect_to room_path(@room.id)
   end
   
   private

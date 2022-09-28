@@ -24,7 +24,8 @@
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
             <td>
             <%= recruit.recruit_status_i18n %> <% if recruit.recruit_status == "match" %>
-            <%= link_to rooms_path(user_ids: [current_user.id, ids]), method: :post do %>
+            <!--募集者と応募者たちのチャットグループを作成-->
+            <%= link_to rooms_path(user_ids: [current_user.id,*@room_users.ids]), method: :post do %>
             <i class="far fa-comment"></i>DM
             <% end %>
             <% end %>

@@ -1,13 +1,13 @@
 class Public::RecruitsController < ApplicationController
-  
+
   def new
     @user = current_user
     @recruit = Recruit.new
     @recruit.user_id = @user.id
     @genre = Genre.find(@user.genre_id)
-    @sites = @user.sites 
+    @sites = @user.sites
   end
-  
+
   def create
     @recruit = Recruit.new(recruit_params)
     @user = current_user
@@ -15,7 +15,7 @@ class Public::RecruitsController < ApplicationController
     @recruit.save
     redirect_to root_path
   end
-  
+
   def show
     @recruit = Recruit.find(params[:id])
     @user = User.find(@recruit.user_id)
@@ -26,10 +26,10 @@ class Public::RecruitsController < ApplicationController
     @user_entry = current_user.entries.find_by(recruit_id: @recruit.id)
     room = Room.new
   end
-  
+
   def edit
     @user = current_user
-    @sites = @user.sites 
+    @sites = @user.sites
     @recruit = Recruit.find(params[:id])
     @genre = Genre.find(@user.genre_id)
   end
@@ -40,35 +40,34 @@ class Public::RecruitsController < ApplicationController
     @recruit.update(recruit_params)
     redirect_to root_path
   end
-  
+
   def index
     @user = current_user
     @recruits = @user.recruits
-    user = User.find(params[:id])
     @recruits.each do |recruit|
-    users = User.all
-    @room_members = users.where(user.entry.recruit_id: recruit.id && userentry.entry_status == "match")
+      #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
+      # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してUserのidに渡している
+      @room_users = User.where(id: recruit.entries.where(entry_status: "match").select(:user_id))
     end
-    ids = @room_members.pluck(:id)
   end
-  
+
   private
-  
+
   def recruit_params
     params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
-  
+
   def entry_params
     params.require(:entry).permit(:user_id, :recruit_id, :entry_status)
   end
-  
+
   def user_params
     params.require(:user).permit(:club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :image, :email)
   end
-  
+
   def site_params
     params.require(:site).permit(:prefecture, :municipality, :address, :user_id)
   end
 
-  
+
 end
