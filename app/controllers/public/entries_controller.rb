@@ -24,6 +24,7 @@ class Public::EntriesController < ApplicationController
   def index
     @user = current_user
     @entries = @user.entries
+    @room = Room.find(params[:id])
   end
   
   def update
