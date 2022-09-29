@@ -3,7 +3,7 @@
 <div class ="container">
   <h3>募集履歴</h3>
   <div class ="row">
-    <div class ="col-md-10">
+    <div class ="col-md-12 mt-3">
       <table class ="table table-bordered">
         <thead>
           <tr>
@@ -19,14 +19,14 @@
           <% @recruits.each do |recruit| %>
           <tr>
             <td><%= recruit.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%= link_to recruit_path(recruit.id) do %><%= recruit.title %><% end %></td>
+            <td><%= link_to recruit_path(recruit.id), class:"text-dark" do %><%= recruit.title %><% end %></td>
             <td><% if recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
             <td>
             <%= recruit.recruit_status_i18n %> <% if recruit.recruit_status == "match" %>
             <!--募集者と応募者たちのチャットグループを作成-->
-            <%= link_to rooms_path(user_ids: [current_user.id,*@room_users.ids]), method: :post do %>
-            <i class="far fa-comment"></i>DM
+            <%= link_to rooms_path(user_ids: [current_user.id,*@room_users.ids]), class:"text-dark", method: :post do %>
+            <i class="far fa-comment text-dark"></i>メッセージを送る
             <% end %>
             <% end %>
             </td>
