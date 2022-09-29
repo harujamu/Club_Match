@@ -4,7 +4,7 @@
   <h3>通知一覧</h3>
   <div class="row">
     <% if @notifies.exists? %>
-    <div class="my-5 mx-auto">
+    <div class="col-md-8 my-5 mx-auto">
       <% @notifies.each do |notify| %>
       <table class="table table-borderless">
         <% if notify.action == "like" %>
@@ -47,8 +47,8 @@
       <% end %>
     </div>
     <% else %>
-    <div>
-      <p>通知はありません</p>
+    <div class="col-md-8 mt-5">
+      <h5>新しい通知はありません</h5>
     </div>
     <% end %>
   </div>
