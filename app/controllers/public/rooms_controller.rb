@@ -11,7 +11,8 @@ class Public::RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @message = Message.new
     @messages = Message.all
-    @recruit = Recruit.find(params[:id])
+    @recruit = Recruit.find(params[:recruit_id])
+    
     @site = Site.find(@recruit.site_id)
   end
 
@@ -23,6 +24,10 @@ class Public::RoomsController < ApplicationController
 
   def message_params
     params.require(:message).permit(:user_id, :room_id, :message)
+  end
+  
+  def room_params
+    params.require(:room).permit(:user_id, :user_ids[])
   end
 
 end

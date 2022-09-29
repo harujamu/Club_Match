@@ -56,7 +56,7 @@
     <% @entries.each do |entry| %>
       <% if entry.entry_status == "recruiting" || "having_candidates" %>
       <div class="mr-2">
-        <%= link_to show_user_path(entry.user.id) do %><%= image_tag entry.user.image, size: '70 X 70' %><% end %>
+        <%= link_to show_user_path(entry.user.id) do %><% if entry.user.image.attached? %><%= image_tag entry.user.image, size: '70 X 70' %><% else %><i class="far fa-smile"></i><% end %><% end %>
         <p><%= entry.user.club_name %>
         <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
         <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle"></i><% end %>

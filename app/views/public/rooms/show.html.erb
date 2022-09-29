@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-10">
       <h3><%= @recruit.title %></h3>
-      <h5><%= @recruit.date.strftime('%Y/%m/%d') %>　<% if @recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @site.site_name %></h5>
+      <h5><%= @recruit.date.strftime('%Y/%m/%d') %>　<% if @recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @recruit.site_name %></h5>
 
       <div>
         <% @messages.each do |message| %>
@@ -13,6 +13,8 @@
       </div>
       <div class="mt-3">
         <%= form_with model: @message, method: :post do |f| %>
+        <%= f.hidden_field :room_id, :value => @room.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.text_area :message, size:"70" %><%= button_tag type: "submit", class:"btn" do %><i class="fas fa-play"></i><% end %>
         <% end %>
       </div>

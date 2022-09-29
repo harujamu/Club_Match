@@ -54,4 +54,8 @@ class Public::EntriesController < ApplicationController
     params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
   
+  def room_params
+    params.require(:room).permit(:user_id)
+  end
+  
 end

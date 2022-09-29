@@ -43,6 +43,7 @@ class Public::RecruitsController < ApplicationController
 
   def index
     @user = current_user
+    @room = Room.new
     @recruits = @user.recruits
     @recruits.each do |recruit|
       #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
