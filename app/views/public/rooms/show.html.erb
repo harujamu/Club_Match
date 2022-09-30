@@ -3,8 +3,8 @@
   
   <div class="row">
     <div class="col-md-10">
-      <h3><%= @recruit.title %></h3>
-      <h5><%= @recruit.date.strftime('%Y/%m/%d') %>　<% if @recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @recruit.site_name %></h5>
+      <h3><%= @room.recruit.title %></h3>
+      <h5><%= @room.recruit.date.strftime('%Y/%m/%d') %>　<% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @room.recruit.site_name %></h5>
 
       <div>
         <% @messages.each do |message| %>

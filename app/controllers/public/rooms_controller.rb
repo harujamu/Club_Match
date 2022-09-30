@@ -2,7 +2,7 @@ class Public::RoomsController < ApplicationController
 
   def create
     # DMのルーム作るのは募集者
-    @room = Room.new(user_ids: params[:user_ids], user_id: current_user.id)
+    @room = Room.new(user_ids: params[:user_ids], user_id: current_user.id, recruit_id: params[:recruit_id])
     @room.save
     redirect_to room_path(@room.id)
   end
@@ -11,9 +11,6 @@ class Public::RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @message = Message.new
     @messages = Message.all
-    @recruit = Recruit.find(params[:recruit_id])
-    
-    @site = Site.find(@recruit.site_id)
   end
 
   private
@@ -27,7 +24,7 @@ class Public::RoomsController < ApplicationController
   end
   
   def room_params
-    params.require(:room).permit(:user_id, :user_ids[])
+    params.require(:room).permit(:user_id, :recruit_id)
   end
 
 end

@@ -25,7 +25,7 @@
             <td>
             <%= recruit.recruit_status_i18n %> <% if recruit.recruit_status == "match" %>
             <!--募集者と応募者たちのチャットグループを作成-->
-            <%= link_to rooms_path(@room,room:{ user_ids: [current_user.id,*@room_users.ids], recruit_id: recruit.id}), class:"text-dark", method: :post do %>
+            <%= link_to rooms_path(@room,room:{ user_ids: [current_user.id,*@room_users.ids], recruit_id: recruit.id},), class:"text-dark", method: :post do %>
             <i class="far fa-comment text-dark"></i>メッセージを送る
             <% end %>
             <% end %>

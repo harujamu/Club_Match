@@ -7,6 +7,7 @@ class Recruit < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :entries
   has_many :notifies
+  has_one :room
   
   def liked_by?(user)
     likes.exists?(user_id: user.id)
@@ -93,7 +94,20 @@ class Recruit < ApplicationRecord
   
   # def create_nortification_message
     # メッセージがあるか調べる
-    # temp = Notify.where(["notifier_id = ? and "])
+    # temp = Notify.where(["notifier_id = ? and checker_id = ? and message_id = ? and action = ? and checked_status = ?",current_user.id, user_id, id, entry.id, 'message', false ])
+    # メッセージなければ通知作成
+    # if temp.blank?
+      # notify = current_user.active_notifications.new(
+      # message_id: id,
+      # checker_id: current_user.id,
+      # action: 'message'
+      # )
+      # 自分のコメントは通知済とする
+      # if notify.notifier_id == notify.checker_id
+        # notify.checked_status = true
+      # end
+      # notify.save if notify.valid?
+    # end
   # end
   
   
