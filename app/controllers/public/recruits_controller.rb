@@ -70,5 +70,9 @@ class Public::RecruitsController < ApplicationController
     params.require(:site).permit(:prefecture, :municipality, :address, :user_id)
   end
 
+   def room_params
+    params.require(:room).permit(:user_id, :recruit_id)
+  end
+
 
 end
