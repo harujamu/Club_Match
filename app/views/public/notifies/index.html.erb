@@ -9,17 +9,17 @@
       <table class="table table-borderless">
         <% if notify.action == "like" %>
         <tr>
-          <td><%= link_to show_user_path(notify.notifier.id) do %><% if notify.notifier.image.attached? %><%= image_tag notify.notifier.image, size:'60 X 60' %><% else %><i class="far fa-smile"></i><% end %><% end %></td>
+          <td><%= link_to show_user_path(notify.notifier.id) do %><% if notify.notifier.image.attached? %><%= image_tag notify.notifier.image, size:'60 X 60', class:"rounded-circle"  %><% else %><i class="far fa-smile"></i><% end %><% end %></td>
           <th><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id) do %><%= notify.recruit.title %><% end %>"　に いいね しました</th>
         </tr>
         <% elsif notify.action == "message" %>
         <tr>
-          <td><%= link_to show_user_path(notify.notifier.id) do %><% if notify.notifier.image.attached? %><%= image_tag notify.notifier.image, size:'60 X 60' %><% else %><i class="far fa-smile"></i><% end %><% end %></td>
+          <td><%= link_to show_user_path(notify.notifier.id) do %><% if notify.notifier.image.attached? %><%= image_tag notify.notifier.image, size:'60 X 60', class:"rounded-circle"  %><% else %><i class="far fa-smile"></i><% end %><% end %></td>
           <th><%= notify.notifier.club_name %>から メッセージ が届きました</th>
         </tr>
         <% elsif notify.action == "entry" %>
         <tr>
-          <td><%= link_to show_user_path(notify.notifier.id) do %><% if notify.notifier.image.attached? %><%= image_tag notify.notifier.image, size:'60 X 60' %><% else %><i class="far fa-smile"></i><% end %><% end %></td>
+          <td><%= link_to show_user_path(notify.notifier.id) do %><% if notify.notifier.image.attached? %><%= image_tag notify.notifier.image, size:'60 X 60', class:"rounded-circle"  %><% else %><i class="far fa-smile"></i><% end %><% end %></td>
           <th><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id) do %><%= notify.recruit.title %><% end %>"　に応募しました</th>
         </tr>
         <% elsif notify.action == "match" %>
