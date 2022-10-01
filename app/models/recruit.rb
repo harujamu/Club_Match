@@ -7,7 +7,7 @@ class Recruit < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :entries
   has_many :notifies
-  has_one :room
+  has_many :rooms
   
   def liked_by?(user)
     likes.exists?(user_id: user.id)

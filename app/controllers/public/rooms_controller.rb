@@ -9,6 +9,7 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    @recruit = Recruit.find(@room.recruit_id)
     @message = Message.new
     @messages = Message.all
   end
@@ -24,7 +25,7 @@ class Public::RoomsController < ApplicationController
   end
   
   def room_params
-    params.require(:room).permit(:user_id, :recruit_id)
+    params.require(:room).permit(:user_id, :recruit_id, :user_ids)
   end
 
 end
