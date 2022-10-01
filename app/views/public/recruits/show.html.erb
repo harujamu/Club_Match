@@ -31,17 +31,17 @@
       
       <div class="mt-5">
       <% if @user == current_user %>
-        <p><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2" %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-warning" %></p>
+        <p class="d-flex justify-content-end"><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2" %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info" %></p>
       <% else %>
         <%= form_with model: @entry do |f| %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-          <%# if @entry.blank? && ( @recruit.recruit_status == "recruiting" || @recruit.recruit_status == "having_candidates"）%>
-          <p><%= f.submit '応募する', class:"btn btn-primary" %></p>
-          <%# end %>
+          <% if ( @entry.blank? && @recruit.recruit_status == "recruiting" ) || ( @entry.blank? && @recruit.recruit_status == "having_candidates") %>
+          <p class="d-flex justify-content-end"><%= f.submit '応募する', class:"btn btn-primary" %></p>
+          <% end %>
         <% end %>
-        <% if @user_entry.present? %>
-          <%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger" %>
+        <% if ( @user_entry.present? && @recruit.recruit_status != "match") || ( @user_entry.present? && @recruit.recruit_status != "done" ) %>
+          <p class="d-flex justify-content-end"><%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger" %></p>
         <% end %>
       <% end %>
       </div>
