@@ -24,8 +24,8 @@
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
             <td>
             <%= recruit.recruit_status_i18n %> <% if recruit.recruit_status == "match" %>
-            <!--募集者と応募者たちのチャットグループを作成-->
-            <%= link_to rooms_path(@room,room:{ user_ids: [*@room_users.ids], user_id: current_user.id, recruit_id: recruit.id}), class:"text-dark", method: :post do %>
+            <!--募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す-->
+            <%= link_to rooms_path(@room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do %>
             <i class="far fa-comment text-dark"></i>メッセージを送る
             <% end %>
             <% end %>

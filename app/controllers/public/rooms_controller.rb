@@ -1,10 +1,20 @@
 class Public::RoomsController < ApplicationController
 
   def create
-    # DMのルーム作るのは募集者
-    @room = Room.new(user_ids: params[:user_ids], user_id: current_user.id, recruit_id: params[:recruit_id])
-    @room.save
-    redirect_to room_path(@room.id)
+    # DMのルーム作るのは募集者（user_id）、募集IDはRoom作成時に持たせたID
+    @room = Room.new(user_id: current_user.id, recruit_id: params[:recruit_id])
+    recruit = Recruit.find(params[:recruit_id])
+    
+    #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
+    # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してUserのidに渡している
+    user_ids = recruit.entries.where(entry_status: "match").pluck(:user_id)
+    
+    # 応募者たちのユーザーIDをそれぞれ抽出し、User_Roomにカラム追加していく
+    user_ids.each do |user_id|
+      @room.user_rooms.build(user_id: user_id)
+    end
+    @room.save!
+    redirect_to room_path(@room)
   end
 
   def show
@@ -23,7 +33,7 @@ class Public::RoomsController < ApplicationController
   def message_params
     params.require(:message).permit(:user_id, :room_id, :message)
   end
-  
+
   def room_params
     params.require(:room).permit(:user_id, :recruit_id, :user_ids)
   end

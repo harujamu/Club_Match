@@ -44,11 +44,6 @@ class Public::RecruitsController < ApplicationController
   def index
     @user = current_user
     @recruits = @user.recruits
-    @recruits.each do |recruit|
-      #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
-      # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してUserのidに渡している
-      @room_users = User.where(id: recruit.entries.where(entry_status: "match").select(:user_id))
-    end
     @room = Room.new
   end
 
