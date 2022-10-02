@@ -22,12 +22,9 @@
             <td><%= link_to recruit_path(recruit.id), class:"text-dark" do %><%= recruit.title %><% end %></td>
             <td><% if recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
-            <td>
-            <%= recruit.recruit_status_i18n %> <% if recruit.recruit_status == "match" %>
-            <!--募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す-->
-            <%= link_to rooms_path(@room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do %>
-            <i class="far fa-comment text-dark"></i>メッセージを送る
-            <% end %>
+            <td><%= recruit.recruit_status_i18n %>
+            <% if recruit.recruit_status == "match" %>
+              <%= room_link(@room, recruit) %>トーク画面へ
             <% end %>
             </td>
             <td><% if recruit.open_status == true %>公開中<% else %>公開停止中<% end %></td>

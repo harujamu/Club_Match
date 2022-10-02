@@ -45,6 +45,7 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruits = @user.recruits
     @room = Room.new
+  
   end
 
   private
