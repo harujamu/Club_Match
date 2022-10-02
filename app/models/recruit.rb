@@ -5,8 +5,8 @@ class Recruit < ApplicationRecord
   belongs_to :user
   belongs_to :site
   has_many :likes, dependent: :destroy
-  has_many :entries
-  has_many :notifies
+  has_many :entries, dependent: :destroy
+  has_many :notifies, dependent: :destroy
   has_one :room
 
   def liked_by?(user)

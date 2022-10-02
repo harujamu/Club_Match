@@ -17,7 +17,11 @@ class Public::EntriesController < ApplicationController
   
   def destroy
     @entry = Entry.find(params[:id])
+    @recruit = @entry.recruit
     @entry.destroy
+    if @recruit.entries.blank?
+      @recruit.update(recruit_status == "recruiting")
+    end
     redirect_to entries_path
   end
   

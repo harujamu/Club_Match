@@ -7,7 +7,7 @@ class Site < ApplicationRecord
 
 
   belongs_to:user
-  # , dependent: :destroy必要？論理削除でも必要かどうか調べる
+  
 
 
  def site_name

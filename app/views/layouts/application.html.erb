@@ -15,7 +15,7 @@
       <!--ロゴ-->
       <nav class ="navbar navbar-expand-md", style="background-color: #ffffff;">
         <div class ="navbar-brand col-md-4">
-          <%= link_to root_path do %><%= image_tag('club_match_logo.png') %><% end %>
+          <%= link_to root_path do %><%= image_tag('club_match_logo.png') %><% end %> <%= current_user.club_name %>さんがログイン中です
         </div>
           
         <div class ="container col-md-8 mt-0">

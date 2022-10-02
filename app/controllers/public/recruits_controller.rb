@@ -19,7 +19,6 @@ class Public::RecruitsController < ApplicationController
   def show
     @recruit = Recruit.find(params[:id])
     @user = User.find(@recruit.user_id)
-    @site = Site.find(@recruit.site_id)
     @entry = Entry.new
     @entry.user_id = current_user.id
     @entries = @recruit.entries
