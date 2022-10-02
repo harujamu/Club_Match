@@ -3,15 +3,11 @@
 <div class="container">
   <div class = "row">
     <div class="col-md-2">
-      <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "100 X 100", class:"rounded-circle" %>
-      <% else %>
-      <i class="far fa-smile"></i>
-      <% end %>
+      <%= user_image(@user,100,100,3) %>
       <% if @user != current_user %>
-      <p><%= link_to show_user_path(@user.id) do %><%= @user.club_name %><% end %></p>
+        <p><%= link_to show_user_path(@user.id), class:"text-dark" do %><%= @user.club_name %><% end %></p>
       <% else %>
-      <p><%= link_to my_page_path do %><%= @user.club_name %><% end %></p>
+        <p><%= link_to my_page_path, class:"text-dark" do %><%= @user.club_name %><% end %></p>
       <% end %>
     </div>
     
@@ -31,27 +27,34 @@
       
       <div class="mt-5">
       <% if @user == current_user %>
-        <p class="d-flex justify-content-end"><% if @recruit.recruit_status == "recruiting" || @recruit.recruit_status == "having_candidates" %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2" %><% end %>
-        <% if @recruit.recruit_status == "having_candidates" %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info" %><% end %></p>
+      
+        <p class="d-flex justify-content-end">
+          <% if @recruit.recruit_status == "recruiting" || @recruit.recruit_status == "having_candidates" %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2" %><% end %>
+          <% if @recruit.recruit_status == "having_candidates" %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info" %><% end %>
+        </p>
+        
       <% else %>
-        <%= form_with model: @entry do |f| %>
+      
+        <% if ( @entry.blank? && @recruit.recruit_status == "recruiting" ) || ( @entry.blank? && @recruit.recruit_status == "having_candidates") %>
+          <%= form_with model: @entry do |f| %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <%= f.hidden_field :recruit_id, :value => @recruit.id %>
-          <% if ( @entry.blank? && @recruit.recruit_status == "recruiting" ) || ( @entry.blank? && @recruit.recruit_status == "having_candidates") %>
           <p class="d-flex justify-content-end"><%= f.submit '応募する', class:"btn btn-primary" %></p>
           <% end %>
         <% end %>
-        <% if ( @user_entry.present? && @recruit.recruit_status == "having_candidates" ) %>
+        
+        <% if @user_entry.present? && (@recruit.recruit_status == "having_candidates") %>
           <p class="d-flex justify-content-end"><%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger" %></p>
         <% end %>
+        
       <% end %>
       </div>
       
     </div>
   </div>
   
-  <% if @user == current_user %>
   <div class = "row">
+  <% if @user == current_user %>
     <div class="d-flex flex-wrap" >
     <% @entries.each do |entry| %>
       <% if entry.recruit.recruit_status == "having_candidates" %>
@@ -66,6 +69,7 @@
       <% end %> 
     <% end %>
     </div>
+    
   <% else %>
     <% if @user_entry.present? %><p>応募ステータス: <%= @user_entry.entry_status_i18n %></p><% end %>
   <% end %>

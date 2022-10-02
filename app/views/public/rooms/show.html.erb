@@ -9,7 +9,7 @@
       <div class="my-5">
         <% @messages.each do |message| %>
           <% if message.user != current_user %>
-          <p class="d-flex justify-content-start"><%= user_image(message.user,30,30,2) %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
+          <p class="d-flex justify-content-start"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= user_image(message.user,30,30,2) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
           <% else %>
           <p class="d-flex justify-content-end"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= user_image(message.user,30,30,2) %></p>
           <% end %>

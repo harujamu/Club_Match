@@ -1,11 +1,7 @@
 <p></p>
 <div class ="container">
   <h3>
-    <% if @user.image.attached? %>
-    <%= image_tag @user.image, size: "100 X 100" %>
-    <% else %>
-    <i class="far fa-smile"></i>
-    <% end %> ユーザー情報編集
+    <%= user_image(@user, 100,100,6) %> ユーザー情報編集
   </h3>
   <div class ="row mt-5">
   <%= form_with model: @user, url: update_user_path(@user.id), method: :patch do |f| %>

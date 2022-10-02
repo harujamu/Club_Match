@@ -4,8 +4,8 @@
   <h3>募集記事作成</h3>
   <div class ="row mt-5">
     <div class ="col-md-10 mx-auto">
+      <%= form_with model: @recruit do |f| %>
       <table class="table table-borderless">
-        <%= form_with model: @recruit do |f| %>
         <tbody>
           <tr>
             <td>タイトル</td>
@@ -41,8 +41,8 @@
             <td><%= f.submit '募集する', class:"btn btn-success w-100" %></td>
           </tr>
           </tbody>
-        <% end %>
       </table>
+      <% end %>
     </div>
   </div>
 </div>

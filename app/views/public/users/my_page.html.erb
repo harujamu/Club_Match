@@ -4,11 +4,7 @@
   <div class="row">
     <div class ="col-md-4">
       <div>
-      <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "100 X 100", class:"rounded-circle mb-2" %>
-      <% else %>
-      <i class="far fa-smile"></i>
-      <% end %>
+      <%= user_image(@user,100,100,6) %>
       <p><%= @user.club_name %></p>
       <% if @user.club_name != "Example_Club" %>
       <p><%= link_to '編集', edit_user_path(@user.id),class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', user_unsubscribe_confirm_path(@user), class:"btn btn-danger btn-sm" %></p>
