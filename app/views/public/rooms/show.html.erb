@@ -16,14 +16,13 @@
         <% end %>
       </div>
       <div class="mt-5">
+        <%= form_with model: @message, method: :post do |f| %>
         <table class="table table-borderless">
-          <%= form_with model: @message, method: :post do |f| %>
           <%= f.hidden_field :room_id, :value => @room.id %>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <tr><%= f.text_area :message, class:"border-secondary", size:"99" %><%= button_tag type: "submit", class:"btn" do %><i class="fas fa-play fa-2x", style="color: 3399FF;"></i><% end %></tr>
-          <% end %>
         </table>
-        
+        <% end %>
       
     </div>
   </div>
