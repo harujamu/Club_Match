@@ -22,11 +22,9 @@
             <td><%if entry.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
             <td><%= entry.recruit.date.strftime('%Y/%m/%d') %></td>
             <td><%= entry.entry_status_i18n %>
-            <%# if entry.entry_status == "match" %>
-            <%#= link_to room_path(@room.id), class:"text-dark", method: :post do %>
-            <i class="far fa-comment text-dark"></i>トーク画面へ
-            <%# end %>
-            <%# end %>
+              <% if @room.present? %>
+                <%= link_to room_path(@room.id), class:"text-dark" do %><i class="far fa-comment text-dark"></i>トーク画面へ<% end %>
+              <% end %>
             </td>
           </tr>
           <% end %>

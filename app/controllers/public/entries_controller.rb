@@ -24,7 +24,9 @@ class Public::EntriesController < ApplicationController
   def index
     @user = current_user
     @entries = @user.entries
-    #@room = Room.find(params[:id])
+    @entries.each do |entry|
+      @room = Room.find(entry.recruit.room.id)
+    end
   end
   
   def update
@@ -55,7 +57,7 @@ class Public::EntriesController < ApplicationController
   end
   
   def room_params
-    params.require(:room).permit(:user_id)
+    params.require(:room).permit(:user_id, :recruit_id)
   end
   
 end
