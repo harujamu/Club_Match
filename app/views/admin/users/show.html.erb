@@ -4,13 +4,9 @@
   <h3>ユーザー情報照会</h3>
   <div class="row mt-5">
     <div class ="col-md-4">
-      <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "100 X 100" %>
-      <% else %>
-      <i class="fa-regular fa-face-smile"></i>
-      <% end %>
-
+      <%= user_image(@user,100,100,6) %>
     </div>
+    
     <div class="col-md-8">
       <table class="table">
         <tr>
