@@ -5,34 +5,34 @@
     <div class ="col-md-4 border-right">
       <h2>募集<%= @recruits.count %>件</h2>
     </div>
-    
+
     <div class ="col-md-8">
       <h2>練習相手募集一覧</h2>
       <div class="mt-5 d-flex flex-wrap">
       <% @recruits.each do |recruit| %>
-        
+
         <% if recruit.open_status == true %>
         <div class="mr-3">
           <%= link_to recruit_path(recruit.id) do %>
           <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150 X 150" %><% else %><i class="far fa-smile"></i><% end %>
           <% end %>
-            
+
           <p><%= recruit.title %></p>
           <% if user_signed_in? %>
             <% if recruit.liked_by?(current_user) %>
-            <p><%= link_to recruit_likes_path(recruit), method: :delete do %><i class="fas fa-heart"></i><%= recruit.likes.count %><% end %></p>
+            <p><%= link_to recruit_likes_path(recruit),class:"text-dark", method: :delete do %><i class="fas fa-heart", style="color: FF6388;"></i> <%= recruit.likes.count %><% end %></p>
             <% else %>
-            <p><%= link_to recruit_likes_path(recruit), method: :post do %><i class="far fa-heart"></i><% end %><%= recruit.likes.count %></p>
+            <p><%= link_to recruit_likes_path(recruit),class:"text-dark", method: :post do %><i class="far fa-heart", style="color: FF6388;"></i> <%= recruit.likes.count %><% end %></p>
             <% end %>
           <% else %>
-            <p><i class="fas fa-heart"></i><%= recruit.likes.count %></p>
+            <p><i class="fas fa-heart", style="color: FF6388;"></i><%= recruit.likes.count %></p>
           <% end %>
           </div>
         <% end %>
-          
+
       <% end %>
       </div>
     </div>
   </div>
-  
+
 </div>

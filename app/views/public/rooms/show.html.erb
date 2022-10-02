@@ -6,21 +6,26 @@
       <h3><%= @room.recruit.title %></h3>
       <h5><%= @room.recruit.date.strftime('%Y/%m/%d') %>　<% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @room.recruit.site.site_name %></h5>
 
-      <div>
+      <div class="my-5">
         <% @messages.each do |message| %>
-        <p><%= image_tag message.user.image, size: "10 X 10", class:"rounded-circle" %><%= message.message %></p>
+          <% if message.user != current_user %>
+          <p class="d-flex justify-content-start"><%= user_image(message.user,30,30,2) %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
+          <% else %>
+          <p class="d-flex justify-content-end"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= user_image(message.user,30,30,2) %></p>
+          <% end %>
         <% end %>
       </div>
-      <div class="mt-3">
-        <%= form_with model: @message, method: :post do |f| %>
-        <%= f.hidden_field :room_id, :value => @room.id %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.text_area :message, size:"70" %><%= button_tag type: "submit", class:"btn" do %><i class="fas fa-play"></i><% end %>
-        <% end %>
-      </div>
+      <div class="mt-5">
+        <table class="table table-borderless">
+          <%= form_with model: @message, method: :post do |f| %>
+          <%= f.hidden_field :room_id, :value => @room.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <tr><%= f.text_area :message, class:"border-secondary", size:"99" %><%= button_tag type: "submit", class:"btn" do %><i class="fas fa-play fa-2x", style="color: 3399FF;"></i><% end %></tr>
+          <% end %>
+        </table>
+        
       
     </div>
-
   </div>
   
 </div>

@@ -2,13 +2,13 @@ module ApplicationHelper
   
   # ユーザー画像があるときは画像表示、ないときはアイコン表示する
   
-  def user_image(user, width=100, height=100)
+  def user_image(user, width=100, height=100, n)
     # width, height で自由にサイズ調整できるようにした（width=100の部分で初期値設定）
     if user.image.attached?
       # "#{width}x#{height}のxはスペース開けない！
-      image_tag user.image, size: "#{width}x#{height}"
+      image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
     else
-      tag.i class: "far fa-smile"
+      tag.i class: "far fa-smile fa-#{n}x"
     end
   end
   
