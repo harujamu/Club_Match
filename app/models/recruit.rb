@@ -13,7 +13,7 @@ class Recruit < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-  def create_nortification_like(current_user)
+  def create_nortification_like(current_user)　
     # いいねされてるか調べる
     temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, 'like', false])
     # いいねされてなければ通知レコード作成
@@ -91,23 +91,23 @@ class Recruit < ApplicationRecord
     end
   end
 
-  # def create_nortification_message
+  def create_nortification_message
     # メッセージがあるか調べる
-    # temp = Notify.where(["notifier_id = ? and checker_id = ? and message_id = ? and action = ? and checked_status = ?",current_user.id, user_id, id, entry.id, 'message', false ])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and message_id = ? and action = ? and checked_status = ?",current_user.id, user_id, id, entry.id, 'message', false ])
     # メッセージなければ通知作成
-    # if temp.blank?
-      # notify = current_user.active_notifications.new(
-      # message_id: id,
-      # checker_id: current_user.id,
-      # action: 'message'
-      # )
+    if temp.blank?
+      notify = current_user.active_notifications.new(
+      message_id: id,
+      checker_id: current_user.id,
+      action: 'message'
+       )
       # 自分のコメントは通知済とする
-      # if notify.notifier_id == notify.checker_id
-        # notify.checked_status = true
-      # end
-      # notify.save if notify.valid?
-    # end
-  # end
+      if notify.notifier_id == notify.checker_id
+        notify.checked_status = true
+      end
+      notify.save if notify.valid?
+    end
+  end
 
 
 end

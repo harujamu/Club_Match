@@ -2,11 +2,26 @@
 
 <div class ="container">
   <div class ="row">
-    <div class ="col-md-4 border-right">
+    <div class ="col-md-3 border-right">
       <h2>募集<%= @recruits.count %>件</h2>
+      <div class="mt-5 border-bottom pb-3">
+        <p><%= link_to '今日', root_path(today_recruit: Date.today), method: :get, class:"btn bg-warning btn-sm bg-gradient" %></p>
+        <%= form_with url:root_path, method: :get do |f| %>
+        <p><%=f.date_field :date_from, class:"form-control w-50 border-warning" %></p>
+        <p><%=f.date_field :date_end, class:"form-control w-50 border-warning" %></p>
+        <p><%= f.submit 'この期間で検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
+        <% end %>
+      </div>
+      <div class="mt-5">
+        <%= form_with url:root_path, method: :get do |f| %>
+        <p><%= f.check_box(:practice_type, {checked: false}, checked_value: true) %>　練習試合</p>
+        <p><%= f.check_box(:practice_type, {checked: false}, checked_value: false) %>　合同練習</p>
+        <p></p>
+        <% end %>
+      </div>
     </div>
 
-    <div class ="col-md-8">
+    <div class ="col-md-8 ml-5">
       <h2>練習相手募集一覧</h2>
       <div class="mt-5 d-flex flex-wrap">
       <% @recruits.each do |recruit| %>

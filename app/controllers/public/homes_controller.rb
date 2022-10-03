@@ -1,7 +1,17 @@
 class Public::HomesController < ApplicationController
   
   def top
-    @recruits = Recruit.all
+    if params[:today_recruit]
+      @recruits = Recruit.where(date: Date.today)
+    elsif params[:date_from] && params[:date_end]
+      recruits = Recruit.all
+      recruits.each do |recruit|
+        @recruits = Recruit.where(date: recruit.date.between?(params[:date_from],params[:date_end]))
+      end
+    else
+      @recruits = Recruit.all
+    end
+    
     @recruits.each do |recruit|
       if recruit.date.before? Date.today
         recruit.update(open_status: false)
