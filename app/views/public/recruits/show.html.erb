@@ -29,13 +29,13 @@
       <% if @user == current_user %>
       <!--current_user が募集者の時-->
         <p class="d-flex justify-content-end">
-          <% if @recruit.recruit_status == "recruiting" || @recruit.recruit_status == "having_candidates" %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2 w-25" %><% end %>
-          <% if @recruit.recruit_status == "having_candidates" %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
+          <% if @recruit.recruiting? || @recruit.having_candidates? %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2 w-25" %><% end %>
+          <% if @recruit.having_candidates? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
         </p>
         
       <% else %>
       <!--current_user が募集者でない時-->
-        <% if @entry.blank? && ( @recruit.recruit_status == "recruiting" || @recruit.recruit_status == "having_candidates") %>
+        <% if @entry.new_record? && ( @recruit.recruiting? || @recruit.having_candidates?) %>
           <%#= form_with model: @entry do |f| %>
           <%#= f.hidden_field :user_id, :value => current_user.id %>
           <%#= f.hidden_field :recruit_id, :value => @recruit.id %>
@@ -44,7 +44,7 @@
           <p class="d-flex justify-content-end"><%= link_to '応募する', entries_path(@entry, entry: {recruit_id: @recruit.id, user_id: current_user.id}), method: :post, class:"btn btn-primary w-25" %></p>
         <% end %>
         
-        <% if @user_entry.present? && (@recruit.recruit_status == "having_candidates") %>
+        <% if @user_entry.present? && @recruit.having_candidates? %>
           <p class="d-flex justify-content-end"><%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger w-25" %></p>
         <% end %>
         
@@ -58,7 +58,7 @@
   <% if @user == current_user %>
     <div class="d-flex flex-wrap" >
     <% @entries.each do |entry| %>
-      <% if entry.recruit.recruit_status == "having_candidates" %>
+      <% if entry.recruit.having_candidates? %>
       <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
       <div class="mr-2">
         <%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70) %><% end %>

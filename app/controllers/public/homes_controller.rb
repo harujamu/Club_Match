@@ -4,10 +4,10 @@ class Public::HomesController < ApplicationController
     if params[:today_recruit]
       @recruits = Recruit.where(date: Date.today)
     elsif params[:date_from] && params[:date_end]
-      recruits = Recruit.all
-      recruits.each do |recruit|
-        @recruits = Recruit.where(date: recruit.date.between?(params[:date_from],params[:date_end]))
-      end
+      # A..Bは『A〜B』として使える
+      date_from = params[:date_from].to_date
+      date_end = params[:date_end].to_date
+      @recruits = Recruit.where(date: date_from..date_end)
     else
       @recruits = Recruit.all
     end

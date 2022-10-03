@@ -23,6 +23,7 @@ class Public::RecruitsController < ApplicationController
     @entry.user_id = current_user.id
     @entries = @recruit.entries
     @user_entry = current_user.entries.find_by(recruit_id: @recruit.id)
+   
   end
 
   def edit
