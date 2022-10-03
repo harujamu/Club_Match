@@ -22,6 +22,11 @@ class Public::RoomsController < ApplicationController
     @recruit = Recruit.find(@room.recruit_id)
     @message = Message.new
     @messages = Message.all
+    user_rooms = User_Room.where(room_id: @room.id)
+    users = User.where(user_id: user_rooms.user_id)
+    users.each do |user|
+    @user = user
+    end
   end
 
   private
