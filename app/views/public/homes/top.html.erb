@@ -32,7 +32,7 @@
           <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150 X 150", class:"rounded-circle" %><% else %><i class="far fa-smile"></i><% end %>
           <% end %>
 
-          <p><%= recruit.title %></p>
+          <p><%= recruit.title.truncate(13) %></p>
           <% if user_signed_in? %>
             <% if recruit.liked_by?(current_user) %>
             <p><%= link_to recruit_likes_path(recruit),class:"text-dark", method: :delete do %><i class="fas fa-heart", style="color: FF6388;"></i> <%= recruit.likes.count %><% end %></p>
