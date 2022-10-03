@@ -52,26 +52,29 @@
       </div>
       
     </div>
-  </div>
-  
-  <div class = "row">
-  <% if @user == current_user %>
-    <div class="d-flex flex-wrap" >
-    <% @entries.each do |entry| %>
-      <% if entry.recruit.having_candidates? %>
-      <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
-      <div class="mr-2">
-        <%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70) %><% end %>
-        <p><%= entry.user.club_name %>
-        <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
-        <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle"></i><% end %>
-        </p>
+    <div class = "row">
+    <% if @user == current_user %>
+      <div class=" col-md-12">
+        <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
+        <div class="d-flex flex-wrap" >
+        <% @entries.each do |entry| %>
+          <% if entry.recruit.having_candidates? %>
+          <div class="mr-5 mt-5">
+            <p><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70,4) %><% end %></p>
+            <p><%= entry.user.club_name %>
+            <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
+            <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle"></i><% end %>
+            </p>
+          </div>
+          <% end %> 
+        <% end %>
+        </div>
       </div>
-      <% end %> 
+    <% else %>
+      <% if @user_entry.present? %><p>応募ステータス: <%= @user_entry.entry_status_i18n %></p><% end %>
     <% end %>
     </div>
-    
-  <% else %>
-    <% if @user_entry.present? %><p>応募ステータス: <%= @user_entry.entry_status_i18n %></p><% end %>
-  <% end %>
+
   </div>
+  
+  

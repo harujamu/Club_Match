@@ -28,7 +28,9 @@ class Public::EntriesController < ApplicationController
     @user = current_user
     @entries = @user.entries
     @entries.each do |entry|
-      @room = Room.find(entry.recruit.room.id)
+      if entry.recruit.match? && entry.recruit.room.present?
+        @room = Room.find(entry.recruit.id)
+      end
     end
   end
   

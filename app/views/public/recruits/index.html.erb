@@ -23,7 +23,7 @@
             <td><% if recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
             <td><%= recruit.recruit_status_i18n %>
-            <% if recruit.recruit_status == "match" %>
+            <% if recruit.match? %>
               <%= room_link(@room, recruit) %>トーク画面へ
             <% end %>
             </td>
