@@ -16,7 +16,7 @@
         <%= form_with url:root_path, method: :get do |f| %>
         <p><%= f.check_box(:practice_type, {checked: false}, checked_value: true) %>　練習試合</p>
         <p><%= f.check_box(:practice_type, {checked: false}, checked_value: false) %>　合同練習</p>
-        <p></p>
+        <p><%= f.check_box(:liked_posts, {checked: false}) %>　<i class="far fa-heart", style="color: FF6388;"></i>済募集記事</p>
         <% end %>
       </div>
     </div>

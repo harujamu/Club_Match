@@ -3,7 +3,6 @@ class Public::EntriesController < ApplicationController
   def create
     @entry = Entry.new(entry_params)
     @recruit = Recruit.find(@entry.recruit_id)
-    @entry.user_id = current_user.id
     @entry.save
     # 応募ステータスが応募済になったら、募集ステータスも候補者ありに更新+募集者に応募通知作成
     if @entry.entry_status == "entered"
