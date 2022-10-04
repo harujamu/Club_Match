@@ -17,8 +17,11 @@ class Public::UsersController < ApplicationController
   
   def update
     @user = current_user
-    @user.update(user_params)
-    redirect_to my_page_path(@user)
+    if @user.update(user_params)
+      redirect_to my_page_path(@user)
+    else
+      render :edit
+    end
   end
   
   def unsubscribe_confirm

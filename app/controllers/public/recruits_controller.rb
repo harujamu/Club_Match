@@ -12,8 +12,11 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.new(recruit_params)
     @user = current_user
     @recruit.user_id = @user.id
-    @recruit.save
-    redirect_to root_path
+    if @recruit.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def show
@@ -36,16 +39,18 @@ class Public::RecruitsController < ApplicationController
   def update
     @user = current_user
     @recruit = Recruit.find(params[:id])
-    @recruit.update(recruit_params)
-    if @recruit.match?
-      @entries = Entry.where(entry_status: 0, recruit_id: @recruit.id).pluck(:id)
-      @entries.each do |entry|
-        entry.update(entry_status: 2)
-        byebug
-        @recruit.create_nortification_match_rejected(current_user, @entry)
+    if @recruit.update(recruit_params)
+      if @recruit.match?
+        @entries = Entry.where(entry_status: 0, recruit_id: @recruit.id).pluck(:id)
+        @entries.each do |entry|
+          entry.update(entry_status: 2)
+          @recruit.create_nortification_match_rejected(current_user, @entry)
+        end
       end
+      redirect_to root_path
+    else
+      render :edit
     end
-    redirect_to root_path
   end
 
   def index
