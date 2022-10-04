@@ -37,6 +37,14 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruit = Recruit.find(params[:id])
     @recruit.update(recruit_params)
+    if @recruit.match?
+      @entries = Entry.where(entry_status: 0, recruit_id: @recruit.id).pluck(:id)
+      @entries.each do |entry|
+        entry.update(entry_status: 2)
+        byebug
+        @recruit.create_nortification_match_rejected(current_user, @entry)
+      end
+    end
     redirect_to root_path
   end
 

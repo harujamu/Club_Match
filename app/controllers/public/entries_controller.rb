@@ -18,8 +18,8 @@ class Public::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @recruit = @entry.recruit
     @entry.destroy
-    if @recruit.entries.blank?
-      @recruit.update(recruit_status == "recruiting")
+    if @recruit.entries.nil?
+      @recruit.update(recruit_status: 0)
     end
     redirect_to entries_path
   end
@@ -27,12 +27,12 @@ class Public::EntriesController < ApplicationController
   def index
     @user = current_user
     @entries = @user.entries
-    @entries.each do |entry|
-      if entry.recruit.match? && entry.recruit.room.present?
-        # @room = Room.where(id: @user.user_rooms.pluck(:room_id))
-        @room = Room.find(entry.recruit.room.id)
-      end
-    end
+    # @entries.each do |entry|
+    #   if entry.recruit.match? && entry.recruit.room.present?
+    #     # @room = Room.where(id: @user.user_rooms.pluck(:room_id))
+    #     @room = Room.find(entry.recruit.room.id)
+    #   end
+    #   end
     
   end
 

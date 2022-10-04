@@ -8,6 +8,10 @@ class Public::HomesController < ApplicationController
       date_from = params[:date_from].to_date
       date_end = params[:date_end].to_date
       @recruits = Recruit.where(date: date_from..date_end)
+    elsif params[:practice_type]
+      @recruits = Recruit.where(practice_type: params[:practice_type])
+    elsif params[:liked_posts]
+      @recruits = Recruit.all.liked_by(current_user)
     else
       @recruits = Recruit.all
     end

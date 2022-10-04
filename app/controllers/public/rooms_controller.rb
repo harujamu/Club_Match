@@ -8,7 +8,8 @@ class Public::RoomsController < ApplicationController
     #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
     # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してuser_idsに保存している
     user_ids = recruit.entries.where(entry_status: "match").pluck(:user_id)
-
+    # byebug
+    
     # 応募者たちのユーザーIDをそれぞれ抽出し、User_Roomにカラム追加していく
     user_ids.each do |user_id|
       @room.user_rooms.build(user_id: user_id)
@@ -21,8 +22,7 @@ class Public::RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @recruit = Recruit.find(@room.recruit.id)
     @message = Message.new
-    @messages = Message.all
-
+    @messages = Message.where(room_id: @room.id)
     @users = User.where(id: @room.user_rooms.pluck(:user_id))
   end
 

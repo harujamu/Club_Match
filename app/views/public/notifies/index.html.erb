@@ -3,7 +3,7 @@
 <div class ="container">
   <h3>通知一覧</h3>
   <div class="row">
-    <% if @notifies.exists? %>
+    <% if @notifies.exists? %>　
     <div class="col-md-8 my-5 mx-auto">
       <% @notifies.each do |notify| %>
       <table class="table table-borderless">
@@ -15,7 +15,7 @@
         <% elsif notify.action == "message" %>
         <tr>
           <td><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><% end %></td>
-          <th><%= notify.notifier.club_name %>から メッセージ が届きました</th>
+          <th><%= notify.notifier.club_name %> から メッセージ が届きました</th>
         </tr>
         <% elsif notify.action == "entry" %>
         <tr>
@@ -25,17 +25,17 @@
         <% elsif notify.action == "match" %>
         <tr>
           <td></td>
-          <th>"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　で<%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><% notify.notifier.club_name %><% end %>とマッチしました！</th>
+          <th>"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　で<%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %> <% notify.notifier.club_name %><% end %>　とマッチしました！</th>
         </tr>
         <% elsif notify.action == "cancel" %>
           <tr>
           <td></td>
-          <th><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><%= notify.notifier.club_name %><% end %>との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>(<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>)はキャンセルされました。</th>
+          <th><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %> <%= notify.notifier.club_name %><% end %>　との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>(<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>)はキャンセルされました。</th>
         </tr>
         <% elsif notify.action == "match_rejected" %>
           <tr>
           <td></td>
-          <th><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><%= notify.notifier.club_name %><% end %>との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>(<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>)はマッチ不成立した。</th>
+          <th><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %> <%= notify.notifier.club_name %><% end %>　との<% if notify.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>(<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>)はマッチ不成立でした。</th>
         </tr>
         <% else %>
         <tr>

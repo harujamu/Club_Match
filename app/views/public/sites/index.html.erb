@@ -1,19 +1,20 @@
 <p></p>
 
 <div class="container">
+  <h3>練習場所登録</h3>
   <div class ="row">
-    <h3>練習場所登録</h3>
-    <div class ="col-md-8">
+    <div class ="col-md-8 mt-3 mb-5">
       <%= form_with model: @site do |f| %>
       <!--, url: create_sites_path, method: :post-->
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.select :prefecture, Site.prefectures_i18n.keys.map{|k| [I18n.t("enums.site.prefecture.#{k}"), k] }, {include_blanck: t("選択してください")}, class:"mr-2" %><%= f.text_field :municipality, class:"mr-2" %><%= f.text_field :address, class:"mr-2" %><%= f.submit '登録', class:"btn btn-success" %>
+      <%= f.select :prefecture, Site.prefectures_i18n.keys.map{|k| [I18n.t("enums.site.prefecture.#{k}"), k] }, {include_blanck: t("選択してください")}, class:"mr-2" %><%= f.text_field :municipality, class:"mr-2" %><%= f.text_field :address, class:"mr-2" %><%= f.submit '登録', class:"btn btn-success w-25" %>
       <% end %>
     </div>
   </div>
+  
+  <h3>登録済練習場所一覧</h3>
   <div class ="row">
-    <h3>登録済練習場所一覧</h3>
-    <div class ="col-md-8">
+    <div class ="col-md-8 mt-2">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -25,7 +26,7 @@
         <tbody>
           <tr>
             <td><%= site.id %></td>
-            <td><%= site.site_name %><%= link_to '削除',site_path(site.id), method: :delete, class:"btn btn-danger ml-2" %></td>
+            <td><%= site.site_name %><%= link_to '削除',site_path(site.id), method: :delete, class:"btn btn-danger ml-5 w-25" %></td>
           </tr>
         </tbody>
         <% end %>
