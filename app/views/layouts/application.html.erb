@@ -14,7 +14,7 @@
     <header>
       <!--ロゴ-->
       <nav class ="navbar navbar-expand-md", style="background-color: #ffffff;">
-        <div class ="navbar-brand col-md-4">
+      <div class ="navbar-brand col-md-4">
           <%= link_to root_path do %><%= image_tag('club_match_logo.png') %><% end %> <% if user_signed_in? %><small><%= current_user.club_name %>さん、ようこそ！</small><% end %>
         </div>  
         <div class ="container col-md-8 mt-0">
@@ -37,44 +37,40 @@
             </ul>
           </div>
   
-            <!--管理者ログイン後のナビゲーションバー-->
-            <% elsif admin_signed_in? %>
-            <div class ="row">
-              <ul class ="navbar-nav justify-content-felx-end">
-                <li class ="nav-item mr-5"> 
-                  <%= link_to 'ジャンル管理', admin_genres_path, class:"btn btn-warning btn-gradient px-5 py-2" %>
-                </li>
-                <li class ="nav-item mr-5"> 
-                  <%= link_to 'ユーザー一覧', admin_path, class: "btn btn-warning btn-gradient px-5 py-2" %>
-                </li>
-                <li class ="nav-item"> 
-                  <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"btn btn-warning btn-gradient px-5 py-2" %>
-                </li>
-              </ul>
-            </div>
-  
-            <!--ログアウト後(サインイン前)のナビゲーションバー-->
-            <% else %>
-            <div class ="row">
-              <ul class ="navbar-nav justify-content-felx-end">
-                <li class ="nav-item mr-5"> 
-                  <%= link_to '募集一覧', recruits_path, class:"btn btn-warning btn-gradient px-5 py-2" %>
-                </li>
-                <li class ="nav-item mr-5"> 
-                  <%= link_to '新規登録', new_user_registration_path, class: "btn btn-warning btn-gradient px-5 py-2" %>
-                </li>
-                <li class ="nav-item"> 
-                  <%= link_to 'ログイン', new_user_session_path, class:"btn btn-warning btn-gradient px-5 py-2" %>
-                </li>
-              </ul>
-            </div>
-            <% end %>
+        <!--管理者ログイン後のナビゲーションバー-->
+        <% elsif admin_signed_in? %>
+          <div class ="row">
+            <ul class ="navbar-nav justify-content-felx-end">
+              <li class ="nav-item mr-5"> 
+                <%= link_to 'ジャンル管理', admin_genres_path, class:"btn btn-warning btn-gradient px-5 py-2" %>
+              </li>
+              <li class ="nav-item mr-5"> 
+                <%= link_to 'ユーザー一覧', admin_path, class: "btn btn-warning btn-gradient px-5 py-2" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"btn btn-warning btn-gradient px-5 py-2" %>
+              </li>
+            </ul>
           </div>
+  
+        <!--ログアウト後(サインイン前)のナビゲーションバー-->
+        <% else %>
+          <div class ="row">
+            <ul class ="navbar-nav justify-content-felx-end">
+              <li class ="nav-item mr-5"> 
+                <%= link_to '募集一覧', recruits_path, class:"btn btn-warning btn-gradient px-5 py-2" %>
+              </li>
+              <li class ="nav-item mr-5"> 
+                <%= link_to '新規登録', new_user_registration_path, class: "btn btn-warning btn-gradient px-5 py-2" %>
+              </li>
+              <li class ="nav-item"> 
+                <%= link_to 'ログイン', new_user_session_path, class:"btn btn-warning btn-gradient px-5 py-2" %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
         </div>
-
-        
-        
-        
+      </div>
       </nav>
     </header>
 
@@ -82,7 +78,10 @@
       <%= yield %>
     </main>
 
-    <footer>
+    <footer class="footer">
+      <div class="fixed-bottom bg-warning bg-gradient",style ="height: 60px;">
+        <p class="text-light text-center pt-2">ClubMatch</p>
+      </div>
     </footer>
   </body>
 </html>
