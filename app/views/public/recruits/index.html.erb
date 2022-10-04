@@ -22,10 +22,7 @@
             <td><%= link_to recruit_path(recruit.id), class:"text-dark" do %><%= recruit.title %><% end %></td>
             <td><% if recruit.practice_type == true %>練習試合<% else %>合同練習<% end %></td>
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
-            <td><%= recruit.recruit_status_i18n %>
-            <% if recruit.match? %>
-              <%= room_link(@room, recruit) %>トーク画面へ
-            <% end %>
+            <td><%= recruit.recruit_status_i18n %><% if recruit.match? %><%= room_link(@room, recruit) %>トーク画面へ<% end %>
             </td>
             <td><% if recruit.open_status == true %>公開中<% else %>公開停止中<% end %></td>
           </tr>

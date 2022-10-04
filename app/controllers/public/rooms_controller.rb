@@ -6,7 +6,7 @@ class Public::RoomsController < ApplicationController
     recruit = Recruit.find(params[:recruit_id])
     
     #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
-    # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してUserのidに渡している
+    # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してuser_idsに保存している
     user_ids = recruit.entries.where(entry_status: "match").pluck(:user_id)
     
     # 応募者たちのユーザーIDをそれぞれ抽出し、User_Roomにカラム追加していく
@@ -14,19 +14,19 @@ class Public::RoomsController < ApplicationController
       @room.user_rooms.build(user_id: user_id)
     end
     @room.save!
-    redirect_to room_path(@room)
+    redirect_to room_path(@room.id)
   end
 
   def show
     @room = Room.find(params[:id])
-    @recruit = Recruit.find(@room.recruit_id)
+    @recruit = Recruit.find(@room.recruit.id)
     @message = Message.new
     @messages = Message.all
-    user_rooms = User_Room.where(room_id: @room.id)
-    users = User.where(user_id: user_rooms.user_id)
-    users.each do |user|
-    @user = user
-    end
+    # user_ids = 
+    # user_ids.each do |user_id|
+      # @user = User.where(id: user_id)
+    # end
+    @users = User.where(id: @room.user_rooms.pluck(:user_id))
   end
 
   private

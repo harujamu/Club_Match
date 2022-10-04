@@ -1,30 +1,37 @@
 <p></p>
 <div class="container">
-  
-  <div class="row">
-    <div class="col-md-10">
-      <h3><%= @room.recruit.title %></h3>
-      <h5><%= @room.recruit.date.strftime('%Y/%m/%d') %>　<% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>@<%= @room.recruit.site.site_name %>　参加メンバー：<%= user_image(@user,30,30,3)</h5>
-
-      <div class="my-5">
-        <% @messages.each do |message| %>
-          <% if message.user != current_user %>
-          <p class="d-flex justify-content-start"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= user_image(message.user,30,30,2) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
-          <% else %>
-          <p class="d-flex justify-content-end"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= user_image(message.user,30,30,2) %></p>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="mt-5">
-        <%= form_with model: @message, method: :post do |f| %>
-        <table class="table table-borderless">
-          <%= f.hidden_field :room_id, :value => @room.id %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <tr><%= f.text_area :message, class:"border-secondary", size:"99" %><%= button_tag type: "submit", class:"btn" do %><i class="fas fa-play fa-2x", style="color: 3399FF;"></i><% end %></tr>
-        </table>
-        <% end %>
-      
+  <h3 class="border-bottom"><%= @room.recruit.title %></h3>
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <h5>練習日・会場：　<%= @room.recruit.date.strftime('%Y/%m/%d') %>　<% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %><%= @room.recruit.site.site_name %></h5>
+    </div>
+    <div class="col-md-4">
+    <p class="d-flex align-items-center">参加メンバー：　<%= user_image(@room.user,38,38,2) %><% @users.each do |user| %><%= user_image(user,30,30,2) %><% end %></p>
     </div>
   </div>
-  
+  <div class="row">
+    <div class="my-5 col-md-10">
+      <% @messages.each do |message| %>
+        <% if message.user != current_user %>
+        <p class="d-flex justify-content-start"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= user_image(message.user,30,30,2) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
+        <% else %>
+        <p class="d-flex justify-content-end"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= user_image(message.user,30,30,2) %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="my-5 col-md-10">
+      <%= form_with model: @message, method: :post do |f| %>
+      <table class="table table-borderless">
+        <%= f.hidden_field :room_id, :value => @room.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <tr><%= f.text_area :message, class:"border-secondary", size:"99" %><%= button_tag type: "submit", class:"btn" do %><i class="fas fa-play fa-2x", style="color: 3399FF;"></i><% end %></tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+
+
 </div>

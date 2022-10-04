@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
      
   
-  has_many :rooms, through: :room_users
+  has_many :rooms, through: :user_rooms
   has_many :user_rooms
   has_many :messages
   has_many :active_notifications, class_name: 'Notify', foreign_key: 'notifier_id'
