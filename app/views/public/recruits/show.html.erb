@@ -3,7 +3,7 @@
 <div class="container">
   <div class = "row">
     <div class="col-md-2">
-      <%= user_image(@user,100,100,3) %>
+      <%= user_image(@user,100,100,6) %>
       <% if @user != current_user %>
         <p><%= link_to show_user_path(@user.id), class:"text-dark" do %><%= @user.club_name %><% end %></p>
       <% else %>
@@ -30,22 +30,17 @@
       <!--current_user が募集者の時-->
         <p class="d-flex justify-content-end">
           <% if @recruit.recruiting? || @recruit.having_candidates? %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2 w-25" %><% end %>
-          <% if @recruit.having_candidates? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
+          <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: 1).any? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
         </p>
         
       <% else %>
       <!--current_user が募集者でない時-->
-        <% if @entry.new_record? && ( @recruit.recruiting? || @recruit.having_candidates?) %>
-          <%#= form_with model: @entry do |f| %>
-          <%#= f.hidden_field :user_id, :value => current_user.id %>
-          <%#= f.hidden_field :recruit_id, :value => @recruit.id %>
-          <!--<p class="d-flex justify-content-end"><%#= f.submit '応募する', class:"btn btn-primary" %></p>-->
-          <%# end %>
+        <% if (@entry.new_record? ) && (@recruit.recruiting? || @recruit.having_candidates?) %>
           <p class="d-flex justify-content-end"><%= link_to '応募する', entries_path(@entry, entry: {recruit_id: @recruit.id, user_id: current_user.id}), method: :post, class:"btn btn-primary w-25" %></p>
         <% end %>
         
-        <% if @user_entry.present? && @recruit.having_candidates? %>
-          <p class="d-flex justify-content-end"><%= link_to '応募取消', entry_path(@user_entry.id), method: :delete, class:"btn btn-danger w-25" %></p>
+        <% if @entry.id.present? && @recruit.having_candidates? %>
+          <p class="d-flex justify-content-end"><%= link_to '応募取消', entry_path(@entry.id), method: :delete, class:"btn btn-danger w-25" %></p>
         <% end %>
         
       <% end %>
@@ -55,10 +50,12 @@
     <div class = "row">
     <% if @user == current_user %>
       <div class=" col-md-12">
+      <% if @recruit.having_candidates? %>
         <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
+      <% end %>
         <div class="d-flex flex-wrap" >
         <% @entries.each do |entry| %>
-          <% if entry.recruit.having_candidates? %>
+          <% if entry.recruit.having_candidates? && entry.entered? %>
           <div class="mr-5 mt-5">
             <p><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70,4) %><% end %></p>
             <p><%= entry.user.club_name %>
@@ -69,9 +66,23 @@
           <% end %> 
         <% end %>
         </div>
+        
+      <% if @recruit.match? || @recruit.having_candidates? %>
+        <h5>参加メンバー</h5>
+      <% end %>
+        <div class="d-flex flex-wrap" >
+        <% @entries.each do |entry| %>
+          <% if entry.recruit.match? %>
+          <div class="mr-5 mt-5">
+            <p><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70,4) %><% end %></p>
+            <p><%= entry.user.club_name %></p>
+          </div>
+          <% end %> 
+        <% end %>
+        </div>
       </div>
     <% else %>
-      <% if @user_entry.present? %><p>応募ステータス: <%= @user_entry.entry_status_i18n %></p><% end %>
+      <% if @entry.id.present? %><p>応募ステータス: <%= @entry.entry_status_i18n %></p><% end %>
     <% end %>
     </div>
 

@@ -91,24 +91,28 @@ class Recruit < ApplicationRecord
     end
   end
 
-  # def create_nortification_message
-    # メッセージがあるか調べる
-    # temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ?  and message_id = ? and action = ? and checked_status = ?",current_user.id, user_id, id, message.id, 'message', false ])
-    # メッセージなければ通知作成
-    # if temp.blank?
-      # notify = current_user.active_notifications.new(
-      #   recruit_id: id,
-      #   checker_id: ,
-      #   action: 'message'
-      # )
-      
-      # 自分のコメントは通知済とする
-  #     if notify.notifier_id == notify.checker_id
-  #       notify.checked_status = true
-  #     end
-  #     notify.save if notify.valid?
-  #   end
-  # end
+  def create_nortification_message(current_user, message)
+    # ユーザー複数の場合はeachで！！！
+    message.room.users.each do |user|
+      return if user.id == current_user.id
+      # メッセージがあるか調べる
+      temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ?  and message_id = ? and action = ? and checked_status = ?",current_user.id, user.id, id, message.id, 'message', false ])
+      # メッセージなければ通知作成
+      if temp.blank?
+        notify = current_user.active_notifications.new(
+          recruit_id: id,
+          checker_id: user.id,
+          action: 'message'
+        )
+        
+        # 自分のコメントは通知済とする
+        if notify.notifier_id == notify.checker_id
+          notify.checked_status = true
+        end
+        notify.save if notify.valid?
+      end
+    end
+  end
 
 
 end

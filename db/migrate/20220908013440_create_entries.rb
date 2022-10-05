@@ -7,5 +7,6 @@ class CreateEntries < ActiveRecord::Migration[6.1]
       t.integer :entry_status, null: false, default: 0
       t.timestamps
     end
+    add_index :entries, [:user_id, :recruit_id], unique: true
   end
 end

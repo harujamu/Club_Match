@@ -2,8 +2,8 @@ class Public::RoomsController < ApplicationController
 
   def create
     # DMのルーム作るのは募集者（user_id）、募集IDはRoom作成時に持たせたID
-    @room = Room.new(user_id: current_user.id, recruit_id: params[:recruit_id])
     recruit = Recruit.find(params[:recruit_id])
+    @room = Room.new(user_id: current_user.id, recruit_id: params[:recruit_id]) || Room.find_by(recruit_id: recruit.id)
 
     #グループメンバー（応募者たち）は、募集に対する応募者で、応募ステータスがマッチの人のみ
     # .select(:user_id)はrecruit~"match")に当てはまるユーザーのIDのみ抽出してuser_idsに保存している

@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_021221) do
     t.integer "entry_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "recruit_id"], name: "index_entries_on_user_id_and_recruit_id", unique: true
   end
 
   create_table "genres", force: :cascade do |t|

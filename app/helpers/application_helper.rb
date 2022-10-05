@@ -20,13 +20,15 @@ module ApplicationHelper
 
   def room_link(room, recruit)
     # Roomがすでにある場合はチャット画面に遷移
-    if room.persisted?
-      link_to room_path(room.id), class:"text-dark" do
-        tag.i class: "far fa-comment text-dark"
-      end
-    else
+    if room.new_record?
       # 募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す
       link_to rooms_path(room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do
+        tag.i class: "far fa-comment text-dark"
+      end
+      
+    else
+      
+      link_to room_path(room.id), class:"text-dark" do
         tag.i class: "far fa-comment text-dark"
       end
     end

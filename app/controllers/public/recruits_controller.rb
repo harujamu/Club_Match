@@ -22,11 +22,9 @@ class Public::RecruitsController < ApplicationController
   def show
     @recruit = Recruit.find(params[:id])
     @user = User.find(@recruit.user_id)
-    @entry = Entry.new
+    @entry = Entry.find_by(user_id: current_user.id) || Entry.new
     @entry.user_id = current_user.id
     @entries = @recruit.entries
-    @user_entry = current_user.entries.find_by(recruit_id: @recruit.id)
-   
   end
 
   def edit
@@ -56,8 +54,10 @@ class Public::RecruitsController < ApplicationController
   def index
     @user = current_user
     @recruits = @user.recruits
-    @room = Room.new
-  
+    @recruits.each do |recruit|
+     @room = Room.new || Room.find_by(recruit_id: recruit.id)
+    byebug
+    end
   end
 
   private
