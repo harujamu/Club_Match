@@ -67,12 +67,12 @@
         <% end %>
         </div>
         
-      <% if @recruit.match? || @recruit.having_candidates? %>
+      <% if @recruit.entries.where(entry_status: 1) || @recruit.having_candidates? %>
         <h5>参加メンバー</h5>
       <% end %>
         <div class="d-flex flex-wrap" >
         <% @entries.each do |entry| %>
-          <% if entry.recruit.match? %>
+          <% if entry.match? %>
           <div class="mr-5 mt-5">
             <p><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70,4) %><% end %></p>
             <p><%= entry.user.club_name %></p>

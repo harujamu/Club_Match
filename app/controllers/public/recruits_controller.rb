@@ -54,9 +54,13 @@ class Public::RecruitsController < ApplicationController
   def index
     @user = current_user
     @recruits = @user.recruits
-    @recruits.each do |recruit|
-     @room = Room.new || Room.find_by(recruit_id: recruit.id)
-    byebug
+    # @recruits.each do |recruit|
+    # @room = Room.find(recruit.room.id) || Room.new
+    # end
+    if @recruits.first.room
+      @room = @recruits.first.room
+    else 
+      @room = Room.new
     end
   end
 

@@ -14,8 +14,13 @@ class Public::RoomsController < ApplicationController
     user_ids.each do |user_id|
       @room.user_rooms.build(user_id: user_id)
     end
-    @room.save!
-    redirect_to room_path(@room.id)
+    room = Room.find_by(user_id: current_user.id, recruit_id: params[:recruit_id] )
+    if room
+      redirect_to room_path(room.id)
+    else
+      @room.save
+      redirect_to room_path(@room.id)
+    end
   end
 
   def show
