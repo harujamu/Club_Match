@@ -39,11 +39,16 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.find(params[:id])
     if @recruit.update(recruit_params)
       if @recruit.match?
-        @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id).pluck(:id)
+        @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id)
         @entries.each do |entry|
           entry.update(entry_status: "match_rejected")
-          @recruit.create_nortification_match_rejected(current_user, @entry)
+          @recruit.create_notification_match_rejected(current_user, entry)
         end
+        # @entries.update_all(entry_status: "match_rejected")
+      elsif @recruit.open_status == false
+        # 募集期間がオーバーしたら(非公開になったら)、応募ステータスをマッチ不成立にする
+        @recruit.entries.update_all(entry_status: "match_rejected")
+        @recruit.create_notification_match_rejected(current_user, @entry)
       end
       redirect_to root_path
     else
