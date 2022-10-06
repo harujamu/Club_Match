@@ -6,7 +6,7 @@
       <h5>練習日・会場：　<%= @room.recruit.date.strftime('%Y/%m/%d') %>　<% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %><%= @room.recruit.site.site_name %></h5>
     </div>
     <div class="col-md-4">
-    <p class="d-flex align-items-center">参加メンバー：　<%= user_image(@room.user,38,38,2) %><% @users.each do |user| %><%= user_image(user,30,30,2) %><% end %></p>
+    <p class="d-flex align-items-center">参加メンバー：　<%= user_image(@room.user,30,30,2) %><% @users.each do |user| %><%= user_image(user,30,30,2) %><% end %></p>
     </div>
   </div>
   <div class="row">

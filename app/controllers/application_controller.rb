@@ -35,10 +35,10 @@ protected
   end
   
   def admin_index
-    if controller_name == 'genres' && action_name == 'index'
+    if controller_name == 'sessions' && action_name == 'new'
       return false
-    elsif controller_name == 'sessions' && action_name == 'new'
-      return false
+    # elsif controller_name == 'genres' && action_name == 'index'
+      # return false
     elsif controller_name == 'registrations' && action_name == 'new'
       return false
     elsif controller_name == 'homes' && action_name == 'top'

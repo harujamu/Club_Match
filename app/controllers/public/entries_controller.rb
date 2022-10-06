@@ -19,7 +19,7 @@ class Public::EntriesController < ApplicationController
     @recruit = @entry.recruit
     @entry.destroy
     if @recruit.entries.nil?
-      @recruit.update(recruit_status: 0)
+      @recruit.update(recruit_status: "recruiting")
     end
     redirect_to entries_path
   end
@@ -27,13 +27,7 @@ class Public::EntriesController < ApplicationController
   def index
     @user = current_user
     @entries = @user.entries
-    # @entries.each do |entry|
-    #   if entry.recruit.match? && entry.recruit.room.present?
-    #     # @room = Room.where(id: @user.user_rooms.pluck(:room_id))
-    #     @room = Room.find(entry.recruit.room.id)
-    #   end
-    #   end
-    
+
   end
 
   def update
@@ -44,12 +38,14 @@ class Public::EntriesController < ApplicationController
     # 応募ステータスがマッチ不成立になったら応募者に不成立通知作成
     if @entry.entry_status == "match_rejected"
       @recruit.create_nortification_match_rejected(current_user, @entry)
+      redirect_to recruit_path(@recruit.id)
 
     # 応募ステータスがマッチになったら、応募者にマッチ通知作成
     elsif @entry.entry_status == "match"
       @recruit.create_nortification_match(current_user, @entry)
+      redirect_to recruit_path(@recruit.id)
 
-    # 募集期間がオーバーしたら、応募ステータスを完了にする
+    # 募集期間がオーバーしたら、応募ステータスをマッチ不成立にする
     end
   end
 

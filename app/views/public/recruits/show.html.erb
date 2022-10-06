@@ -47,45 +47,52 @@
       </div>
       
     </div>
-    <div class = "row">
-    <% if @user == current_user %>
-      <div class=" col-md-12">
+  </div>
+  <div class = "row">
+  <% if @user == current_user %>
+    <div class=" col-md-12">
       <% if @recruit.having_candidates? %>
-        <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
+      <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
       <% end %>
-        <div class="d-flex flex-wrap" >
-        <% @entries.each do |entry| %>
-          <% if entry.recruit.having_candidates? && entry.entered? %>
-          <div class="mr-5 mt-5">
-            <p><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70,4) %><% end %></p>
+      <div class="d-flex flex-wrap" >
+      <% @entries.each do |entry| %>
+        <% if entry.recruit.having_candidates? && entry.entered? %>
+        <div class="mr-5 mt-3">
+            <p class="d-flex align-items-center"><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,40,40,3) %><% end %></p>
             <p><%= entry.user.club_name %>
             <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
-            <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle"></i><% end %>
+            <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle", style="color: FF3333;"></i><% end %>
             </p>
-          </div>
-          <% end %> 
-        <% end %>
         </div>
-        
-      <% if @recruit.entries.where(entry_status: 1) || @recruit.having_candidates? %>
-        <h5>参加メンバー</h5>
+        <% end %> 
       <% end %>
-        <div class="d-flex flex-wrap" >
-        <% @entries.each do |entry| %>
-          <% if entry.match? %>
-          <div class="mr-5 mt-5">
-            <p><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,70,70,4) %><% end %></p>
-            <p><%= entry.user.club_name %></p>
-          </div>
-          <% end %> 
-        <% end %>
-        </div>
       </div>
-    <% else %>
-      <% if @entry.id.present? %><p>応募ステータス: <%= @entry.entry_status_i18n %></p><% end %>
-    <% end %>
     </div>
-
   </div>
+  <div class="row">
+  <% if @recruit.entries.where(entry_status: 1).any? %>
+    <div class="col-md-12">
+      <h5>参加メンバー</h5>
+      <div class="d-flex  flex-wrap" >
+      <% @entries.each do |entry| %>
+        <% if entry.match? %>
+        <div class="mr-5 mt-3 ml-0">
+          <p class="d-flex align-items-center"><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,40,40,3) %><% end %></p>
+          <p><%= entry.user.club_name %></p>
+        </div>
+        <% end %> 
+      <% end %>
+      </div>
+    <% end %>  
+      
+  <% else %>
+    <% if @entry.id.present? %>
+    <p>応募ステータス: <%= @entry.entry_status_i18n %></p>
+    <% end %>
+  <% end %>
+    </div>
+  </div>
+
+</div>
   
   

@@ -22,7 +22,7 @@ class Public::RecruitsController < ApplicationController
   def show
     @recruit = Recruit.find(params[:id])
     @user = User.find(@recruit.user_id)
-    @entry = Entry.find_by(user_id: current_user.id) || Entry.new
+    @entry = Entry.find_by(user_id: current_user.id, recruit_id: @recruit.id) || Entry.new
     @entry.user_id = current_user.id
     @entries = @recruit.entries
   end
@@ -39,9 +39,9 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.find(params[:id])
     if @recruit.update(recruit_params)
       if @recruit.match?
-        @entries = Entry.where(entry_status: 0, recruit_id: @recruit.id).pluck(:id)
+        @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id).pluck(:id)
         @entries.each do |entry|
-          entry.update(entry_status: 2)
+          entry.update(entry_status: "match_rejected")
           @recruit.create_nortification_match_rejected(current_user, @entry)
         end
       end
