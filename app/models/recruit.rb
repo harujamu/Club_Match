@@ -13,7 +13,7 @@ class Recruit < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-  def create_notification_like(current_user)　
+  def create_notification_like(current_user)
     # いいねされてるか調べる
     temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, 'like', false])
     # いいねされてなければ通知レコード作成
@@ -64,21 +64,6 @@ class Recruit < ApplicationRecord
     end
   end
 
-  def create_notification_cancel(current_user,entry)
-    # 応募ステータスが"キャンセル"か調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, entry.id, 'cancel', false ])
-    # キャンセルなら通知レコード作成
-    if temp.blank?
-      notify = current_user.active_notifications.new(
-        recruit_id: id,
-        checker_id: entry.user_id,
-        entry_id: entry.id,
-        action: 'cancel'
-      )
-      notify.save if notify.valid?
-    end
-  end
-
   def create_notification_match_rejected(current_user,entry)
     # 応募ステータスが"マッチ不成立"か調べる
     temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, entry.id, 'match_rejected', false ])
@@ -92,6 +77,25 @@ class Recruit < ApplicationRecord
       )
       notify.save if notify.valid?
       # temp.destroy
+    end
+  end
+
+  def create_notification_overdue(current_user,entry)
+    # ユーザー複数の場合はeachで！！！
+    recruit.entries.users.each do |user|
+      # 募集が期日切れか調べる
+      temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, entry.id, 'overdue', false ])
+      # マッチ不成立なら通知レコード作成
+      if temp.blank?
+        notify = current_user.active_notifications.new(
+          recruit_id: id,
+          checker_id: entry.user_id,
+          entry_id: entry.id,
+          action: 'overdue'
+        )
+        notify.save if notify.valid?
+        # temp.destroy
+      end
     end
   end
 
@@ -109,7 +113,7 @@ class Recruit < ApplicationRecord
           message_id: message.id,
           action: 'message'
         )
-        
+
         # 自分のコメントは通知済とする
         if notify.notifier_id == notify.checker_id
           notify.checked_status = true

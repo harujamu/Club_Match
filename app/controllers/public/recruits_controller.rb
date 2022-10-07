@@ -44,11 +44,12 @@ class Public::RecruitsController < ApplicationController
           entry.update(entry_status: "match_rejected")
           @recruit.create_notification_match_rejected(current_user, entry)
         end
-        # @entries.update_all(entry_status: "match_rejected")
       elsif @recruit.open_status == false
-        # 募集期間がオーバーしたら(非公開になったら)、応募ステータスをマッチ不成立にする
-        @recruit.entries.update_all(entry_status: "match_rejected")
-        @recruit.create_notification_match_rejected(current_user, @entry)
+        # 練習日を超えたら(非公開になったら)、応募を削除する
+        @recruit.entries.each do |entry|
+          @recruit.create_notification_overdue(current_user, entry)
+        end
+        @recruit.entries.destroy_all
       end
       redirect_to root_path
     else

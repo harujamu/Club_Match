@@ -1,46 +1,49 @@
 <p></p>
 
 <div class ="container">
-  <h3>募集記事作成</h3>
-  <div class ="row">
-    <div class ="col-md-8">
+  <h3>募集記事編集</h3>
+
+  <div class ="row mt-5">
+    <div class ="col-md-10 mx-auto">
       <%= form_with model: @recruit, url: recruit_path(@recruit.id), method: :patch do |f| %>
-      <table>
+      <table class="table table-borderless">
         <tbody>
           <tr>
             <td>タイトル</td>
-            <td colspan = "4"><%= f.text_field :title %></td>
+            <td colspan="4"><%= f.text_area :title, size:"85x2" %></td>
           </tr>
           <tr>
             <td>ジャンル</td>
-            <td><%= @genre.name %></td>
+            <td colspan="4"><%= @genre.name %></td>
+          </tr>
+          <tr>
             <td>開催地</td>
-            <td colspan ="2"><%= f.select :site_id, options_from_collection_for_select(@sites, :id, :site_name), include_blank:"選択してください" %></td>
+            <td colspan="4"><%= f.select :site_id, options_from_collection_for_select(@sites, :id, :site_name), include_blank:"選択してください" %></td>
+          </tr>
+          <tr>
+            <td>練習形式</td>
+            <td colsapn="4"><%= f.radio_button :practice_type, false %>  <%= f.label :"合同練習" %><%= f.radio_button :practice_type, true, class:"ml-5" %>  <%= f.label :"練習試合" %></td>
           </tr>
           <tr>
             <td>日程</td>
-            <td><%=f.date_field :date, class:"form-control" %></td>
-            <td>練習形式</td>
-            <td><%= f.radio_button :practice_type, false %><%= f.label :"合同練習" %></td>
-            <td><%= f.radio_button :practice_type, true %><%= f.label :"練習試合" %></td>
+            <td colspan="4"><%=f.date_field :date, class:"form-control w-50" %></td>
           </tr>
           <tr>
             <td>年齢層</td>
-            <td><%= f.select :age_group, Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colspan="4"><%= f.select :age_group, Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
           </tr>
           <tr rowspan="3">
             <td>当日の活動内容</td>
-            <td colspan = "4"><%= f.text_field :detail %></td>
+            <td colspan="4"><%= f.text_area :detail, size:"85x5" %></td>
           </tr>
           <tr>
             <td>公開ステータス</td>
-            <td><%= f.radio_button :open_status, true %><%= f.label :"公開" %></td>
-            <td><%= f.radio_button :open_status, false %><%= f.label :"公開停止" %></td>
+            <td colsapn="4"><%= f.radio_button :open_status, true %>　<%= f.label :"公開" %><%= f.radio_button :open_status, false, class:"ml-5" %>　<%= f.label :"公開停止" %></td>            <td></td>
+          </tr>
+          <tr>
             <td></td>
-            <td><%= f.submit '更新する', class:"btn btn-success" %></td>
+            <td colspan="3"></td>
+            <td><%= f.submit '更新する', class:"btn btn-success w-100" %></td>
           </tr>
         </tbody>
       </table>

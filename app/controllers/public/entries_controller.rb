@@ -18,7 +18,6 @@ class Public::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @recruit = @entry.recruit
     @entry.destroy
-    # @entry.notifies.update(checked_status: true)
     if @recruit.entries.nil?
       @recruit.update(recruit_status: "recruiting")
     end
