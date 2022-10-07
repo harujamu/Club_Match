@@ -72,7 +72,7 @@
   <div class="row">
   <% if @recruit.entries.where(entry_status: 1).any? %>
     <div class="col-md-12">
-      <h5>参加メンバー</h5>
+      <h5>参加メンバー</h5><% if @recruit.room.present? %><%= room_link(@recruit.room, @recruit) %>トーク画面へ<% end %>
       <div class="d-flex  flex-wrap" >
       <% @entries.each do |entry| %>
         <% if entry.match? %>
