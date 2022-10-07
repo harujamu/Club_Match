@@ -1,9 +1,7 @@
-<p></p>
-
 <div class ="container">
   <h3>通知一覧</h3>
   <div class="row">
-    <% if @notifies.exists? %>　
+    <% if @notifies.exists? %>
     <div class="col-md-8 my-5 mx-auto">
       <% @notifies.each do |notify| %>
       <table class="table table-borderless">
@@ -12,7 +10,7 @@
           <td><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><% end %></td>
           <th><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　に いいね♡しました</th>
         </tr>
-        
+
         <% elsif notify.action == "message" %>
         <tr>
           <td><%= link_to show_user_path(notify.notifier.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><% end %></td>
