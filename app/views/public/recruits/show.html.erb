@@ -57,7 +57,7 @@
         <% if entry.recruit.having_candidates? && entry.entered? %>
         <div class="mr-5 mt-3">
             <p class="d-flex align-items-center"><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,40,40,3) %><% end %></p>
-            <p><%= entry.user.club_name %>
+            <p><%= entry.user.club_name.truncate(8) %>
             <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
             <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle", style="color: FF3333;"></i><% end %>
             </p>
@@ -70,13 +70,13 @@
   <div class="row">
   <% if @recruit.entries.where(entry_status: 1).any? %>
     <div class="col-md-12">
-      <h5>参加メンバー</h5><% if @recruit.room.present? %><%= room_link(@recruit.room, @recruit) %><% end %>
+      <h5>参加メンバー <span><% if @recruit.room.present? %><%= room_link(@recruit.room, @recruit) %>トーク画面へ<% end %></span></h5>
       <div class="d-flex  flex-wrap" >
       <% @entries.each do |entry| %>
         <% if entry.match? %>
         <div class="mr-5 mt-3 ml-0">
           <p class="d-flex align-items-center"><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,40,40,3) %><% end %></p>
-          <p><%= entry.user.club_name %></p>
+          <p><%= entry.user.club_name.truncate(8) %></p>
         </div>
         <% end %>
       <% end %>
