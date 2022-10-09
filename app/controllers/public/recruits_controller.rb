@@ -51,7 +51,7 @@ class Public::RecruitsController < ApplicationController
         end
         @recruit.entries.destroy_all
       end
-      redirect_to root_path
+      redirect_to recruit_path(@recruit.id)
     else
       render :edit
     end

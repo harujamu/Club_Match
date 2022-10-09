@@ -21,7 +21,7 @@ class Public::EntriesController < ApplicationController
     if @recruit.entries.nil?
       @recruit.update(recruit_status: "recruiting")
     end
-    redirect_to entries_path
+    redirect_to root_path
   end
 
   def index
