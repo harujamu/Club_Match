@@ -5,7 +5,7 @@ class Public::LikesController < ApplicationController
     like = current_user.likes.new(recruit_id: recruit.id)
     like.save
     # いいね通知メソッド追加
-    recruit.create_nortification_like(current_user)
+    recruit.create_notification_like(current_user)
     redirect_to root_path
   end
 
