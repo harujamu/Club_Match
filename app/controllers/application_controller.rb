@@ -27,23 +27,33 @@ protected
     devise_parameter_sanitizer.permit(:sign_up,keys:[:club_name, :captain_last_name, :captain_first_name, :prefecture, :municipality, :address, :age_group, :genre_id])
   end
   
+  # ユーザーか管理者でログインしていないときはroot_pathに返す
   def authenticate_user_or_admin!
     if user_signed_in? || admin_signed_in?
-      
     else
       redirect_to root_path
     end
   end
   
+  # ログインしていなくても動かしたいもの（falseの時）
   def admin_index
+    # ログイン画面
     if controller_name == 'sessions' && action_name == 'new'
       return false
     # elsif controller_name == 'genres' && action_name == 'index'
       # return false
+    # 新規登録画面
     elsif controller_name == 'registrations' && action_name == 'new'
       return false
+    # トップ画面
     elsif controller_name == 'homes' && action_name == 'top'
-    return false
+      return false
+    # 新規登録の処理
+    elsif controller_name == 'registrations' && action_name == 'create'
+      return false
+    # ゲストログイン
+    elsif controller_name == 'sessions' && action_name == 'guest_sign_in'
+      return false
     else
       return true
     end
