@@ -6,12 +6,24 @@ module ApplicationHelper
     # width, height で自由にサイズ調整できるようにした（width=100の部分で初期値設定）
     if user.image.attached?
       # "#{width}x#{height}のxはスペース開けない！
-      link_to show_user_path(user.id), class:"text-dark" do
-        image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
+      if user = current_user
+        link_to my_page_path(user.id), class:"text-dark" do
+          image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
+        end
+      else
+        link_to show_user_path(user.id), class:"text-dark" do
+          image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
+        end
       end
     else
-      link_to show_user_path(user.id), class:"text-dark" do
-        tag.i class: "far fa-smile fa-#{n}x"
+      if user == current_user
+        link_to my_page_path(user.id), class:"text-dark" do
+          tag.i class: "far fa-smile fa-#{n}x"
+        end
+      else
+        link_to show_user_path(user.id), class:"text-dark" do
+          tag.i class: "far fa-smile fa-#{n}x"
+        end
       end
     end
   end

@@ -33,7 +33,7 @@
         </tr>
         <% elsif %>
         <tr>
-          <td><%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= user_image(notify.notifier, 30,30,2) %><% end %></td>
+          <td><%= user_image(notify.notifier, 30,30,2) %></td>
           <th>"<%= notify.recruit.title %>"　の練習日を過ぎたため、この募集への応募は削除されました。</th>
         </tr>
         <% end %>
