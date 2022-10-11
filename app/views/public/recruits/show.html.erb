@@ -2,16 +2,12 @@
   <div class = "row">
     <div class="col-md-2">
       <%= user_image(@user,100,100,6) %>
-      <% if @user != current_user %>
-        <p><%= link_to show_user_path(@user.id), class:"text-dark" do %><%= @user.club_name %><% end %></p>
-      <% else %>
-        <p><%= link_to my_page_path, class:"text-dark" do %><%= @user.club_name %><% end %></p>
-      <% end %>
+      <p><%= @user.club_name %></p>
     </div>
 
     <div class="col-md-9 mx-auto">
       <div>
-        <h3 class="border-bottom border-secondary"><%= @recruit.title %> <i class="fas fa-heart fa-xs", style="color: FF6388;"></i><span class="h5"><%= @recruit.likes.count %></span></h3>
+        <h3 class="border-bottom border-secondary"><%= @recruit.title %>  <i class="fas fa-heart fa-xs", style="color: FF6388;"></i><span class="h5"><%= @recruit.likes.count %></span>　<% if @recruit.open_status == false && @recruit.match? %>マッチ成立済<% elsif @recruit.open_status == false %><span class="text-danger">※公開停止中</span><% end %></h3>
         <h5 class=" mt-4"><%= @recruit.date.strftime('%Y/%m/%d') %> に @<%= @recruit.site.site_name %> で『<% if @recruit.practice_type == false %>合同練習<% else %>練習試合<% end %>』 ができる相手を募集しています</h5>
       <% if @recruit.age_group_i18n != "指定なし" %>
         <p>※この募集対象は、<%= @recruit.age_group_i18n %>に限ります。</p>
@@ -28,7 +24,7 @@
       <!--current_user が募集者の時-->
         <p class="d-flex justify-content-end">
           <% if @recruit.recruiting? || @recruit.having_candidates? %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2 w-25" %><% end %>
-          <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: 1).any? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
+          <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: 1).any? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group, open_status: false}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
         </p>
 
       <% else %>
@@ -49,18 +45,19 @@
   <div class = "row">
   <% if @user == current_user %>
     <div class=" col-md-12">
-      <% if @recruit.having_candidates? %>
+      <% if @recruit.having_candidates? && @entries.where(entry_status: 0).any? %>
       <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
       <% end %>
       <div class="d-flex flex-wrap" >
       <% @entries.each do |entry| %>
         <% if entry.recruit.having_candidates? && entry.entered? %>
         <div class="mr-5 mt-3">
-            <p class="d-flex align-items-center"><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,40,40,3) %><% end %></p>
-            <p><%= entry.user.club_name.truncate(8) %>
-            <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle"></i><% end %>
-            <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle", style="color: FF3333;"></i><% end %>
+            <p class="d-flex align-items-center mb-0 ml-2"><%= user_image(entry.user,40,40,3) %></p>
+            <p class="my-0 mr-0 ml-2 p-0">
+              <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle mr-3"></i><% end %>
+              <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle", style="color: FF3333;"></i><% end %>
             </p>
+            <small><%= entry.user.club_name.truncate(8) %></small>
         </div>
         <% end %>
       <% end %>
@@ -68,15 +65,15 @@
     </div>
   </div>
   <div class="row">
-  <% if @recruit.entries.where(entry_status: 1).any? %>
+  <% if @entries.where(entry_status: 1).any? %>
     <div class="col-md-12">
-      <h5>参加メンバー <span><% if @recruit.room.present? %><%= room_link(@recruit.room, @recruit) %><% end %></span></h5>
+      <h5>参加メンバー <span><% if @recruit.match? %><%= room_link(@recruit.room, @recruit) %><% end %></span></h5>
       <div class="d-flex  flex-wrap" >
       <% @entries.each do |entry| %>
         <% if entry.match? %>
         <div class="mr-5 mt-3 ml-0">
-          <p class="d-flex align-items-center"><%= link_to show_user_path(entry.user.id) do %><%= user_image(entry.user,40,40,3) %><% end %></p>
-          <p><%= entry.user.club_name.truncate(8) %></p>
+          <p class="d-flex align-items-center mb-0 ml-2"><%= user_image(entry.user,40,40,3) %></p>
+          <small><%= entry.user.club_name.truncate(8) %></small>
         </div>
         <% end %>
       <% end %>

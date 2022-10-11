@@ -46,10 +46,11 @@ class Public::RecruitsController < ApplicationController
         end
       elsif @recruit.open_status == false
         # 練習日を超えたら(非公開になったら)、応募を削除する
-        @recruit.entries.each do |entry|
+        @entries = @recruit.entries.where(entry_status: 0)
+        @entries.each do |entry|
           @recruit.create_notification_overdue(current_user, entry)
         end
-        @recruit.entries.destroy_all
+        @entries.destroy_all
       end
       redirect_to recruit_path(@recruit.id)
     else

@@ -28,7 +28,7 @@
         <% if recruit.open_status == true %>
         <div class="card col-md-3 mt-0 border border-0">
           <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
-          <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150 X 150", class:"rounded-circle card-img-top" %><% else %><i class="far fa-smile fa-6x card-img-top"></i><% end %>
+          <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150 X 150", class:"rounded-circle card-img-top" %><% else %><i class="far fa-smile fa-10x card-img-top"></i><% end %>
           <% end %>
           <div class="row">
             <p class="card-title"><%= recruit.title.truncate(8) %></p>

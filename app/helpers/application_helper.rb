@@ -6,7 +6,7 @@ module ApplicationHelper
     # width, height で自由にサイズ調整できるようにした（width=100の部分で初期値設定）
     if user.image.attached?
       # "#{width}x#{height}のxはスペース開けない！
-      if user = current_user
+      if user == current_user
         link_to my_page_path(user.id), class:"text-dark" do
           image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
         end
@@ -32,7 +32,7 @@ module ApplicationHelper
 
   def room_link(room, recruit)
     # Roomがすでにある場合はチャット画面に遷移
-    if room.persisted?
+    if room.id.present?
       link_to room_path(room.id), class:"text-dark" do
         tag.i class: "far fa-comments text-dark"
       end
@@ -56,7 +56,6 @@ module ApplicationHelper
       end
     end
   end
-
 
 end
 
