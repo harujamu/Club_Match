@@ -10,6 +10,12 @@
         <p><%= f.submit 'この期間で検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
         <% end %>
       </div>
+      <div class="mt-5 border-bottom pb-3">
+        <%= form_with url:root_path, method: :get do |f| %>
+        <p><%=f.text_field :genre_search, class:"form-control w-75 border-warning", placeholder:"ジャンル名" %></p>
+        <p><%= f.submit 'ジャンルから検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
+        <% end %>
+      </div>
       <div class="mt-5">
         <%= form_with url:root_path, method: :get do |f| %>
         <p><%= f.check_box(:practice_type, {checked: false}, checked_value: true) %>　練習試合</p>

@@ -9,9 +9,9 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy
@@ -28,11 +28,15 @@ class Public::SessionsController < Devise::SessionsController
   
   protected
   
+  # 退会確認
   def user_state
     @user = User.find_by(email: params[:user][:email])
-    return if !@user
-    if @user.valid_password?(params[:user][:password]) && @user.active_status == false
-      redirect_to new_user_registration_path and return
+    return
+    if @user == true
+    else
+      if @user.valid_password?(params[:user][:password]) && @user.active_status == false
+        redirect_to new_user_registration_path and return
+      end
     end
   end
 

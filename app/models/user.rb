@@ -37,13 +37,13 @@ class User < ApplicationRecord
   end
      
   
-  has_many :rooms, through: :user_rooms
+  has_many :rooms, through: :user_room
   has_many :user_rooms
   has_many :messages
   has_many :active_notifications, class_name: 'Notify', foreign_key: 'notifier_id'
   has_many :passive_notifications, class_name: 'Notify', foreign_key: 'checker_id'
   has_many :entries
-  has_one :genre
+  belongs_to :genre
   has_many :sites
   has_many :recruits
   has_many :likes

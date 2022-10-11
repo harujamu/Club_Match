@@ -13,8 +13,13 @@ class Public::HomesController < ApplicationController
     elsif params[:practice_type]
       recruits = Recruit.where(practice_type: params[:practice_type])
       @recruits = recruits.page(params[:page])
+    elsif params[:genre_search]
+      genre = Genre.find_by(name: params[:genre_search])
+      users = User.where(genre_id: genre.id)
+      recruits = Recruit.where(user_id: [users.ids])
+      @recruits = recruits.page(params[:page])
     elsif params[:liked_posts]
-      recruits = Recruit.all.liked_by(current_user)
+      recruits = Recruit.where(liked_by?(current_user) == true)
       @recruits = recruits.page(params[:page])
     else
       recruits = Recruit.all
