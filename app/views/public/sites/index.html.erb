@@ -11,7 +11,7 @@
       <% end %>
     </div>
   </div>
-  
+
   <h3>登録済練習場所一覧</h3>
   <div class ="row">
     <div class ="col-md-8 mt-2">
@@ -26,7 +26,12 @@
         <tbody>
           <tr>
             <td><%= site.id %></td>
-            <td><%= site.site_name %><%= link_to '削除',site_path(site.id), method: :delete, class:"btn btn-danger w-25 ml-5" %></td>
+            <td class="site_click">
+              <%= site.site_name %>
+              <div class="site-delete">
+                <%= link_to '削除',site_path(site.id), method: :delete, class:"btn btn-danger test" %>
+              </div>
+            </td>
           </tr>
         </tbody>
         <% end %>

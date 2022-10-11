@@ -3,7 +3,9 @@
     <div class ="col-md-10">
       <h3 class="mb-3">ジャンル登録</h3>
       <%= form_with model: @genre,url: admin_genres_path, method: :post do |f| %>
-      <%= f.text_field :name, size:"50", placeholder:"ジャンル名", class:"mr-2" %> <%= f.file_field :image, accept: "image/*" %><%= f.submit "登録", class:"btn btn-success" %>
+      <%= f.text_field :name, size:"50", placeholder:"ジャンル名", class:"mr-2" %> 
+      <%= f.file_field :genre_image %> <!--, accept: "image/*"-->
+      <%= f.submit "登録", class:"btn btn-success" %>
       <% end %>
     </div>
   </div>

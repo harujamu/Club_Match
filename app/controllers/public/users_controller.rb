@@ -42,7 +42,7 @@ class Public::UsersController < ApplicationController
   end
   
   def genre_params
-    params.require(:genre).permit(:name, :image)
+    params.require(:genre).permit(:name, :genre_image)
   end
   
 end

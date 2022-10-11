@@ -3,7 +3,7 @@
   <div class = "row mt-5">
     <div class ="col-10">
       <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
-      <%= f.text_field :name, size:"50" %> <%#= f.file_field :image, accept: "image/*" %><%= f.submit '更新する', class:"btn btn-primary ml-2" %>
+      <%= f.text_field :name, size:"50" %> <%= f.file_field :image, accept: "image/*" %><%= f.submit '更新する', class:"btn btn-primary ml-2" %>
       <% end %>
     </div>
   </div>
