@@ -3,7 +3,7 @@
   <div class="row mt-2">
     <div class="col-md-12 mx-auto">
       <h3 class="border-bottom"><%= @room.recruit.title %></h3>
-      <h5>練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>　会場： <%= @room.recruit.site.site_name %>　練習形式： <% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>　参加メンバー： <%= profile_image(@room.user,@room.user.genre,30,30) %><% @users.each do |user| %><%= profile_image(user,user.genre,30,30) %><% end %></h5>
+      <h5>練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>　会場： <%= @room.recruit.site.site_name %>　練習形式： <% practice_type(@room.recruit) %>　参加メンバー： <%= profile_image(@room.user,@room.user.genre,30,30) %><% @users.each do |user| %><%= profile_image(user,user.genre,30,30) %><% end %></h5>
     </div>
   </div>
   <div class="row">

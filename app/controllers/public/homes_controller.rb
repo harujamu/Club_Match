@@ -4,22 +4,32 @@ class Public::HomesController < ApplicationController
     if params[:today_recruit]
       recruits = Recruit.where(date: Date.today)
       @recruits = recruits.page(params[:page])
+      
     elsif params[:date_from] && params[:date_end]
       # A..Bは『A〜B』として使える
       date_from = params[:date_from].to_date
       date_end = params[:date_end].to_date
       recruits = Recruit.where(date: date_from..date_end)
       @recruits = recruits.page(params[:page])
+      
     elsif params[:practice_type]
       recruits = Recruit.where(practice_type: params[:practice_type])
       @recruits = recruits.page(params[:page])
+      # binding.pry
     elsif params[:genre_search]
       genre = Genre.find_by(name: params[:genre_search])
       users = User.where(genre_id: genre.id)
       recruits = Recruit.where(user_id: [users.ids])
       @recruits = recruits.page(params[:page])
     elsif params[:liked_posts]
-      recruits = Recruit.where(liked_by?(current_user) == true)
+      # Recruitに紐づいたLikeのユーザー（いいねした人）が現在のユーザーと同じものを抽出
+      # recruits = Recruit.includes(:likes).where(user_id: current_user.id)
+      
+      # recruit_ids = Like.where(user_id: current_user.id).pluck(:recruit_id)
+      # recruit_ids.each do |id|
+      #   liked_recruit.build(recruit_id: id)
+      # end
+      # recruits = liked_recruit.all
       @recruits = recruits.page(params[:page])
     else
       recruits = Recruit.all

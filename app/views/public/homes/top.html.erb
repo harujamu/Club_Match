@@ -18,9 +18,9 @@
       </div>
       <div class="mt-5">
         <%= form_with url:root_path, method: :get do |f| %>
-        <p><%= f.check_box(:practice_type, {checked: false}, checked_value: true) %>　練習試合</p>
-        <p><%= f.check_box(:practice_type, {checked: false}, checked_value: false) %>　合同練習</p>
-        <p><%= f.check_box(:liked_posts, {checked: false}) %>　お気に入り</p>
+        <p><%= f.check_box(:practice_type, {checked: false},true,false) %>　練習試合</p>
+        <p><%= f.check_box(:practice_type, {checked: false},false,true) %>　合同練習</p>
+        <p><%= f.check_box(:liked_posts, {checked: false},true, false) %>　お気に入り</p>
         <p><%= f.submit 'この条件で検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
         <% end %>
       </div>

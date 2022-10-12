@@ -58,6 +58,15 @@ module ApplicationHelper
       end
     end
   end
+  
+  # 練習形式の表示
+  def practice_type(recruit)
+    if recruit.practice_type == false
+      return '合同練習'
+    else
+      return '練習試合'
+    end
+  end
 
 end
 
