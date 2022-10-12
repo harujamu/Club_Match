@@ -1,8 +1,8 @@
 <div class="container">
   <div class = "row">
     <div class="col-md-2">
-      <%= user_image(@user,100,100,6) %>
-      <p><%= @user.club_name %></p>
+      <%= profile_image(@user,@user.genre,180,180) %>
+      <p class="text-center mt-2"><%= @user.club_name %></p>
     </div>
 
     <div class="col-md-9 mx-auto">
@@ -52,7 +52,7 @@
       <% @entries.each do |entry| %>
         <% if entry.recruit.having_candidates? && entry.entered? %>
         <div class="mr-5 mt-3">
-            <p class="d-flex align-items-center mb-0 ml-2"><%= user_image(entry.user,40,40,3) %></p>
+            <p class="d-flex align-items-center mb-0 ml-2"><%= profile_image(entry.user,entry.user.genre,40,40) %></p>
             <p class="my-0 mr-0 ml-2 p-0">
               <%= link_to entry_path(entry, entry: {entry_status: "match", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-check-circle mr-3"></i><% end %>
               <%= link_to entry_path(entry, entry: {entry_status: "match_rejected", user_id: entry.user.id, recruit_id: entry.recruit.id }), method: :patch do %><i class="fas fa-times-circle", style="color: FF3333;"></i><% end %>
@@ -72,7 +72,7 @@
       <% @entries.each do |entry| %>
         <% if entry.match? %>
         <div class="mr-5 mt-3 ml-0">
-          <p class="d-flex align-items-center mb-0 ml-2"><%= user_image(entry.user,40,40,3) %></p>
+          <p class="d-flex align-items-center mb-0 ml-2"><%= profile_image(entry.user,entry.user.genre,40,40) %></p>
           <small><%= entry.user.club_name.truncate(8) %></small>
         </div>
         <% end %>

@@ -3,17 +3,17 @@
   <div class="row mt-2">
     <div class="col-md-12 mx-auto">
       <h3 class="border-bottom"><%= @room.recruit.title %></h3>
-      <h5>練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>　会場： <%= @room.recruit.site.site_name %>　練習形式： <% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>　参加メンバー： <%= user_image(@room.user,30,30,2) %><% @users.each do |user| %><%= user_image(user,30,30,2) %><% end %></h5>
+      <h5>練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>　会場： <%= @room.recruit.site.site_name %>　練習形式： <% if @room.recruit.practice_type == true %>練習試合<% else %>合同練習<% end %>　参加メンバー： <%= profile_image(@room.user,@room.user.genre,30,30) %><% @users.each do |user| %><%= profile_image(user,user.genre,30,30) %><% end %></h5>
     </div>
   </div>
   <div class="row">
     <div class="my-5 col-md-12 mx-auto">
       <% @messages.each do |message| %>
         <% if message.user != current_user %>
-        <p class="d-flex justify-content-start mb-0 pb-0 mt-2"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= user_image(message.user,30,30,2) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
+        <p class="d-flex justify-content-start mb-0 pb-0 mt-2"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= profile_image(message.user,message.user.genre,30,30) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
         <small class="m-0 p-0"><%= message.user.club_name %></small>
         <% else %>
-        <p class="d-flex justify-content-end mb-0 pb-0 mt-2"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= user_image(message.user,30,30,2) %></p>
+        <p class="d-flex justify-content-end mb-0 pb-0 mt-2"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= profile_image(message.user,message.user.genre,30,30) %></p>
         <small class="m-0 p-0 d-flex justify-content-end"><%= message.user.club_name %></small>
         <% end %>
       <% end %>

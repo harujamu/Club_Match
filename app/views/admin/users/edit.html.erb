@@ -2,7 +2,11 @@
   <h2>ユーザー情報管理</h2>
   <div class ="row mt-5">
     <div class ="col-md-2">
-      <% if @user.image.attached? %><%= image_tag @user.image, size: "100 X 100", class:"rounded-circle card-img-top" %><% else %><i class="far fa-smile fa-6x card-img-top"></i><% end %>
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image, size: "150 X 150", class:"rounded-circle card-img-top" %>
+    <% else %>
+      <%= image_tag @user.genre.genre_image, size: "150 X 150", class:"rounded-circle card-img-top" %>
+    <% end %>
     </div>
     
     <div class="col-md-10">
