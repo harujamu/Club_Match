@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  # ユーザー画像があるときは画像表示、ないときはアイコン表示する
+  # ユーザー画像があるときは画像表示、ないときはジャンルに紐づいた画像を表示する
 
   def user_image(user, genre, width=100, height=100)
     # width, height で自由にサイズ調整できるようにした（width=100の部分で初期値設定）
