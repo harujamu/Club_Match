@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td>練習形式</td>
-            <td colsapn="4"><%= f.radio_button :practice_type, false %>  <%= f.label :"合同練習" %><%= f.radio_button :practice_type, true, class:"ml-5" %>  <%= f.label :"練習試合" %></td>
+            <td colsapn="4"><%= f.check_box(:joint_practice,{checked: false},true, false) %>  <%= f.label :"合同練習" %><%= f.check_box(:practice_game,{checked: false, class:"ml-5"},true, false) %>  <%= f.label :"練習試合" %></td>
           </tr>
           <tr>
             <td>日程</td>

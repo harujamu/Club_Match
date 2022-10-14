@@ -25,7 +25,7 @@ class Public::LikesController < ApplicationController
   
   
   def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
+    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_game, :joint_practice, :detail, :age_group, :recruit_status, :open_status)
   end
   
 end

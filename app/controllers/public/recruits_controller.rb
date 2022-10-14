@@ -12,10 +12,14 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.new(recruit_params)
     @user = current_user
     @recruit.user_id = @user.id
-    if @recruit.save
-      redirect_to root_path
+    if (@recruit.practice_game == true) || (@recruit.joint_practice == true)
+      if @recruit.save
+        redirect_to root_path
+      else
+        render :new
+      end
     else
-      render :new
+        render :new
     end
   end
 
@@ -37,24 +41,28 @@ class Public::RecruitsController < ApplicationController
   def update
     @user = current_user
     @recruit = Recruit.find(params[:id])
-    if @recruit.update(recruit_params)
-      if @recruit.match?
-        @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id)
-        @entries.each do |entry|
-          entry.update(entry_status: "match_rejected")
-          @recruit.create_notification_match_rejected(current_user, entry)
+    if (@recruit.practice_game == true) || (@recruit.joint_practice == true)
+      if @recruit.update(recruit_params)
+        if @recruit.match?
+          @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id)
+          @entries.each do |entry|
+            entry.update(entry_status: "match_rejected")
+            @recruit.create_notification_match_rejected(current_user, entry)
+          end
+        elsif @recruit.open_status == false
+          # 練習日を超えたら(非公開になったら)、応募を削除する
+          @entries = @recruit.entries.where(entry_status: 0)
+          @entries.each do |entry|
+            @recruit.create_notification_overdue(current_user, entry)
+          end
+          @entries.destroy_all
         end
-      elsif @recruit.open_status == false
-        # 練習日を超えたら(非公開になったら)、応募を削除する
-        @entries = @recruit.entries.where(entry_status: 0)
-        @entries.each do |entry|
-          @recruit.create_notification_overdue(current_user, entry)
-        end
-        @entries.destroy_all
+        redirect_to recruit_path(@recruit.id)
+      else
+        render :edit
       end
-      redirect_to recruit_path(@recruit.id)
     else
-      render :edit
+        render :edit
     end
   end
 
@@ -69,7 +77,7 @@ class Public::RecruitsController < ApplicationController
   private
 
   def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
+    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_game, :joint_practice, :detail, :age_group, :recruit_status, :open_status)
   end
 
   def entry_params

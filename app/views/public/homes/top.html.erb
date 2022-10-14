@@ -4,23 +4,26 @@
       <h2>募集<%= @recruits.count %>件</h2>
       <div class="mt-5 border-bottom pb-3">
         <p><%= link_to '今日', root_path(today_recruit: Date.today), method: :get, class:"btn bg-warning btn-sm bg-gradient" %></p>
-        <%= form_with url:root_path, method: :get do |f| %>
-        <p><%=f.date_field :date_from, class:"form-control w-50 border-warning" %></p>
-        <p><%=f.date_field :date_end, class:"form-control w-50 border-warning" %></p>
+        <%#= form_with url:root_path, method: :get do |f| %>
+        <%= search_form_for @q, url: root_path do |f| %>
+        <p><%=f.date_field :date_gteq, class:"form-control w-50 border-warning" %></p>
+        <p><%=f.date_field :date_lteq, class:"form-control w-50 border-warning" %></p>
         <p><%= f.submit 'この期間で検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
         <% end %>
       </div>
       <div class="mt-5 border-bottom pb-3">
-        <%= form_with url:root_path, method: :get do |f| %>
-        <p><%=f.text_field :genre_search, class:"form-control w-75 border-warning", placeholder:"ジャンル名" %></p>
+        <%#= form_with url:root_path, method: :get do |f| %>
+        <%= search_form_for @q, url: root_path do |f| %>
+        <p><%=f.text_field :user_genre_name_cont, class:"form-control w-75 border-warning", placeholder:"ジャンル名" %></p>
         <p><%= f.submit 'ジャンルから検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
         <% end %>
       </div>
       <div class="mt-5">
-        <%= form_with url:root_path, method: :get do |f| %>
-        <p><%= f.check_box(:practice_type, {checked: false},true,false) %>　練習試合</p>
-        <p><%= f.check_box(:practice_type, {checked: false},false,true) %>　合同練習</p>
-        <p><%= f.check_box(:liked_posts, {checked: false},true, false) %>　お気に入り</p>
+        <%#= form_with url:root_path, method: :get do |f| %>
+        <%= search_form_for @q, url: root_path do |f| %>
+        <p><%= f.check_box(:practice_game_matches_any, {checked: false},true,false) %>　練習試合</p>
+        <p><%= f.check_box(:joint_practice_matches_any, {checked: false},true,false) %>　合同練習</p>
+        <p><%= f.check_box(:liked_status_eq, {checked: false},true,false) %>　お気に入り</p>
         <p><%= f.submit 'この条件で検索', class:"btn bg-warning btn-sm bg-gradient" %></p>
         <% end %>
       </div>
@@ -46,5 +49,5 @@
       </div>
     </div>
   </div>
-<p><%= paginate @recruits %></p>
+<p><%#= paginate @recruits %></p>
 </div>
