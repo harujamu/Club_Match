@@ -17,59 +17,39 @@ class Public::HomesController < ApplicationController
     #   @recruits = recruits.page(params[:page])
     # end
 
-      # 練習形式で絞り込み
-      # if params[:practice_game] == true && params[:joint_practice]== false
-      #   recruits = Recruit.where(practice_game: true, joint_practice: false)
-      #   @recruits = recruits.page(params[:page])
-      # elsif params[:joint_practice] == true && params[:practice_game] == false
-      #   recruits = Recruit.where(practice_game: false, joint_practice: true)
-      #   @recruits = recruits.page(params[:page])
-      # else
-      #   recruits = Recruit.all
-      #   @recruits = recruits.page(params[:page])
-      # end
+    # 練習形式で絞り込み
+    # if params[:practice_game] == true && params[:joint_practice]== false
+    #   recruits = Recruit.where(practice_game: true, joint_practice: false)
+    #   @recruits = recruits.page(params[:page])
+    # elsif params[:joint_practice] == true && params[:practice_game] == false
+    #   recruits = Recruit.where(practice_game: false, joint_practice: true)
+    #   @recruits = recruits.page(params[:page])
+    # else
+    #   recruits = Recruit.all
+    #   @recruits = recruits.page(params[:page])
+    # end
 
-      # # ジャンル名で絞り込み
-      # if params[:genre_search]
-      #   genre = Genre.find_by(name: params[:genre_search])
-      #   users = User.where(genre_id: genre.id)
-      #   recruits = Recruit.where(user_id: [users.ids])
-      #   @recruits = recruits.page(params[:page])
+    # ジャンル名で絞り込み
+    # if params[:genre_search]
+    #   genre = Genre.find_by(name: params[:genre_search])
+    #   users = User.where(genre_id: genre.id)
+    #   recruits = Recruit.where(user_id: [users.ids])
+    #   @recruits = recruits.page(params[:page])
 
-      # else
-      #   recruits = Recruit.all
-      #   @recruits = recruits.page(params[:page])
-      # end
+    # else
+    #   recruits = Recruit.all
+    #   @recruits = recruits.page(params[:page])
+    # end
 
-      # お気に入りで絞り込み
-      # if params[:liked_posts]==true
-        # Recruitに紐づいたLikeのユーザー（いいねした人）が現在のユーザーと同じものを抽出
-        # recruits = Recruit.includes(:likes).where(user_id: current_user.id)
+    # お気に入りで絞り込み
+    # if params[:liked_posts]==true
+    # Recruitに紐づいたLikeのユーザー（いいねした人）が現在のユーザーと同じものを抽出
+    # recruits = Recruit.includes(:likes).where(user_id: current_user.id)
 
-        # recruits = Recruit.likes.where(user_id: current_user.id)
-
-        # likes = Like.where(user_id: current_user.id)
-        # recruit_ids = likes.pluck(:recruit_id)
-        # recruits = recruit_ids.map{|id| Recruit.find(id)}
-
-        # recruit_ids = Like.where(user_id: current_user.id).pluck(:recruit_id)
-        # recruit_ids.each do |id|
-        #   liked_recruit = Recruit.find(recruit_id: id)
-        # end
-        # recruits = liked_recruit.all
-
-
-        # @recruits = recruits.page(params[:page])
-      # else
-      #   recruits = Recruit.all
-      #   @recruits = recruits.page(params[:page])
-      # end
+    # recruits = Recruit.likes.where(user_id: current_user.id)
+    # @recruits = recruits.page(params[:page])
 
     # ランサックで記述
-    # recruits = Recruit.all
-    # recruits.each do |recruit|
-    #   liked_id = recruit.likes.where(user_id: current_user.id)
-    # end
     @q = Recruit.ransack(params[:q])
     @recruits = @q.result(distinct: true)
 
@@ -80,8 +60,6 @@ class Public::HomesController < ApplicationController
         recruit.update(open_status: false)
       end
     end
-
-    # like = Like.new
 
     @recruits.each do |recruit|
       @user = User.find(recruit.user_id)

@@ -4,6 +4,8 @@ class Public::LikesController < ApplicationController
     recruit = Recruit.find(params[:recruit_id])
     like = current_user.likes.new(recruit_id: recruit.id)
     like.save
+    # Recruitのliked_statusをtrueにする
+    like.recruit.update(liked_status: true)
     # いいね通知メソッド追加
     recruit.create_notification_like(current_user)
     redirect_to root_path
@@ -12,6 +14,7 @@ class Public::LikesController < ApplicationController
   def destroy
     recruit = Recruit.find(params[:recruit_id])
     like = current_user.likes.find_by(recruit_id: recruit.id)
+    like.recruit.update(liked_status: false)
     like.destroy
     redirect_to root_path
   end

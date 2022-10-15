@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_021221) do
     t.date "date", null: false
     t.boolean "practice_game", default: false, null: false
     t.boolean "joint_practice", default: false, null: false
+    t.boolean "liked_status", default: false, null: false
     t.integer "age_group", null: false
     t.integer "recruit_status", default: 0, null: false
     t.boolean "open_status", default: true, null: false

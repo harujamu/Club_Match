@@ -7,6 +7,7 @@ class CreateRecruits < ActiveRecord::Migration[6.1]
       t.date :date, null: false
       t.boolean :practice_game, null: false, default: false
       t.boolean :joint_practice, null: false, default: false
+      t.boolean :liked_status, null: false, default: false
       t.integer :age_group, null: false
       t.integer :recruit_status, null: false, default: 0
       t.boolean :open_status, null: false, default: true

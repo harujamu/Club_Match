@@ -47,7 +47,7 @@ module ApplicationHelper
   end
 
   # いいねのON／OFF
-  def liked_status(current_user, recruit)
+  def like_button(current_user, recruit)
     if recruit.liked_by?(current_user)
       link_to recruit_likes_path(recruit),class:"text-dark", method: :delete do
         tag.i class: "fas fa-heart", style: "color: FF6388;"

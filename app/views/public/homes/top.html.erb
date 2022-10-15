@@ -3,7 +3,12 @@
     <div class ="col-md-3 border-right">
       <h2>募集<%= @recruits.count %>件</h2>
       <div class="mt-5 border-bottom pb-3">
-        <p><%= link_to '今日', root_path(today_recruit: Date.today), method: :get, class:"btn bg-warning btn-sm bg-gradient" %></p>
+        <!--<p><%#= link_to '今日', root_path(today_recruit: Date.today), method: :get, class:"btn bg-warning btn-sm bg-gradient" %></p>-->
+        
+        <%= form_with url:root_path, method: :get do |f| %>
+        <p><%= f.hidden_field :date_eq , :value => Date.today %></p>
+        <p><%= f.submit '今日', class:"btn bg-warning btn-sm bg-gradient" %></p>
+        <% end %>
         <%#= form_with url:root_path, method: :get do |f| %>
         <%= search_form_for @q, url: root_path do |f| %>
         <p><%=f.date_field :date_gteq, class:"form-control w-50 border-warning" %></p>
@@ -41,7 +46,7 @@
           <% end %>
           <div class="row">
             <p class="card-title"><%= recruit.title.truncate(8) %></p>
-            <span><% if user_signed_in? %><%= liked_status(current_user,recruit) %><% else %><i class="fas fa-heart", style="color: FF6388;"></i><% end %><%= recruit.likes.count %></span>
+            <span><% if user_signed_in? %><%= like_button(current_user,recruit) %><% else %><i class="fas fa-heart", style="color: FF6388;"></i><% end %><%= recruit.likes.count %></span>
           </div>
         </div>
         <% end %>
