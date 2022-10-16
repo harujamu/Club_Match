@@ -131,3 +131,7 @@ ja:
         match: "マッチ！"
         decline: "断る"
         done: "完了"
+        
+      practice_type:
+        practice_game: "練習試合"
+        joint_practice: "合同練習"

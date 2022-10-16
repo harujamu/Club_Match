@@ -1,5 +1,5 @@
 class Entry < ApplicationRecord
-  enum entry_status: { entered: 0, match: 1, match_rejected: 2, done: 3 }
+  enum entry_status: { entered: 1, match: 2, match_rejected: 3, done: 4 }
   
   belongs_to :user
   belongs_to :recruit

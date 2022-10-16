@@ -35,14 +35,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.string :club_name, null: false
       t.integer :genre_id, null: false
-      t.integer :prefecture, null: false
+      t.integer :prefecture, null: false, default: 1
       t.string :municipality, null: false
       t.string :address, null: false
       t.string :captain_last_name, null: false
       t.string :captain_first_name, null: false
       t.text :introduction
       t.boolean :active_status, null: false, default: true
-      t.integer :age_group, null: false
+      t.integer :age_group, null: false, default: 1
       t.timestamps null: false
     end
 

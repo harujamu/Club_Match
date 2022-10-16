@@ -61,9 +61,9 @@ module ApplicationHelper
   
   # 練習形式の表示
   def practice_type(recruit)
-    if recruit.practice_game == true && recruit.joint_practice == false
+    if recruit.practice_game?
       return '練習試合'
-    else recruit.practice_game == false && recruit.joint_practice == true
+    elsif recruit.joint_practice? 
       return '合同練習'
     end
   end

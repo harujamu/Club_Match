@@ -18,11 +18,11 @@ class Public::HomesController < ApplicationController
     # end
 
     # 練習形式で絞り込み
-    # if params[:practice_game] == true && params[:joint_practice]== false
-    #   recruits = Recruit.where(practice_game: true, joint_practice: false)
+    # if params[:practice_type] == 1
+    #   recruits = Recruit.where(practice_type: 1)
     #   @recruits = recruits.page(params[:page])
-    # elsif params[:joint_practice] == true && params[:practice_game] == false
-    #   recruits = Recruit.where(practice_game: false, joint_practice: true)
+    # elsif params[:practice_type] == 2
+    #   recruits = Recruit.where(practice_type: 2)
     #   @recruits = recruits.page(params[:page])
     # else
     #   recruits = Recruit.all
@@ -49,6 +49,9 @@ class Public::HomesController < ApplicationController
     # recruits = Recruit.likes.where(user_id: current_user.id)
     # @recruits = recruits.page(params[:page])
 
+
+
+
     # ランサックで記述
     @q = Recruit.ransack(params[:q])
     @recruits = @q.result(distinct: true)
@@ -64,13 +67,12 @@ class Public::HomesController < ApplicationController
     @recruits.each do |recruit|
       @user = User.find(recruit.user_id)
     end
-
   end
 
   private
 
   def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_game, :joint_practice, :detail, :age_group, :recruit_status, :open_status)
+    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
 
   def like_params

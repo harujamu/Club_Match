@@ -4,12 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum age_group: { elementary_shool_student: 0, secondary_school_student: 1, high_school_student: 2, college_student: 3, adult: 4 }
-  enum prefecture: { hokkaido: 0, aomori: 1, iwate: 2, miyagi: 3, akita: 4, yamagata: 5, hukushima: 6, ibaraki: 7, tochigi: 8, gunma: 9,
-                     saitama: 10, chiba: 11, tokyo: 12, kanagawa: 13, niigata: 14, toyama: 15, ishikawa: 16, fukui: 17, yamanashi: 18, nagano: 19,
-                     gifu: 20, shizuoka: 21, aichi: 22, mie: 23, shiga: 24, kyoto: 25, osaka: 26, hyogo: 27, nara: 28, wakayama: 29,
-                     tottori: 30, shimane: 31, okayama: 32, hiroshima: 33, yamaguchi: 34, tokushima: 35, kagawa: 36, ehime: 37, kochi: 38, fukuoka: 39,
-                     saga: 40, nagasaki: 41, oita: 42, kumamoto: 43, miiyazaki: 44, kagoshima: 45, okinawa: 46 }
+  enum age_group: { elementary_shool_student: 1, secondary_school_student: 2, high_school_student: 3, college_student: 4, adult: 5 }
+  enum prefecture: { hokkaido: 1, aomori: 2, iwate: 3, miyagi: 4, akita: 5, yamagata: 6, hukushima: 7, ibaraki: 8, tochigi: 9, gunma: 10,
+                     saitama: 11, chiba: 12, tokyo: 13, kanagawa: 14, niigata: 15, toyama: 16, ishikawa: 17, fukui: 18, yamanashi: 19, nagano: 20,
+                     gifu: 21, shizuoka: 22, aichi: 23, mie: 24, shiga: 25, kyoto: 26, osaka: 27, hyogo: 28, nara: 29, wakayama: 30,
+                     tottori: 31, shimane: 32, okayama: 33, hiroshima: 34, yamaguchi: 35, tokushima: 36, kagawa: 37, ehime: 38, kochi: 39, fukuoka: 40,
+                     saga: 41, nagasaki: 42, oita: 43, kumamoto: 44, miiyazaki: 45, kagoshima: 46, okinawa: 47 }
 
 
  

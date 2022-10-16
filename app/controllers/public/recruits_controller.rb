@@ -12,14 +12,10 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.new(recruit_params)
     @user = current_user
     @recruit.user_id = @user.id
-    if (@recruit.practice_game == true) || (@recruit.joint_practice == true)
-      if @recruit.save
-        redirect_to root_path
-      else
-        render :new
-      end
+    if @recruit.save
+      redirect_to root_path
     else
-        render :new
+      render :new
     end
   end
 
@@ -41,7 +37,6 @@ class Public::RecruitsController < ApplicationController
   def update
     @user = current_user
     @recruit = Recruit.find(params[:id])
-    if (@recruit.practice_game == true) || (@recruit.joint_practice == true)
       if @recruit.update(recruit_params)
         if @recruit.match?
           @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id)
@@ -51,7 +46,7 @@ class Public::RecruitsController < ApplicationController
           end
         elsif @recruit.open_status == false
           # 練習日を超えたら(非公開になったら)、応募を削除する
-          @entries = @recruit.entries.where(entry_status: 0)
+          @entries = @recruit.entries.where(entry_status: "entered")
           @entries.each do |entry|
             @recruit.create_notification_overdue(current_user, entry)
           end
@@ -61,9 +56,6 @@ class Public::RecruitsController < ApplicationController
       else
         render :edit
       end
-    else
-        render :edit
-    end
   end
 
   def index
@@ -77,7 +69,7 @@ class Public::RecruitsController < ApplicationController
   private
 
   def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_game, :joint_practice, :detail, :age_group, :recruit_status, :open_status)
+    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
 
   def entry_params
