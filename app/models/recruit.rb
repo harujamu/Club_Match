@@ -9,6 +9,15 @@ class Recruit < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :notifies, dependent: :destroy
   has_one :room
+  
+  validates :date, presence: true
+  validates :title, presence: true, on:create
+  validates :practice_type, presence: true, on:create
+  validates :detail, allow_blank: true
+  validates :age_group, presence: true, on:create
+  validates :recruit_status, presence: true
+  validates :open_status, presence: true
+  validates :liked_status, presence: true
 
   def liked_by?(user)
     likes.exists?(user_id: user.id)

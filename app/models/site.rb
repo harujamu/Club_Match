@@ -8,7 +8,9 @@ class Site < ApplicationRecord
 
   belongs_to:user
   
-
+  validates :prefecture, presence: true, on:create
+  validates :municipality, presence: true, on:create
+  validates :address, presence: true, on:create
 
  def site_name
    prefecture_i18n + ' ' +  municipality + ' ' + address
