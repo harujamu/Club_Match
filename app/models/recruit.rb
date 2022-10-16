@@ -11,10 +11,10 @@ class Recruit < ApplicationRecord
   has_one :room
   
   validates :date, presence: true
-  validates :title, presence: true, on:create
-  validates :practice_type, presence: true, on:create
-  validates :detail, allow_blank: true
-  validates :age_group, presence: true, on:create
+  validates :title, presence: true
+  validates :practice_type, presence: true
+  validates :detail, allow_blank: true, length: { maximum: 300 }
+  validates :age_group, presence: true
   validates :recruit_status, presence: true
   validates :open_status, presence: true
   validates :liked_status, presence: true

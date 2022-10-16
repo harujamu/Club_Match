@@ -16,7 +16,7 @@ class User < ApplicationRecord
   validates :club_name, uniqueness: true, presence: true, on:create
   validates :captain_first_name, presence: true, on:create
   validates :captain_last_name, presence: true, on:create
-  validates :introduction, allow_blank: true, on:create
+  validates :introduction, allow_blank: true, length: { maximum: 300 }, on:create
   validates :active_status, presence: true
   validates :age_group, presence: true, on:create
   validates :email, uniqueness: true, presence: true, on:create
