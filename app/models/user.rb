@@ -12,25 +12,36 @@ class User < ApplicationRecord
                      saga: 41, nagasaki: 42, oita: 43, kumamoto: 44, miiyazaki: 45, kagoshima: 46, okinawa: 47 }
 
 
- 
-  validates :club_name, uniqueness: true, presence: true, on:create
-  validates :captain_first_name, presence: true, on:create
-  validates :captain_last_name, presence: true, on:create
-  validates :introduction, allow_blank: true, length: { maximum: 300 }, on:create
+  has_many :rooms, through: :user_room
+  has_many :user_rooms
+  has_many :messages
+  has_many :active_notifications, class_name: 'Notify', foreign_key: 'notifier_id'
+  has_many :passive_notifications, class_name: 'Notify', foreign_key: 'checker_id'
+  has_many :entries
+  belongs_to :genre
+  has_many :sites
+  has_many :recruits
+  has_many :likes
+  has_one_attached :image
+
+  validates :club_name, uniqueness: true, presence: true, on: :create
+  validates :captain_first_name, presence: true, on: :create
+  validates :captain_last_name, presence: true, on: :create
+  validates :introduction, allow_blank: true, length: { maximum: 300 }, on: :create
   validates :active_status, presence: true
-  validates :age_group, presence: true, on:create
-  validates :email, uniqueness: true, presence: true, on:create
-  validates :encrypted_password, uniqueness: true, presence: true, on:create
-  
-  
+  validates :age_group, presence: true, on: :create
+  validates :email, uniqueness: true, presence: true, on: :create
+  validates :encrypted_password, uniqueness: true, presence: true, on: :create
+
+
   def captain_name
    captain_last_name + ' ' + captain_first_name
   end
-  
+
   def user_address
       prefecture_i18n + ' ' + municipality + ' ' + address
   end
-  
+
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -44,18 +55,5 @@ class User < ApplicationRecord
       user.genre_id = 1
     end
   end
-     
-  
-  has_many :rooms, through: :user_room
-  has_many :user_rooms
-  has_many :messages
-  has_many :active_notifications, class_name: 'Notify', foreign_key: 'notifier_id'
-  has_many :passive_notifications, class_name: 'Notify', foreign_key: 'checker_id'
-  has_many :entries
-  belongs_to :genre
-  has_many :sites
-  has_many :recruits
-  has_many :likes
-  has_one_attached :image
 
 end
