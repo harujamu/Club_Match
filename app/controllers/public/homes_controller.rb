@@ -67,11 +67,6 @@ class Public::HomesController < ApplicationController
       end
     end
 
-    @recruits.each do |recruit|
-      @user = User.find(recruit.user_id)
-    end
-  end
-
   private
 
   def recruit_params
@@ -82,4 +77,5 @@ class Public::HomesController < ApplicationController
     params.require(:like).permit(:user_id, :recruit_id)
   end
 
+  end
 end
