@@ -28,7 +28,6 @@ class User < ApplicationRecord
   validates :captain_first_name, presence: true
   validates :captain_last_name, presence: true
   validates :introduction, allow_blank: true, length: { maximum: 300 }
-  validates :active_status, presence: true
   validates :age_group, presence: true
   validates :email, uniqueness: true, presence: true
   validates :encrypted_password, uniqueness: true, presence: true
