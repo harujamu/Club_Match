@@ -19,7 +19,7 @@
           </tr>
           <tr>
             <td>練習形式</td>
-            <td colsapn="4"><%= f.check_box(:practice_type, {checked: false, include_hidden: false },2 ) %>  <%= f.label :"合同練習" %><%= f.check_box(:practice_type, {checked: false, include_hidden: false, class:"ml-5" },1 ) %>  <%= f.label :"練習試合" %></td>
+            <td colsapn="4"><%= f.check_box :practice_type, {checked: false, include_hidden: false },"joint_practice" %>  <%= f.label :"合同練習" %><%= f.check_box :practice_type, {checked: false, include_hidden: false, class:"ml-5" },"practice_game" %>  <%= f.label :"練習試合" %></td>
           </tr>
           <tr>
             <td>日程</td>

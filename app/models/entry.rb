@@ -5,6 +5,4 @@ class Entry < ApplicationRecord
   belongs_to :recruit
   has_many :notifies, dependent: :destroy
   
-  validates :entry_status, presence: true
-  
 end
