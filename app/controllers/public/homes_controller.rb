@@ -59,6 +59,7 @@ class Public::HomesController < ApplicationController
 
     # 募集記事の練習日超えたら非公開に設定
     @recruits.each do |recruit|
+      @user = User.find(recruit.user_id)
       if recruit.date.before? Date.today
         recruit.update(open_status: false)
       elsif recruit.user.active_status == false
