@@ -34,8 +34,8 @@ module ApplicationHelper
 
   def room_link(room, recruit)
     # Roomがすでにある場合はチャット画面に遷移
-    if room.id.present?
-      link_to room_path(room.id), class:"text-dark" do
+    if room.present?
+      link_to room_path(recruit.room.id), class:"text-dark" do
         tag.i class: "far fa-comments text-dark"
       end
     else
