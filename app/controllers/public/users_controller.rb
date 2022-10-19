@@ -30,7 +30,7 @@ class Public::UsersController < ApplicationController
   
   def unsubscribe
     @user = current_user
-    @user.update(user_params)
+    @user.update(active_status: false)
     reset_session
     redirect_to root_path
   end

@@ -12,7 +12,7 @@ class Public::SessionsController < Devise::SessionsController
   def create
     @user = User.find_by(email: params[:user][:email])
     if @user.active_status == false
-      redirect_to new_user_session_path
+      redirect_to new_user_registration_path and return
     else
       super
     end
@@ -33,7 +33,7 @@ class Public::SessionsController < Devise::SessionsController
   
   protected
   
-
+ 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])

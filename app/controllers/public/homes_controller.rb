@@ -61,6 +61,8 @@ class Public::HomesController < ApplicationController
     @recruits.each do |recruit|
       if recruit.date.before? Date.today
         recruit.update(open_status: false)
+      elsif recruit.user.active_status == false
+        recruit.update(open_status: false)
       end
     end
 
