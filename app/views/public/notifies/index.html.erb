@@ -8,41 +8,41 @@
         <% if notify.action == "like" %>
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　に いいね♡しました</th>
+          <th><span class="justify-cntent-start"><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　に いいね♡しました</span></th>
         </tr>
 
         <% elsif notify.action == "message" %>
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th><%= notify.notifier.club_name %>から メッセージが届きました</th>
+          <th><span class="justify-cntent-start"><%= notify.notifier.club_name %>から メッセージが届きました</span></th>
         </tr>
         <% elsif notify.action == "entry" %>
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　に応募しました</th>
+          <th><span class="justify-cntent-start"><%= notify.notifier.club_name %>が　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　に応募しました</span></th>
         </tr>
         <% elsif notify.action == "match" %>
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>と、　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　でマッチしました！</th>
+          <th><span class="justify-cntent-start"><%= notify.notifier.club_name %>と　"<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %><%= notify.recruit.title %><% end %>"　でマッチしました！</span></th>
         </tr>
         <% elsif notify.action == "match_rejected" %>
         <tr>
           <td>
           <%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
-            <% if @user.image.attached? %>
-              <%= image_tag @user.image, size: "150 X 150", class:"rounded-circle card-img-top" %>
+            <% if notify.notifier.image.attached? %>
+              <%= image_tag notify.notifier.image, size: "30 X 30", class:"rounded-circle card-img-top" %>
             <% else %>
-              <%= image_tag @user.genre.genre_image, size: "150 X 150", class:"rounded-circle card-img-top" %>
+              <%= image_tag notify.notifier.genre.genre_image, size: "30 X 30", class:"rounded-circle card-img-top" %>
             <% end %>
           <% end %>
           </td>
-          <th><%= notify.recruit.title %>　への応募結果はマッチ不成立でした。</th>
+          <th><span class="justify-cntent-start"><%= notify.recruit.title %>　への応募結果はマッチ不成立でした。</span></th>
         </tr>
         <% elsif %>
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>"<%= notify.recruit.title %>"　の練習日を過ぎたため、この募集への応募は削除されました。</th>
+          <th><span class="justify-cntent-start">"<%= notify.recruit.title %>"　の予定練習日を過ぎたため、この募集への応募は削除されました。</span></th>
         </tr>
         <% end %>
       </table>
