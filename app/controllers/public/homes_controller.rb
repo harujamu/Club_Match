@@ -62,20 +62,20 @@ class Public::HomesController < ApplicationController
       @user = User.find(recruit.user_id)
       if recruit.date.before? Date.today
         recruit.update(open_status: false)
-      elsif recruit.user.active_status == false
+      elsif @user.active_status == false
         recruit.update(open_status: false)
       end
     end
-
+  end
+  
   private
-
+  
   def recruit_params
     params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
-
+  
   def like_params
     params.require(:like).permit(:user_id, :recruit_id)
   end
-
-  end
+  
 end
