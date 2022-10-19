@@ -54,7 +54,11 @@ class Public::HomesController < ApplicationController
 
     # ランサックで記述
     @q = Recruit.ransack(params[:q])
-    @recruits = @q.result(distinct: true)
+    @recruits = @q.result(distinct: true).where(open_status: true)
+    # ランサックだけではcurrent_userのいいねかどうかの判断ができないので、ランサックで拾ったいいね付き投稿がcurrent_userのものか調べる
+    if params.dig(:q, :liked_status_eq) == "true"
+      @recruits = @recruits.to_a.select {|r| r.likes.find_by(user_id: current_user) }
+    end
 
 
     # 募集記事の練習日超えたら非公開に設定
@@ -67,15 +71,15 @@ class Public::HomesController < ApplicationController
       end
     end
   end
-  
+
   private
-  
+
   def recruit_params
     params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
-  
+
   def like_params
     params.require(:like).permit(:user_id, :recruit_id)
   end
-  
+
 end

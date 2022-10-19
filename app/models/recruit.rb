@@ -9,7 +9,7 @@ class Recruit < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :notifies, dependent: :destroy
   has_one :room
-  
+
   validates :date, presence: true
   validates :title, presence: true
   validates :practice_type, presence: true
@@ -108,8 +108,11 @@ class Recruit < ApplicationRecord
 
   def create_notification_message(current_user, message)
     # ユーザー複数の場合はeachで！！！
-    message.room.users.each do |user|
-      return if user.id == current_user.id
+    # each分の中でreturnは使わない、次に行くならnext
+    
+    #usersはmessage.room.usersのうち、currentuserでないuserのみ抽出した 
+    users = message.room.users.select {|user| user != current_user }
+    users.each do |user|
       # メッセージがあるか調べる
       temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ?  and message_id = ? and action = ? and checked_status = ?",current_user.id, user.id, id, message.id, 'message', false ])
       # メッセージなければ通知作成

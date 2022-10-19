@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <div class="row mt-2">
     <div class="col-md-12 mx-auto">
       <h3 class="border-bottom"><%= @room.recruit.title %></h3>
@@ -7,7 +7,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="my-5 col-md-12 mx-auto">
+    <!--送信フォームが高い位置にきすぎないようにstyeで最低限の高さ指定-->
+    <div class="my-5 col-md-12 mx-auto" style="min-height: 280px;">
       <% @messages.each do |message| %>
         <% if message.user != current_user %>
         <p class="d-flex justify-content-start mb-0 pb-0 mt-2"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= profile_image(message.user,message.user.genre,30,30) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
@@ -21,7 +22,7 @@
   </div>
 
   <div class="row">
-    <div class="my-5 col-md-10 mx-auto fixed-bottom">
+    <div class="my-5 col-md-12 mx-auto">
       <%= form_with model: @message, method: :post do |f| %>
       <table class="table table-borderless">
         <%= f.hidden_field :room_id, :value => @room.id %>

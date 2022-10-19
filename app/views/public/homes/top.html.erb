@@ -1,7 +1,7 @@
 <div class ="container">
   <div class ="row">
     <div class ="col-md-3 border-right">
-      <h2>募集<%= @recruits.where(open_status: true).count %>件</h2>
+      <h2>募集<%= @recruits.count %>件</h2>
       <div class="mt-5">
         <%#= form_with url:root_path, method: :get do |f| %>
         <%= search_form_for @q, url: root_path do |f| %>
