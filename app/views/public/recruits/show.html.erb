@@ -33,7 +33,7 @@
           <p class="d-flex justify-content-end"><%= link_to '応募する', entries_path(@entry, entry: {recruit_id: @recruit.id, user_id: current_user.id}), method: :post, class:"btn btn-primary w-25" %></p>
         <% end %>
 
-        <% if @entry.id.present? && @recruit.having_candidates? %>
+        <% if @entry.id.present? && @recruit.having_candidates? && (@entry.entry_status != "match_rejected") %>
           <p class="d-flex justify-content-end"><%= link_to '応募取消', entry_path(@entry.id), method: :delete, class:"btn btn-danger w-25" %></p>
         <% end %>
 
