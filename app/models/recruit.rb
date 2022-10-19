@@ -12,7 +12,7 @@ class Recruit < ApplicationRecord
   
   validates :date, presence: true
   validates :title, presence: true
-  # validates :practice_type, presence: true
+  validates :practice_type, presence: true
   validates :detail, allow_blank: true, length: { maximum: 300 }
   validates :age_group, presence: true
 
