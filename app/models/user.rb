@@ -45,12 +45,12 @@ class User < ApplicationRecord
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.alphanumeric(10) + [*'a'..'z'].sample(1).join + [*'0'..'9'].sample(1).join
-      user.club_name = 'Example_Club'
+      user.club_name = 'ゲストユーザー'
       user.captain_first_name = 'Match'
       user.captain_last_name = 'Club'
       user.prefecture = 1
-      user.municipality = 'Example City'
-      user.address = 'Example Address'
+      user.municipality = 'Sample City'
+      user.address = 'Sample Address'
       user.age_group = 1
       user.genre_id = 1
     end
