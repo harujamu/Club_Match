@@ -1,7 +1,7 @@
 class Public::RoomsController < ApplicationController
 
   def create
-    # DMのルーム作るのは募集者（user_id）、募集IDはRoom作成時に持たせたID
+    # チャットルーム作るのは募集者（user_id）、募集IDはRoom作成時に持たせたID
     recruit = Recruit.find(params[:recruit_id])
     @room = Room.new(user_id: current_user.id, recruit_id: params[:recruit_id]) || Room.find_by(recruit_id: recruit.id)
 
@@ -14,6 +14,8 @@ class Public::RoomsController < ApplicationController
     user_ids.each do |user_id|
       @room.user_rooms.build(user_id: user_id)
     end
+    # チャットルーム作成者もUser_Roomにカラム追加していく
+    @room.user_rooms.build(user_id: @room.user_id)
     room = Room.find_by(user_id: current_user.id, recruit_id: params[:recruit_id] )
     if room
       redirect_to room_path(room.id)
@@ -28,7 +30,8 @@ class Public::RoomsController < ApplicationController
     @recruit = Recruit.find(@room.recruit.id)
     @message = Message.new
     @messages = Message.where(room_id: @room.id)
-    @users = User.where(id: @room.user_rooms.pluck(:user_id))
+    # @users = User.where(id: @room.user_rooms.pluck(:user_id))
+    @users = @room.users
   end
 
   private
