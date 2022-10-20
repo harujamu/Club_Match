@@ -14,7 +14,7 @@
         <% elsif notify.action == "message" %>
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th><span class="justify-cntent-start"><%= notify.notifier.club_name %>から メッセージが届きました</span></th>
+          <th><span class="justify-cntent-start"><%= notify.notifier.club_name %>から <%= link_to 'メッセージ', room_path(notify.recruit.room.id), class:"text-dark" %>が届きました</span></th>
         </tr>
         <% elsif notify.action == "entry" %>
         <tr>
