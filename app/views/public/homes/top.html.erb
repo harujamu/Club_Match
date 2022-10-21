@@ -28,15 +28,15 @@
       </div>
     </div>
 
-    <div class ="col-md-8 mx-auto">
+    <div class ="col-md-8 mx-auto px-0">
       <h2>練習相手募集一覧</h2>
 
       <div class="mt-5 d-flex flex-wrap p-0">
       <% @recruits.each do |recruit| %>
         <% if recruit.open_status == true %>
-        <div class="card col-md-3 mt-0 border border-0">
+        <div class="card col-md-3 mt-0 border border-0 mx-0">
           <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
-          <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150x150", class:"rounded-circle card-img-top" %><% else %><%= image_tag recruit.user.genre.genre_image, size: "150x150", class:"rounded-circle card-img-top" %><% end %>
+          <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150x150", class:"rounded-circle" %><% else %><%= image_tag recruit.user.genre.genre_image, size: "150x150", class:"rounded-circle" %><% end %>
           <% end %>
           <div class="row">
             <p class="card-title"><%= recruit.title.truncate(8) %></p>
