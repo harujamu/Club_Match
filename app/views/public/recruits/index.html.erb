@@ -20,7 +20,7 @@
             <td><%= link_to recruit_path(recruit.id), class:"text-dark" do %><%= recruit.title %><% end %></td>
             <td><%= practice_type(recruit) %></td>
             <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
-            <td><%= recruit.recruit_status_i18n %><% if recruit.match? %><%= room_link(@room, recruit) %><% end %>
+            <td><%= recruit.recruit_status_i18n %><% if recruit.match? %><%= room_link(recruit.room, recruit) %><% end %>
             </td>
             <td><% if recruit.open_status == true %>公開中<% else %>公開停止中<% end %></td>
           </tr>

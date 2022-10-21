@@ -62,7 +62,7 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruits = @user.recruits
     @recruits.each do |recruit|
-    @room = Room.find_by(recruit_id: recruit.id) || Room.new
+    # @room = Room.find_by(recruit_id: recruit.id) || Room.new
     end
   end
 
