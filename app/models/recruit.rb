@@ -20,14 +20,15 @@ class Recruit < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-  def create_notification_like(current_user)
+  def create_notification_like(current_user, like)
     # いいねされてるか調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, 'like', false])
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and action = ? and like_id = ? and checked_status = ?", current_user.id, user_id, id, 'like', like.id, false])
     # いいねされてなければ通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
         recruit_id: id,
         checker_id: user_id,
+        like_id: like.id,
         action: 'like'
       )
       # 自分の投稿へのいいねは通知済とする

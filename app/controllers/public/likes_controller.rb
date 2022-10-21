@@ -7,7 +7,7 @@ class Public::LikesController < ApplicationController
     # Recruitのliked_statusをtrueにする
     like.recruit.update(liked_status: true)
     # いいね通知メソッド追加
-    recruit.create_notification_like(current_user)
+    recruit.create_notification_like(current_user, like)
     redirect_to root_path
   end
 
