@@ -31,9 +31,9 @@
           <td>
           <%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
             <% if notify.notifier.image.attached? %>
-              <%= image_tag notify.notifier.image, size: '30x30', class:"rounded-circle card-img-top" %>
+              <%= image_tag notify.notifier.image, :size => '30x30', class:"rounded-circle" %>
             <% else %>
-              <%= image_tag notify.notifier.genre.genre_image, size: '30x30', class:"rounded-circle card-img-top" %>
+              <%= image_tag notify.notifier.genre.genre_image, :size => '30x30', class:"rounded-circle" %>
             <% end %>
           <% end %>
           </td>
