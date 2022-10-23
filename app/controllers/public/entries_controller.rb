@@ -4,9 +4,9 @@ class Public::EntriesController < ApplicationController
     @entry = Entry.new(entry_params)
     @recruit = Recruit.find(@entry.recruit_id)
     @entry.save
-    # 応募ステータスが応募済になったら、募集ステータスも候補者ありに更新+募集者に応募通知作成
+    # 応募ステータスが応募済になったら、募集者に応募通知作成
     if @entry.entry_status == "entered"
-      @recruit.update(recruit_status: "having_candidates")
+      # @recruit.update(recruit_status: "having_candidates")
       @recruit.create_notification_entry(current_user, @entry)
     end
 
@@ -27,7 +27,12 @@ class Public::EntriesController < ApplicationController
   def index
     @user = current_user
     @entries = @user.entries
-
+    # @entries.each do |entry|
+    #   if entry.recruit.match? && (entry.recruit.date.before? Date.today)
+    #     entry.update(entry_status: "done")
+    #     entry.recruit.update(recruit_status: "done")
+    #   end
+    # end
   end
 
   def update

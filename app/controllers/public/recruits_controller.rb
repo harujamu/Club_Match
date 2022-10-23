@@ -38,19 +38,12 @@ class Public::RecruitsController < ApplicationController
     @user = current_user
     @recruit = Recruit.find(params[:id])
       if @recruit.update(recruit_params)
-        if @recruit.match?
-          @entries = Entry.where(entry_status: "entered", recruit_id: @recruit.id)
+        if @recruit.open_status == false
+          @entries = @recruit.entries.where(entry_status: "entered")
           @entries.each do |entry|
             entry.update(entry_status: "match_rejected")
             @recruit.create_notification_match_rejected(current_user, entry)
           end
-        elsif @recruit.open_status == false
-          # 練習日を超えたら(非公開になったら)、応募を削除する
-          @entries = @recruit.entries.where(entry_status: "entered")
-          @entries.each do |entry|
-            @recruit.create_notification_overdue(current_user, entry)
-          end
-          @entries.destroy_all
         end
         redirect_to recruit_path(@recruit.id)
       else
@@ -61,9 +54,18 @@ class Public::RecruitsController < ApplicationController
   def index
     @user = current_user
     @recruits = @user.recruits
-    @recruits.each do |recruit|
-    # @room = Room.find_by(recruit_id: recruit.id) || Room.new
-    end
+    # @recruits.each do |recruit|
+    # # @room = Room.find_by(recruit_id: recruit.id) || Room.new
+
+    #   if recruit.match? && (recruit.date.before? Date.today)
+    #     recruit.update(open_status: false, recruit_status: "done")
+    #     recruit.entries.update(entry_status: "done")
+    #   elsif (recruit.recruiting? || recruit.having_candidates?) && (recruit.date.before? Date.today)
+    #     recruit.update(open_status: false)
+    #   elsif @user.active_status == false
+    #     recruit.update(open_status: false)
+    #   end
+    # end
   end
 
   private

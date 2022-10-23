@@ -7,6 +7,7 @@ class Notify < ApplicationRecord
   belongs_to :notifier, class_name: 'User', foreign_key: 'notifier_id', optional: true
   belongs_to :checker, class_name: 'User', foreign_key: 'checker_id', optional: true
   
+
   validates :notifier_id, presence: true
   validates :checker_id, presence: true
 end

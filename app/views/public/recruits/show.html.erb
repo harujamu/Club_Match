@@ -7,8 +7,8 @@
 
     <div class="col-md-9 mx-auto">
       <div>
-        <h3 class="border-bottom border-secondary"><%= @recruit.title %>  <span class="h5"><%= like_button(current_user, @recruit) %><%= @recruit.likes.count %></span>　<% if @recruit.match? %>マッチ成立済　<% if @recruit.room.present? %><%= room_link(@recruit.room, @recruit) %><% end %><% elsif @recruit.open_status == false %><span class="text-danger">※公開停止中</span><% end %></h3>
-        <h5 class=" mt-4"><%= @recruit.date.strftime('%Y/%m/%d') %> に @<%= @recruit.site.site_name %> で『<%= practice_type(@recruit) %>』 ができる相手を募集しています</h5>
+        <h3 class="border-bottom border-secondary"><%= @recruit.title %>  <span class="h5"><%= like_button(current_user, @recruit) %><%= @recruit.likes.count %></span>　<% if @recruit.match? %>マッチ成立済 <%= room_link(@recruit.room, @recruit) %><% elsif @recruit.done? %>完了<% elsif @recruit.open_status == false %><span class="text-danger">※公開停止中</span><% end %> </h3>
+        <h5 class=" mt-4"><%= @recruit.date.strftime('%Y/%m/%d') %> に <%= @recruit.site.site_name %> で『<%= practice_type(@recruit) %>』 ができる相手を募集しています</h5>
       <% if @recruit.age_group_i18n != "指定なし" %>
         <p>※この募集対象は、<%= @recruit.age_group_i18n %>に限ります。</p>
       <% end %>

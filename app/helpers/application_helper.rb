@@ -39,9 +39,11 @@ module ApplicationHelper
         tag.i class: "far fa-comments text-dark"
       end
     else
-      # 募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す
-      link_to rooms_path(room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do
-        tag.i class: " far fa-comments text-dark"
+      if recruit.user == current_user
+        # 募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す
+        link_to rooms_path(room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do
+          tag.i class: " far fa-comments text-dark"
+        end
       end
     end
   end
