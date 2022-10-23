@@ -1,11 +1,12 @@
-<p></p>
-
 <div class="container ">
   <div class ="row">
     <div class="col-md-10 mx-auto">
       <h2>退会します。よろしいですか？</h2>
       <h4 class="mt-5">退会すると、会員登録情報やこれまでの募集・応募記録が閲覧できなくなります。</h4>
       <h4>退会する場合は、『退会する』をクリックしてください。</h4>
+      <% if flash.any? %>
+      <h2 class="alert alert-danger mt-5"><%= flash[:alret] %></h2>
+      <% end %>
     </div>
   </div>  
   
