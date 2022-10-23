@@ -24,7 +24,7 @@
       <!--current_user が募集者の時-->
         <p class="d-flex justify-content-end">
           <% if @recruit.recruiting? || @recruit.having_candidates? %><%= link_to '編集する', edit_recruit_path(@recruit.id), class:"btn btn-success mr-2 w-25" %><% end %>
-          <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: 2).any? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group, open_status: false}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
+          <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: "match").any? %><%= link_to '応募受付終了', recruit_path(@recruit, recruit: {recruit_status: "match", user_id: current_user.id, date: @recruit.date, title: @recruit.title, practice_type: @recruit.practice_type, detail: @recruit.detail, age_group: @recruit.age_group, open_status: false}, site_id: @recruit.site_id ), method: :patch, class:"btn btn-info w-25" %><% end %>
         </p>
 
       <% else %>
