@@ -9,8 +9,6 @@ class Public::EntriesController < ApplicationController
       # @recruit.update(recruit_status: "having_candidates")
       @recruit.create_notification_entry(current_user, @entry)
     end
-
-    # recruit_status = recruiting ?
     redirect_to recruit_path(@recruit.id)
   end
 
@@ -18,9 +16,6 @@ class Public::EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @recruit = @entry.recruit
     @entry.destroy
-    if @recruit.entries.nil?
-      @recruit.update(recruit_status: "recruiting")
-    end
     redirect_to root_path
   end
 

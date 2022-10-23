@@ -17,7 +17,7 @@ class Recruit < ApplicationRecord
       recruit.update(open_status: false)
     end
    
-  # 非公開になったら応募中の応募者にマッチ不成立を通知
+    # 非公開になったら応募中の応募者にマッチ不成立を通知
     if recruit.open_status == false
       entries = recruit.entries.where(entry_status: "entered")
       entries.each do |entry|
@@ -25,6 +25,11 @@ class Recruit < ApplicationRecord
         recruit.create_notification_match_rejected(current_user, entry)
       end
     end
+    # 募集記事の応募者がいない時の処理
+    if recruit.entries.nil?
+      recruit.update(recruit_status: "recruiting")
+    end
+
   end
 
 
