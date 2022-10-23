@@ -26,7 +26,7 @@ class Recruit < ApplicationRecord
       end
     end
     # 募集記事の応募者がいない時の処理
-    if recruit.entries.nil?
+    if recruit.entries.empty?
       recruit.update(recruit_status: "recruiting")
     end
 
