@@ -4,10 +4,14 @@ class Entry < ApplicationRecord
   after_find do |entry|
     # 応募ステータスが応募済になったら、募集ステータスも候補者ありに更新
     if entry.entered?
-      entry.recruit.update(recruit_status: "having_candidates")
+      if entry.recruit.recruit_status != "match"
+        entry.recruit.update(recruit_status: "having_candidates")
+      end
     elsif entry.match_rejected?
-      entry.recruit.entries.where(entry_status: "entered").empty? && entry.recruit.entries.where(entry_status: "match").empty?
-      entry.recruit.update(recruit_status: "recruiting")
+      if entry.recruit.recruit_status != "match"
+        entry.recruit.entries.where(entry_status: "entered").empty? && entry.recruit.entries.where(entry_status: "match").empty?
+        entry.recruit.update(recruit_status: "recruiting")
+      end
     end
   end
   
