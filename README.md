@@ -25,7 +25,8 @@
 - 他チームや他クラブとの交流を持ちたいとき
 
 ## 設計書
-
+- テーブル定義書:　https://docs.google.com/spreadsheets/d/1sgVIA1_GgwMM8gipKpdYei9HumpTr8kWNqIoxPhplTQ/edit?usp=sharing
+- ER図・ワイヤーフレーム:  https://drive.google.com/file/d/1bDMrl1IKVd-SGe0kR09MyB14B89-J6v6/view?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -35,7 +36,4 @@
 - IDE：Cloud9
 
 ## 使用素材
-<!--<a href="https://pixabay.com/ja/users/lefox-1550450/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1039299">LeFox</a>による<a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1039299">Pixabay</a>からの画像-->
-<!--<a href="https://pixabay.com/ja/users/zollerkmd-8560753/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3430879">zollerkmd</a>による<a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3430879">Pixabay</a>からの画像-->
-<!--<a href="https://pixabay.com/ja/users/jarmoluk-143740/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=488700">Michal Jarmoluk</a>による<a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=488700">Pixabay</a>からの画像-->
-<!--<a href="https://pixabay.com/ja/users/annros-614174/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1396740">Ann -- please donate</a>による<a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1396740">Pixabay</a>からの画像-->
+- pixabayよりフリー画像使用
