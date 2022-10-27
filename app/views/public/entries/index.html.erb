@@ -16,7 +16,11 @@
           <% @entries.each do |entry| %>
           <tr>
             <td><%= entry.created_at.strftime('%Y/%m/%d') %></td>
+            <% if entry.match_rejected? %>
+            <td><%= entry.recruit.title %></td>
+            <% else %>
             <td><%= link_to recruit_path(entry.recruit.id), class:"text-dark" do %><%= entry.recruit.title %><% end %></td>
+            <% end %>
             <td><%= practice_type(entry.recruit) %></td>
             <td><%= entry.recruit.date.strftime('%Y/%m/%d') %></td>
             <td><%= entry.entry_status_i18n %><% if entry.recruit.room.present? && entry.match? %><%= room_link(entry.recruit.room, entry.recruit) %><% end %></td>
