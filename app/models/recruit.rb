@@ -118,25 +118,6 @@ class Recruit < ApplicationRecord
     end
   end
 
-  # def create_notification_overdue(current_user,entry)
-  #   # ユーザー複数の場合はeachで！！！
-  #   recruit.entries.users.each do |user|
-  #     # 募集が期日切れか調べる
-  #     temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, entry.id, 'overdue', false ])
-  #     # マッチ不成立なら通知レコード作成
-  #     if temp.blank?
-  #       notify = current_user.active_notifications.new(
-  #         recruit_id: id,
-  #         checker_id: entry.user_id,
-  #         entry_id: entry.id,
-  #         action: 'overdue'
-  #       )
-  #       notify.save if notify.valid?
-  #       # temp.destroy
-  #     end
-  #   end
-  # end
-
   def create_notification_message(current_user, message)
     # ユーザー複数の場合はeachで！！！
     # each分の中でreturnは使わない、次に行くならnext

@@ -3,7 +3,7 @@ class Public::HomesController < ApplicationController
   def top
     # ランサックで記述
     @q = Recruit.ransack(params[:q])
-    # 同じジャンルの募集情報のみ表示
+    # 同じジャンルの募集のみ表示
     if user_signed_in?
       recruits = @q.result(distinct: true).where(open_status: true)
       @recruits = recruits.to_a.select {|r| (r.user.genre_id == current_user.genre.id) }

@@ -2,6 +2,10 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+main{
+  min-height: calc(100vh - 176px - 40px);
+}
+
 .site_click{
   display: flex;
   justify-content: space-between;
