@@ -68,6 +68,16 @@ class Public::RecruitsController < ApplicationController
     # end
   end
 
+  def destroy
+    recruit = Recruit.find(params[:id])
+    if current_user == recruit.user
+      
+      recruit.destroy
+      redirect_to my_page_path(current_user.id)
+    else
+   end
+  end
+
   private
 
   def recruit_params

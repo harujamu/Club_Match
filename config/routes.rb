@@ -25,7 +25,8 @@ Rails.application.routes.draw do
   
   # Recruitsコントローラ
   
-  resources :recruits, :except => :destroy do
+  resources :recruits do
+  # , :except => :destroy do
   # Likesコントローラ
     resource :likes, :only => [:create, :destroy]
   end
