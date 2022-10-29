@@ -16,8 +16,13 @@
         <p class=" ml-5 pl-2 my-0">〜</p>
         <p class="mt-0"><%=f.date_field :date_lteq, class:"form-control w-50 border-warning" %></p>
 
-        <p class="border-top mt-4 pt-3 mb-1"> ジャンルを指定</p>
-        <p><%= f.text_field :user_genre_name_cont, class:"form-control w-75 border-warning mb-4", placeholder:"ジャンル名を入力" %></p>
+        <!--<p class="border-top mt-4 pt-3 mb-1"> 都道府県を指定</p>-->
+        <!--<p><%#= f.text_field :site_prefecture_cont, class:"form-control w-75 border-warning mb-4", placeholder:"都道府県名を入力" %></p>-->
+        <!--<p class="border-bottom mb-4"></p>-->
+        
+        <p class="border-top mt-4 pt-3 mb-1"> 対象年齢層を指定</p>
+        <p><%= f.check_box(:age_group_eq_any, {checked: false, multiple: true, include_hidden: false }, current_user.age_group) %> <%= current_user.age_group_i18n %></p>
+        <p><%= f.check_box(:age_group_eq_any, {checked: false, multiple: true, include_hidden: false },1 ) %> 指定なし</p>
         <p class="border-bottom mb-4"></p>
 
         <p><%= f.check_box(:practice_type_eq_any, {checked: false, multiple: true, include_hidden: false },1 ) %>　練習試合</p>

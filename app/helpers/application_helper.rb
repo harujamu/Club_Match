@@ -69,6 +69,5 @@ module ApplicationHelper
       return '合同練習'
     end
   end
-
 end
 

@@ -1,5 +1,5 @@
 class Recruit < ApplicationRecord
-  enum age_group:{ unspecified: 1, junior_school_student: 2, secondary_school_student: 3, high_school_student: 4, college_student: 5, adult: 6 }
+  enum age_group:{ unspecified: 1, elementary_shool_student: 2, secondary_school_student: 3, high_school_student: 4, college_student: 5, adult: 6 }
   enum recruit_status:{ recruiting: 1, having_candidates: 2, match: 3, done: 4 }
   enum practice_type:{ practice_game: 1, joint_practice: 2 }
 

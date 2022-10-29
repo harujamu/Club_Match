@@ -119,7 +119,7 @@ ja:
     recruit:
       age_group:
         unspecified: "指定なし"
-        junior_school_student: "小学生"
+        elementary_shool_student: "小学生"
         secondary_school_student: "中学生"
         high_school_student: "高校生"
         college_student: "大学生"
