@@ -135,5 +135,10 @@ ja:
         practice_game: "練習試合"
         joint_practice: "合同練習"
         
-  # activerecord:
-  #   attributes:
+  activerecord:
+    attributes:
+      recruit:
+        title: "タイトル"
+        date: "練習日"
+        site: "練習場所"
+        

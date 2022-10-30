@@ -9,7 +9,7 @@ class Recruit < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :notifies, dependent: :destroy
   has_one :room
-  
+
   after_find do |recruit|
     # 募集記事の練習日超えた場合の処理
     if recruit.match? && (recruit.date.before? Date.today)
@@ -18,12 +18,12 @@ class Recruit < ApplicationRecord
     elsif (recruit.recruiting? || recruit.having_candidates?) && (recruit.date.before? Date.today)
       recruit.update(open_status: false)
     end
-    
+
     # 退会ユーザーの募集記事を非公開にする
     if recruit.user.active_status == false
       recruit.update(open_status: false)
     end
-   
+
     # 非公開になったら応募中の応募者にマッチ不成立を通知
     if recruit.open_status == false
       entries = recruit.entries.where(entry_status: "entered")
@@ -137,10 +137,10 @@ class Recruit < ApplicationRecord
     end
   end
 
-  
+
   validates :date, presence: true
   validates :title, presence: true
   validates :detail, allow_blank: true, length: { maximum: 300 }
-  validates :site_id, presence: true
+  # validates :site_id, presence: true
 end
 
