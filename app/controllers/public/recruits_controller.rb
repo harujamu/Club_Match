@@ -15,6 +15,8 @@ class Public::RecruitsController < ApplicationController
     if @recruit.save
       redirect_to root_path
     else
+      @genre = Genre.find(@user.genre_id)
+      @sites = @user.sites
       render :new
     end
   end
@@ -47,6 +49,8 @@ class Public::RecruitsController < ApplicationController
         end
         redirect_to recruit_path(@recruit.id)
       else
+        @genre = Genre.find(@user.genre_id)
+        @sites = @user.sites
         render :edit
       end
   end
@@ -54,18 +58,6 @@ class Public::RecruitsController < ApplicationController
   def index
     @user = current_user
     @recruits = @user.recruits
-    # @recruits.each do |recruit|
-    # # @room = Room.find_by(recruit_id: recruit.id) || Room.new
-
-    #   if recruit.match? && (recruit.date.before? Date.today)
-    #     recruit.update(open_status: false, recruit_status: "done")
-    #     recruit.entries.update(entry_status: "done")
-    #   elsif (recruit.recruiting? || recruit.having_candidates?) && (recruit.date.before? Date.today)
-    #     recruit.update(open_status: false)
-    #   elsif @user.active_status == false
-    #     recruit.update(open_status: false)
-    #   end
-    # end
   end
 
   def destroy

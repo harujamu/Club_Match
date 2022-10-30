@@ -3,6 +3,13 @@ class Recruit < ApplicationRecord
   enum recruit_status:{ recruiting: 1, having_candidates: 2, match: 3, done: 4 }
   enum practice_type:{ practice_game: 1, joint_practice: 2 }
 
+  belongs_to :user
+  belongs_to :site
+  has_many :likes, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :notifies, dependent: :destroy
+  has_one :room
+  
   after_find do |recruit|
     # 募集記事の練習日超えた場合の処理
     if recruit.match? && (recruit.date.before? Date.today)
@@ -31,21 +38,6 @@ class Recruit < ApplicationRecord
     end
 
   end
-
-
-
-  belongs_to :user
-  belongs_to :site
-  has_many :likes, dependent: :destroy
-  has_many :entries, dependent: :destroy
-  has_many :notifies, dependent: :destroy
-  has_one :room
-
-  validates :date, presence: true
-  validates :title, presence: true
-  validates :practice_type, presence: true
-  validates :detail, allow_blank: true, length: { maximum: 300 }
-  validates :age_group, presence: true
 
   def liked_by?(user)
     likes.exists?(user_id: user.id)
@@ -145,6 +137,10 @@ class Recruit < ApplicationRecord
     end
   end
 
-
+  
+  validates :date, presence: true
+  validates :title, presence: true
+  validates :detail, allow_blank: true, length: { maximum: 300 }
+  validates :site_id, presence: true
 end
 

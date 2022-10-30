@@ -1,4 +1,5 @@
 class Public::RoomsController < ApplicationController
+  
 
   def create
     # チャットルーム作るのは募集者（user_id）、募集IDはRoom作成時に持たせたID

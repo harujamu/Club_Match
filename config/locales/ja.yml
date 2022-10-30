@@ -134,3 +134,6 @@ ja:
       practice_type:
         practice_game: "練習試合"
         joint_practice: "合同練習"
+        
+  # activerecord:
+  #   attributes:

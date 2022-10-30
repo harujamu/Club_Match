@@ -3,6 +3,16 @@
 
   <div class ="row mt-5">
     <div class ="col-md-10 mx-auto">
+      <% if @recruit.errors.any? %>
+        <div class="error border border-danger pl-5 py-2 mt-0 mb-5 col-md-10">
+          <strong><%= @recruit.errors.count %>件のエラーが発生しました</strong>
+          <ul>
+            <% @recruit.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= form_with model: @recruit, url: recruit_path(@recruit.id), method: :patch do |f| %>
       <table class="table table-borderless">
         <tbody>
