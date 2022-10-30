@@ -22,12 +22,6 @@ class Public::EntriesController < ApplicationController
   def index
     @user = current_user
     @entries = @user.entries
-    # @entries.each do |entry|
-    #   if entry.recruit.match? && (entry.recruit.date.before? Date.today)
-    #     entry.update(entry_status: "done")
-    #     entry.recruit.update(recruit_status: "done")
-    #   end
-    # end
   end
 
   def update

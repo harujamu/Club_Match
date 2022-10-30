@@ -1,7 +1,6 @@
 module ApplicationHelper
 
   # ユーザー画像があるときは画像表示、ないときはジャンルに紐づいた画像を表示する
-
   def profile_image(user, genre, width=100, height=100)
     # width, height で自由にサイズ調整できるようにした（width=100の部分で初期値設定）
     if user.image.attached?
@@ -31,7 +30,6 @@ module ApplicationHelper
   end
 
   # トーク画面の作成・遷移
-
   def room_link(room, recruit)
     # Roomがすでにある場合はチャット画面に遷移
     if room.present?
@@ -69,20 +67,6 @@ module ApplicationHelper
       return '合同練習'
     end
   end
-  
-  # クラブ年齢層と募集年齢層の変換
-  def age_group_number
-    if current_user.age_group == "elementary_shool_student"
-      return 2
-    elsif current_user.age_group == "secondary_school_student"
-      return 3
-    elsif current_user.age_group == "high_school_student"
-      return 4
-    elsif current_user.age_group == "college_student"
-      return 5
-    else
-      return 6
-    end
-  end
+
 end
 

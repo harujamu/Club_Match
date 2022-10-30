@@ -7,17 +7,13 @@ class Public::RoomsController < ApplicationController
 
     #tチャットルームのメンバーは、募集に対する応募者で、応募ステータスがマッチの人のみ
     user_ids = recruit.entries.where(entry_status: "match").pluck(:user_id)
-    # byebug
-    
+
     # 応募者たちのユーザーIDをそれぞれ抽出し、User_Roomにカラム追加していく
     user_ids.each do |user_id|
       @room.user_rooms.build(user_id: user_id)
     end
     # チャットルーム作成者もUser_Roomにカラム追加していく
-    @room.user_rooms.build(user_id: @room.user_id)
-    # room = Room.find_by(user_id: current_user.id, recruit_id: params[:recruit_id] )
-    # if room
-    #   redirect_to room_path(room.id)
+    @room.user_rooms.build(user_id: @room.user.id)
     if @room.save
       redirect_to room_path(@room.id)
     end
@@ -28,7 +24,6 @@ class Public::RoomsController < ApplicationController
     @recruit = Recruit.find(@room.recruit.id)
     @message = Message.new
     @messages = Message.where(room_id: @room.id)
-    # @users = User.where(id: @room.user_rooms.pluck(:user_id))
     @users = @room.users
   end
 

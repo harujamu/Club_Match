@@ -75,7 +75,7 @@ class Public::RecruitsController < ApplicationController
       recruit.destroy
       redirect_to my_page_path(current_user.id)
     else
-   end
+    end
   end
 
   private
