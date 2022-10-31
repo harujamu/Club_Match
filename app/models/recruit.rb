@@ -3,6 +3,8 @@ class Recruit < ApplicationRecord
   enum recruit_status:{ recruiting: 1, having_candidates: 2, match: 3, done: 4 }
   enum practice_type:{ practice_game: 1, joint_practice: 2 }
 
+  scope :opened, -> { where(open_status: true) }
+
   belongs_to :user
   belongs_to :site
   has_many :likes, dependent: :destroy

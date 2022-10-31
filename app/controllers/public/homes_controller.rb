@@ -1,20 +1,14 @@
 class Public::HomesController < ApplicationController
-
+  before_action :recruit_ransack_params, only: :top
+  
   def top
-    # ランサックで記述
-    @q = Recruit.ransack(params[:q])
+    @recruits = @q.result(distinct: true).opened
     # 同じジャンルの募集のみ表示
     if user_signed_in?
-      recruits = @q.result(distinct: true).where(open_status: true)
-      @recruits = recruits.to_a.select {|r| (r.user.genre_id == current_user.genre.id) }
-    else
-      @recruits = @q.result(distinct: true).where(open_status: true)
+      @recruits = @recruits.joins(:user).where("user.genre_id": current_user.genre.id)
+      # ランサックだけではcurrent_userのいいねかどうかの判断ができないので、ランサックで拾ったいいね付き投稿がcurrent_userのものか調べる
+      @recruits = @recruits.joins(:likes).distinct.where("likes.user_id": current_user.id) if params.dig(:q, :liked_status_eq) == "true"
     end
-    # ランサックだけではcurrent_userのいいねかどうかの判断ができないので、ランサックで拾ったいいね付き投稿がcurrent_userのものか調べる
-    if params.dig(:q, :liked_status_eq) == "true"
-      @recruits = @recruits.to_a.select {|r| r.likes.find_by(user_id: current_user) }
-    end
-
   end
 
   private
@@ -26,5 +20,9 @@ class Public::HomesController < ApplicationController
   def like_params
     params.require(:like).permit(:user_id, :recruit_id)
   end
-
+  
+  def recruit_ransack_params
+    # ランサックで記述
+    @q = Recruit.ransack(params[:q])
   end
+end
