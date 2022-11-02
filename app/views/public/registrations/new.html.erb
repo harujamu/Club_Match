@@ -7,44 +7,107 @@
       <table class="table table-borderless">
           <tbody>
             <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :クラブ名 %></td>
-              <td colspan="2"><%= f.text_field :club_name, autofocus: true, autocomplete:"", size:"53" %></td>
-            </tr>
-            <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :代表者氏名 %></td>
-              <td colspan="2"><%= f.text_field :captain_last_name, autofocus: true, placeholder: "代表者姓", size:"25", class:"mr-3" %><%= f.text_field :captain_first_name, autofocus: true, placeholder: "代表者名", size:"25" %></td>
-            </tr>
-            <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :主な活動場所 %></td>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :クラブ名 %>
+              </td>
               <td colspan="2">
-                <%= f.select :prefecture, User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, {include_blanck: t("選択してください")}, class:"mr-1" %>
+                <%= f.text_field :club_name, autofocus: true, autocomplete:"", size:"53" %>
+              </td>
+            </tr>
+            
+            <tr>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :代表者氏名 %>
+              </td>
+              <td colspan="2">
+                <%= f.text_field :captain_last_name, 
+                  autofocus: true, 
+                  placeholder: "代表者姓", 
+                  size:"25", 
+                  class:"mr-3" 
+                %>
+                <%= f.text_field :captain_first_name, 
+                  autofocus: true, 
+                  placeholder: "代表者名", 
+                  size:"25" 
+                %>
+              </td>
+            </tr>
+            
+            <tr>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :主な活動場所 %>
+              </td>
+              <td colspan="2">
+                <%= f.select :prefecture, 
+                  User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, 
+                  {include_blanck: t("選択してください")}, 
+                  class:"mr-1" 
+                %>
                 <%= f.text_field :municipality, placeholder: "市区町村", class:"mr-1" %>
                 <%= f.text_field :address, placeholder: "番地", size:"40" %>
               </td>
             </tr>
+            
             <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :年齢層 %></td>
-              <td><%= f.select :age_group, User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :年齢層 %>
+              </td>
+              <td>
+                <%= f.select :age_group, 
+                  User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, 
+                  {include_blanck: t("選択してください")} 
+                %>
+              </td>
+              <td></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :ジャンル %>
+              </td>
+              <td>
+                <%= f.collection_select :genre_id, 
+                  Genre.all, :id, :name, 
+                  include_blanck:"選択してください"
+                %>
+              </td>
               <td></td>
             </tr>
             <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :ジャンル %></td>
-              <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blanck:"選択してください" %></td>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :メールアドレス %>
+              </td>
+              <td>
+              <%= f.email_field :email, 
+                autofocus: true, 
+                placeholder: "sample@email.com", 
+                size:"30" 
+              %>
+              </td>
               <td></td>
             </tr>
             <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :メールアドレス %></td>
-              <td><%= f.email_field :email, autofocus: true, placeholder: "sample@email.com", size:"30" %></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="btn btn-danger btn-sm mr-3">必須</span><%= f.label :パスワード %>
-                <% if @minimum_password_length %><em>(<%= @minimum_password_length %> 桁以上)</em><% end %>
+              <td>
+                <span class="btn btn-danger btn-sm mr-3">必須</span>
+                <%= f.label :パスワード %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> 桁以上)</em>
+                <% end %>
               </td>
               <td>
                 <%= f.password_field :password, autocomplete: "new-password", size:"30" %>
               </td>
-              <td><%= f.label :（確認用） %><%= f.password_field :password_confirmation, autocomplete: "new-password", size:"30" %></td>
+              <td>
+                <%= f.label :（確認用） %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", size:"30" %>
+              </td>
             </tr>
             <tr>
               <td></td>

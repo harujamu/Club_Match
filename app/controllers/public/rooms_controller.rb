@@ -1,5 +1,5 @@
 class Public::RoomsController < ApplicationController
-  
+  before_action :room_member_only, on: :show
 
   def create
     # チャットルーム作るのは募集者（user_id）、募集IDはRoom作成時に持たせたID
@@ -29,6 +29,13 @@ class Public::RoomsController < ApplicationController
   end
 
   private
+  
+  def room_member_only
+    room = Room.find_by(id: params[:id])
+    if !room || !room.user_rooms.find_by(user_id: current_user.id)
+      redirect_to root_path
+    end
+  end
 
   def recruit_params
     params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)

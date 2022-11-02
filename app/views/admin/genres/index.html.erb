@@ -2,11 +2,13 @@
   <div class ="row">
     <div class ="col-md-10">
       <h3 class="mb-3">ジャンル登録</h3>
+      
       <%= form_with model: @genre,url: admin_genres_path, method: :post do |f| %>
-      <%= f.text_field :name, size:"50", placeholder:"ジャンル名", class:"mr-2" %> 
-      <%= f.file_field :genre_image %> <!--, accept: "image/*"-->
-      <%= f.submit "登録", class:"btn btn-success" %>
+        <%= f.text_field :name, size:"50", placeholder:"ジャンル名", class:"mr-2" %> 
+        <%= f.file_field :genre_image %>
+        <%= f.submit "登録", class:"btn btn-success" %>
       <% end %>
+      
     </div>
   </div>
   
@@ -22,19 +24,25 @@
           <th></th>
         </tr>
         </thead>
+        
         <tbody>
-          <% @genres.each do |genre| %>
+        <% @genres.each do |genre| %>
           <tr>
             <td><%= genre.id %></td>
-            <td class="genre-preview"><%= genre.name %><%= image_tag genre.genre_image, size: "50x50", class:"rounded-circle" %></td>
-            <td><%= link_to '編集',edit_admin_genre_path(genre.id), class:"btn btn-success" %></td>
+            <td class="genre-preview">
+              <%= genre.name %>
+              <%= image_tag genre.genre_image, 
+              size: "50x50", class:"rounded-circle" %>
+            </td>
+            <td>
+              <%= link_to '編集',edit_admin_genre_path(genre.id), 
+              class:"btn btn-success" %>
+            </td>
           </tr>
         <% end %>
         </tbody>
-        
       </table>
       
     </div>
-    
   </div>
 </div>

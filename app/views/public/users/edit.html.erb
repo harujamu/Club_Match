@@ -9,43 +9,87 @@
           <tbody>
             <tr>
               <td><%= f.label :クラブ名 %></td>
-              <td colspan="2"><%= f.text_field :club_name, autofocus: true, autocomplete:"", size:"53" %></td>
-              </tr>
+              <td colspan="2">
+                <%= f.text_field :club_name, autofocus: true, autocomplete:"", size:"53" %>
+              </td>
+            </tr>
+              
             <tr>
               <td>プロフィール画像</td>
-              <td colspan="2"><%= f.file_field :image, accept: "image/*" %></td>
+              <td colspan="2">
+                <%= f.file_field :image, accept: "image/*" %>
+              </td>
             </tr>
+            
             <tr>
               <td><%= f.label :代表者氏名 %></td>
-              <td colspan="2"><%= f.text_field :captain_last_name, autofocus: true, placeholder: "代表者姓", size:"25", class:"mr-3" %><%= f.text_field :captain_first_name, autofocus: true, placeholder: "代表者名", size:"25" %></td>
+              <td colspan="2">
+                <%= f.text_field :captain_last_name, 
+                  autofocus: true, 
+                  placeholder: "代表者姓", 
+                  size:"25", 
+                  class:"mr-3" 
+                %>
+                <%= f.text_field :captain_first_name, 
+                  autofocus: true, 
+                  placeholder: "代表者名", 
+                  size:"25" 
+                %>
+              </td>
             </tr>
+            
             <tr>
               <td><%= f.label :主な活動場所 %></td>
               <td colspan="2">
-                <%= f.select :prefecture, User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, {include_blanck: t("選択してください")}, class:"mr-1" %>
+                <%= f.select :prefecture, 
+                  User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]}, 
+                  {include_blanck: t("選択してください")}, 
+                  class:"mr-1" 
+                %>
                 <%= f.text_field :municipality, placeholder: "市区町村", class:"mr-1" %>
                 <%= f.text_field :address, placeholder: "番地", size:"40" %>
               </td>
             </tr>
+            
             <tr>
               <td><%= f.label :年齢層 %></td>
-              <td><%= f.select :age_group, User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, {include_blanck: t("選択してください")} %></td>
+              <td>
+                <%= f.select :age_group, 
+                  User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]}, 
+                  {include_blanck: t("選択してください")} 
+                %>
+              </td>
               <td></td>
             </tr>
+            
             <tr>
               <td><%= f.label :ジャンル %></td>
-              <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blanck:"選択してください" %></td>
+              <td>
+                <%= f.collection_select :genre_id, 
+                  Genre.all, :id, :name, 
+                  include_blanck:"選択してください" 
+                %>
+                </td>
               <td></td>
             </tr>
+            
             <tr>
               <td><%= f.label :メールアドレス %></td>
-              <td><%= f.email_field :email, autofocus: true, placeholder: "sample@email.com", size:"30" %></td>
+              <td>
+                <%= f.email_field :email, 
+                  autofocus: true, 
+                  placeholder: "sample@email.com", 
+                  size:"30" 
+                %>
+                </td>
               <td></td>
             </tr>
+            
             <tr rowspan="3">
               <td><%= f.label :クラブ紹介 %></td>
               <td colspan="2"><%= f.text_area:introduction, size:"74x5" %></td>
             </tr>
+            
             <tr>
               <td></td>
               <td></td>

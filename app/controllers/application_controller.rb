@@ -56,4 +56,8 @@ protected
     end
   end
 
+  def admin_only
+    redirect_to root_path unless admin_signed_in?
+  end
+
 end

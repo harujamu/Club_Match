@@ -6,21 +6,40 @@
         <tbody>
           <tr>
             <td><%= f.label :email %></td>
-            <td colspan="2"><%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "sample-user@com", size:"40" %></td>
+            <td colspan="2">
+              <%= f.text_field :email, 
+                autofocus: true, 
+                autocomplete: "email", 
+                placeholder: "sample-user@com", 
+                size:"40" 
+              %>
+              </td>
           </tr>
           <tr>
             <td><%= f.label :password %></td>
-            <td colspan="2"><%= f.password_field :password, autocomplete: "current-password", placeholder: "password", size:"40" %></td>
+            <td colspan="2">
+              <%= f.password_field :password, 
+                autocomplete: "current-password", 
+                placeholder: "password", 
+                size:"40" 
+              %>
+            </td>
           </tr>
           <tr>
             <td></td>
             <td><%= f.submit "ログイン", class:"btn btn-primary w-100" %></td>
-            <td><%= link_to " ゲストログイン", guest_sign_in_path, method: :post, class:"btn btn-info w-100" %></td>
+            <td>
+              <%= link_to " ゲストログイン", 
+                guest_sign_in_path, 
+                method: :post, 
+                class:"btn btn-info w-100" 
+              %>
+            </td>
           </tr>
           <tr>
             <td></td>
             <td colspan="2">
-            <%= link_to '新しくアカウントを作成する', new_user_registration_path %>
+              <%= link_to '新しくアカウントを作成する', new_user_registration_path %>
             </td>
           </tr>
         </tbody>

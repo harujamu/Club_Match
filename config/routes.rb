@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   
   resources :recruits do
   # , :except => :destroy do
+  patch "update_status" => "recruits#update_status", as: "update_status"
   # Likesコントローラ
     resource :likes, :only => [:create, :destroy]
   end

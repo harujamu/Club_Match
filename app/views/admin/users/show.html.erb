@@ -1,11 +1,14 @@
 <div class="container">
   <h3>ユーザー情報照会</h3>
   <div class="row mt-5">
+    
     <div class ="col-md-4 mx-auto">
     <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "250 X 250", class:"rounded-circle card-img-top" %>
+      <%= image_tag @user.image, size: "250 X 250", 
+      class:"rounded-circle card-img-top" %>
     <% else %>
-      <%= image_tag @user.genre.genre_image, size: "250 X 250", class:"rounded-circle card-img-top" %>
+      <%= image_tag @user.genre.genre_image, size: "250 X 250", 
+      class:"rounded-circle card-img-top" %>
     <% end %>
     </div>
     
@@ -15,27 +18,31 @@
           <td>クラブ名</td>
           <td><%= @user.club_name %></td>
         </tr>
+        
         <tr>
           <td>代表者氏名</td>
           <td><%= @user.captain_name %></td>
         </tr>
+        
         <tr>
           <td>主な活動場所</td>
           <td><%= @user.user_address %></td>
         </tr>
+        
         <tr>
           <td>e-mail</td>
           <td><%= @user.email %></td>
         </tr>
+        
         <tr>
           <td>活動ステータス</td>
-          <td><% if @user.active_status == true %>活動中<% else %>退会済<% end %><%= link_to '編集', edit_admin_user_path(@user), class:"btn btn-success ml-5" %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
+          <td>
+            <%= active_status(@user) %>
+            <%= link_to '編集', edit_admin_user_path(@user), class:"btn btn-success ml-5" %>
+          </td>
         </tr>
       </table>
     </div>
+    
   </div>
 </div>

@@ -1,5 +1,6 @@
 class Admin::GenresController < ApplicationController
-  
+before_action :admin_only
+
   def create
     @genre = Genre.new(genre_params)
     @genre.save

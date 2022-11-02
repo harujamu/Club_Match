@@ -17,12 +17,10 @@ module ApplicationHelper
     else
       if user == current_user
         link_to my_page_path(user.id), class:"text-dark" do
-          # tag.i class: "far fa-smile fa-#{n}x"
           image_tag genre.genre_image, size: "#{width}x#{height}", class:"rounded-circle"
         end
       else
         link_to show_user_path(user.id), class:"text-dark" do
-          # tag.i class: "far fa-smile fa-#{n}x"
           image_tag genre.genre_image, size: "#{width}x#{height}", class:"rounded-circle"
         end
       end
@@ -49,12 +47,12 @@ module ApplicationHelper
   # いいねのON／OFF
   def like_button(current_user, recruit)
     if recruit.liked_by?(current_user)
-      link_to recruit_likes_path(recruit),class:"text-dark", method: :delete do
-        tag.i class: "fas fa-heart", style: "color: FF6388;"
+      link_to recruit_likes_path(recruit), method: :delete do
+        tag.i class: "fas fa-heart like_icon"
       end
     else
-      link_to recruit_likes_path(recruit),class:"text-dark", method: :post do
-        tag.i class: "far fa-heart", style: "color: FF6388;"
+      link_to recruit_likes_path(recruit), method: :post do
+        tag.i class: "far fa-heart like_icon"
       end
     end
   end
@@ -62,9 +60,27 @@ module ApplicationHelper
   # 練習形式の表示
   def practice_type(recruit)
     if recruit.practice_game?
-      return '練習試合'
+      "練習試合"
     elsif recruit.joint_practice? 
-      return '合同練習'
+      "合同練習"
+    end
+  end
+
+  # 公開非公開の表示
+  def open_status(recruit)
+    if recruit.open_status == true
+      "公開中" 
+    else
+      "公開停止中"
+    end
+  end
+  
+  # ユーザーの活動ステータス
+  def active_status(user)
+    if user.active_status == true
+      "活動中"
+    else
+      "退会済"
     end
   end
 

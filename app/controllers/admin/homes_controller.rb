@@ -1,5 +1,6 @@
 class Admin::HomesController < ApplicationController
-  
+before_action :admin_only
+
   def top
     @users = User.all
   end

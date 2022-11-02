@@ -4,14 +4,36 @@
       <div>
       <%= profile_image(@user,@user.genre,130,130) %>
       <p class="mt-2"><%= @user.club_name %></p>
-      <p><%= link_to '編集', edit_user_path(@user.id),class:"btn btn-success btn-sm mr-2" %><%= link_to '退会', user_unsubscribe_confirm_path(@user), class:"btn btn-danger btn-sm" %></p>
-      <p><%= link_to notifies_path, class:"text-dark" do %><i class="fas fa-bell" style="color: orange;"></i> 通知<%= @notifies.count %>件<% end %></p>
+      <p>
+        <%= link_to '編集', 
+          edit_user_path(@user.id),
+          class:"btn btn-success btn-sm mr-2" 
+        %>
+        <%= link_to '退会', 
+          user_unsubscribe_confirm_path(@user), 
+          class:"btn btn-danger btn-sm"
+        %>
+      </p>
+      <p>
+        <%= link_to notifies_path, class:"text-dark" do %>
+          <i class="fas fa-bell bell-icon"></i> 
+          通知<%= @notifies.count %>件<% end %>
+        </p>
       </div>
       <div class="mt-2">
         <ul class="list-unstyled">
-          <li><i class="fas fa-map-pin"></i><%= link_to '　 練習場所一覧', sites_path, class:"text-dark" %></li>
-          <li><i class="fas fa-thumbtack"></i>　<%= link_to '  応募履歴', entries_path, class:"text-dark" %> </li>
-          <li><i class="fas fa-bullhorn"></i><%= link_to '　募集履歴', recruits_path, class:"text-dark" %></li>
+          <li>
+            <i class="fas fa-map-pin"></i>
+            <%= link_to '　 練習場所一覧', sites_path, class:"text-dark" %>
+          </li>
+          <li>
+            <i class="fas fa-thumbtack"></i>　
+            <%= link_to '  応募履歴', entries_path, class:"text-dark" %> 
+          </li>
+          <li>
+            <i class="fas fa-bullhorn"></i>
+            <%= link_to '　募集履歴', recruits_path, class:"text-dark" %>
+          </li>
         </ul>
       </div>
 
@@ -22,18 +44,22 @@
           <td>代表者氏名</td>
           <td><%= @user.captain_last_name %><%= @user.captain_first_name %></td>
         </tr>
+        
         <tr>
           <td>ジャンル</td>
           <td><%= @genre.name %></td>
         </tr>
+        
         <tr>
           <td>チームの年齢層</td>
           <td><%= @user.age_group_i18n %></td>
         </tr>
+        
         <tr>
           <td>主な活動場所</td>
           <td><%= @user.user_address %></td>
         </tr>
+        
         <tr>
           <td>クラブ紹介</td>
           <td ><%= @user.introduction %></td>

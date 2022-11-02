@@ -3,19 +3,41 @@
   <div class="row mt-2">
     <div class="col-md-12 mx-auto">
       <h3 class="border-bottom"><%= @room.recruit.title %></h3>
-      <h5>練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>　会場： <%= @room.recruit.site.site_name %>　練習形式： <% practice_type(@room.recruit) %>　参加メンバー： <% @users.each do |user| %><%= profile_image(user,user.genre,30,30) %><% end %></h5>
+      <h5>
+        練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>　
+        会場： <%= @room.recruit.site.site_name %>　
+        練習形式： <% practice_type(@room.recruit) %>　
+        参加メンバー： <% @users.each do |user| %>
+          <%= profile_image(user,user.genre,30,30) %> 
+        <% end %>
+      </h5>
     </div>
   </div>
+  
   <div class="row">
     <!--送信フォームが高い位置にきすぎないようにstyeで最低限の高さ指定-->
-    <div class="my-5 col-md-12 mx-auto" style="min-height: 280px;">
+    <div class="my-5 col-md-12 mx-auto chat-room-form">
       <% @messages.each do |message| %>
         <% if message.user != current_user %>
-        <p class="d-flex justify-content-start mb-0 pb-0 mt-2"><%= link_to show_user_path(message.user), class:"text-dark" do %><%= profile_image(message.user,message.user.genre,30,30) %><% end %>　<span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span></p>
-        <small class="m-0 p-0"><%= message.user.club_name %></small>
+          <p class="d-flex justify-content-start mb-0 pb-0 mt-2">
+            <%= link_to show_user_path(message.user), class:"text-dark" do %>
+              <%= profile_image(message.user,message.user.genre,30,30) %>
+            <% end %>　
+            <span class="border rounded-pill py-1 px-2 bg-light">
+              <%= message.message %>
+            </span>
+          </p>
+          <small class="m-0 p-0"><%= message.user.club_name %></small>
         <% else %>
-        <p class="d-flex justify-content-end mb-0 pb-0 mt-2"><span class="border rounded-pill py-1 px-2 bg-light"><%= message.message %></span>　<%= profile_image(message.user,message.user.genre,30,30) %></p>
-        <small class="m-0 p-0 d-flex justify-content-end"><%= message.user.club_name %></small>
+          <p class="d-flex justify-content-end mb-0 pb-0 mt-2">
+            <span class="border rounded-pill py-1 px-2 bg-light">
+              <%= message.message %>
+            </span>　
+            <%= profile_image(message.user,message.user.genre,30,30) %>
+          </p>
+          <small class="m-0 p-0 d-flex justify-content-end">
+            <%= message.user.club_name %>
+          </small>
         <% end %>
       <% end %>
     </div>
@@ -27,7 +49,10 @@
       <table class="table table-borderless">
         <%= f.hidden_field :room_id, :value => @room.id %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
-        <tr><%= f.text_area :message, class:"border-secondary", size:"99" %><%= f.submit '送信', class:"btn btn-primary ml-3 mb-5 p-3" %></tr>
+        <tr>
+          <%= f.text_area :message, class:"border-secondary", size:"99" %>
+          <%= f.submit '送信', class:"btn btn-primary ml-3 mb-5 p-3" %>
+        </tr>
       </table>
       <% end %>
     </div>

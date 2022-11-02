@@ -22,16 +22,32 @@
         <%#= recruit.inspect %>
         <div class="card col-md-3 mt-0 border border-0 mx-0">
           <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
-          <% if recruit.user.image.attached? %><%= image_tag recruit.user.image, size: "150x150", class:"rounded-circle" %><% else %><%= image_tag recruit.user.genre.genre_image, size: "150x150", class:"rounded-circle" %><% end %>
+            <% if recruit.user.image.attached? %>
+              <%= image_tag recruit.user.image,  
+                size: "150x150", 
+                class:"rounded-circle" 
+              %>
+            <% else %>
+              <%= image_tag recruit.user.genre.genre_image, 
+                size: "150x150", 
+                class:"rounded-circle" 
+              %>
+            <% end %>
           <% end %>
           <div class="row">
             <p class="card-title"><%= recruit.title.truncate(8) %></p>
-            <span><% if user_signed_in? %><%= like_button(current_user,recruit) %><% else %><i class="fas fa-heart", style="color: FF6388;"></i><% end %><%= recruit.likes.count %></span>
+            <span>
+              <% if user_signed_in? %>
+                <%= like_button(current_user,recruit) %>
+              <% else %>
+                <i class="fas fa-heart like_icon"></i>
+              <% end %>
+              <%= recruit.likes.count %>
+            </span>
           </div>
         </div>
       <% end %>
       </div>
     </div>
   </div>
-<p><%#= paginate @recruits %></p>
 </div>

@@ -13,7 +13,12 @@
   <div class ="row mt-5">
     <div class="col-md-4  mx-auto">
       <%= link_to '退会を辞める', my_page_path, class:"btn btn-primary btn-lg" %>
-      <%= link_to '退会する', user_unsubscribe_path(@user, user: {active_status: false}), method: :patch, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger ml-5 btn-lg" %>
+      <%= link_to '退会する', 
+        user_unsubscribe_path(@user, user: {active_status: false}), 
+        method: :patch, 
+        "data-confirm" => "本当に退会しますか？", 
+        class:"btn btn-danger ml-5 btn-lg" 
+      %>
     </div>
   </div>
   

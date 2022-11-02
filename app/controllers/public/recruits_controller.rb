@@ -1,4 +1,6 @@
 class Public::RecruitsController < ApplicationController
+  before_action:recruit_change_limit, {only: [:edit, :update]}
+  before_action:recruit_show_limit, {only: [:show]}
 
   def new
     @user = current_user
@@ -54,6 +56,25 @@ class Public::RecruitsController < ApplicationController
         render :edit
       end
   end
+  
+  def update_status
+    @user = current_user
+    @recruit = Recruit.find(params[:recruit_id])
+      if @recruit.update(recruit_status_params)
+        if @recruit.open_status == false
+          @entries = @recruit.entries.where(entry_status: "entered")
+          @entries.each do |entry|
+            entry.update(entry_status: "match_rejected")
+            @recruit.create_notification_match_rejected(current_user, entry)
+          end
+        end
+        redirect_to recruit_path(@recruit.id)
+      else
+        @genre = Genre.find(@user.genre_id)
+        @sites = @user.sites
+        render :edit
+      end
+  end
 
   def index
     @user = current_user
@@ -63,7 +84,7 @@ class Public::RecruitsController < ApplicationController
   def destroy
     recruit = Recruit.find(params[:id])
     if current_user == recruit.user
-      
+
       recruit.destroy
       redirect_to my_page_path(current_user.id)
     else
@@ -72,8 +93,30 @@ class Public::RecruitsController < ApplicationController
 
   private
 
+  def recruit_change_limit
+    recruit = Recruit.find_by(id: params[:id])
+    if !recruit || !recruit.find_by(user_id: current_user.id)
+      redirect_to root_path
+    end
+  end
+
+  def recruit_show_limit
+    recruit = Recruit.find_by(id: params[:id])
+    # binding.pry
+    if !recruit || (
+      recruit.user_id != current_user.id &&
+      !recruit.entries.find_by(user_id: current_user.id, entry_status: [:match, :done]) &&
+      !recruit.open_status)
+      redirect_to root_path
+    end
+  end
+
   def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
+    params.require(:recruit).permit(:site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
+  end
+  
+  def recruit_status_params
+    params.require(:recruit).permit(:recruit_status, :open_status)
   end
 
   def entry_params
@@ -88,7 +131,7 @@ class Public::RecruitsController < ApplicationController
     params.require(:site).permit(:prefecture, :municipality, :address, :user_id)
   end
 
-   def room_params
+  def room_params
     params.require(:room).permit(:user_id, :recruit_id, :user_ids)
   end
 
