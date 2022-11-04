@@ -1,22 +1,30 @@
-<%= search_form_for q, url: root_path do |f| %>
-  <p class="mb-0"><%=f.date_field :date_gteq, class:"form-control w-50 border-warning" %></p>
-  <p class=" ml-5 pl-2 my-0">〜</p>
-  <p class="mt-0"><%=f.date_field :date_lteq, class:"form-control w-50 border-warning" %></p>
-
-  <p class="border-top mt-4 pt-3 mb-1"> 都道府県を指定</p>
-  <%# {k: v, k2: v2} %>
-  <p><%= f.select :site_prefecture_eq, Site.prefectures.map { |k, v| [Site.prefectures_i18n[k], v]}, {include_blank: "選択してください"}, class:"form-control w-75 border-warning" %></p>
-  
-  <% if user_signed_in? %>
-    <p class="border-top mt-4 pt-3 mb-2"> 対象年齢層を指定</p>
-    <p><%= f.check_box(:age_group_eq_any, {checked: false, multiple: true, include_hidden: false }, Recruit.age_groups[current_user.age_group]) %> <%= current_user.age_group_i18n %></p>
-    <p><%= f.check_box(:age_group_eq_any, {checked: false, multiple: true, include_hidden: false }, Recruit.age_groups["unspecified"]) %> 指定なし</p>
-    <p class="border-bottom mb-4"></p>
+<div class="mt-5">
+  <%= search_form_for q, url: root_path do |f| %>
+    <p><%= f.hidden_field :date_eq , :value => Date.today %></p>
+    <p><%= f.submit '今日', class:"btn bg-warning btn-sm bg-gradient" %></p>
   <% end %>
-
-  <p><%= f.check_box(:practice_type_eq_any, {checked: false, multiple: true, include_hidden: false },1 ) %>　練習試合</p>
-  <p><%= f.check_box(:practice_type_eq_any, {checked: false, multiple: true, include_hidden: false },2) %>　合同練習</p>
-  <p><%= f.check_box(:liked_status_eq, {checked: false},true,false) %>　お気に入り</p>
+</div>
+<div>
+  <%= search_form_for q, url: root_path do |f| %>
+    <p class="mb-0"><%=f.date_field :date_gteq, class:"form-control w-50 border-warning" %></p>
+    <p class=" ml-5 pl-2 my-0">〜</p>
+    <p class="mt-0"><%=f.date_field :date_lteq, class:"form-control w-50 border-warning" %></p>
   
-  <p><%= f.submit 'この条件で検索', class:"btn bg-warning btn-sm bg-gradient p-2" %></p>
-<% end %>
+    <p class="border-top mt-4 pt-3 mb-1"> 都道府県を指定</p>
+    <%# {k: v, k2: v2} %>
+    <p><%= f.select :site_prefecture_eq, Site.prefectures.map { |k, v| [Site.prefectures_i18n[k], v]}, {include_blank: "選択してください"}, class:"form-control w-75 border-warning" %></p>
+    
+    <% if user_signed_in? %>
+      <p class="border-top mt-4 pt-3 mb-2"> 対象年齢層を指定</p>
+      <p><%= f.check_box(:age_group_eq_any, {checked: false, multiple: true, include_hidden: false }, Recruit.age_groups[current_user.age_group]) %> <%= current_user.age_group_i18n %></p>
+      <p><%= f.check_box(:age_group_eq_any, {checked: false, multiple: true, include_hidden: false }, Recruit.age_groups["unspecified"]) %> 指定なし</p>
+      <p class="border-bottom mb-4"></p>
+    <% end %>
+  
+    <p><%= f.check_box(:practice_type_eq_any, {checked: false, multiple: true, include_hidden: false },1 ) %>　練習試合</p>
+    <p><%= f.check_box(:practice_type_eq_any, {checked: false, multiple: true, include_hidden: false },2) %>　合同練習</p>
+    <p><%= f.check_box(:liked_status_eq, {checked: false},true,false) %>　お気に入り</p>
+    
+    <p><%= f.submit 'この条件で検索', class:"btn bg-warning btn-sm bg-gradient p-2" %></p>
+  <% end %>
+</div>

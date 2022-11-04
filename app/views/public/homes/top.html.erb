@@ -2,16 +2,7 @@
   <div class ="row">
     <div class ="col-md-3 border-right">
       <h2>募集<%= @recruits.count %>件</h2>
-      <div class="mt-5">
-        <%= search_form_for @q, url: root_path do |f| %>
-          <p><%= f.hidden_field :date_eq , :value => Date.today %></p>
-          <p><%= f.submit '今日', class:"btn bg-warning btn-sm bg-gradient" %></p>
-        <% end %>
-      </div>
-
-      <div>
         <%= render 'public/shared/ransack_form', q: @q %>
-      </div>
     </div>
 
     <div class ="col-md-8 mx-auto px-0">
