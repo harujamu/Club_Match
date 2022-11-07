@@ -2,44 +2,7 @@
   <h3>応募履歴</h3>
   <div class ="row">
     <div class ="col-md-10 mt-3">
-      <table class ="table table-bordered">
-        <thead>
-          <tr>
-            <th>応募日</th>
-            <th>募集タイトル</th>
-            <th>練習形式</th>
-            <th>練習日</th>
-            <th>応募ステータス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @entries.each do |entry| %>
-          <tr>
-            <td><%= entry.created_at.strftime('%Y/%m/%d') %></td>
-            
-            <% if entry.match_rejected? %>
-            <td><%= entry.recruit.title %><%#= entry.inspect %></td>
-            <% else %>
-            <td>
-              <%= link_to recruit_path(entry.recruit.id), class:"text-dark" do %>
-                <%= entry.recruit.title %>
-              <% end %>
-              <%#= entry.inspect %>
-            </td>
-            <% end %>
-            
-            <td><%= practice_type(entry.recruit) %></td>
-            <td><%= entry.recruit.date.strftime('%Y/%m/%d') %></td>
-            <td>
-              <%= entry.entry_status_i18n %>
-              <% if entry.recruit.room.present? && entry.match? %>
-                <%= room_link(entry.recruit.room, entry.recruit) %>
-              <% end %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'public/shared/recruit_or_entry_index', entries: @entries %>
     </div>
   </div>
 </div>

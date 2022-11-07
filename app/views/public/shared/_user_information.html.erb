@@ -1,0 +1,57 @@
+<table class="table">
+      <% if current_page?(admin_user_path(user.id)) %>
+        <tr>
+          <td>クラブ名</td>
+          <td><%= user.club_name %></td>
+        </tr>
+      <% end %>
+        <tr>
+          <td>代表者氏名</td>
+          <td><%= user.captain_name %></td>
+        </tr>
+      
+      <% if !current_page?(admin_user_path(user.id)) %>
+        <tr>
+          <td>ジャンル</td>
+          <td><%= genre.name %></td>
+        </tr>
+        
+        <tr>
+          <td>チームの年齢層</td>
+          <td><%= user.age_group_i18n %></td>
+        </tr>
+      <% end %>
+        
+      <% if current_page?(show_user_path(user.id)) %>  
+        <tr>
+          <td>主な活動地域</td>
+          <td><%= user.prefecture_i18n %></td>
+        </tr>
+      <% else %>  
+        <tr>
+          <td>主な活動場所</td>
+          <td><%= user.user_address %></td>
+        </tr>
+      <% end %>
+      
+      <% if current_page?(admin_user_path(user.id)) %>
+        <tr>
+          <td>e-mail</td>
+          <td><%= user.email %></td>
+        </tr>
+      
+        <tr>
+          <td>活動ステータス</td>
+          <td>
+            <%= active_status(user) %>
+            <%= link_to '編集', edit_admin_user_path(user.id), class:"btn btn-success ml-5" %>
+          </td>
+        </tr>
+      <% else %>
+        <tr>
+          <td>クラブ紹介</td>
+          <td ><%= user.introduction %></td>
+        </tr>
+      <% end %>
+        
+      </table>

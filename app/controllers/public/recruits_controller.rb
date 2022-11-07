@@ -95,7 +95,7 @@ class Public::RecruitsController < ApplicationController
 
   def recruit_change_limit
     recruit = Recruit.find_by(id: params[:id])
-    if !recruit || !recruit.find_by(user_id: current_user.id)
+    if !recruit || !(recruit.user_id == current_user.id)
       redirect_to root_path
     end
   end
@@ -103,11 +103,11 @@ class Public::RecruitsController < ApplicationController
   def recruit_show_limit
     recruit = Recruit.find_by(id: params[:id])
     # binding.pry
-    if !recruit || (
-      recruit.user_id != current_user.id &&
-      !recruit.entries.find_by(user_id: current_user.id, entry_status: [:match, :done]) &&
-      !recruit.open_status)
-      redirect_to root_path
+    if !recruit ||
+      recruit.user_id != current_user.id ||
+      !recruit.entries.find_by(user_id: current_user.id, entry_status: [:match, :done]) ||
+      !recruit.open_status
+        redirect_to root_path
     end
   end
 
