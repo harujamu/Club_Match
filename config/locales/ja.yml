@@ -142,3 +142,12 @@ ja:
         date: "練習日"
         site: "練習場所"
         
+      user:
+        captain_first_name: "代表者姓"
+        captain_last_name: "代表者名"
+        email: "メールアドレス"
+        encrypted_password: "パスワード"
+        club_name: "クラブ名"
+        municipality: "市区町村"
+        address: "番地"
+        

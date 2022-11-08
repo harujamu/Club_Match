@@ -3,6 +3,7 @@ class Public::RecruitsController < ApplicationController
   before_action:recruit_show_limit, {only: [:show]}
 
   def new
+    # binding.pry
     @user = current_user
     @recruit = Recruit.new
     @recruit.user_id = @user.id
@@ -17,9 +18,11 @@ class Public::RecruitsController < ApplicationController
     if @recruit.save
       redirect_to root_path
     else
+      # binding.pry
       @genre = Genre.find(@user.genre_id)
       @sites = @user.sites
-      render :new
+      render action: :new
+      # redirect_to new_recruit_path
     end
   end
 
@@ -56,7 +59,7 @@ class Public::RecruitsController < ApplicationController
         render :edit
       end
   end
-  
+
   def update_status
     @user = current_user
     @recruit = Recruit.find(params[:recruit_id])
@@ -115,7 +118,7 @@ class Public::RecruitsController < ApplicationController
   def recruit_params
     params.require(:recruit).permit(:site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
   end
-  
+
   def recruit_status_params
     params.require(:recruit).permit(:recruit_status, :open_status)
   end
