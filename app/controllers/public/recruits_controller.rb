@@ -102,12 +102,13 @@ class Public::RecruitsController < ApplicationController
 
   def recruit_show_limit
     recruit = Recruit.find_by(id: params[:id])
-    # binding.pry
-    if !recruit ||
-      recruit.user_id != current_user.id ||
-      !recruit.entries.find_by(user_id: current_user.id, entry_status: [:match, :done]) ||
-      !recruit.open_status
-        redirect_to root_path
+    # 募集が存在しない、募集作成者でない　または　参加者でない人は非公開記事を見れない
+    if !recruit
+      redirect_to root_path
+    elsif recruit.open_status == false
+      unless recruit.entries.find_by(user_id: current_user.id, entry_status: [:match, :done]) || recruit.user_id == current_user.id
+          redirect_to root_path
+      end
     end
   end
 
