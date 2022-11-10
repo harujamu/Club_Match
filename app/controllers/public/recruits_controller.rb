@@ -3,24 +3,23 @@ class Public::RecruitsController < ApplicationController
   before_action:recruit_show_limit, {only: [:show]}
 
   def new
-    # binding.pry
-    @user = current_user
+    user = current_user
     @recruit = Recruit.new
-    @recruit.user_id = @user.id
-    @genre = Genre.find(@user.genre_id)
+    @recruit.user_id = user.id
+    @genre = Genre.find(user.genre_id)
     @sites = @user.sites
   end
 
   def create
     @recruit = Recruit.new(recruit_params)
-    @user = current_user
-    @recruit.user_id = @user.id
+    user = current_user
+    @recruit.user_id = user.id
     if @recruit.save
       redirect_to root_path
     else
       # binding.pry
-      @genre = Genre.find(@user.genre_id)
-      @sites = @user.sites
+      @genre = Genre.find(user.genre_id)
+      @sites = user.sites
       render action: :new
       # redirect_to new_recruit_path
     end
@@ -35,14 +34,14 @@ class Public::RecruitsController < ApplicationController
   end
 
   def edit
-    @user = current_user
-    @sites = @user.sites
+    user = current_user
+    @sites = user.sites
     @recruit = Recruit.find(params[:id])
-    @genre = Genre.find(@user.genre_id)
+    @genre = Genre.find(user.genre_id)
   end
 
   def update
-    @user = current_user
+    user = current_user
     @recruit = Recruit.find(params[:id])
       if @recruit.update(recruit_params)
         if @recruit.open_status == false
@@ -54,14 +53,14 @@ class Public::RecruitsController < ApplicationController
         end
         redirect_to recruit_path(@recruit.id)
       else
-        @genre = Genre.find(@user.genre_id)
-        @sites = @user.sites
+        @genre = Genre.find(user.genre_id)
+        @sites = user.sites
         render :edit
       end
   end
 
   def update_status
-    @user = current_user
+    user = current_user
     @recruit = Recruit.find(params[:recruit_id])
       if @recruit.update(recruit_status_params)
         if @recruit.open_status == false
@@ -73,21 +72,19 @@ class Public::RecruitsController < ApplicationController
         end
         redirect_to recruit_path(@recruit.id)
       else
-        @genre = Genre.find(@user.genre_id)
-        @sites = @user.sites
+        @genre = Genre.find(user.genre_id)
+        @sites = user.sites
         render :edit
       end
   end
 
   def index
-    @user = current_user
-    @recruits = @user.recruits
+    @recruits = current_user.recruits
   end
 
   def destroy
     recruit = Recruit.find(params[:id])
     if current_user == recruit.user
-
       recruit.destroy
       redirect_to my_page_path(current_user.id)
     else

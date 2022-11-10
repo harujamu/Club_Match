@@ -22,7 +22,6 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @recruit = Recruit.find(@room.recruit.id)
     @message = Message.new
     @messages = Message.where(room_id: @room.id)
     @users = @room.users

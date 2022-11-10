@@ -2,13 +2,11 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
-    @genre = Genre.find(@user.genre_id)
     @notifies = current_user.passive_notifications.where(checked_status: false)
   end
 
   def show
     @user = User.find(params[:id])
-    @genre = Genre.find(@user.genre_id)
   end
 
   def edit
@@ -16,9 +14,9 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user.update(user_params)
-      redirect_to my_page_path(@user)
+    user = current_user
+    if user.update(user_params)
+      redirect_to my_page_path(user)
     else
       render :edit
     end

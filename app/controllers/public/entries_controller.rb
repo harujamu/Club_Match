@@ -6,7 +6,6 @@ class Public::EntriesController < ApplicationController
     @entry.save
     # 応募ステータスが応募済になったら、募集者に応募通知作成
     if @entry.entry_status == "entered"
-      # @recruit.update(recruit_status: "having_candidates")
       @recruit.create_notification_entry(current_user, @entry)
     end
     redirect_to recruit_path(@recruit.id)
@@ -14,14 +13,12 @@ class Public::EntriesController < ApplicationController
 
   def destroy
     @entry = Entry.find(params[:id])
-    @recruit = @entry.recruit
     @entry.destroy
     redirect_to root_path
   end
 
   def index
-    @user = current_user
-    @entries = @user.entries
+    @entries = current_user.entries
   end
 
   def update
