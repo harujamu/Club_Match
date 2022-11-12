@@ -17,7 +17,10 @@
   <%# binding.pry %>
   <% if params[:id].present? %>
     <tr>
-      <td>プロフィール画像</td>
+      <td>
+        <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
+        プロフィール画像
+      </td>
       <td colspan="2">
         <%= f.file_field :image, accept: "image/*" %>
       </td>
@@ -112,7 +115,10 @@
 
   <% if params[:id].present? %>
     <tr rowspan="3">
-      <td><%= f.label :クラブ紹介 %></td>
+      <td>
+        <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
+        <%= f.label :クラブ紹介 %>
+      </td>
       <td colspan="2"><%= f.text_area:introduction, size:"74x5" %></td>
     </tr>
 

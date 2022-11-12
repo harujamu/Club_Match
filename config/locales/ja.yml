@@ -9,7 +9,7 @@ ja:
         high_school_student: "高校生"
         college_student: "大学生"
         adult: "社会人"
-      
+
       prefecture:
         hokkaido: "北海道"
         aomori: "青森県"
@@ -58,7 +58,7 @@ ja:
         miiyazaki: "宮崎県"
         kagoshima: "鹿児島県"
         okinawa: "沖縄県"
-        
+
     site:
       prefecture:
         hokkaido: "北海道"
@@ -108,14 +108,14 @@ ja:
         miiyazaki: "宮崎県"
         kagoshima: "鹿児島県"
         okinawa: "沖縄県"
-        
+
     entry:
       entry_status:
         entered : "応募済"
         match: "マッチ！"
         match_rejected: "マッチ不成立"
         done: "完了"
-        
+
     recruit:
       age_group:
         unspecified: "指定なし"
@@ -124,30 +124,30 @@ ja:
         high_school_student: "高校生"
         college_student: "大学生"
         adult: "社会人"
-      
+
       recruit_status:
         recruiting: "募集中"
         having_candidates: "候補者あり"
         match: "マッチ！"
         done: "完了"
-        
+
       practice_type:
         practice_game: "練習試合"
         joint_practice: "合同練習"
-        
+
   activerecord:
     attributes:
       recruit:
         title: "タイトル"
         date: "練習日"
         site: "練習場所"
-        
+
       user:
         captain_first_name: "代表者姓"
         captain_last_name: "代表者名"
         email: "メールアドレス"
-        encrypted_password: "パスワード"
         club_name: "クラブ名"
         municipality: "市区町村"
         address: "番地"
-        
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"

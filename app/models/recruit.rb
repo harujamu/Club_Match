@@ -39,6 +39,12 @@ class Recruit < ApplicationRecord
       recruit.update(recruit_status: "recruiting")
     end
 
+    # いいねが１つ以上あればいいねステータスtrueに更新
+    if recruit.likes.any?
+      recruit.update(liked_status: true)
+    else 
+      recruit.update(liked_status: false)
+    end
   end
 
   def liked_by?(user)

@@ -7,7 +7,7 @@ class Public::RecruitsController < ApplicationController
     @recruit = Recruit.new
     @recruit.user_id = user.id
     @genre = Genre.find(user.genre_id)
-    @sites = @user.sites
+    @sites = user.sites
   end
 
   def create
@@ -55,7 +55,7 @@ class Public::RecruitsController < ApplicationController
       else
         @genre = Genre.find(user.genre_id)
         @sites = user.sites
-        render :edit
+        render action: :edit
       end
   end
 
@@ -74,7 +74,7 @@ class Public::RecruitsController < ApplicationController
       else
         @genre = Genre.find(user.genre_id)
         @sites = user.sites
-        render :edit
+        render action: :edit
       end
   end
 

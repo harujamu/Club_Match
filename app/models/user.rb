@@ -53,6 +53,4 @@ class User < ApplicationRecord
   validates :introduction, allow_blank: true, length: { maximum: 300 }
   validates :age_group, presence: true
   validates :email, uniqueness: true, presence: true
-  validates :encrypted_password, uniqueness: true, presence: true
-
 end
