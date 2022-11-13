@@ -29,7 +29,7 @@
 - ER図・ワイヤーフレーム:  https://drive.google.com/file/d/1bDMrl1IKVd-SGe0kR09MyB14B89-J6v6/view?usp=sharing
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux2(Karoo)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
