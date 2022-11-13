@@ -6,7 +6,7 @@ class Public::RoomsController < ApplicationController
     recruit = Recruit.find(params[:recruit_id])
     @room = Room.new(user_id: current_user.id, recruit_id: params[:recruit_id]) || Room.find_by(recruit_id: recruit.id)
 
-    #tチャットルームのメンバーは、募集に対する応募者で、応募ステータスがマッチの人のみ
+    #チャットルームのメンバーは、募集に対する応募者で、応募ステータスがマッチの人のみ
     user_ids = recruit.entries.where(entry_status: "match").pluck(:user_id)
 
     # 応募者たちのユーザーIDをそれぞれ抽出し、User_Roomにカラム追加していく
@@ -28,10 +28,15 @@ class Public::RoomsController < ApplicationController
   end
 
   private
-  
+
+  # 練習参加メンバー以外チャットがみれないようにする
   def room_member_only
     room = Room.find_by(id: params[:id])
-    if !room || !room.user_rooms.find_by(user_id: current_user.id)
+    if room
+      if !room.user_rooms.find_by(user_id: current_user.id)
+        redirect_to root_path
+      end
+    else
       redirect_to root_path
     end
   end

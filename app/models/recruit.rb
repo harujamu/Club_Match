@@ -35,7 +35,7 @@ class Recruit < ApplicationRecord
       end
     end
     # 募集記事の応募者がいない時の処理
-    if recruit.entries.empty?
+    if !recruit.entries.any?
       recruit.update(recruit_status: "recruiting")
     end
 
@@ -149,6 +149,5 @@ class Recruit < ApplicationRecord
   validates :date, presence: true
   validates :title, presence: true
   validates :detail, allow_blank: true, length: { maximum: 300 }
-  # validates :site_id, presence: true
 end
 

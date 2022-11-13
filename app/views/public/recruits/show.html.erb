@@ -87,7 +87,7 @@
   <% if @user == current_user %>
     <div class = "row">
       <div class=" col-md-12">
-        <% if @recruit.having_candidates? && @entries.where(entry_status: 1).any? %>
+        <% if @recruit.having_candidates? && @entries.where(entry_status: "entered").any? %>
           <h5>応募者一覧(募集ステータス: <%= @recruit.recruit_status_i18n %>)</h5>
         <% end %>
         <div class="d-flex flex-wrap" >
