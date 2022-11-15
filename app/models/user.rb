@@ -51,6 +51,25 @@ class User < ApplicationRecord
       user.genre_id = 1
     end
   end
+  
+  # フォロー通知メソッド
+  def create_notification_follow(current_user, follow)
+    # フォローされてるか調べる
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and action = ? and follow_id = ? and checked_status = ?", current_user.id, id, 'follow', follow.id, false])
+    # フォローされてなければ通知レコード作成
+    if temp.blank?
+      notify = current_user.active_notifications.new(
+        checker_id: id,
+        follow_id: follow.id,
+        action: 'follow'
+      )
+      # 自分へのフォローは通知済とする
+      if notify.notifier_id == notify.checker_id
+        notify.checked_status = true
+      end
+      notify.save if notify.valid?
+    end
+  end
 
 
   validates :club_name, uniqueness: true, presence: true

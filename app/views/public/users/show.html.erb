@@ -6,7 +6,6 @@
       <%= profile_image(@user,@user.genre,250,250) %>
       <p class="mt-2">
         <%= @user.club_name %>
-        <!--<i class="fas fa-user-plus ml-2"></i><i class="fas fa-user-check"></i>-->
         <% if user_signed_in? %>
           <%= follow_button(@user,current_user) %>
         <% else %>

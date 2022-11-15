@@ -2,7 +2,15 @@
   <div class = "row">
     <div class="col-md-2">
       <%= profile_image(@user,@user.genre,180,180) %>
-      <p class="text-center mt-2"><%= @user.club_name %></p>
+      <p class="text-center mt-2">
+        <%= @user.club_name %>
+        <% if user_signed_in? %>
+          <%= follow_button(@user,current_user) %>
+        <% else %>
+          <i class="fas fa-user-check"></i>
+        <% end %>
+        <%= @user.follows.count %>
+      </p>
     </div>
 
     <div class="col-md-9 mx-auto">

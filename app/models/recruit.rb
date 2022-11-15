@@ -73,19 +73,21 @@ class Recruit < ApplicationRecord
       notify.save if notify.valid?
     end
   end
-
-
-  def create_notification_entry(current_user,entry)
-    # 応募ステータスが”応募済”か調べる
-    temp = Notify.where(["notifier_id = ? and checker_id = ? and recruit_id = ? and entry_id = ? and action = ? and checked_status = ?", current_user.id, user_id, id, entry.id, 'entry', false])
-    #応募済なら通知レコード作成
+  
+  def create_notification_follow(current_user, follow)
+    # フォローされてるか調べる
+    temp = Notify.where(["notifier_id = ? and checker_id = ? and action = ? and follow_id = ? and checked_status = ?", current_user.id, user_id, 'follow', follow.id, false])
+    # フォローされてなければ通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
-        recruit_id: id,
         checker_id: user_id,
-        entry_id: entry.id,
-        action: 'entry'
+        follow_id: follow.id,
+        action: 'follow'
       )
+      # 自分へのフォローは通知済とする
+      if notify.notifier_id == notify.checker_id
+        notify.checked_status = true
+      end
       notify.save if notify.valid?
     end
   end

@@ -18,6 +18,16 @@
             </span>
           </th>
         </tr>
+        
+        <% elsif notify.action == "follow" %>
+        <tr>
+          <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
+          <th>
+            <span class="justify-content-start">
+              <%= notify.notifier.club_name %>があなたをフォローしました
+            </span>
+          </th>
+        </tr>
 
         <% elsif notify.action == "message" %>
         <tr>

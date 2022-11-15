@@ -48,9 +48,5 @@ class Public::UsersController < ApplicationController
   def genre_params
     params.require(:genre).permit(:name, :genre_image)
   end
-  
-  # def follow_params
-  #   params.require(:follow).permit(:user_id, :follower_id)
-  # end
-
+ 
 end

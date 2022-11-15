@@ -5,15 +5,15 @@ class Public::FollowsController < ApplicationController
     follow = Follow.new(follower_id: current_user.id, user_id: user.id)
     follow.save
     # フォロー通知メソッド追加
-    # recruit.create_notification_follow(current_user, follow)
-    redirect_to root_path
+    user.create_notification_follow(current_user, follow)
+    redirect_to user_path(user.id)
   end
 
   def destroy
     user = User.find(params[:user_id])
     follow = Follow.find_by(follower_id: current_user.id, user_id: user.id)
     follow.destroy
-    redirect_to root_path
+    redirect_to user_path(user.id)
   end
 
 
