@@ -13,16 +13,18 @@
         <%#= recruit.inspect %>
         <div class="card col-md-3 mt-0 border border-0 mx-0">
           <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
-            <% if recruit.user.image.attached? %>
-              <%= image_tag recruit.user.image,  
-                size: "150x150", 
-                class:"rounded-circle" 
-              %>
-            <% else %>
-              <%= image_tag recruit.user.genre.genre_image, 
-                size: "150x150", 
-                class:"rounded-circle" 
-              %>
+            <% if recruit.user != nil %>
+              <% if recruit.user.image.attached? %>
+                <%= image_tag recruit.user.image,
+                  size: "150x150",
+                  class:"rounded-circle"
+                %>
+              <% else %>
+                <%= image_tag recruit.user.genre.genre_image,
+                  size: "150x150",
+                  class:"rounded-circle"
+                %>
+              <% end %>
             <% end %>
           <% end %>
           <div class="row">

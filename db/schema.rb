@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_14_021221) do
+ActiveRecord::Schema.define(version: 2022_11_13_085152) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 2022_09_14_021221) do
     t.index ["user_id", "recruit_id"], name: "index_entries_on_user_id_and_recruit_id", unique: true
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -86,6 +93,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_021221) do
     t.integer "recruit_id"
     t.integer "entry_id"
     t.integer "like_id"
+    t.integer "follow_id"
     t.integer "message_id"
     t.string "action", null: false
     t.integer "notifier_id", null: false
@@ -150,6 +158,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_021221) do
     t.text "introduction"
     t.boolean "active_status", default: true, null: false
     t.integer "age_group", default: 1, null: false
+    t.boolean "followed_status", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -43,6 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.text :introduction
       t.boolean :active_status, null: false, default: true
       t.integer :age_group, null: false, default: 1
+      t.boolean :followed_status, null: false, default: false
       t.timestamps null: false
     end
 

@@ -7,6 +7,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @follow = Follow.new(user_id: @user.id, follower_id: current_user.id)
   end
 
   def edit
@@ -16,7 +17,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to my_page_path(@user)
+      redirect_to user_my_page_path(@user)
     else
       render :edit
     end
@@ -47,5 +48,9 @@ class Public::UsersController < ApplicationController
   def genre_params
     params.require(:genre).permit(:name, :genre_image)
   end
+  
+  # def follow_params
+  #   params.require(:follow).permit(:user_id, :follower_id)
+  # end
 
 end

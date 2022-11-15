@@ -1,6 +1,6 @@
 class Public::HomesController < ApplicationController
   before_action :recruit_ransack_params, only: :top
-  
+
   def top
     @recruits = @q.result(distinct: true).opened
     # 同じジャンルの募集のみ表示
@@ -20,7 +20,7 @@ class Public::HomesController < ApplicationController
   def like_params
     params.require(:like).permit(:user_id, :recruit_id)
   end
-  
+
   def recruit_ransack_params
     # ランサックで記述
     @q = Recruit.ransack(params[:q])

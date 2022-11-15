@@ -17,11 +17,9 @@ class Public::RecruitsController < ApplicationController
     if @recruit.save
       redirect_to root_path
     else
-      # binding.pry
       @genre = Genre.find(user.genre_id)
       @sites = user.sites
       render action: :new
-      # redirect_to new_recruit_path
     end
   end
 

@@ -20,7 +20,7 @@
       <% @messages.each do |message| %>
         <% if message.user != current_user %>
           <p class="d-flex justify-content-start mb-0 pb-0 mt-2">
-            <%= link_to show_user_path(message.user), class:"text-dark" do %>
+            <%= link_to suser_path(message.user), class:"text-dark" do %>
               <%= profile_image(message.user,message.user.genre,30,30) %>
             <% end %>　
             <span class="border rounded-pill py-1 px-2 bg-light">

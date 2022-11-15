@@ -22,7 +22,7 @@
         </tr>
       <% end %>
         
-      <% if current_page?(show_user_path(user.id)) %>  
+      <% if current_page?(user_path(user.id)) %>  
         <tr>
           <td>主な活動地域</td>
           <td><%= user.prefecture_i18n %></td>

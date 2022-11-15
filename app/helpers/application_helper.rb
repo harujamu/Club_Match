@@ -6,21 +6,21 @@ module ApplicationHelper
     if user.image.attached?
       # "#{width}x#{height}のxはスペース開けない！
       if user == current_user
-        link_to my_page_path(user.id), class:"text-dark" do
+        link_to user_my_page_path(user.id), class:"text-dark" do
           image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
         end
       else
-        link_to show_user_path(user.id), class:"text-dark" do
+        link_to user_path(user.id), class:"text-dark" do
           image_tag user.image, size: "#{width}x#{height}", class:"rounded-circle"
         end
       end
     else
       if user == current_user
-        link_to my_page_path(user.id), class:"text-dark" do
+        link_to user_my_page_path(user.id), class:"text-dark" do
           image_tag genre.genre_image, size: "#{width}x#{height}", class:"rounded-circle"
         end
       else
-        link_to show_user_path(user.id), class:"text-dark" do
+        link_to user_path(user.id), class:"text-dark" do
           image_tag genre.genre_image, size: "#{width}x#{height}", class:"rounded-circle"
         end
       end
@@ -37,7 +37,7 @@ module ApplicationHelper
     else
       if recruit.user == current_user
         # 募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す
-        link_to rooms_path(room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do
+        link_to room_path(room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do
           tag.i class: " far fa-comments text-dark"
         end
       end
@@ -56,12 +56,26 @@ module ApplicationHelper
       end
     end
   end
-  
+
+  # フォローのON／OFF
+  # user(user_id)はcurrent_user(follower_id)にフォローされているかでボタン表示変更
+  def follow_button(user, current_user)
+    if user.followed_by?(current_user)
+      link_to user_follows_path(user), method: :delete do
+        tag.i class: "fas fa-user-check follow-icon ml-2"
+      end
+    else
+      link_to user_follows_path(user), method: :post do
+        tag.i class: "fas fa-user-plus ml-2 follow-icon"
+      end
+    end
+  end
+
   # 練習形式の表示
   def practice_type(recruit)
     if recruit.practice_game?
       "練習試合"
-    elsif recruit.joint_practice? 
+    elsif recruit.joint_practice?
       "合同練習"
     end
   end
@@ -69,12 +83,12 @@ module ApplicationHelper
   # 公開非公開の表示
   def open_status(recruit)
     if recruit.open_status == true
-      "公開中" 
+      "公開中"
     else
       "公開停止中"
     end
   end
-  
+
   # ユーザーの活動ステータス
   def active_status(user)
     if user.active_status == true

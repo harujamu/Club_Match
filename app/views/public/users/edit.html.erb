@@ -6,7 +6,7 @@
   </h3>
   <div class ="row mt-5">
     <div class="col-md-10 mx-auto">
-      <%= form_with model: @user, url: update_user_path(@user.id), local: true, method: :patch do |f| %>
+      <%= form_with model: @user, local: true, method: :patch do |f| %>
         <%= render 'public/shared/error_messages', resource: @user %>
         <%= render 'public/shared/user_form', user: @user, f: f %>
       <% end %>

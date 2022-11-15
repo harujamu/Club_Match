@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :sites
   has_many :recruits
   has_many :likes
+  has_many :follows
   has_one_attached :image
 
   def captain_name
@@ -30,6 +31,11 @@ class User < ApplicationRecord
 
   def user_address
       prefecture_i18n + ' ' + municipality + ' ' + address
+  end
+
+#user（follower_idに代入）にフォローされているかどうか調べる
+  def followed_by?(user)
+    follows.exists?(follower_id: user.id)
   end
 
   def self.guest

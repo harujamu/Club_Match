@@ -26,19 +26,23 @@ Rails.application.routes.draw do
   # Recruitsコントローラ
   
   resources :recruits do
-  # , :except => :destroy do
-  patch "update_status" => "recruits#update_status", as: "update_status"
-  # Likesコントローラ
+    # , :except => :destroy do
+    patch "update_status" => "recruits#update_status", as: "update_status"
+    # Likesコントローラ
     resource :likes, :only => [:create, :destroy]
   end
     
-  # Usersコントローラ
-   get "users/my_page" => "users#my_page" , as: "my_page"
-   get "users/:id/edit" => "users#edit", as: "edit_user"
-   get "users/:id" => "users#show", as: "show_user"
-   patch "users/:id" => "users#update", as: "update_user"
-   get "users/unsubscribe/:id" => "users#unsubscribe_confirm", as: "user_unsubscribe_confirm"
-   patch "users/unsubscribe/:id" => "users#unsubscribe", as: "user_unsubscribe"
+    # Usersコントローラ
+    # get "users/:id/edit" => "users#edit", as: "edit_user"
+    # get "users/:id" => "users#show", as: "show_user"
+    # patch "users/:id" => "users#update", as: "update_user"
+    resources :users, :only => [:edit, :show, :update] do  
+      get "my_page" => "users#my_page" , as: "my_page"
+      get "unsubscribe" => "users#unsubscribe_confirm", as: "unsubscribe_confirm"
+      patch "unsubscribe" => "users#unsubscribe", as: "unsubscribe"
+      # Followsコントローラ
+      resource :follows, :only => [:create, :destroy]
+    end
   
   # Entriesコントローラ
   resources :entries, :only => [:index, :create, :show, :destroy, :update]

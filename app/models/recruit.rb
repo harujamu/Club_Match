@@ -22,8 +22,12 @@ class Recruit < ApplicationRecord
     end
 
     # 退会ユーザーの募集記事を非公開にする
-    if recruit.user.active_status == false
+    if recruit.user != nil && recruit.user.active_status == false
       recruit.update(open_status: false)
+    else
+      if recruit.user == nil
+        recruit.update(open_status: false)
+      end
     end
 
     # 非公開になったら応募中の応募者にマッチ不成立を通知
@@ -42,7 +46,7 @@ class Recruit < ApplicationRecord
     # いいねが１つ以上あればいいねステータスtrueに更新
     if recruit.likes.any?
       recruit.update(liked_status: true)
-    else 
+    else
       recruit.update(liked_status: false)
     end
   end
