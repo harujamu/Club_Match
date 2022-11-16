@@ -10,7 +10,7 @@
         <%= f.text_field :club_name,
           autofocus: true,
           autocomplete:"",
-          size:"53"
+          class:"form-control"
         %>
       </td>
     </tr>
@@ -54,19 +54,21 @@
         <%= f.label :主な活動場所 %>
       </td>
       <td colspan="2">
-        <%= f.select :prefecture,
-          User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]},
-          {include_blanck: t("選択してください")},
-          class:"mr-1"
-        %>
-        <%= f.text_field :municipality,
-          placeholder: "市区町村",
-          class:"mr-1"
-        %>
-        <%= f.text_field :address,
-          placeholder: "番地",
-          size:"40"
-        %>
+        <span , class:"form-control">
+          <%= f.select :prefecture,
+            User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]},
+            {include_blanck: t("選択してください")},
+            class:"mr-1"
+          %>
+          <%= f.text_field :municipality,
+            placeholder: "市区町村",
+            class:"mr-1"
+          %>
+          <%= f.text_field :address,
+            placeholder: "番地",
+            width: "30%"
+          %>
+        </span>
       </td>
     </tr>
 
@@ -119,7 +121,7 @@
         <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
         <%= f.label :クラブ紹介 %>
       </td>
-      <td colspan="2"><%= f.text_area:introduction, size:"74x5" %></td>
+      <td colspan="2"><%= f.text_area:introduction, class:"form-control", row:"5" %></td>
     </tr>
 
     <tr>

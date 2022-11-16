@@ -14,14 +14,15 @@
         <div class="card col-md-3 mt-0 border border-0 mx-0">
           <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
             <% if recruit.user != nil %>
+            <!--画像サイズを％指定することでレスポンシブ対応時も画像削れない、枠いっぱいの画像サイズになる-->
               <% if recruit.user.image.attached? %>
                 <%= image_tag recruit.user.image,
-                  size: "150x150",
+                  width: "100%",
                   class:"rounded-circle"
                 %>
               <% else %>
                 <%= image_tag recruit.user.genre.genre_image,
-                  size: "150x150",
+                  width: "100%",
                   class:"rounded-circle"
                 %>
               <% end %>

@@ -4,7 +4,7 @@
       <tbody>
         <tr>
           <td>タイトル</td>
-          <td colspan="4"><%= f.text_area :title, size:"85x2" %></td>
+          <td colspan="4"><%= f.text_area :title, class:"form-control", row:"2" %></td>
         </tr>
 
         <tr>
@@ -48,7 +48,7 @@
 
         <tr rowspan="3">
           <td>当日の活動内容</td>
-          <td colspan="4"><%= f.text_area :detail, size:"85x5" %></td>
+          <td colspan="4"><%= f.text_area :detail, class:"form-control", row:"2" %></td>
         </tr>
 
       <% if current_page?(action: 'new') %>
@@ -80,8 +80,8 @@
             %>
           </td>
         </tr>
-      
-      <% else %> 
+
+      <% else %>
         <tr>
           <td></td>
           <td colspan="3"></td>

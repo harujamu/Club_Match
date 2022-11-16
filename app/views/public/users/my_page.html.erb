@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="row">
+  <div class="row mt-5 mx-auto">
 
     <div class ="col-md-4">
       <div>
-        <%= profile_image(@user,@user.genre,130,130) %>
-        <p class="mt-2"><%= @user.club_name %></p>
-        <p>
+        <%= profile_image(@user,@user.genre,200,200) %>
+        <p class="mt-2 ml-5"><%= @user.club_name %></p>
+        <p class="ml-5">
           <%= link_to '編集',
             edit_user_path(@user.id),
             class:"btn btn-success btn-sm mr-2"
@@ -15,16 +15,17 @@
             class:"btn btn-danger btn-sm"
           %>
         </p>
-        <p>
-          <%= link_to notifies_path, class:"text-dark" do %>
-            <i class="fas fa-bell bell-icon"></i>
-            通知<%= @notifies.count %>件
-          <% end %>
-        </p>
+        
       </div>
 
-      <div class="mt-2 ml-0 pl-0 col-md-6">
+      <div class="mt-5">
         <ul class="list-unstyled">
+          <li>
+            <i class="fas fa-bell bell-icon"></i>　
+            <%= link_to notifies_path, class:"text-dark" do %>
+              通知 <%= @notifies.count %> 件
+            <% end %>
+          </li>
           <li>
             <i class="fas fa-map-pin mr-3"></i>
             <%= link_to '練習場所一覧', sites_path, class:"text-dark" %>
@@ -42,7 +43,7 @@
     </div>
 
 
-    <div class="col-md-8 my-5">
+    <div class="col-md-7 my-5">
       <%= render '/public/shared/user_information', user: @user, genre: @user.genre %>
     </div>
 
