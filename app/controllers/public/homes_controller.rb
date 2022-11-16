@@ -20,6 +20,10 @@ class Public::HomesController < ApplicationController
   def like_params
     params.require(:like).permit(:user_id, :recruit_id)
   end
+  
+  def follow_params
+    params.require(:follow).permit(:user_id, :follower_id)
+  end
 
   def recruit_ransack_params
     # ランサックで記述
