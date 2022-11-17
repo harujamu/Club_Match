@@ -29,21 +29,21 @@
             <% if user_signed_in? %>
               <small><%= current_user.club_name %>さん、ようこそ！</small>
               <ul class ="navbar-nav ml-auto">
-                <li class ="nav-item mr-3 mb-1" style="width:120px !important;">
+                <li class ="nav-item mr-3 mb-1">
                   <%= link_to '応募履歴', entries_path,
                   class:"btn btn-warning btn-gradient  py-2 w-100" %>
                 </li>
-                <li class ="nav-item mr-3 mb-1" style="width:120px !important;">
+                <li class ="nav-item mr-3 mb-1">
                   <%= link_to '募集する', new_recruit_path,
                   class:"btn btn-warning btn-gradient py-2 w-100" %>
                 </li>
-                <li class ="nav-item mr-3 mb-1" style="width:120px !important;">
+                <li class ="nav-item mr-3 mb-1">
                   <%= link_to 'マイページ', user_my_page_path(current_user.id),
-                  class:"btn btn-warning btn-gradient py-2 w-100" , style:"white-space: nowrap;"%>
+                  class:"btn btn-warning btn-gradient py-2 w-100" %>
                 </li>
-                <li class ="nav-item" style="width:120px!important;">
+                <li class ="nav-item">
                   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,
-                  class:"btn btn-warning btn-gradient  py-2 w-100", style:"white-space: nowrap;" %>
+                  class:"btn btn-warning btn-gradient  py-2 w-100" %>
                 </li>
               </ul>
 
@@ -52,32 +52,32 @@
               <ul class ="navbar-nav ml-auto">
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to 'ジャンル管理', admin_genres_path,
-                  class:"btn btn-warning btn-gradient px-5 py-2" %>
+                  class:"btn btn-warning btn-gradient w-100 py-2" %>
                 </li>
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to 'ユーザー一覧', admin_path,
-                  class: "btn btn-warning btn-gradient px-5 py-2" %>
+                  class: "btn btn-warning btn-gradient w-100 py-2" %>
                 </li>
                 <li class ="nav-item">
                   <%= link_to 'ログアウト', destroy_admin_session_path,
-                  method: :delete, class:"btn btn-warning btn-gradient px-5 py-2" %>
+                  method: :delete, class:"btn btn-warning btn-gradient w-100 py-2" %>
                 </li>
               </ul>
 
           <!--ログアウト後(サインイン前)のナビゲーションバー-->
             <% else %>
               <ul class ="navbar-nav ml-auto">
-                <li class ="nav-item mr-3">
+                <li class ="nav-item mr-3 mb-1">
                   <%= link_to '募集一覧', recruits_path,
-                  class:"btn btn-warning btn-gradient px-5 py-2" %>
+                  class:"btn btn-warning btn-gradient w-100 py-2" %>
                 </li>
-                <li class ="nav-item mr-3">
+                <li class ="nav-item mr-3 mb-1">
                   <%= link_to '新規登録', new_user_registration_path,
-                  class: "btn btn-warning btn-gradient px-5 py-2" %>
+                  class: "btn btn-warning btn-gradient w-100 py-2" %>
                 </li>
                 <li class ="nav-item">
                   <%= link_to 'ログイン', new_user_session_path,
-                  class:"btn btn-warning btn-gradient px-5 py-2" %>
+                  class:"btn btn-warning btn-gradient w-100 py-2" %>
                 </li>
               </ul>
             <% end %>
@@ -86,8 +86,8 @@
       </nav>
     </header>
 
-     <main class="mb-auto">
-      <%= yield %>
+    <main class="mb-auto">
+    <%= yield %>
     </main>
     <%#= debug(params) if Rails.env.development? %>
 

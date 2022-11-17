@@ -22,7 +22,7 @@
         プロフィール画像
       </td>
       <td colspan="2">
-        <%= f.file_field :image, accept: "image/*" %>
+        <%= f.file_field :image, class:"form-control w-50" %>
       </td>
     </tr>
   <% else %>
@@ -37,13 +37,12 @@
         <%= f.text_field :captain_last_name,
           autofocus: true,
           placeholder: "代表者姓",
-          size:"24",
-          class:"mr-3"
+          class:"name-form mr-3 border border-secondary py-1 pl-3 rounded"
         %>
         <%= f.text_field :captain_first_name,
           autofocus: true,
           placeholder: "代表者名",
-          size:"25"
+          class:"name-form border border-secondary py-1 pl-3 rounded"
         %>
       </td>
     </tr>
@@ -80,7 +79,8 @@
       <td>
         <%= f.select :age_group,
           User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]},
-          {include_blanck: t("選択してください")}
+          {include_blanck: t("選択してください")},
+          {class:"form-control w-25"}
         %>
       </td>
       <td></td>
@@ -94,7 +94,8 @@
       <td>
         <%= f.collection_select :genre_id,
           Genre.all, :id, :name,
-          include_blanck:"選択してください"
+          {include_blanck:"選択してください"},
+          {class:"form-control w-50"}
         %>
       </td>
       <td></td>
@@ -109,7 +110,7 @@
       <%= f.email_field :email,
         autofocus: true,
         placeholder: "sample@email.com",
-        size:"30"
+        class:"form-control w-75"
       %>
       </td>
       <td></td>
@@ -121,7 +122,7 @@
         <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
         <%= f.label :クラブ紹介 %>
       </td>
-      <td colspan="2"><%= f.text_area:introduction, class:"form-control", row:"5" %></td>
+      <td colspan="2"><%= f.text_area:introduction, class:"form-control" %></td>
     </tr>
 
     <tr>
