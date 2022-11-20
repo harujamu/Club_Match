@@ -10,7 +10,7 @@
         <tr>
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
           <th>
-            <span class="justify-content-start">
+            <span class="justify-content-start no-wrap">
               <%= notify.notifier.club_name %>が　
               "<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
                 <%= notify.recruit.title %>

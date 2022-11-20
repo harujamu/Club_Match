@@ -7,8 +7,8 @@ class Public::EntriesController < ApplicationController
     # 応募ステータスが応募済になったら、募集者に応募通知作成
     if @entry.entry_status == "entered"
       @recruit.create_notification_entry(current_user, @entry)
+      redirect_to recruit_path(@recruit.id)
     end
-    redirect_to recruit_path(@recruit.id)
   end
 
   def destroy

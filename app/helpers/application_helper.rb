@@ -37,7 +37,7 @@ module ApplicationHelper
     else
       if recruit.user == current_user
         # 募集者と応募者たちのチャットグループを作成、RoomはRecruit IDさえあれば作れるので引数はRecruit IDだけ渡す
-        link_to room_path(room, params: { recruit_id: recruit.id }), class:"text-dark", method: :post do
+        link_to rooms_path(room, params: { recruit_id: recruit.id , user_id: current_user.id}), class:"text-dark", method: :post do
           tag.i class: " far fa-comments text-dark"
         end
       end
@@ -56,7 +56,7 @@ module ApplicationHelper
       end
     end
   end
-
+  
   # フォローのON／OFF
   # user(user_id)はcurrent_user(follower_id)にフォローされているかでボタン表示変更
   def follow_button(user, current_user)
@@ -99,4 +99,3 @@ module ApplicationHelper
   end
 
 end
-

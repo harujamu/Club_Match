@@ -37,7 +37,25 @@ class Public::RoomsController < ApplicationController
         redirect_to root_path
       end
     else
-      redirect_to root_path
+      recruit = Recruit.find_by(params[:recruit_id])
+      # binding.pry
+      if recruit && (current_user.id == recruit.user_id)
+        @room = Room.new(user_id: current_user.id, recruit_id: params[:id])
+        #チャットルームのメンバーは、募集に対する応募者で、応募ステータスがマッチの人のみ
+        user_ids = recruit.entries.where(entry_status: "match").pluck(:user_id)
+    
+        # 応募者たちのユーザーIDをそれぞれ抽出し、User_Roomにカラム追加していく
+        user_ids.each do |user_id|
+          @room.user_rooms.build(user_id: user_id)
+        end
+        # チャットルーム作成者もUser_Roomにカラム追加していく
+        @room.user_rooms.build(user_id: @room.user.id)
+        if @room.save
+          redirect_to room_path(@room.id)
+        end
+      else
+        redirect_to root_path
+      end
     end
   end
 

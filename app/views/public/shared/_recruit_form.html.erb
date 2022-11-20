@@ -1,12 +1,10 @@
-
+<div class="table-responsive">
   <%= form_with model: recruit do |f| %>
     <table class="table table-borderless">
       <tbody>
         <tr>
           <td>タイトル</td>
-          <td colspan="4">
-            <%= f.text_area :title,class:"form-control form-control-sm w-100"%>
-          </td>
+          <td colspan="4"><%= f.text_area :title, class:"form-control form-control-sm w-" %></td>
         </tr>
 
         <tr>
@@ -28,11 +26,11 @@
         <tr>
           <td>練習形式</td>
           <td colsapn="4">
-            <span class="practice-type-form mr-5">
+            <span class="practice-type-form">
               <%= f.radio_button :practice_type, "joint_practice" %>
               <%= f.label :"合同練習" %>
-            </span>
-            <span class="practice-type-form ml-5">
+            </span>　　
+            <span class="practice-type-form">
               <%= f.radio_button :practice_type, "practice_game" %>
               <%= f.label :"練習試合" %>
             </span>
@@ -41,9 +39,7 @@
 
         <tr>
           <td>日程</td>
-          <td colspan="4">
-            <%=f.date_field :date, class:"form-control w-50" %>
-          </td>
+          <td colspan="4"><%=f.date_field :date, class:"form-control w-50" %></td>
         </tr>
 
         <tr>
@@ -52,16 +48,14 @@
             <%= f.select :age_group,
               Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]},
               {include_blanck: t("選択してください")},
-              {class:"form-control w-25"}
+              {class:"form-control w-25"} 
             %>
           </td>
         </tr>
 
         <tr rowspan="3">
           <td>当日の活動内容</td>
-          <td colspan="4">
-            <%= f.text_area :detail, class:"form-control form-control-lg" %>
-          </td>
+          <td colspan="4"><%= f.text_area :detail, class:"form-control form-control-lg" %></td>
         </tr>
 
       <% if current_page?(action: 'new') %>
@@ -103,4 +97,5 @@
       <% end %>
       </tbody>
     </table>
-<% end %>
+  <% end %>
+</div>

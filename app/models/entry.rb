@@ -15,6 +15,7 @@ class Entry < ApplicationRecord
     end
   end
   
+  
   belongs_to :user
   belongs_to :recruit
   has_many :notifies, dependent: :destroy

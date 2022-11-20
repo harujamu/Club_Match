@@ -1,161 +1,167 @@
-
-<table class="table table-borderless">
-  <tbody>
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :クラブ名 %>
-      </td>
-      <td colspan="2">
-        <%= f.text_field :club_name,
-          autofocus: true,
-          autocomplete:"",
-          class:"form-control"
-        %>
-      </td>
-    </tr>
-  <%# binding.pry %>
-  <% if params[:id].present? %>
-    <tr>
-      <td>
-        <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
-        プロフィール画像
-      </td>
-      <td colspan="2">
-        <%= f.file_field :image, class:"form-control w-50" %>
-      </td>
-    </tr>
-  <% else %>
-  <% end %>
-
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :代表者氏名 %>
-      </td>
-      <td colspan="2">
-        <%= f.text_field :captain_last_name,
-          autofocus: true,
-          placeholder: "代表者姓",
-          class:"name-form mr-3 border border-secondary py-1 pl-3 rounded"
-        %>
-        <%= f.text_field :captain_first_name,
-          autofocus: true,
-          placeholder: "代表者名",
-          class:"name-form border border-secondary py-1 pl-3 rounded"
-        %>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :主な活動場所 %>
-      </td>
-      <td colspan="2">
-        <span , class:"form-control">
-          <%= f.select :prefecture,
-            User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]},
+<div class="table-responsive">
+  <table class="table table-borderless">
+    <tbody>
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :クラブ名 %>
+        </td>
+        <td colspan="2">
+          <%= f.text_field :club_name,
+            autofocus: true,
+            autocomplete:"",
+            class:"form-control border-secondary"
+          %>
+        </td>
+      </tr>
+    <%# binding.pry %>
+    <% if params[:id].present? %>
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
+          プロフィール画像
+        </td>
+        <td colspan="2">
+          <%= f.file_field :image %>
+        </td>
+      </tr>
+    <% else %>
+    <% end %>
+  
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :代表者氏名 %>
+        </td>
+        <td colspan="2">
+          <%= f.text_field :captain_last_name,
+            autofocus: true,
+            placeholder: "代表者姓",
+            class:"name-form mr-3 border border-secondary py-1 pl-3 rounded"
+          %>
+          <%= f.text_field :captain_first_name,
+            autofocus: true,
+            placeholder: "代表者名",
+            class:"name-form border border-secondary py-1 pl-3 rounded"
+          %>
+        </td>
+      </tr>
+  
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :主な活動場所 %>
+        </td>
+        <td colspan="2">
+          <span class:"form-control  no-wrap">
+            <%= f.select :prefecture,
+              User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]},
+              {include_blanck: t("選択してください")},
+              class:"mr-1"
+            %>
+            <%= f.text_field :municipality,
+              placeholder: "市区町村",
+              class:"mr-1"
+            %>
+            <%= f.text_field :address,
+              placeholder: "番地",
+              width: "30%"
+            %>
+          </span>
+        </td>
+      </tr>
+  
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :年齢層 %>
+        </td>
+        <td>
+          <%= f.select :age_group,
+            User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]},
             {include_blanck: t("選択してください")},
-            class:"mr-1"
+            {class:"form-control w-25 border-secondary"}
           %>
-          <%= f.text_field :municipality,
-            placeholder: "市区町村",
-            class:"mr-1"
+        </td>
+        <td></td>
+      </tr>
+  
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :ジャンル %>
+        </td>
+        <td>
+          <%= f.collection_select :genre_id,
+            Genre.all, :id, :name,
+            {include_blanck:"選択してください"},
+            {class:"form-control w-50 border-secondary"}
           %>
-          <%= f.text_field :address,
-            placeholder: "番地",
-            width: "30%"
-          %>
-        </span>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :年齢層 %>
-      </td>
-      <td>
-        <%= f.select :age_group,
-          User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]},
-          {include_blanck: t("選択してください")},
-          {class:"form-control w-25"}
+        </td>
+        <td></td>
+      </tr>
+  
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :メールアドレス %>
+        </td>
+        <td>
+        <%= f.email_field :email,
+          autofocus: true,
+          placeholder: "sample@email.com",
+          class:"form-control w-75 border-secondary"
         %>
-      </td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :ジャンル %>
-      </td>
-      <td>
-        <%= f.collection_select :genre_id,
-          Genre.all, :id, :name,
-          {include_blanck:"選択してください"},
-          {class:"form-control w-50"}
-        %>
-      </td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :メールアドレス %>
-      </td>
-      <td>
-      <%= f.email_field :email,
-        autofocus: true,
-        placeholder: "sample@email.com",
-        class:"form-control w-75"
-      %>
-      </td>
-      <td></td>
-    </tr>
-
-  <% if params[:id].present? %>
-    <tr rowspan="3">
-      <td>
-        <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
-        <%= f.label :クラブ紹介 %>
-      </td>
-      <td colspan="2"><%= f.text_area:introduction, class:"form-control" %></td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><%= f.submit "更新", class:"btn btn-primary w-100" %></td>
-    </tr>
-
-  <% else %>
-    <tr>
-      <td>
-        <span class="btn btn-danger btn-sm mr-3">必須</span>
-        <%= f.label :パスワード %>
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> 桁以上)</em>
-        <% end %>
-      </td>
-
-      <td>
-        <%= f.password_field :password, autocomplete: "new-password", size:"30" %>
-      </td>
-
-      <td>
-        <%= f.label :（確認用） %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", size:"30" %>
-      </td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td></td>
-      <td><span class="submit-button"><%= f.submit "新規登録", class:"btn btn-success w-75" %></span></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+        </td>
+        <td></td>
+      </tr>
+  
+    <% if params[:id].present? %>
+      <tr rowspan="3">
+        <td class="no-wrap">
+          <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
+          <%= f.label :クラブ紹介 %>
+        </td>
+        <td colspan="2"><%= f.text_area:introduction, class:"form-control border-secondary" %></td>
+      </tr>
+  
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= f.submit "更新", class:"btn btn-primary w-100" %></td>
+      </tr>
+  
+    <% else %>
+      <tr>
+        <td class="no-wrap">
+          <span class="btn btn-danger btn-sm mr-3">必須</span>
+          <%= f.label :パスワード %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 桁以上)</em>
+          <% end %>
+        </td>
+  
+        <td>
+          <spann class:"form-control no-wrap">
+            <%= f.password_field :password, autocomplete: "new-password", class:"mr-4" %> 
+            <%= f.label :（確認用） %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </span>
+        </td>
+  
+        <td></td>
+      </tr>
+  
+      <tr>
+        <td></td>
+        <td></td>
+        <td>
+          <span class="submit-button">
+            <%= f.submit "新規登録", class:"btn btn-success w-75" %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
