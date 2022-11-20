@@ -83,18 +83,18 @@ module ApplicationHelper
   # 公開非公開の表示
   def open_status(recruit)
     if recruit.open_status == true
-      "公開中"
+      tag.p "公開中", class:"green"
     else
-      "公開停止中"
+      tag.p "公開停止中", class:"gray"
     end
   end
 
   # ユーザーの活動ステータス
   def active_status(user)
     if user.active_status == true
-      "活動中"
+      tag.p "活動中", class:"green"
     else
-      "退会済"
+      tag.p "退会済", class:"gray"
     end
   end
 

@@ -24,7 +24,7 @@
         <tr>
           <td><%= recruit.created_at.strftime('%Y/%m/%d') %></td>
           <td>
-            <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
+            <%= link_to recruit_path(recruit.id), class:"text-dark link" do %>
               <%= recruit.title %>
             <% end %>
           </td>
@@ -47,7 +47,7 @@
         <td><%= entry.recruit.title %><%#= entry.inspect %></td>
         <% else %>
         <td>
-          <%= link_to recruit_path(entry.recruit.id), class:"text-dark" do %>
+          <%= link_to recruit_path(entry.recruit.id), class:"text-dark link" do %>
             <%= entry.recruit.title %>
           <% end %>
           <%#= entry.inspect %>

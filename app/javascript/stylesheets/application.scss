@@ -77,3 +77,21 @@ margin-right: 6px;
 .no-wrap{
     white-space:nowrap;
 }
+
+.green{
+  color: #009900;
+  font-weight:bold;
+}
+
+.gray{
+  color:#a9a9a9;
+}
+
+.link{
+  background:linear-gradient(transparent 80%, #87cefa 0%);
+}
+
+.link:hover{
+  text-decoration: none;
+  background:linear-gradient(transparent 80%, #ffb6c1 0%);
+}
