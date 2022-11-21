@@ -95,3 +95,8 @@ margin-right: 6px;
   text-decoration: none;
   background:linear-gradient(transparent 80%, #ffb6c1 0%);
 }
+
+.space-between{
+  display: flex;
+  justify-content: space-between;
+}
