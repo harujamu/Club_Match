@@ -1,44 +1,44 @@
 <div class ="container">
   <div class ="row">
-    <div class ="col-md-8 col-sm-5 mx-auto mt-5">
+    <div class ="col-lg-8 col-md-8 col-sm-10 col-xs-12 mx-auto mt-5">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <table class="table table-borderless">
+      <table class="table table-borderless mx-auto">
         <tbody>
           <tr>
-            <td class="no-wrap"><%= f.label :email %></td>
+            <td class="px-0 no-wrap"><%= f.label :email %></td>
             <td colspan="2">
               <%= f.text_field :email, 
                 autofocus: true, 
                 autocomplete: "email", 
                 placeholder: "sample-user@com", 
-                size:"40" 
+                class:"form-control" 
               %>
               </td>
           </tr>
           <tr>
-            <td class="no-wrap"><%= f.label :password %></td>
+            <td class="px-0 no-wrap"><%= f.label :password %></td>
             <td colspan="2">
               <%= f.password_field :password, 
                 autocomplete: "current-password", 
                 placeholder: "password", 
-                size:"40" 
+                class:"form-control"  
               %>
             </td>
           </tr>
           <tr>
             <td></td>
-            <td><%= f.submit "ログイン", class:"btn btn-primary w-100" %></td>
-            <td>
+            <td colspan="2", class="text-left no-wrap">
+              <%= f.submit "ログイン", class:"btn btn-primary no-wrap" %>
               <%= link_to " ゲストログイン", 
                 guest_sign_in_path, 
                 method: :post, 
-                class:"btn btn-info w-75" 
+                class:"btn btn-info no-wrap"
               %>
             </td>
           </tr>
           <tr>
             <td></td>
-            <td colspan="2">
+            <td colspan="2", class="no-wrap text-left">
               <%= link_to '>>  新しくアカウントを作成する', new_user_registration_path %>
             </td>
           </tr>
