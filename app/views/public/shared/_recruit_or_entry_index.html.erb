@@ -3,18 +3,18 @@
     <thead>
       <tr>
       <% if current_page?(recruits_path) %>
-        <th>募集記事作成日</th>
+        <th class="no-wrap">募集記事作成日</th>
       <% else %>
-        <th>応募日</th>
+        <th class="no-wrap">応募日</th>
       <% end %>
-        <th>募集タイトル</th>
-        <th>練習形式</th>
-        <th>練習日</th>
+        <th class="no-wrap">タイトル</th>
+        <th class="no-wrap">練習形式</th>
+        <th class="no-wrap">練習日</th>
       <% if current_page?(entries_path) %>
-        <th>応募ステータス</th>
+        <th class="no-wrap">応募状況</th>
       <% else %>
-        <th>募集ステータス</th>
-        <th>公開ステータス</th>
+        <th class="no-wrap">募集状況</th>
+        <th class="no-wrap">公開状況</th>
       <% end %>
       </tr>
     </thead>
@@ -29,7 +29,7 @@
             <% end %>
           </td>
           <td><%= practice_type(recruit) %></td>
-          <td><%= recruit.date.strftime('%Y/%m/%d') %></td>
+          <td><%= recruit.date.strftime('%m/%d') %></td>
           <td><%= recruit.recruit_status_i18n %>
             <% if recruit.match? %>
               <%= room_link(recruit.room, recruit) %>
@@ -55,7 +55,7 @@
         <% end %>
         
         <td><%= practice_type(entry.recruit) %></td>
-        <td><%= entry.recruit.date.strftime('%Y/%m/%d') %></td>
+        <td><%= entry.recruit.date.strftime('%m/%d') %></td>
         <td>
           <%= entry.entry_status_i18n %>
           <% if entry.recruit.room.present? && entry.match? %>

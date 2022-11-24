@@ -1,36 +1,36 @@
 <div class ="container">
   <div class ="row">
-    
+
     <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 mx-auto mt-5">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <table class="table table-borderless">
           <tbody>
             <tr>
-              <td><%= f.label :email %></td>
+              <td class="no-wrap"><%= f.label :email %></td>
               <td>
                 <%= f.text_field :email,
-                  autofocus: true, 
+                  autofocus: true,
                   autocomplete: "email",
                   placeholder: "sample-admin@com",
-                  class:"form-control" 
+                  class:"form-control"
                 %>
               </td>
             </tr>
-            
+
             <tr>
-              <td><%= f.label :password %></td>
+              <td class="no-wrap"><%= f.label :password %></td>
               <td>
-                <%= f.password_field :password, 
+                <%= f.password_field :password,
                   autocomplete: "current-password",
                   placeholder: "password",
                   class:"form-control"  %>
               </td>
             </tr>
-            
+
             <tr>
               <td></td>
-              <td class="no-wrap text-left">　　 
-                <%= f.submit "管理者ログイン", class:"btn btn-primary" %>
+              <td class="no-wrap text-left">
+                <%= f.submit "管理者ログイン", class:"btn btn-primary ml-0 w-75" %>
               </td>
             </tr>
           </tbody>

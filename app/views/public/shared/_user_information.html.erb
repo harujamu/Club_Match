@@ -2,47 +2,47 @@
   <table class="table">
     <% if current_page?(admin_user_path(user.id)) %>
       <tr>
-        <td>クラブ名</td>
+        <td class="no-wrap">クラブ名</td>
         <td><%= user.club_name %></td>
       </tr>
     <% end %>
       <tr>
-        <td>代表者氏名</td>
+        <td class="no-wrap">代表者氏名</td>
         <td><%= user.captain_name %></td>
       </tr>
     
     <% if !current_page?(admin_user_path(user.id)) %>
       <tr>
-        <td>ジャンル</td>
+        <td class="no-wrap">ジャンル</td>
         <td><%= genre.name %></td>
       </tr>
       
       <tr>
-        <td>チームの年齢層</td>
+        <td class="no-wrap">チームの年齢層</td>
         <td><%= user.age_group_i18n %></td>
       </tr>
     <% end %>
       
     <% if current_page?(user_path(user.id)) %>  
       <tr>
-        <td>主な活動地域</td>
+        <td class="no-wrap">主な活動地域</td>
         <td><%= user.prefecture_i18n %></td>
       </tr>
     <% else %>  
       <tr>
-        <td>主な活動場所</td>
+        <td class="no-wrap">主な活動場所</td>
         <td><%= user.user_address %></td>
       </tr>
     <% end %>
     
     <% if current_page?(admin_user_path(user.id)) %>
       <tr>
-        <td>e-mail</td>
+        <td class="no-wrap">e-mail</td>
         <td><%= user.email %></td>
       </tr>
     
       <tr>
-        <td>活動ステータス</td>
+        <td class="no-wrap">活動ステータス</td>
         <td class="space-between">
           <%= active_status(user) %>
           <%= link_to '編集', edit_admin_user_path(user.id), class:"btn btn-success w-25" %>
@@ -50,7 +50,7 @@
       </tr>
     <% else %>
       <tr>
-        <td>クラブ紹介</td>
+        <td class="no-wrap">クラブ紹介</td>
         <td ><%= user.introduction %></td>
       </tr>
     <% end %>

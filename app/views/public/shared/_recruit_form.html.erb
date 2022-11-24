@@ -1,19 +1,19 @@
-<div class="table-responsive">
+<div>
   <%= form_with model: recruit do |f| %>
     <table class="table table-borderless">
       <tbody>
         <tr>
-          <td>タイトル</td>
-          <td colspan="4"><%= f.text_area :title, class:"form-control form-control-sm w-" %></td>
+          <td class="no-wrap">タイトル</td>
+          <td colspan="4"><%= f.text_area :title, class:"form-control form-control-sm" %></td>
         </tr>
 
         <tr>
-          <td>ジャンル</td>
+          <td class="no-wrap">ジャンル</td>
           <td colspan="4"><%= genre.name %></td>
         </tr>
 
         <tr>
-          <td>開催地</td>
+          <td class="no-wrap">開催地</td>
           <td colspan="4">
             <%= f.select :site_id,
               options_from_collection_for_select(sites, :id, :site_name),
@@ -24,7 +24,7 @@
         </tr>
 
         <tr>
-          <td>練習形式</td>
+          <td class="no-wrap">練習形式</td>
           <td colsapn="4">
             <span class="practice-type-form">
               <%= f.radio_button :practice_type, "joint_practice" %>
@@ -38,12 +38,12 @@
         </tr>
 
         <tr>
-          <td>日程</td>
+          <td class="no-wrap">日程</td>
           <td colspan="4"><%=f.date_field :date, class:"form-control w-50" %></td>
         </tr>
 
         <tr>
-          <td>年齢層</td>
+          <td class="no-wrap">年齢層</td>
           <td colspan="4">
             <%= f.select :age_group,
               Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]},
@@ -54,7 +54,7 @@
         </tr>
 
         <tr rowspan="3">
-          <td>当日の活動内容</td>
+          <td class="no-wrap">当日の活動内容</td>
           <td colspan="4"><%= f.text_area :detail, class:"form-control form-control-lg" %></td>
         </tr>
 
@@ -66,7 +66,7 @@
         </tr>
       <% elsif current_page?(action: 'edit') || params["_method"] == "patch" %>
         <tr>
-          <td>公開ステータス</td>
+          <td class="no-wrap">公開ステータス</td>
           <td colsapn="4">
             <%= f.radio_button :open_status, true %>
             <%= f.label :"公開" %>
