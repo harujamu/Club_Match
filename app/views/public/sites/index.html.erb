@@ -1,7 +1,7 @@
 <div class="container">
   <h3>練習場所登録</h3>
   <div class ="row">
-    <div class ="col-md-8 mt-3 mb-5">
+    <div class ="col-md-10 mt-3 mb-5">
       <%= form_with model: @site do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.select :prefecture, 
@@ -16,14 +16,14 @@
     </div>
   </div>
 
-  <h3>登録済練習場所一覧</h3>
+  <h3>登録練習場所一覧</h3>
   <div class ="row">
-    <div class ="col-md-8 mt-2">
+    <div class ="col-md-10 mt-2">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>練習場所ID</th>
-            <th>住所</th>
+            <th class="no-wrap">練習場所ID</th>
+            <th class="no-wrap">住所</th>
           </tr>
         </thead>
         <% @sites.each do |site| %>
@@ -33,7 +33,7 @@
             <td class="site_click">
               <%= site.site_name %>
               <div class="site-delete">
-                <%= link_to '削除',site_path(site.id), method: :delete, class:"btn btn-danger" %>
+                <%= link_to '削除',site_path(site.id), method: :delete, class:"btn btn-danger no-wrap" %>
               </div>
             </td>
           </tr>

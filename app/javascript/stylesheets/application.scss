@@ -62,8 +62,9 @@ margin-right: 6px;
    white-space:nowrap;
 }
 
-.name-form{
-   width: 224px;
+.prefecture-form,
+.municipality-form{
+   width: 145px;
 }
 
 .footer{
@@ -102,14 +103,26 @@ margin-right: 6px;
     border-bottom: solid 1px #ccc;
     width: 100%;
   }
-  .tbl-r02 {
+  .recruit-form-table,
+  .user-information-table,
+  .user-form-table{
     width: 80%;
   }
   .recruit-form-table th,
-  .recruit-form-table td {
+  .recruit-form-table td,
+  .user-information-table th,
+  .user-information-table td,
+  .user-form-table th,
+  .user-form-table td{
 　　border-bottom: none;
     display: block;
     width: 100%;
   }
- 
+  .user-information-table th,
+  .user-information-table td{
+  text-align: center;
+  }
+  .user-information-table th{
+  background-color: $gray-200;
+  }
 }

@@ -1,11 +1,11 @@
 <div>
-  <table class="table table-borderless", width: "100%">
+  <table class="table table-borderless user-form-table">
     <tbody>
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :クラブ名 %>
-        </td>
+        </th>
         <td colspan="2">
           <%= f.text_field :club_name,
             autofocus: true,
@@ -13,14 +13,14 @@
             class:"form-control border-secondary"
           %>
         </td>
-      </tr>
-    <%# binding.pry %>
+      </tr class="caption">
+      
     <% if params[:id].present? %>
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
           プロフィール画像
-        </td>
+        </th>
         <td colspan="2">
           <%= f.file_field :image %>
         </td>
@@ -28,69 +28,74 @@
     <% else %>
     <% end %>
 
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :代表者氏名 %>
-        </td>
-        <td colspan="2">
+        </th>
+        <td>
           <%= f.text_field :captain_last_name,
             autofocus: true,
             placeholder: "代表者姓",
-            class:"name-form mr-3 border border-secondary py-1 pl-3 rounded"
+            class:"form-control border-secondary"
           %>
+        </td>
+        <td>
           <%= f.text_field :captain_first_name,
             autofocus: true,
             placeholder: "代表者名",
-            class:"name-form border border-secondary py-1 pl-3 rounded"
+            class:"form-control border-secondary"
           %>
         </td>
       </tr>
 
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :主な活動場所 %>
-        </td>
-        <td colspan="2">
+        </th>
+        <td>
           <span class:"form-control no-wrap">
             <%= f.select :prefecture,
               User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]},
               {include_blanck: t("選択してください")},
-              class:"mr-1"
+              class:"px-3 py-1 border rounded border-secondary prefecture-form"
             %>
             <%= f.text_field :municipality,
               placeholder: "市区町村",
-              class:"mr-1"
-            %>
-            <%= f.text_field :address,
-              placeholder: "番地",
-              width: "30%"
+              class:"municipality-form px-3 py-1 border rounded border-secondary"
             %>
           </span>
         </td>
+        <td>
+            <%= f.text_field :address,
+              placeholder: "番地",
+              class:"form-control py-1 border-secondary"
+            %>
+         
+        </td>
       </tr>
 
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :年齢層 %>
-        </td>
+        </th>
         <td>
           <%= f.select :age_group,
             User.age_groups_i18n.keys.map{|k| [I18n.t("enums.user.age_group.#{k}"), k]},
             {include_blanck: t("選択してください")},
-            {class:"form-control w-25 border-secondary"}
+            {class:"form-control w-50 border-secondary"}
           %>
         </td>
         <td></td>
       </tr>
 
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :ジャンル %>
-        </td>
+        </th>
         <td>
           <%= f.collection_select :genre_id,
             Genre.all, :id, :name,
@@ -101,11 +106,11 @@
         <td></td>
       </tr>
 
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :メールアドレス %>
-        </td>
+        </th>
         <td>
         <%= f.email_field :email,
           autofocus: true,
@@ -117,29 +122,28 @@
       </tr>
 
     <% if params[:id].present? %>
-      <tr rowspan="3">
-        <td class="no-wrap">
+      <tr rowspan="3",class="caption">
+        <th class="no-wrap">
           <span class="btn btn-light border-secondary btn-sm mr-3">任意</span>
           <%= f.label :クラブ紹介 %>
-        </td>
+        </th>
         <td colspan="2"><%= f.text_area:introduction, class:"form-control border-secondary" %></td>
       </tr>
 
-      <tr>
-        <td></td>
-        <td></td>
-        <td><%= f.submit "更新", class:"btn btn-primary w-100" %></td>
+      <tr class="caption">
+        <th></th>
+        <td colspan="2", class="text-right"><%= f.submit "更新", class:"btn btn-primary w-50" %></td>
       </tr>
 
     <% else %>
-      <tr>
-        <td class="no-wrap">
+      <tr class="caption">
+        <th class="no-wrap">
           <span class="btn btn-danger btn-sm mr-3">必須</span>
           <%= f.label :パスワード %>
           <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> 桁以上)</em>
           <% end %>
-        </td>
+        </th>
 
         <td>
           <span class="no-wrap">
@@ -151,8 +155,8 @@
         <td></td>
       </tr>
 
-      <tr>
-        <td></td>
+      <tr class="caption">
+        <th></th>
         <td colspan="2", class="text-right">
           <%= f.submit "新規登録", class:"btn btn-success w-50" %>
         </td>
