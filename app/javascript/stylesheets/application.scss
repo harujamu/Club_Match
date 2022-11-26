@@ -20,10 +20,6 @@ margin-right: 6px;
   justify-content: space-between;
 }
 
-.submit-button{
-  display: flex;
-  justify-content: flex-end;
-}
 
 .registration-button{
   display: flex;
@@ -99,4 +95,21 @@ margin-right: 6px;
 .space-between{
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 640px) {
+  .caption td:caption-child {
+    border-bottom: solid 1px #ccc;
+    width: 100%;
+  }
+  .tbl-r02 {
+    width: 80%;
+  }
+  .recruit-form-table th,
+  .recruit-form-table td {
+　　border-bottom: none;
+    display: block;
+    width: 100%;
+  }
+ 
 }
