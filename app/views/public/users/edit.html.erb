@@ -5,7 +5,7 @@
     ユーザー情報編集
   </h3>
   <div class ="row mt-5">
-    <div class="col-md-10 mx-auto">
+    <div class="col-kg-10 col-md-10 col-sm-12 col-xs-12 mx-auto">
       <%= form_with model: @user, local: true, method: :patch do |f| %>
         <%= render 'public/shared/error_messages', resource: @user %>
         <%= render 'public/shared/user_form', user: @user, f: f %>

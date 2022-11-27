@@ -82,6 +82,7 @@ margin-right: 6px;
 
 .gray{
   color:#a9a9a9;
+  font-weight:bold;
 }
 
 .link{
@@ -105,15 +106,20 @@ margin-right: 6px;
   }
   .recruit-form-table,
   .user-information-table,
-  .user-form-table{
+  .user-form-table,
+  .admin-user-table{
     width: 80%;
+    margin-right: auto;
+    margin-left: auto;
   }
   .recruit-form-table th,
   .recruit-form-table td,
   .user-information-table th,
   .user-information-table td,
   .user-form-table th,
-  .user-form-table td{
+  .user-form-table td,
+  .admin-user-table th,
+  .admin-user-table td{
 　　border-bottom: none;
     display: block;
     width: 100%;
@@ -123,6 +129,18 @@ margin-right: 6px;
   text-align: center;
   }
   .user-information-table th{
-  background-color: $gray-200;
+  background-color: $gray-300;
   }
+  .search{
+    margin-bottom: 5px;
+  }
+  .search-submit{
+    padding-bottom: 12px;
+    border-bottom: 2px solid $gray-200;
+  }
+  
+  .user-image{
+    margin-bottom: 30px;
+  }
+  
 }

@@ -85,7 +85,7 @@
 
         <tr class="caption">
           <th></th>
-          <td colspan="4", class="text-right">
+          <td colspan="4", class="submit-button">
             <%= f.submit '更新する', class:"btn btn-primary w-25 no-wrap px-1" %>
             <%= link_to '削除する',
               recruit_path(recruit.id),
@@ -98,7 +98,7 @@
       <% else %>
         <tr class="caption">
           <th></th>
-          <td colspan="4", class="text-right"><%= f.submit '募集する', class:"btn btn-success w-50 no-wrap " %></td>
+          <td colspan="4", class="text-right"><%= f.submit '募集する', class:"btn btn-success w-50 no-wrap" %></td>
         </tr>
       <% end %>
       </tbody>
