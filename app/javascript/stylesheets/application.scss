@@ -64,7 +64,7 @@ margin-right: 6px;
 
 .prefecture-form,
 .municipality-form{
-   width: 145px;
+   width: 25%;
 }
 
 .footer{
@@ -99,11 +99,30 @@ margin-right: 6px;
   justify-content: space-between;
 }
 
+.name-form{
+  width: 46%;
+}
+
+.address-form{
+  width: 38%;
+}
+
+.password-form{
+  width: 46%;
+}
+
+.club-name-form,
+.e-mail-form{
+  width: 75%;
+}
+
+.genre-form,
+.age-group-form{
+  width: 50%;
+}
+
 @media screen and (max-width: 640px) {
-  .caption td:caption-child {
-    border-bottom: solid 1px #ccc;
-    width: 100%;
-  }
+ 
   .recruit-form-table,
   .user-information-table,
   .user-form-table,
@@ -142,5 +161,23 @@ margin-right: 6px;
   .user-image{
     margin-bottom: 30px;
   }
-  
+
+}
+
+@media screen and (max-width: 991px) {
+  .name-form,
+  .address-form,
+  .prefecture-form,
+  .municipality-form,
+  .password-form{
+　　border-bottom: none;
+    display: block;
+    width: 100%;
+  }
+  .last-name-form,
+  .password-confirmation-form,
+  .address-form,
+  .municipality-form{
+    margin-top: 1px;
+  }
 }

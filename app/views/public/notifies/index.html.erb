@@ -3,7 +3,7 @@
   <div class="row">
     <% if @notifies.exists? %>
     
-    <div class="col-md-8 my-5 mx-auto">
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 my-5 mx-auto">
       <% @notifies.each do |notify| %>
       <table class="table table-borderless">
         <% if notify.action == "like" %>
@@ -11,10 +11,10 @@
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
           <th>
             <span class="justify-content-start no-wrap">
-              <%= notify.notifier.club_name %>が　
-              "<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
-                <%= notify.recruit.title %>
-              <% end %>"　に いいね♡しました
+              <%= notify.notifier.club_name %>が
+              <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
+                "<%= notify.recruit.title %>"
+                <% end %>にいいね!しました
             </span>
           </th>
         </tr>
@@ -34,8 +34,8 @@
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
           <th>
             <span class="justify-content-start">
-              <%= notify.notifier.club_name %>から 
-              <%= link_to 'メッセージ', room_path(notify.recruit.room.id), class:"text-dark" %>が届きました
+              <%= notify.notifier.club_name %>から
+              <%= link_to 'メッセージ', room_path(notify.recruit.room.id), class:"text-dark link" %>が届きました
             </span>
           </th>
         </tr>
@@ -45,10 +45,10 @@
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
           <th>
             <span class="justify-content-start">
-              <%= notify.notifier.club_name %>が　
-              "<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
-                <%= notify.recruit.title %>
-              <% end %>"　に応募しました
+              <%= notify.notifier.club_name %>が
+              <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
+                "<%= notify.recruit.title %>"
+              <% end %>に応募しました
             </span>
           </th>
         </tr>
@@ -58,10 +58,10 @@
           <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
           <th>
             <span class="justify-content-start">
-              <%= notify.notifier.club_name %>と　
-              "<%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
-                <%= notify.recruit.title %>
-              <% end %>"　でマッチしました！
+              <%= notify.notifier.club_name %>と
+              <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
+                "<%= notify.recruit.title %>"
+              <% end %>でマッチしました！
             </span>
           </th>
         </tr>
@@ -85,7 +85,7 @@
           </td>
           <th>
             <span class="justify-content-start">
-              <%= notify.recruit.title %>　への応募結果はマッチ不成立でした。
+              <%= notify.recruit.title %>への応募結果はマッチ不成立でした。
             </span>
           </th>
         </tr>
@@ -97,7 +97,7 @@
     
     <% else %>
     
-    <div class="col-md-8 mt-5">
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 mt-5 mx-auto">
       <h5>新しい通知はありません</h5>
     </div>
     

@@ -22,48 +22,48 @@
       <% if current_page?(recruits_path)  %>
         <% recruits.each do |recruit| %>
         <tr>
-          <td><%= recruit.created_at.strftime('%Y/%m/%d') %></td>
-          <td>
+          <td class="no-wrap"><%= recruit.created_at.strftime('%Y/%m/%d') %></td>
+          <td class="no-wrap">
             <%= link_to recruit_path(recruit.id), class:"text-dark link" do %>
               <%= recruit.title %>
             <% end %>
           </td>
-          <td><%= practice_type(recruit) %></td>
-          <td><%= recruit.date.strftime('%m/%d') %></td>
-          <td><%= recruit.recruit_status_i18n %>
+          <td class="no-wrap"><%= practice_type(recruit) %></td>
+          <td class="no-wrap"><%= recruit.date.strftime('%m/%d') %></td>
+          <td class="no-wrap"><%= recruit.recruit_status_i18n %>
             <% if recruit.match? %>
               <%= room_link(recruit.room, recruit) %>
             <% end %>
           </td>
-          <td><%= open_status(recruit) %></td>
+          <td class="no-wrap"><%= open_status(recruit) %></td>
         </tr>
         <% end %>
       <% else %>
         <% entries.each do |entry| %>
-      <tr>
-        <td><%= entry.created_at.strftime('%Y/%m/%d') %></td>
-        
-        <% if entry.match_rejected? %>
-        <td><%= entry.recruit.title %><%#= entry.inspect %></td>
-        <% else %>
-        <td>
-          <%= link_to recruit_path(entry.recruit.id), class:"text-dark link" do %>
-            <%= entry.recruit.title %>
-          <% end %>
-          <%#= entry.inspect %>
-        </td>
+          <tr>
+            <td class="no-wrap"><%= entry.created_at.strftime('%Y/%m/%d') %></td>
+            
+            <% if entry.match_rejected? %>
+            <td class="no-wrap"><%= entry.recruit.title %><%#= entry.inspect %></td>
+            <% else %>
+            <td class="no-wrap">
+              <%= link_to recruit_path(entry.recruit.id), class:"text-dark link" do %>
+                <%= entry.recruit.title %>
+              <% end %>
+              <%#= entry.inspect %>
+            </td>
+            <% end %>
+            
+            <td class="no-wrap"><%= practice_type(entry.recruit) %></td>
+            <td class="no-wrap"><%= entry.recruit.date.strftime('%m/%d') %></td>
+            <td class="no-wrap">
+              <%= entry.entry_status_i18n %>
+              <% if entry.recruit.room.present? && entry.match? %>
+                <%= room_link(entry.recruit.room, entry.recruit) %>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-        
-        <td><%= practice_type(entry.recruit) %></td>
-        <td><%= entry.recruit.date.strftime('%m/%d') %></td>
-        <td>
-          <%= entry.entry_status_i18n %>
-          <% if entry.recruit.room.present? && entry.match? %>
-            <%= room_link(entry.recruit.room, entry.recruit) %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
       <% end %>
     </tbody>
   </table>
