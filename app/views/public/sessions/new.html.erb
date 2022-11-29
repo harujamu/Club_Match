@@ -1,50 +1,56 @@
 <div class ="container">
-  <div class ="row">
-    <div class ="col-lg-8 col-md-8 col-sm-10 col-xs-12 mx-auto mt-5">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <table class="table table-borderless mx-auto">
-        <tbody>
-          <tr>
-            <td class="no-wrap text-center py-3">email</td>
-            <td colspan="2">
-              <%= f.text_field :email, 
-                autofocus: true, 
-                autocomplete: "email", 
-                placeholder: "sample-user@com", 
-                class:"form-control" 
-              %>
-              </td>
-          </tr>
-          <tr>
-            <td class="no-wrap text-center py-3">password</td>
-            <td colspan="2">
-              <%= f.password_field :password, 
-                autocomplete: "current-password", 
-                placeholder: "password", 
-                class:"form-control"  
-              %>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td colspan="2", class="text-left no-wrap">
-              <%= f.submit "ログイン", class:"btn btn-primary no-wrap" %>
-              <%= link_to " ゲストログイン", 
-                guest_sign_in_path, 
-                method: :post, 
-                class:"btn btn-info no-wrap"
-              %>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td colspan="2", class="no-wrap text-left">
-              <%= link_to '>>  新しくアカウントを作成する', new_user_registration_path %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <% end %>
+  <!--<div class ="row">-->
+  <!--  <div class =" mt-5">-->
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row g-3 col-lg-8 col-md-8 col-sm-12 col-xs-12 mx-auto my-5">
+
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-left mr-3">
+        <p>email</p>
+      </div>
+
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <%= f.text_field :email,
+          autofocus: true,
+          autocomplete: "email",
+          placeholder: "sample-admin@com",
+          class:"form-control"
+        %>
+      </div>
+
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-left mr-3 mt-2">
+        <p>password</p>
+      </div>
+
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 mt-2">
+        <%= f.password_field :password,
+          autocomplete: "current-password",
+          placeholder: "password",
+          class:"form-control"
+        %>
+      </div>
+      
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-left mr-3">
+      </div>
+      
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 mt-3">
+        <%= f.submit "ログイン", class:"btn btn-primary w-100" %>
+      </div>
+
+      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 mt-3">
+        <%= link_to "ゲストログイン",
+          guest_sign_in_path,
+          method: :post,
+          class:"btn btn-info w-100"
+        %>
+      </div>
+      
+      <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 text-center mt-5">
+        <%= link_to '>>  新しくアカウントを作成する',
+          new_user_registration_path
+        %>
+      </div>
     </div>
-  </div>
+  <% end %>
+ 
+
 </div>

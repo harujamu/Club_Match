@@ -1,20 +1,20 @@
 <div class ="container">
   <h2>ユーザー情報管理</h2>
-  
+
   <div class ="row mt-5">
-    
+
     <div class ="col-lg-2 col-md-2 col-sm-3 col-xs-3">
     <% if @user.image.attached? %>
-      <%= image_tag @user.image, size: "150 X 150", 
+      <%= image_tag @user.image, size: "150 X 150",
       class:"rounded-circle card-img-top" %>
     <% else %>
-      <%= image_tag @user.genre.genre_image, 
+      <%= image_tag @user.genre.genre_image,
       size: "150 X 150", class:"rounded-circle card-img-top" %>
     <% end %>
     </div>
-    
+
     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-    <%= form_with model: @user,url: admin_user_path(@user), method: :patch do |f| %>  
+    <%= form_with model: @user,url: admin_user_path(@user), method: :patch do |f| %>
       <table class="table table-borderless admin-user-table">
         <tbody>
           <tr class="caption">
@@ -28,7 +28,7 @@
               %>
             </td>
           </tr>
-          
+
           <tr class="caption">
             <td class="no-wrap"><%= f.label :代表者氏名 %></td>
             <td>
@@ -38,7 +38,7 @@
                   placeholder: "代表者姓",
                   class:"form-control border-secondary ml-3 name-form"
                 %>
-      
+
                 <%= f.text_field :captain_first_name,
                   autofocus: true,
                   placeholder: "代表者名",
@@ -47,7 +47,7 @@
               </div>
             </td>
           </tr>
-          
+
           <tr class="caption">
             <td class="no-wrap"><%= f.label :主な活動場所 %></td>
             <td>
@@ -68,7 +68,7 @@
               </div>
             </td>
           </tr>
-          
+
           <tr class="caption">
             <td class="no-wrap"><%= f.label :メールアドレス %></td>
             <td>
@@ -79,31 +79,31 @@
               %>
             </td>
           </tr>
-          
+
           <tr class="caption">
             <td class="no-wrap">活動状況</td>
             <td>
               <%= f.radio_button :active_status, true, class:"mr-2" %>
-              <%= f.label :活動中 %> 
+              <%= f.label :活動中 %>
               <%= f.radio_button :active_status, false, class:"ml-5 mr-2" %>
               <%= f.label :退会済 %>
             </td>
           </tr>
-          
+
           <tr>
             <td></td>
             <td class="no-wrap text-right">
-              <%= f.submit "更新", 
-                class:"btn btn-primary w-50" 
+              <%= f.submit "更新",
+                class:"btn btn-primary w-50"
               %>
             </td>
           </tr>
         </tbody>
       </table>
-      
+
     <% end %>
     </div>
-    
+
   </div>
-  
+
 </div>

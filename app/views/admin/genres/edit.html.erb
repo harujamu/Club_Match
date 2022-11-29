@@ -1,24 +1,33 @@
 <div class ="container">
   <h3>ジャンル編集</h3>
-  <div class = "row mt-5">
-    <div class ="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+  
+  <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
+    <div class = "row g-3 mt-4 mx-auto">
       
-      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
-        <%= f.text_field :name, class:"mr-2 form-control" %>
-        <span class="space-between">
-          <%= f.file_field :genre_image %>
-          <%= f.submit '更新する', class:"btn btn-primary ml-2" %>
-        </span>
-      <% end %>
-      
-      <h5 class="mt-5">
-        登録中のジャンルイメージ：
-        <%= image_tag @genre.genre_image,
-          size: "80x80", 
-          class:"rounded-circle m-3" 
+      <div class ="col-lg-10 col-md-12 col-sm-12 col-xs-12 mt-1">
+        <%= f.text_field :name, 
+          placeholder:"ジャンル名", 
+          class:"form-control" 
         %>
-      </h5>
+      </div>
+      
+      <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 mt-1">
+        <%= f.file_field :genre_image %>
+      </div>
+      
+      <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 text-right mt-1">
+        <%= f.submit '更新する', class:"btn btn-primary" %>
+      </div>
       
     </div>
-  </div>
+  <% end %>
+  
+  <h5 class="mt-5">
+    登録中のジャンルイメージ：
+    <%= image_tag @genre.genre_image,
+      size: "80x80", 
+      class:"rounded-circle m-3" 
+    %>
+  </h5>
+  
 </div>

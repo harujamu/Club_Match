@@ -2,7 +2,6 @@ class Public::SitesController < ApplicationController
   
   def create
     @site = Site.new(site_params)
-    @site.user_id = current_user.id
     if @site.save
       redirect_to sites_path
     else
@@ -12,8 +11,8 @@ class Public::SitesController < ApplicationController
   
   def index
     @site = Site.new
-    @site.user_id = current_user.id
     @sites = current_user.sites
+    
   end
   
   def destroy
