@@ -1,11 +1,15 @@
 <div class="table-responsive">  
   <table class="table user-information-table">
+    
     <% if current_page?(admin_user_path(user.id)) %>
       <tr class="caption">
         <th class="no-wrap">クラブ名</th>
-        <td><%= user.club_name %></td>
+        <td>
+          <%= user.club_name %>
+        </td>
       </tr>
     <% end %>
+    
       <tr class="caption">
         <th class="no-wrap">代表者氏名</th>
         <td><%= user.captain_name %></td>

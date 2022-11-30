@@ -1,11 +1,12 @@
 <div class ="container">
-  <h3>
-    <%# binding.pry %>
-    <%= profile_image(@user, @user.genre, 60, 60) %>
-    ユーザー情報編集
-  </h3>
-  <div class ="row mt-5">
-    <div class="col-kg-10 col-md-10 col-sm-12 col-xs-12 mx-auto">
+  
+  <div class ="row mt-5 mx-auto">
+    <h3 class="col-lg-10 col-md-10 col-sm-12 col-xs-12 mb-5">
+      <%# binding.pry %>
+      <%= profile_image(@user, @user.genre, 60, 60) %>
+      ユーザー情報編集
+    </h3>
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
       <%= form_with model: @user, local: true, method: :patch do |f| %>
         <%= render 'public/shared/error_messages', resource: @user %>
         <%= render 'public/shared/user_form', user: @user, f: f %>

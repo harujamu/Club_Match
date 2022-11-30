@@ -6,26 +6,10 @@
  width:120px !important;
 }
 
-.site_click{
-  display: flex;
-  justify-content: space-between;
-}
-
-.site-delete{
-margin-right: 6px;
-}
-
 .genre-preview{
   display: flex;
   justify-content: space-between;
 }
-
-
-.registration-button{
-  display: flex;
-  justify-content: flex-end;
-}
-
 
  .alert{
   background-color: #FFE100;
@@ -36,7 +20,7 @@ margin-right: 6px;
    min-height: 280px;
 }
 
-.like_icon{
+.like-icon{
   color: #FF6388;
 }
 
@@ -55,16 +39,6 @@ margin-right: 6px;
 
 .follow-icon{
   color: #6495ed;
-}
-
-.practice-type-form{
-   width: 80px;
-   white-space:nowrap;
-}
-
-.prefecture-form,
-.municipality-form{
-   width: 25%;
 }
 
 .footer{
@@ -98,45 +72,21 @@ margin-right: 6px;
   display: flex;
   justify-content: space-between;
 }
-
-.name-form{
-  width: 46%;
+.caption-user{
+      margin-bottom: 2px;
+      font-weight: bold;
 }
 
-.address-form{
-  width: 38%;
-}
-
-.password-form{
-  width: 46%;
-}
-
-.club-name-form,
-.e-mail-form{
-  width: 75%;
-}
-
-.genre-form,
-.age-group-form{
-  width: 50%;
-}
-
-@media screen and (max-width: 640px) {
- 
-  .recruit-form-table,
+@media screen and (max-width: 575px) {
   .user-information-table,
-  .user-form-table,
   .admin-user-table{
     width: 80%;
     margin-right: auto;
     margin-left: auto;
   }
-  .recruit-form-table th,
-  .recruit-form-table td,
+
   .user-information-table th,
   .user-information-table td,
-  .user-form-table th,
-  .user-form-table td,
   .admin-user-table th,
   .admin-user-table td{
 　　border-bottom: none;
@@ -157,27 +107,18 @@ margin-right: 6px;
     padding-bottom: 12px;
     border-bottom: 2px solid $gray-200;
   }
-  
+
   .user-image{
     margin-bottom: 30px;
   }
-
+  .caption-recruit{
+      margin-bottom: 1px;
+      font-weight: bold;
+    }
 }
 
-@media screen and (max-width: 991px) {
-  .name-form,
-  .address-form,
-  .prefecture-form,
-  .municipality-form,
-  .password-form{
-　　border-bottom: none;
-    display: block;
-    width: 100%;
-  }
-  .last-name-form,
-  .password-confirmation-form,
-  .address-form,
-  .municipality-form{
-    margin-top: 1px;
-  }
+@media screen and (min-width: 576px) {
+  .caption-recruit{
+      font-weight: bold;
+    }
 }

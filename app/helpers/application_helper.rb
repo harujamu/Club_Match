@@ -48,11 +48,11 @@ module ApplicationHelper
   def like_button(current_user, recruit)
     if recruit.liked_by?(current_user)
       link_to recruit_likes_path(recruit), method: :delete do
-        tag.i class: "fas fa-heart like_icon"
+        tag.i class: "fas fa-heart like-icon"
       end
     else
       link_to recruit_likes_path(recruit), method: :post do
-        tag.i class: "far fa-heart like_icon"
+        tag.i class: "far fa-heart like-icon"
       end
     end
   end

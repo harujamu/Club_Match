@@ -1,107 +1,135 @@
-<div>
+<div class="mb-5">
   <%= form_with model: recruit do |f| %>
-    <table class="table table-borderless recruit-form-table">
-      <tbody>
-        <tr class="caption">
-          <th class="no-wrap">タイトル</th>
-          <td colspan="4">
-            <%= f.text_area :title, class:"form-control form-control-sm" %>
-          </td>
-        </tr>
-
-        <tr class="caption">
-          <th class="no-wrap">ジャンル</th>
-          <td colspan="4"><%= genre.name %></td>
-        </tr>
-
-        <tr class="caption">
-          <th class="no-wrap">開催地</th>
-          <td colspan="4">
-            <%= f.select :site_id,
-              options_from_collection_for_select(sites, :id, :site_name),
-              {include_blank:"選択してください"},
-              {class:"form-control w-75"}
-            %>
-          </td>
-        </tr>
-
-        <tr class="caption">
-          <th class="no-wrap">練習形式</th>
-          <td colsapn="4">
-            <span class="practice-type-form">
-              <%= f.radio_button :practice_type, "joint_practice" %>
-              <%= f.label :"合同練習" %>
-            </span>　　
-            <span class="practice-type-form">
-              <%= f.radio_button :practice_type, "practice_game" %>
-              <%= f.label :"練習試合" %>
-            </span>
-          </td>
-        </tr>
-
-        <tr class="caption">
-          <th class="no-wrap">日程</th>
-          <td colspan="4">
-            <%=f.date_field :date, class:"form-control w-50" %>
-          </td>
-        </tr>
-
-        <tr class="caption">
-          <th class="no-wrap">年齢層</th>
-          <td colspan="4">
-            <%= f.select :age_group,
-              Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]},
-              {include_blanck: t("選択してください")},
-              {class:"form-control w-50"} 
-            %>
-          </td>
-        </tr>
-
-        <tr rowspan="3",class="caption">
-          <th class="no-wrap">当日の活動内容</th>
-          <td colspan="4">
-            <%= f.text_area :detail, class:"form-control form-control-lg" %>
-          </td>
-        </tr>
-
-      <% if current_page?(action: 'new') %>
-        <tr class="caption">
-          <th></th>
-          <td colspan="4", class="text-right">
-            <%= f.submit '募集する', class:"btn btn-success w-50 no-wrap " %>
-          </td>
-        </tr>
+    <div class="row g-3">
+      
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 mt-2 caption-recruit">
+        <p>タイトル</p>
+      </div>
+      
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+        <%= f.text_area :title, 
+          class:"form-control form-control-sm" 
+        %>
+      </div>
+      
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+        <p>ジャンル</p>
+      </div>
+      
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+        <%= genre.name %>
+      </div>
+  
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+        <p>開催地</p>
+      </div>
+      
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+        <%= f.select :site_id,
+          options_from_collection_for_select(sites, :id, :site_name),
+          {include_blank:"選択してください"},
+          {class:"form-control"}
+        %>
+      </div>
+  
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+        <p>練習形式</p>
+      </div>
+      
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+        <span class="mr-5">
+          <%= f.radio_button :practice_type, 
+            "joint_practice" 
+          %>
+          <%= f.label :"合同練習" %>
+        </span>
+        <span>
+          <%= f.radio_button :practice_type, 
+            "practice_game" 
+          %>
+          <%= f.label :"練習試合" %>
+        </span>
+      </div>
+      
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+        <p>日程</p>
+      </div>
+      
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+        <%=f.date_field :date, 
+          class:"form-control w-75" 
+        %>
+      </div>
+      
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+        <p>年齢層</p>
+      </div>
+      
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+        <%= f.select :age_group,
+          Recruit.age_groups_i18n.keys.map{|k| [I18n.t("enums.recruit.age_group.#{k}"), k]},
+          {include_blanck: t("選択してください")},
+          {class:"form-control w-50"} 
+        %>
+      </div>
+      
+      <% if current_page?(action: 'new') %>  
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+          <p>活動内容</p>
+        </div>
+      
+        <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+          <%= f.text_area :detail, 
+            class:"form-control form-control-lg"
+          %>
+        </div>
         
+        <div class="col-12 mb-3 text-right">
+          <%= f.submit '募集する', 
+            class:"btn btn-success w-25" 
+          %>
+        </div>    
+  
       <% elsif current_page?(action: 'edit') || params["_method"] == "patch" %>
-        <tr class="caption">
-          <th class="no-wrap">公開ステータス</th>
-          <td colsapn="4">
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+          <p>公開状況</p>
+        </div>
+        
+        <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
+          <span class="mr-5">
             <%= f.radio_button :open_status, true %>
             <%= f.label :"公開" %>
+          </span>
+          <span>
             <%= f.radio_button :open_status, false, class:"ml-5" %>
             <%= f.label :"公開停止" %>
-          </td>
-        </tr>
-
-        <tr class="caption">
-          <th></th>
-          <td colspan="4", class="submit-button">
-            <%= f.submit '更新する', class:"btn btn-primary w-25 no-wrap px-1" %>
+          </span>
+        </div>
+        
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 mb-3">
+        </div>
+         
+        <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 text-right">
+          <span>
+            <%= f.submit '更新する', 
+              class:"btn btn-primary col-lg-3 col-md-5 col-sm-5 col-xs-5 mb-1" 
+            %>
             <%= link_to '削除する',
               recruit_path(recruit.id),
               method: :delete,
-              class:"btn btn-danger ml-2 w-25 no-wrap px-1"
+              class:"btn btn-danger col-lg-3 col-md-3 col-sm-4 col-xs-4 mb-1"
             %>
-          </td>
-        </tr>
-
+          </span>
+          
+        </div>
       <% else %>
-        <tr class="caption">
-          <th></th>
-          <td colspan="4", class="text-right"><%= f.submit '募集する', class:"btn btn-success w-50 no-wrap" %></td>
-        </tr>
+        <div class="col-12 mb-3 text-right">
+          <%= f.submit '募集する', 
+            class:"btn btn-success w-25" 
+          %>
+        </div>    
       <% end %>
-      </tbody>
-    </table>
+    </div>
+    
   <% end %>
 </div>
