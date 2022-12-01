@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="row mt-5 mx-auto">
+  <div class="row mt-5 mx-auto g-3">
 
-    <div class ="col-md-4">
-      <div>
+    <div class ="col-lg-4 col-md-4 col-sm-12 col-12 mx-auto row">
+      <div class="mx-auto">
         <%= profile_image(@user,@user.genre,200,200) %>
         <p class="mt-2 ml-5"><%= @user.club_name %></p>
         <p class="ml-5">
@@ -15,35 +15,57 @@
             class:"btn btn-danger btn-sm"
           %>
         </p>
-        
       </div>
 
-      <div class="mt-5">
-        <ul class="list-unstyled">
-          <li>
-            <i class="fas fa-bell bell-icon"></i>　
-            <%= link_to notifies_path, class:"text-dark" do %>
+      <div class="my-5 col-lg-12 col-md-12 col-sm-5 col-6 offset-md-0 offset-4">
+        <div class="row g-3">
+
+          <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
+            <i class="fas fa-bell bell-icon"></i>
+          </div>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
+            <%= link_to notifies_path, class:"text-dark no-wrap" do %>
               通知 <%= @notifies.count %> 件
             <% end %>
-          </li>
-          <li>
-            <i class="fas fa-map-pin mr-3"></i>
-            <%= link_to '練習場所一覧', sites_path, class:"text-dark link" %>
-          </li>
-          <li>
-            <i class="fas fa-thumbtack mr-3"></i>
-            <%= link_to '応募履歴', entries_path, class:"text-dark link" %>
-          </li>
-          <li>
-            <i class="fas fa-bullhorn mr-2"></i>
-            <%= link_to '募集履歴', recruits_path, class:"text-dark link" %>
-          </li>
-        </ul>
+          </div>
+
+          <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
+            <%= link_to '練習場所一覧',
+              sites_path,
+              class:"text-dark link no-wrap"
+            %>
+          </div>
+
+          <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
+            <i class="fas fa-thumbtack"></i>
+          </div>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
+            <%= link_to '応募履歴',
+              entries_path,
+              class:"text-dark link no-wrap"
+            %>
+          </div>
+
+          <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
+            <%= link_to '募集履歴',
+              recruits_path,
+              class:"text-dark link no-wrap"
+            %>
+          </div>
+
+        </div>
       </div>
+
     </div>
 
 
-    <div class="col-md-7 my-5 mx-auto">
+    <div class="col-lg-7 col-md-8 col-sm-12 col-12 mb-5 table-responsive">
       <%= render '/public/shared/user_information', user: @user, genre: @user.genre %>
     </div>
 

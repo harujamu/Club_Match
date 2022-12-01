@@ -1,21 +1,24 @@
 <div class="container">
-  <div class="row mt-5">
+  <div class="row mt-5 mx-auto g-3">
 
-    <div class ="col-md-4">
+    <div class ="col-lg-4 col-md-4 col-sm-12 col-12 mx-auto row">
       <!--ユーザー画像の表示-->
-      <%= profile_image(@user,@user.genre,250,250) %>
-      <p class="mt-2">
-        <%= @user.club_name %>
-        <% if user_signed_in? %>
-          <%= follow_button(@user,current_user) %>
-        <% else %>
-          <i class="fas fa-user-check"></i>
-        <% end %>
-        <%= @user.follows.count %>
-      </p>
+      <div class="mx-auto">
+        <%= profile_image(@user,@user.genre,250,250) %>
+        <p class="mt-2 ml-5">
+          <%= @user.club_name %>
+          <% if user_signed_in? %>
+            <%= follow_button(@user,current_user) %>
+          <% else %>
+            <i class="fas fa-user-check"></i>
+          <% end %>
+          <%= @user.follows.count %>
+        </p>
+      </div>
     </div>
+    
 
-    <div class="col-md-8">
+    <div class="col-lg-7 col-md-7 col-sm-12 col-12 my-5">
       <%= render '/public/shared/user_information', user: @user, genre: @user.genre %>
     </div>
 

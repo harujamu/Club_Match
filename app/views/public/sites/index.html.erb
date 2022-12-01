@@ -5,7 +5,7 @@
     <div class="row g-3 mt-2 mb-5 mx-auto">
       <%= f.hidden_field :user_id, :value => current_user.id %>
 
-      <div class ="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+      <div class ="col-lg-3 col-md-3 col-sm-4 col-12">
         <%= f.select :prefecture,
           Site.prefectures_i18n.keys.map{|k| [I18n.t("enums.site.prefecture.#{k}"), k] },
           {include_blanck: t("選択してください")},
@@ -13,14 +13,14 @@
         %>
       </div>
 
-      <div class ="col-lg-4 col-md-4 col-sm-8 col-xs-12">
+      <div class ="col-lg-4 col-md-4 col-sm-8 col-12">
         <%= f.text_field :municipality,
           placeholder: "市区町村",
           class:"form-control mt-1"
         %>
       </div>
 
-      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+      <div class="col-lg-5 col-md-5 col-sm-12 col-12">
         <%= f.text_field :address,
           placeholder: "番地",
           class:"form-control mt-1"
