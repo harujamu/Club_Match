@@ -69,23 +69,13 @@
         <% elsif notify.action == "match_rejected" %>
         <tr>
           <td>
-          <%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
-            <% if notify.notifier.image.attached? %>
-              <%= image_tag notify.notifier.image, 
-                :size => '30x30', 
-                class:"rounded-circle" 
-              %>
-            <% else %>
-              <%= image_tag notify.notifier.genre.genre_image, 
-                :size => '30x30', 
-                class:"rounded-circle" 
-              %>
+            <%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
+              <%= profile_image(notify.notifier, notify.notifier.genre,30,30) %>
             <% end %>
-          <% end %>
           </td>
           <th>
             <span class="justify-content-start">
-              <%= notify.recruit.title %>への応募結果はマッチ不成立でした。
+              "<%= notify.recruit.title %>"への応募結果はマッチ不成立でした。
             </span>
           </th>
         </tr>

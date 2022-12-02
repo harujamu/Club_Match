@@ -77,6 +77,10 @@
       font-weight: bold;
 }
 
+.message{
+  word-wrap: break-word;
+}
+
 @media screen and (max-width: 575px) {
   .user-information-table,
   .admin-user-table{

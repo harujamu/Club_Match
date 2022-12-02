@@ -2,7 +2,7 @@
   <h3>ユーザー情報照会</h3>
   <div class="row mt-5">
     
-    <div class ="col-lg-4 col-md-4 col-sm-6 col-xs-6 mx-auto user-image mb-5">
+    <div class ="col-lg-4 col-md-4 col-sm-6 col-6 mx-auto user-image mb-5">
     <% if @user.image.attached? %>
       <%= image_tag @user.image,
       size: "250 X 250", 
@@ -14,7 +14,7 @@
     <% end %>
     </div>
     
-    <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 mx-auto">
+    <div class="col-lg-8 col-md-8 col-sm-10 col-10 mx-auto">
       <%= render '/public/shared/user_information', user: @user, genre: @user.genre %>
     </div>
     

@@ -1,17 +1,17 @@
 <div class ="container">
   <div class ="row">
-    <div class ="col-lg-3 col-md-4 col-sm-5 col-xs-6 border-right search">
+    <div class ="col-lg-3 col-md-4 col-sm-5 col-4 border-right search">
       <h2>募集<%= @recruits.count %>件</h2>
         <%= render 'public/shared/ransack_form', q: @q %>
     </div>
 
-    <div class ="col-lg-8 col-md-7 col-sm-6 col-xs-6 mx-2 px-0">
+    <div class ="col-lg-8 col-md-7 col-sm-6 col-7 px-0 offset-1">
       <h2>練習相手募集一覧</h2>
 
       <div class="mt-5 d-flex flex-wrap p-0">
       <% @recruits.each do |recruit| %>
         <%#= recruit.inspect %>
-        <div class="card col-md-3 mt-0 border border-0 mx-0">
+        <div class="card col-lg-3 col-md-4 col-sm-5 col-9 mt-0 border border-0 mx-0">
           <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
             <% if recruit.user != nil %>
             <!--画像サイズを％指定することでレスポンシブ対応時も画像削れない、枠いっぱいの画像サイズになる-->

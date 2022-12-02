@@ -4,18 +4,18 @@
   <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
     <div class = "row g-3 mt-4 mx-auto">
       
-      <div class ="col-lg-10 col-md-12 col-sm-12 col-xs-12 mt-1">
+      <div class ="col-lg-10 col-md-12 col-sm-12 col-12 mt-1">
         <%= f.text_field :name, 
           placeholder:"ジャンル名", 
           class:"form-control" 
         %>
       </div>
       
-      <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 mt-1">
+      <div class="col-lg-5 col-md-6 col-sm-12 col-12 mt-1">
         <%= f.file_field :genre_image %>
       </div>
       
-      <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 text-right mt-1">
+      <div class="col-lg-5 col-md-6 col-sm-12 col-12 text-right mt-1">
         <%= f.submit '更新する', class:"btn btn-primary" %>
       </div>
       
