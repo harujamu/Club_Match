@@ -79,6 +79,8 @@
 
 .message{
   word-wrap: break-word;
+  max-width: 75%;
+  padding: 1% 2%;
 }
 
 @media screen and (max-width: 575px) {
@@ -125,4 +127,16 @@
   .caption-recruit{
       font-weight: bold;
     }
+}
+
+@media screen and (max-width: 767px) {
+  .message{
+  padding: 2% 4%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .message{
+  padding: 3% 4%;
+  }
 }
