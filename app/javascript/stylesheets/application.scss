@@ -17,7 +17,7 @@
 }
 
 .chat-room-form{
-   min-height: 280px;
+ min-height: 280px;
 }
 
 .like-icon{
@@ -29,7 +29,7 @@
 }
 
 .bell-icon{
-   color: orange;
+  color: orange;
 }
 
 .error_explanation{
@@ -42,11 +42,11 @@
 }
 
 .footer{
-    width: 100%;
+  width: 100%;
 }
 
 .no-wrap{
-    white-space:nowrap;
+  white-space:nowrap;
 }
 
 .green{
@@ -73,15 +73,14 @@
   justify-content: space-between;
 }
 .caption-user{
-      margin-bottom: 2px;
-      font-weight: bold;
+  margin-bottom: 2px;
+  font-weight: bold;
 }
 
 .message{
   word-wrap: break-word;
-  max-width: 75%;
-  padding: 1% 2%;
 }
+
 
 @media screen and (max-width: 575px) {
   .user-information-table,
@@ -101,10 +100,10 @@
   }
   .user-information-table th,
   .user-information-table td{
-  text-align: center;
+    text-align: center;
   }
   .user-information-table th{
-  background-color: $gray-300;
+    background-color: $gray-300;
   }
   .search{
     margin-bottom: 5px;
@@ -118,25 +117,13 @@
     margin-bottom: 30px;
   }
   .caption-recruit{
-      margin-bottom: 1px;
-      font-weight: bold;
-    }
+    margin-bottom: 1px;
+    font-weight: bold;
+  }
 }
 
 @media screen and (min-width: 576px) {
   .caption-recruit{
-      font-weight: bold;
-    }
-}
-
-@media screen and (max-width: 767px) {
-  .message{
-  padding: 2% 4%;
-  }
-}
-
-@media screen and (max-width: 470px) {
-  .message{
-  padding: 3% 4%;
+    font-weight: bold;
   }
 }

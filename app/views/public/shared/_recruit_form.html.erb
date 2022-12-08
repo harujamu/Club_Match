@@ -8,7 +8,7 @@
       
       <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
         <%= f.text_area :title, 
-          class:"form-control" 
+          class:"form-control form-control-sm" 
         %>
       </div>
       
@@ -73,17 +73,17 @@
         %>
       </div>
       
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-          <p class="caption-recruit">活動内容</p>
+      <% if current_page?(action: 'new') %>  
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 caption-recruit">
+          <p>活動内容</p>
         </div>
       
         <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12 mb-3">
           <%= f.text_area :detail, 
-            class:"form-control"
+            class:"form-control form-control-lg"
           %>
         </div>
         
-      <% if current_page?(action: 'new') %>    
         <div class="col-12 mb-3 text-right">
           <%= f.submit '募集する', 
             class:"btn btn-success w-25" 
