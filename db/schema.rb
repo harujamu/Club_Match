@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2022_11_13_085152) do
   create_table "entries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "recruit_id", null: false
-    t.integer "entry_status", default: 1, null: false
+    t.integer "entry_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "recruit_id"], name: "index_entries_on_user_id_and_recruit_id", unique: true
@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2022_11_13_085152) do
     t.integer "recruit_id"
     t.integer "entry_id"
     t.integer "like_id"
-    t.integer "follow_id"
     t.integer "message_id"
     t.string "action", null: false
     t.integer "notifier_id", null: false
@@ -109,8 +108,8 @@ ActiveRecord::Schema.define(version: 2022_11_13_085152) do
     t.date "date", null: false
     t.integer "practice_type", default: 1, null: false
     t.boolean "liked_status", default: false, null: false
-    t.integer "age_group", default: 1, null: false
-    t.integer "recruit_status", default: 1, null: false
+    t.integer "age_group", null: false
+    t.integer "recruit_status", default: 0, null: false
     t.boolean "open_status", default: true, null: false
     t.text "title", null: false
     t.text "detail", null: false
@@ -128,7 +127,7 @@ ActiveRecord::Schema.define(version: 2022_11_13_085152) do
 
   create_table "sites", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "prefecture", default: 1, null: false
+    t.integer "prefecture", null: false
     t.string "municipality", null: false
     t.string "address", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -150,15 +149,14 @@ ActiveRecord::Schema.define(version: 2022_11_13_085152) do
     t.datetime "remember_created_at"
     t.string "club_name", null: false
     t.integer "genre_id", null: false
-    t.integer "prefecture", default: 1, null: false
+    t.integer "prefecture", null: false
     t.string "municipality", null: false
     t.string "address", null: false
     t.string "captain_last_name", null: false
     t.string "captain_first_name", null: false
     t.text "introduction"
     t.boolean "active_status", default: true, null: false
-    t.integer "age_group", default: 1, null: false
-    t.boolean "followed_status", default: false, null: false
+    t.integer "age_group", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
