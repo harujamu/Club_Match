@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Recruit < ApplicationRecord
-  enum age_group:{
+  enum age_group: {
     unspecified: 1,
     elementary_shool_student: 2,
     secondary_school_student: 3,
@@ -7,8 +9,8 @@ class Recruit < ApplicationRecord
     college_student: 5,
     adult: 6
     }
-  enum recruit_status:{ recruiting: 1, having_candidates: 2, match: 3, done: 4 }
-  enum practice_type:{ practice_game: 1, joint_practice: 2 }
+  enum recruit_status: { recruiting: 1, having_candidates: 2, match: 3, done: 4 }
+  enum practice_type: { practice_game: 1, joint_practice: 2 }
   scope :opened, -> { where(open_status: true) }
   belongs_to :user
   belongs_to :site
@@ -18,15 +20,17 @@ class Recruit < ApplicationRecord
   has_one :room
 
   after_find do |recruit|
-  # 募集記事の練習日超えた場合の処理
+    # 募集記事の練習日超えた場合の処理
     if recruit.match? && (recruit.date.before? Date.today)
-     recruit.entries.update(entry_status: "done")
-     recruit.update(open_status: false,recruit_status: "done")
-    elsif (recruit.recruiting? || recruit.having_candidates?) && (recruit.date.before? Date.today)
+      recruit.entries.update(entry_status: "done")
+      recruit.update(open_status: false, recruit_status: "done")
+    elsif
+      (recruit.recruiting? || recruit.having_candidates?) &&
+      (recruit.date.before? Date.today)
       recruit.update(open_status: false)
     end
 
-  # 退会ユーザーの募集記事を非公開にする
+    # 退会ユーザーの募集記事を非公開にする
     if recruit.user != nil && recruit.user.active_status == false
       recruit.update(open_status: false)
     else
@@ -35,7 +39,7 @@ class Recruit < ApplicationRecord
       end
     end
 
-  # 非公開になったら応募中の応募者にマッチ不成立を通知
+    # 非公開になったら応募中の応募者にマッチ不成立を通知
     if recruit.open_status == false
       entries = recruit.entries.where(entry_status: "entered")
       entries.each do |entry|
@@ -44,18 +48,17 @@ class Recruit < ApplicationRecord
       end
     end
 
-  # 募集記事の応募者がいない時の処理
+    # 募集記事の応募者がいない時の処理
     if !recruit.entries.any?
       recruit.update(recruit_status: "recruiting")
     end
 
-  # いいねが１つ以上あればいいねステータスtrueに更新
+    # いいねが１つ以上あればいいねステータスtrueに更新
     if recruit.likes.any?
       recruit.update(liked_status: true)
     else
       recruit.update(liked_status: false)
     end
-
   end
 
   def liked_by?(user)
@@ -63,7 +66,7 @@ class Recruit < ApplicationRecord
   end
 
   def create_notification_like(current_user, like)
-  # いいねされてるか調べる
+    # いいねされてるか調べる
     temp = Notify.where([
       "notifier_id = ? and
       checker_id = ? and
@@ -73,28 +76,28 @@ class Recruit < ApplicationRecord
       checked_status = ?",
       current_user.id,
       user_id, id,
-      'like',
+      "like",
       like.id,
       false
       ])
-  # いいねされてなければ通知レコード作成
+    # いいねされてなければ通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
       recruit_id: id,
       checker_id: user_id,
       like_id: like.id,
-      action: 'like'
-      )
-    # 自分の投稿へのいいねは通知済とする
-    if notify.notifier_id == notify.checker_id
-      notify.checked_status = true
-    end
-    notify.save if notify.valid?
+      action: "like"
+    )
+      # 自分の投稿へのいいねは通知済とする
+      if notify.notifier_id == notify.checker_id
+        notify.checked_status = true
+      end
+      notify.save if notify.valid?
     end
   end
 
   def create_notification_follow(current_user, follow)
-  # フォローされてるか調べる
+    # フォローされてるか調べる
     temp = Notify.where([
     "notifier_id = ? and
     checker_id = ? and
@@ -103,7 +106,7 @@ class Recruit < ApplicationRecord
     checked_status = ?",
     current_user.id,
     user_id,
-    'follow',
+    "follow",
     follow.id,
     false
     ])
@@ -112,17 +115,17 @@ class Recruit < ApplicationRecord
       notify = current_user.active_notifications.new(
        checker_id: user_id,
        follow_id: follow.id,
-       action: 'follow'
-      )
-    # 自分へのフォローは通知済とする
-    if notify.notifier_id == notify.checker_id
-      notify.checked_status = true
-    end
-    notify.save if notify.valid?
+       action: "follow"
+     )
+      # 自分へのフォローは通知済とする
+      if notify.notifier_id == notify.checker_id
+        notify.checked_status = true
+      end
+      notify.save if notify.valid?
     end
   end
 
-  def create_notification_match(current_user,entry)
+  def create_notification_match(current_user, entry)
     # 応募ステータスが"マッチ"か調べる
     temp = Notify.where([
     "notifier_id = ? and
@@ -135,25 +138,25 @@ class Recruit < ApplicationRecord
     user_id,
     id,
     entry.id,
-    'match',
+    "match",
     false
     ])
     # マッチなら通知レコード作成
     if temp.blank?
-    # current_user（= notifier_id）は通知送る人（募集者）
+      # current_user（= notifier_id）は通知送る人（募集者）
       notify = current_user.active_notifications.new(
       recruit_id: id,
-    # checkerは通知受ける人(応募者)
+      # checkerは通知受ける人(応募者)
 
       checker_id: entry.user_id,
       entry_id: entry.id,
-      action: 'match'
-      )
-    notify.save if notify.valid?
+      action: "match"
+    )
+      notify.save if notify.valid?
     end
   end
 
-  def create_notification_entry(current_user,entry)
+  def create_notification_entry(current_user, entry)
     # 応募ステータスが”応募済”か調べる
     temp = Notify.where([
       "notifier_id = ? and
@@ -166,22 +169,22 @@ class Recruit < ApplicationRecord
       user_id,
       id,
       entry.id,
-      'entry',
+      "entry",
       false
       ])
-    #応募済なら通知レコード作成
+    # 応募済なら通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
       recruit_id: id,
       checker_id: user_id,
-      action: 'entry'
-      )
+      action: "entry"
+    )
       notify.save if notify.valid?
     end
   end
 
-  def create_notification_match_rejected(current_user,entry)
-  # 応募ステータスが"マッチ不成立"か調べる
+  def create_notification_match_rejected(current_user, entry)
+    # 応募ステータスが"マッチ不成立"か調べる
     temp = Notify.where([
     "notifier_id = ? and
     checker_id = ? and
@@ -193,27 +196,27 @@ class Recruit < ApplicationRecord
     user_id,
     id,
     entry.id,
-    'match_rejected',
+    "match_rejected",
     false
     ])
-  # マッチ不成立なら通知レコード作成
+    # マッチ不成立なら通知レコード作成
     if temp.blank?
       notify = current_user.active_notifications.new(
       recruit_id: id,
       checker_id: entry.user_id,
       entry_id: entry.id,
-      action: 'match_rejected'
-      )
-    notify.save if notify.valid?
+      action: "match_rejected"
+    )
+      notify.save if notify.valid?
     end
   end
 
   def create_notification_message(current_user, message)
-  # ユーザー複数の場合はeachで！！！
-   # each分の中でreturnは使わない、次に行くならnext
+    # ユーザー複数の場合はeachで！！！
+    # each分の中でreturnは使わない、次に行くならnext
 
-  #usersはmessage.room.usersのうち、currentuserでないuserのみ抽出した
-    users = message.room.users.select {|user| user != current_user }
+    # usersはmessage.room.usersのうち、currentuserでないuserのみ抽出した
+    users = message.room.users.select { |user| user != current_user }
     users.each do |user|
       # メッセージがあるか調べる
       temp = Notify.where([
@@ -227,7 +230,7 @@ class Recruit < ApplicationRecord
       user.id,
       id,
       message.id,
-      'message',
+      "message",
       false
       ])
       # メッセージなければ通知ば通知作成
@@ -236,8 +239,8 @@ class Recruit < ApplicationRecord
         recruit_id: id,
         checker_id: user.id,
         message_id: message.id,
-        action: 'message'
-        )
+        action: "message"
+      )
         # 自分のコメントは通知済とする
         if notify.notifier_id == notify.checker_id
           notify.checked_status = true

@@ -22,16 +22,14 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました'
+    redirect_to root_path, notice: "ゲストユーザーとしてログインしました"
   end
 
 
 
   protected
-
-  def only_active_user!
-    user = User.find_by(email: params[:user][:email])
-    redirect_to new_user_registration_path if user&.valid_password?(params[:user][:password]) && !user&.active_status
-  end
-
+    def only_active_user!
+      user = User.find_by(email: params[:user][:email])
+      redirect_to new_user_registration_path if user&.valid_password?(params[:user][:password]) && !user&.active_status
+    end
 end

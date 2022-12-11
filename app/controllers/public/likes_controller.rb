@@ -1,5 +1,6 @@
-class Public::LikesController < ApplicationController
+# frozen_string_literal: true
 
+class Public::LikesController < ApplicationController
   def create
     recruit = Recruit.find(params[:recruit_id])
     like = current_user.likes.new(recruit_id: recruit.id)
@@ -18,14 +19,25 @@ class Public::LikesController < ApplicationController
 
 
   private
+    def like_params
+      params.require(:like).permit(
+        :user_id,
+        :recruit_id
+      )
+    end
 
-  def like_params
-    params.require(:like).permit(:user_id, :recruit_id)
-  end
 
-
-  def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
-  end
-
+    def recruit_params
+      params.require(:recruit).permit(
+        :user_id,
+        :site_id,
+        :date,
+        :title,
+        :practice_type,
+        :detail,
+        :age_group,
+        :recruit_status,
+        :open_status
+      )
+    end
 end

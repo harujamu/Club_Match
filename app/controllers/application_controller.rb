@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :authenticate_user_or_admin!, if: :admin_index
-  before_action :configure_permitted_parameters,if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource_or_scope)
     if resource_or_scope.is_a?(Admin)
@@ -21,7 +23,19 @@ class ApplicationController < ActionController::Base
 
 protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up,keys:[:club_name, :captain_last_name, :captain_first_name, :prefecture, :municipality, :address, :age_group, :genre_id])
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      keys: [
+        :club_name,
+        :captain_last_name,
+        :captain_first_name,
+        :prefecture,
+        :municipality,
+        :address,
+        :age_group,
+        :genre_id
+      ]
+    )
   end
 
   # ユーザーか管理者でログインしていないときはroot_pathに返す
@@ -35,29 +49,25 @@ protected
   # ログインしていなくても動かしたいもの（falseの時）
   def admin_index
     # ログイン画面
-    if controller_name == 'sessions'
-      return false
-    # elsif controller_name == 'genres' && action_name == 'index'
-      # return false
+    if controller_name == "sessions"
     # 新規登録画面
-    elsif controller_name == 'registrations'
-      return false
+    elsif controller_name == "registrations"
+      false
     # トップ画面
-    elsif controller_name == 'homes' && action_name == 'top'
-      return false
+    elsif controller_name == "homes" && action_name == "top"
+      false
     # 新規登録の処理
-    elsif controller_name == 'registrations' && action_name == 'create'
-      return false
+    elsif controller_name == "registrations" && action_name == "create"
+      false
     # ゲストログイン
-    elsif controller_name == 'sessions' && action_name == 'guest_sign_in'
-      return false
+    elsif controller_name == "sessions" && action_name == "guest_sign_in"
+      false
     else
-      return true
+      true
     end
   end
 
   def admin_only
     redirect_to root_path unless admin_signed_in?
   end
-
 end

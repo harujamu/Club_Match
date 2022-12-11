@@ -1,5 +1,6 @@
-class Public::UsersController < ApplicationController
+# frozen_string_literal: true
 
+class Public::UsersController < ApplicationController
   def my_page
     @user = current_user
     @notifies = current_user.passive_notifications.where(checked_status: false)
@@ -29,7 +30,8 @@ class Public::UsersController < ApplicationController
 
   def unsubscribe
     @user = current_user
-    if @user.recruits.where(recruit_status: "match").any? || @user.entries.where(entry_status: "match").any?
+    if @user.recruits.where(recruit_status: "match").any? ||
+      @user.entries.where(entry_status: "match").any?
       flash[:alret] = "マッチ中の募集または応募があるため退会できませんでした"
       redirect_to user_unsubscribe_confirm_path(@user.id)
     else
@@ -40,13 +42,27 @@ class Public::UsersController < ApplicationController
   end
 
   private
+    def user_params
+      params.require(:user).permit(
+        :club_name,
+        :captain_last_name,
+        :captain_first_name,
+        :age_group,
+        :genre_id,
+        :prefecture,
+        :municipality,
+        :address,
+        :introduction,
+        :image,
+        :email,
+        :active_status
+      )
+    end
 
-  def user_params
-    params.require(:user).permit(:club_name, :captain_last_name, :captain_first_name, :age_group, :genre_id, :prefecture, :municipality, :address, :introduction, :image, :email, :active_status)
-  end
-
-  def genre_params
-    params.require(:genre).permit(:name, :genre_image)
-  end
- 
+    def genre_params
+      params.require(:genre).permit(
+        :name,
+        :genre_image
+      )
+    end
 end

@@ -1,5 +1,6 @@
-class Public::EntriesController < ApplicationController
+# frozen_string_literal: true
 
+class Public::EntriesController < ApplicationController
   def create
     @entry = Entry.new(entry_params)
     @recruit = Recruit.find(@entry.recruit_id)
@@ -39,17 +40,32 @@ class Public::EntriesController < ApplicationController
   end
 
   private
+    def entry_params
+      params.require(:entry).permit(
+        :user_id,
+        :recruit_id,
+        :entry_status
+      )
+    end
 
-  def entry_params
-    params.require(:entry).permit(:user_id, :recruit_id, :entry_status)
-  end
+    def recruit_params
+      params.require(:recruit).permit(
+        :user_id,
+        :site_id,
+        :date,
+        :title,
+        :practice_type,
+        :detail,
+        :age_group,
+        :recruit_status,
+        :open_status
+      )
+    end
 
-  def recruit_params
-    params.require(:recruit).permit(:user_id, :site_id, :date, :title, :practice_type, :detail, :age_group, :recruit_status, :open_status)
-  end
-
-  def room_params
-    params.require(:room).permit(:user_id, :recruit_id)
-  end
-
+    def room_params
+      params.require(:room).permit(
+        :user_id,
+        :recruit_id
+      )
+    end
 end

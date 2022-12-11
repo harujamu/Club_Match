@@ -8,7 +8,6 @@
 
 # 管理者登録
 Admin.create!(
-  email:'admin@com',
-  password:'admin1'
-  )
- 
+  email: "admin@com",
+  password: "admin1"
+)

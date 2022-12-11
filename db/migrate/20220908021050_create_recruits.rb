@@ -1,7 +1,6 @@
 class CreateRecruits < ActiveRecord::Migration[6.1]
   def change
     create_table :recruits do |t|
-
       t.integer :user_id, null: false
       t.integer :site_id, null: false
       t.date :date, null: false

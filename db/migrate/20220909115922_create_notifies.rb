@@ -1,7 +1,6 @@
 class CreateNotifies < ActiveRecord::Migration[6.1]
   def change
     create_table :notifies do |t|
-
       t.integer :recruit_id
       t.integer :entry_id
       t.integer :like_id
