@@ -1,22 +1,38 @@
 <div class="container">
-  <h3>ユーザー情報照会</h3>
+  
+  <h3>
+    ユーザー情報照会
+  </h3>
+  
   <div class="row mt-5">
     
+    <!--START　ユーザー画像表示-->
     <div class ="col-lg-4 col-md-4 col-sm-6 col-6 mx-auto user-image mb-5">
-    <% if @user.image.attached? %>
-      <%= image_tag @user.image,
-      size: "250 X 250", 
-      class:"rounded-circle card-img-top" %>
-    <% else %>
-      <%= image_tag @user.genre.genre_image,
-      size: "250 X 250", 
-      class:"rounded-circle card-img-top" %>
-    <% end %>
+      <!--ユーザー画像登録時-->
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image,
+          size: "250 X 250", 
+          class:"rounded-circle card-img-top"
+        %>
+        
+      <!--ユーザー画像未登録時-->
+      <% else %>
+        <%= image_tag @user.genre.genre_image,
+          size: "250 X 250", 
+          class:"rounded-circle card-img-top"
+        %>
+      <% end %>
     </div>
+    <!--END　ユーザー画像表示-->
     
+    <!--START　ユーザー登録情報表-->
     <div class="col-lg-8 col-md-8 col-sm-10 col-10 mx-auto">
-      <%= render '/public/shared/user_information', user: @user, genre: @user.genre %>
+      <%= render '/public/shared/user_information', 
+        user: @user, 
+        genre: @user.genre 
+      %>
     </div>
+    <!--END ユーザー登録情報表-->
     
   </div>
 </div>

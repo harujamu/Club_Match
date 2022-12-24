@@ -1,25 +1,39 @@
 <div class ="container">
-  <h2>ユーザー情報管理</h2>
+  
+  <h2>
+    ユーザー情報管理
+  </h2>
 
   <div class ="row mt-5 mx-auto">
+    
+    <!--START ユーザー画像-->
     <div class ="col-lg-2 col-md-6 col-sm-6 col-6 mr-5 mx-auto">
+      <!--START ユーザー画像登録時の表示-->
       <% if @user.image.attached? %>
         <%= image_tag @user.image, 
           size: "150 X 150",
           class:"rounded-circle card-img-top" 
         %>
+      <!--END ユーザー画像登録時の表示-->
         
+      <!--START　ユーザー画像未登録時の表示（デフォルト画像）-->
       <% else %>
         <%= image_tag @user.genre.genre_image,
           size: "150 X 150", 
           class:"rounded-circle card-img-top" 
         %>
       <% end %>
+      <!--END ユーザー画像未登録時の表示-->
     </div>
+    <!--END ユーザー画像-->
   
     <div class="col-lg-9 col-md-12 col-sm-12 col-12 my-5 mx-auto">
+      
+      <!--START　ユーザー情報編集フォーム-->
       <%= form_with model: @user,url: admin_user_path(@user), method: :patch do |f| %>
         <div class="row g-3">
+          
+          <!--START クラブ名入力-->
           <div class="col-lg-3 col-md-12 col-sm-12 col-12 mt-2 caption-user mb-3">
             <%= f.label :クラブ名 %>
           </div>
@@ -32,11 +46,14 @@
               class:"form-control"
             %>
           </div>
+          <!--END　クラブ名入力-->
           
+          <!--START　ユーザー名（代表者氏名）入力-->
           <div class="col-lg-3 col-md-12 col-sm-12 col-12 mt-2 caption-user mb-3">
             <%= f.label :代表者氏名 %>
           </div>
           
+          <!--ユーザー姓-->
           <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-3">
             <%= f.text_field :captain_last_name,
               autofocus: true,
@@ -45,6 +62,7 @@
             %>
           </div>
           
+          <!--ユーザー名-->
           <div class="col-lg-5 col-md-6 col-sm-12 col-12 mb-3">
             <%= f.text_field :captain_first_name,
                 autofocus: true,
@@ -52,11 +70,14 @@
                 class:"form-control"
               %>
           </div>
+          <!--END ユーザー名入力-->
           
+          <!--START 主な活動場所入力-->
           <div class="col-lg-3 col-md-12 col-sm-12 col-12 mt-2 caption-user mb-3">
             <%= f.label :主な活動場所 %>
           </div>
           
+          <!--都道府県選択-->
           <div class="col-lg-2 col-md-5 col-sm-12 col-12 mb-3">
             <%= f.select :prefecture,
               User.prefectures_i18n.keys.map{|k| [I18n.t("enums.user.prefecture.#{k}"), k]},
@@ -65,6 +86,7 @@
             %>
           </div>
           
+          <!--市区町村入力-->
           <div class="col-lg-3 col-md-7 col-sm-12 col-12 mb-3">
             <%= f.text_field :municipality,
               placeholder: "市区町村",
@@ -72,15 +94,20 @@
             %>
           </div>
           
+          <!--番地入力-->
           <div class="col-lg-4 col-md-12 col-sm-12 col-12 mb-3">
             <%= f.text_field :address,
               placeholder: "番地",
               class:"form-control"
             %>
           </div>
+          <!--END 主な活動場所入力-->
           
+          <!--START e-mail入力-->
           <div class="col-lg-3 col-md-12 col-sm-12 col-12 mt-2 caption-user mb-3">
-            <span>e-mail</span>
+            <span>
+              e-mail
+            </span>
           </div>
           
           <div class="col-lg-9 col-md-12 col-sm-12 col-12 mb-3">
@@ -90,31 +117,45 @@
               class:"form-control"
             %>
           </div>
+          <!--END e-mail入力-->
           
+          <!--START 活動状況入力-->
           <div class="col-lg-3 col-md-12 col-sm-12 col-12 caption-recruit">
-            <p>活動状況</p>
+            <p>
+              活動状況
+            </p>
           </div>
           
           <div class="col-lg-9 col-md-12 col-sm-9 col-12 mb-3">
             <span class="mr-5">
-              <%= f.radio_button :active_status, true %>
+              <%= f.radio_button :active_status, 
+                true 
+              %>
               <%= f.label :"活動中" %>
             </span>
             <span>
-              <%= f.radio_button :active_status, false, class:"ml-5" %>
+              <%= f.radio_button :active_status, 
+                false, 
+                class:"ml-5" 
+              %>
               <%= f.label :"退会済" %>
             </span>
           </div>
+          <!--END 活動状況入力-->
           
+          <!--空欄-->
           <div class="col-lg-3 col-md-12 col-sm-12 col-12 mt-2 mb-3">
           </div>
         
+          <!--更新ボタン-->
           <div class="col-lg-9 col-md-12 col-sm-12 col-12 mb-3 text-right">
-            <%= f.submit "更新", class:"btn btn-primary w-25" %>
+            <%= f.submit "更新",　
+              class:"btn btn-primary w-25" 
+            %>
           </div>
-  
         </div>
       <% end %>
+      <!--END  ユーザー情報入力フォーム-->
     </div>
   </div>
 

@@ -1,5 +1,8 @@
 <div class ="container">
-  <h3 class="mb-3">ジャンル登録</h3>
+  
+  <h3 class="mb-3">
+    ジャンル登録
+  </h3>
   
   <!--START ジャンル登録フォーム-->
   <%= form_with model: @genre,url: admin_genres_path, method: :post do |f| %>
@@ -20,7 +23,9 @@
       
       <!--登録ボタン-->
       <div class="col-lg-5 col-md-6 col-sm-12 col-12 text-right mt-1">
-        <%= f.submit '登録する', class:"btn btn-success" %>
+        <%= f.submit '登録する', 
+          class:"btn btn-success" 
+        %>
       </div>
     </div>
   <% end %>

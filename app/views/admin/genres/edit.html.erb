@@ -1,7 +1,10 @@
 <div class ="container">
-  <h3>ジャンル編集</h3>
   
-  <!--START ジャンル情報更新フォーム-->
+  <h3>
+    ジャンル編集
+  </h3>
+  
+  <!--START ジャンル情報編集フォーム-->
   <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
     <div class = "row g-3 mt-4 mx-auto">
       
@@ -20,12 +23,14 @@
       
       <!--更新ボタン-->
       <div class="col-lg-5 col-md-6 col-sm-12 col-12 text-right mt-1">
-        <%= f.submit '更新する', class:"btn btn-primary" %>
+        <%= f.submit '更新する', 
+          class:"btn btn-primary"
+        %>
       </div>
       
     </div>
   <% end %>
-  <!--END ジャンル情報更新フォーム-->
+  <!--END ジャンル情報編集フォーム-->
   
   <!--登録済みジャンル画像表示-->
   <h5 class="mt-5">
