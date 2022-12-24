@@ -11,9 +11,11 @@
 
   <body class="d-flex flex-column vh-100">
     <header>
-      <!--ロゴ-->
+      <!--START　ヘッダー-->
       <nav class ="navbar navbar-expand-lg navbar-light">
         <div class ="container mt-0">
+        <!--START ヘッダー共通部分-->
+          <!--START　ロゴ-->
           <div class ="navbar-brand ">
             <% if admin_signed_in? %>
               <%= link_to admin_path do %>
@@ -25,6 +27,7 @@
               <% end %>
             <% end %>
           </div>
+          <!--END　ロゴ-->
 
           <button 
             class="navbar-toggler" 
@@ -37,9 +40,10 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
+        <!--END ヘッダー共通部分-->
 
-          <!--ユーザーログイン後のナビゲーションバー-->
           <div class ="collapse navbar-collapse" id="navbarNavDropdown">
+            <!--START　ユーザーログイン後のヘッダー-->
             <% if user_signed_in? %>
               <small><%= current_user.club_name %>さん、ようこそ！</small>
               <ul class ="navbar-nav ml-auto">
@@ -69,8 +73,9 @@
                   %>
                 </li>
               </ul>
+            <!--END ユーザーログイン後のヘッダー-->
 
-          <!--管理者ログイン後のナビゲーションバー-->
+            <!--START 管理者ログイン後のヘッダー-->
             <% elsif admin_signed_in? %>
               <ul class ="navbar-nav ml-auto">
                 <li class ="nav-item mr-3 mb-1">
@@ -93,8 +98,9 @@
                   %>
                 </li>
               </ul>
+            <!--END 管理者ログイン後のヘッダー-->
 
-          <!--ログアウト後(サインイン前)のナビゲーションバー-->
+            <!--START ログアウト後(サインイン前)のヘッダー-->
             <% else %>
               <ul class ="navbar-nav ml-auto">
                 <li class ="nav-item mr-3 mb-1">
@@ -117,20 +123,25 @@
                 </li>
               </ul>
             <% end %>
+            <!--END ログアウト後のヘッダー-->
           </div>
         </div>
       </nav>
+      <!--END　ヘッダー-->
     </header>
 
     <main class="mb-auto">
     <%= yield %>
     </main>
     <%#= debug(params) if Rails.env.development? %>
-
+    
+    <!--START フッター-->
     <footer class="footer">
       <div class="bg-warning bg-gradient p-2">
         <p class="text-light text-center m-0">ClubMatch</p>
       </div>
     </footer>
+    <!--END フッター-->
+    
   </body>
 </html>
