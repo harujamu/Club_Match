@@ -1,45 +1,59 @@
 <div class ="container">
   <h3 class="mb-3">ジャンル登録</h3>
-      
+  
+  <!--START ジャンル登録フォーム-->
   <%= form_with model: @genre,url: admin_genres_path, method: :post do |f| %>
     <div class = "row g-3 mt-4 mx-auto">
+      
+      <!--ジャンル名入力-->
       <div class ="col-lg-10 col-md-12 col-sm-12 col-12 mt-1">
         <%= f.text_field :name, 
           placeholder:"ジャンル名", 
           class:"mr-2 form-control" 
         %>
       </div>
-        
+      
+      <!--ジャンル画像添付-->
       <div class="col-lg-5 col-md-6 col-sm-12 col-12 mt-1">
         <%= f.file_field :genre_image %>
       </div>
       
+      <!--登録ボタン-->
       <div class="col-lg-5 col-md-6 col-sm-12 col-12 text-right mt-1">
         <%= f.submit '登録する', class:"btn btn-success" %>
       </div>
     </div>
   <% end %>
+  <!--END ジャンル登録フォーム-->
 
   
   <h3 class="mt-5 mb-3">ジャンル一覧</h3>
       
   <div class ="row">
     <div class ="col-lg-10 col-md-10 col-sm-12 col-10 table-responsive mb-5">  
-    
+      
+      <!--START ジャンル一覧表-->
       <table class ="table table-bordered mx-auto">
         <thead>
           <tr>
-          <th class="no-wrap">No.</th>
-          <th class="no-wrap">ジャンル名・イメージ画像</th>
-        </tr>
+            <!--登録ID-->
+            <th class="no-wrap">No.</th>
+            <!--ジャンル名、画像-->
+            <th class="no-wrap">ジャンル名・イメージ画像</th>
+          </tr>
         </thead>
         
         <tbody>
           <% @genres.each do |genre| %>
             <tr>
+              <!--登録ID-->
               <td><%= genre.id %></td>
+              
+              <!--START ジャンル名、画像表示-->
               <td class="genre-preview no-wrap">
+                <!--ジャンル名-->
                 <%= genre.name %>
+                <!--ジャンル画像-->
                 <span class="no-wrap">
                   <%= image_tag genre.genre_image, 
                     size: "50x50", 
@@ -51,10 +65,12 @@
                   %>
                 </span>
               </td>
+              <!--END ジャンル名、画像表示-->
             </tr>
           <% end %>
         </tbody>
       </table>
+      <!--END ジャンル一覧表-->
       
     </div>
   </div>

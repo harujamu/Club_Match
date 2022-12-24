@@ -1,9 +1,11 @@
 <div class ="container">
   <h3>ジャンル編集</h3>
   
+  <!--START ジャンル情報更新フォーム-->
   <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
     <div class = "row g-3 mt-4 mx-auto">
       
+      <!--ジャンル名入力-->
       <div class ="col-lg-10 col-md-12 col-sm-12 col-12 mt-1">
         <%= f.text_field :name, 
           placeholder:"ジャンル名", 
@@ -11,17 +13,21 @@
         %>
       </div>
       
+      <!--ジャンル画像添付-->
       <div class="col-lg-5 col-md-6 col-sm-12 col-12 mt-1">
         <%= f.file_field :genre_image %>
       </div>
       
+      <!--更新ボタン-->
       <div class="col-lg-5 col-md-6 col-sm-12 col-12 text-right mt-1">
         <%= f.submit '更新する', class:"btn btn-primary" %>
       </div>
       
     </div>
   <% end %>
+  <!--END ジャンル情報更新フォーム-->
   
+  <!--登録済みジャンル画像表示-->
   <h5 class="mt-5">
     登録中のジャンルイメージ：
     <%= image_tag @genre.genre_image,
