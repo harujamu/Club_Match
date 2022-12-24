@@ -1,47 +1,86 @@
 <div class ="container">
   <div class ="row">
+    
+    <!--START  サイドバー-->
     <div class ="col-lg-3 col-md-4 col-sm-5 col-4 border-right search">
-      <h2>募集<%= @recruits.count %>件</h2>
-        <%= render 'public/shared/ransack_form', q: @q %>
+      <h2>
+        募集
+        <%= @recruits.count %>件
+      </h2>
+      
+      <!--START 絞り込み検索フォーム-->
+      <%= render 'public/shared/ransack_form',
+        q: @q 
+      %>
+      <!--END  絞り込み検索フォーム-->
     </div>
-
+    <!--END サイドバー-->
+    
+    
     <div class ="col-lg-8 col-md-7 col-sm-6 col-7 px-0 offset-1">
-      <h2>練習相手募集一覧</h2>
-
+      
+      <h2>
+        練習相手募集一覧
+      </h2>
+      
+      <!--START　募集記事一覧表示-->
       <div class="mt-5 d-flex flex-wrap p-0">
-      <% @recruits.each do |recruit| %>
-        <%#= recruit.inspect %>
-        <div class="card col-lg-3 col-md-4 col-sm-5 col-9 mt-0 border border-0 mx-0">
-          <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
-            <% if recruit.user != nil %>
-            <!--画像サイズを％指定することでレスポンシブ対応時も画像削れない、枠いっぱいの画像サイズになる-->
-              <% if recruit.user.image.attached? %>
-                <%= image_tag recruit.user.image,
-                  width: "100%",
-                  class:"rounded-circle"
-                %>
-              <% else %>
-                <%= image_tag recruit.user.genre.genre_image,
-                  width: "100%",
-                  class:"rounded-circle"
-                %>
+        <% @recruits.each do |recruit| %>
+          <%#= recruit.inspect %>
+          <div class="card col-lg-3 col-md-4 col-sm-5 col-9 mt-0 border border-0 mx-0">
+            
+            <!--START　募集者のユーザー画像表示-->
+            <%= link_to recruit_path(recruit.id), class:"text-dark" do %>
+              <% if recruit.user != nil %>
+              <!--画像サイズを％指定することでレスポンシブ対応時も画像削れない、枠いっぱいの画像サイズになる-->
+              
+                <!--募集者が画像登録時-->
+                <% if recruit.user.image.attached? %>
+                  <%= image_tag recruit.user.image,
+                    width: "100%",
+                    class:"rounded-circle"
+                  %>
+                <!--募集者が画像未登録時-->
+                <% else %>
+                  <%= image_tag recruit.user.genre.genre_image,
+                    width: "100%",
+                    class:"rounded-circle"
+                  %>
+                <% end %>
               <% end %>
+              <!--END 募集者のユーザー画像表示-->
             <% end %>
-          <% end %>
-          <div class="row">
-            <p class="card-title"><%= recruit.title.truncate(8) %></p>
-            <span>
-              <% if user_signed_in? %>
-                <%= like_button(current_user,recruit) %>
-              <% else %>
-                <i class="fas fa-heart like-icon"></i>
-              <% end %>
-              <%= recruit.likes.count %>
-            </span>
+            
+            <!--START 募集記事の概要-->
+            <div class="row">
+              
+              <!--募集タイトル-->
+              <p class="card-title">
+                <%= recruit.title.truncate(8) %>
+              </p>
+              
+              <!--START　いいね状況-->
+              <span>
+                <!--閲覧ユーザーがログイン時-->
+                <% if user_signed_in? %>
+                  <%= like_button(current_user,recruit) %>
+                  
+                <!--閲覧ユーザー非ログイン時-->
+                <% else %>
+                  <i class="fas fa-heart like-icon"></i>
+                <% end %>
+                
+                <!--共通-->
+                <%= recruit.likes.count %>
+              </span>
+              <!--END　いいね状況-->
+            </div>
+            <!--END　募集記事の概要-->
           </div>
-        </div>
-      <% end %>
+        <% end %>
       </div>
+      <!--END 募集記事一覧表示-->
+      
     </div>
   </div>
 </div>
