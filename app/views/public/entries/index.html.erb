@@ -1,8 +1,19 @@
 <div class ="container">
-  <h3>応募履歴</h3>
+  
+  <h3>
+    応募履歴
+  </h3>
+  
   <div class ="row">
+
+    <!--START　応募履歴一覧表示-->
     <div class ="col-lg-10 col-md-10 col-sm-12 col-12 mt-3 mx-auto">
-      <%= render 'public/shared/recruit_or_entry_index', entries: @entries %>
+      <%= render 'public/shared/recruit_or_entry_index', 
+        entries: @entries 
+      %>
     </div>
+    <!--END　応募履歴一覧表示-->
+    
   </div>
+  
 </div>
