@@ -36,10 +36,12 @@
       <table class ="table table-bordered mx-auto">
         <thead>
           <tr>
-            <!--登録ID-->
-            <th class="no-wrap">No.</th>
-            <!--ジャンル名、画像-->
-            <th class="no-wrap">ジャンル名・イメージ画像</th>
+            <th class="no-wrap">
+              No.
+            </th>
+            <th class="no-wrap">
+              ジャンル名・イメージ画像
+            </th>
           </tr>
         </thead>
         
@@ -47,7 +49,9 @@
           <% @genres.each do |genre| %>
             <tr>
               <!--登録ID-->
-              <td><%= genre.id %></td>
+              <td>
+                <%= genre.id %>
+              </td>
               
               <!--START ジャンル名、画像表示-->
               <td class="genre-preview no-wrap">

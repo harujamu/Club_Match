@@ -3,33 +3,68 @@
     <h2>ユーザー一覧</h2>
 
     <div class ="col-lg-10 col-md-12 col-sm-12 col-12 mt-3 table-responsive mx-auto">
+      <!--START ユーザー一覧表-->
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th class="no-wrap">No.</th>
-            <th class="no-wrap">クラブ名</th>
-            <th class="no-wrap">代表者氏名</th>
-            <th class="no-wrap">e-mail</th>
-            <th class="no-wrap">活動ステータス</th>
+            <th class="no-wrap">
+              No.
+            </th>
+            
+            <th class="no-wrap">
+              クラブ名
+            </th>
+            
+            <th class="no-wrap">
+              代表者氏名
+            </th>
+            
+            <th class="no-wrap">
+              e-mail
+            </th>
+            
+            <th class="no-wrap">
+              活動ステータス
+            </th>
+            
           </tr>
         </thead>
 
         <% @users.each do |user| %>
           <tbody>
             <tr>
-              <td class="no-wrap"><%= user.id %></td>
+              <!--ユーザーID-->
+              <td class="no-wrap">
+                <%= user.id %>
+              </td>
+              
+              <!--クラブ名-->
               <td class="no-wrap">
                 <%= link_to admin_user_path(user.id), class:"text-dark link" do %>
                   <%= user.club_name %>
                 <% end %>
               </td>
-              <td class="no-wrap"><%= user.captain_name %></td>
-              <td class="no-wrap"><%= user.email %></td>
-              <td class="no-wrap"><%= active_status(user) %></td>
+              
+              <!--ユーザー名（クラブ代表名）-->
+              <td class="no-wrap">
+                <%= user.captain_name %>
+              </td>
+              
+              <!--e-mail-->
+              <td class="no-wrap">
+                <%= user.email %>
+              </td>
+              
+              <!--活動状況-->
+              <td class="no-wrap">
+                <%= active_status(user) %>
+              </td>
             </tr>
           </tbody>
         <% end %>
       </table>
+      <!--END ユーザー一覧表-->
+      
     </div>
   </div>
 </div>
