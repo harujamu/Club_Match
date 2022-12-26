@@ -1,96 +1,179 @@
 <div class ="container">
-  <h3>通知一覧</h3>
+  
+  <h3>
+    通知一覧
+  </h3>
+  
   <div class="row">
+    <!--START 通知１件以上-->
     <% if @notifies.exists? %>
+      <div class="col-lg-10 col-md-10 col-sm-12 col-12 my-5 mx-auto">
+        
+        <% @notifies.each do |notify| %>
+          <!--START 通知一覧表-->
+          <table class="table table-borderless">
+            
+            <!--START いいね通知-->
+            <% if notify.action == "like" %>
+              <tr>
+                <!--通知者-->
+                <td>
+                  <%= profile_image(
+                    notify.notifier, 
+                    notify.notifier.genre,
+                    30,
+                    30) 
+                  %>
+                </td>
+                <!--通知内容-->
+                <th>
+                  <span class="justify-content-start no-wrap">
+                    <%= notify.notifier.club_name %>が
+                    <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
+                      "<%= notify.recruit.title %>"
+                    <% end %>
+                    にいいね!しました
+                  </span>
+                </th>
+              </tr>
+            <!--END いいね通知-->
+            
+            <!--START フォロー通知-->
+            <% elsif notify.action == "follow" %>
+              <tr>
+                <!--通知者-->
+                <td>
+                  <%= profile_image(
+                    notify.notifier, 
+                    notify.notifier.genre,
+                    30,
+                    30) 
+                  %>
+                </td>
+                <!--通知内容-->
+                <th>
+                  <span class="justify-content-start">
+                    <%= notify.notifier.club_name %>があなたをフォローしました
+                  </span>
+                </th>
+              </tr>
+            <!--END フォロー通知-->
     
-    <div class="col-lg-10 col-md-10 col-sm-12 col-12 my-5 mx-auto">
-      <% @notifies.each do |notify| %>
-      <table class="table table-borderless">
-        <% if notify.action == "like" %>
-        <tr>
-          <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>
-            <span class="justify-content-start no-wrap">
-              <%= notify.notifier.club_name %>が
-              <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
-                "<%= notify.recruit.title %>"
-                <% end %>にいいね!しました
-            </span>
-          </th>
-        </tr>
-        
-        <% elsif notify.action == "follow" %>
-        <tr>
-          <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>
-            <span class="justify-content-start">
-              <%= notify.notifier.club_name %>があなたをフォローしました
-            </span>
-          </th>
-        </tr>
-
-        <% elsif notify.action == "message" %>
-        <tr>
-          <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>
-            <span class="justify-content-start">
-              <%= notify.notifier.club_name %>から
-              <%= link_to 'メッセージ', room_path(notify.recruit.room.id), class:"text-dark link" %>が届きました
-            </span>
-          </th>
-        </tr>
-        
-        <% elsif notify.action == "entry" %>
-        <tr>
-          <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>
-            <span class="justify-content-start">
-              <%= notify.notifier.club_name %>が
-              <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
-                "<%= notify.recruit.title %>"
-              <% end %>に応募しました
-            </span>
-          </th>
-        </tr>
-        
-        <% elsif notify.action == "match" %>
-        <tr>
-          <td><%= profile_image(notify.notifier, notify.notifier.genre,30,30) %></td>
-          <th>
-            <span class="justify-content-start">
-              <%= notify.notifier.club_name %>と
-              <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
-                "<%= notify.recruit.title %>"
-              <% end %>でマッチしました！
-            </span>
-          </th>
-        </tr>
-        
-        <% elsif notify.action == "match_rejected" %>
-        <tr>
-          <td>
-            <%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
-              <%= profile_image(notify.notifier, notify.notifier.genre,30,30) %>
+            <!--START メッセージ通知-->
+            <% elsif notify.action == "message" %>
+              <tr>
+                <!--通知者-->
+                <td>
+                  <%= profile_image(
+                    notify.notifier, 
+                    notify.notifier.genre,
+                    30,
+                    30) 
+                  %>
+                </td>
+                <!--通知内容-->
+                <th>
+                  <span class="justify-content-start">
+                    <%= notify.notifier.club_name %>から
+                    <%= link_to 'メッセージ', 
+                      room_path(notify.recruit.room.id), 
+                      class:"text-dark link"
+                    %>
+                    が届きました
+                  </span>
+                </th>
+              </tr>
+            <!--END メッセージ通知-->
+            
+            <!--START 応募通知-->
+            <% elsif notify.action == "entry" %>
+              <tr>
+                <!--通知者-->
+                <td>
+                  <%= profile_image(
+                    notify.notifier, 
+                    notify.notifier.genre,
+                    30,
+                    30) 
+                  %>
+                </td>
+                <!--通知内容-->
+                <th>
+                  <span class="justify-content-start">
+                    <%= notify.notifier.club_name %>が
+                    <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
+                      "<%= notify.recruit.title %>"
+                    <% end %>
+                    に応募しました
+                  </span>
+                </th>
+              </tr>
+            <!--END 応募通知-->
+            
+            <!--START マッチ通知-->
+            <% elsif notify.action == "match" %>
+              <tr>
+                <!--通知者-->
+                <td>
+                  <%= profile_image(
+                    notify.notifier, 
+                    notify.notifier.genre,
+                    30,
+                    30) 
+                  %>
+                </td>
+                <!--通知内容-->
+                <th>
+                  <span class="justify-content-start">
+                    <%= notify.notifier.club_name %>と
+                    <%= link_to recruit_path(notify.recruit.id), class:"text-dark link" do %>
+                      "<%= notify.recruit.title %>"
+                    <% end %>
+                    でマッチしました！
+                  </span>
+                </th>
+              </tr>
+            <!--END マッチ通知-->
+            
+            <!--START マッチ不成立通知-->
+            <% elsif notify.action == "match_rejected" %>
+              <tr>
+                <!--通知者-->
+                <td>
+                  <%= profile_image(
+                    notify.notifier, 
+                    notify.notifier.genre,
+                    30,
+                    30) 
+                  %>
+                </td>
+                <!--通知内容-->
+                <th>
+                  <span class="justify-content-start">
+                    <%= link_to recruit_path(notify.recruit.id), class:"text-dark" do %>
+                      "<%= notify.recruit.title %>"
+                    <% end %>
+                    への応募結果はマッチ不成立でした。
+                  </span>
+                </th>
+              </tr>
             <% end %>
-          </td>
-          <th>
-            <span class="justify-content-start">
-              "<%= notify.recruit.title %>"への応募結果はマッチ不成立でした。
-            </span>
-          </th>
-        </tr>
-        
+            <!--END マッチ不成立通知-->
+            
+          </table>
+          <!--END 通知一覧表-->
         <% end %>
-      </table>
-      <% end %>
-    </div>
+      </div>
+    <!--END 通知１件以上-->
     
+    <!--START　通知0件-->
     <% else %>
-    
-    <div class="col-lg-10 col-md-10 col-sm-12 col-12 mt-5 mx-auto">
-      <h5>新しい通知はありません</h5>
-    </div>
-    
+      <div class="col-lg-10 col-md-10 col-sm-12 col-12 mt-5 mx-auto">
+        <h5>
+          新しい通知はありません
+        </h5>
+      </div>
     <% end %>
+    <!--END 通知0件-->
   </div>
 </div>
