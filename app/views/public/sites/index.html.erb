@@ -1,66 +1,99 @@
 <div class="container">
-  <h3>練習場所登録</h3>
-  
-  <%= form_with model: @site do |f| %>
-    <div class="row g-3 mt-2 mb-5 mx-auto">
-      <%= f.hidden_field :user_id, :value => current_user.id %>
-
-      <div class ="col-lg-3 col-md-3 col-sm-4 col-12">
-        <%= f.select :prefecture,
-          Site.prefectures_i18n.keys.map{|k| [I18n.t("enums.site.prefecture.#{k}"), k] },
-          {include_blanck: t("選択してください")},
-          class:"form-control mt-1"
-        %>
+  <div class="row">
+    <h3>
+      練習場所登録
+    </h3>
+    
+    <!--START 練習場所入力フォーム-->
+    <%= form_with model: @site do |f| %>
+      <div class="row g-3 mt-2 mb-5 mx-auto col-12">
+        <!--user_id送信-->
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        
+        <!--都道府県選択-->
+        <div class ="col-lg-3 col-md-3 col-sm-4 col-12">
+          <%= f.select :prefecture,
+            Site.prefectures_i18n.keys.map{|k| [I18n.t("enums.site.prefecture.#{k}"), k] },
+            {include_blanck: t("選択してください")},
+            class:"form-control mt-1"
+          %>
+        </div>
+        
+        <!--市区町村入力-->
+        <div class ="col-lg-4 col-md-4 col-sm-8 col-12">
+          <%= f.text_field :municipality,
+            placeholder: "市区町村",
+            class:"form-control mt-1"
+          %>
+        </div>
+        
+        <!--番地入力-->
+        <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+          <%= f.text_field :address,
+            placeholder: "番地",
+            class:"form-control mt-1"
+          %>
+        </div>
+        
+        <!--登録ボタン-->
+        <div class="col-12 mt-2 text-right">
+          <%= f.submit '登録', 
+            class:"btn btn-success w-25"
+          %>
+        </div>
+        
       </div>
+    <% end %>
+    <!--END 練習場所入力フォーム-->
+  </div>
 
-      <div class ="col-lg-4 col-md-4 col-sm-8 col-12">
-        <%= f.text_field :municipality,
-          placeholder: "市区町村",
-          class:"form-control mt-1"
-        %>
-      </div>
-
-      <div class="col-lg-5 col-md-5 col-sm-12 col-12">
-        <%= f.text_field :address,
-          placeholder: "番地",
-          class:"form-control mt-1"
-        %>
-      </div>
-
-      <div class="col-12 mt-2 text-right">
-        <%= f.submit '登録', class:"btn btn-success w-25" %>
-      </div>
-    </div>
-  <% end %>
-  
-
-  <h3>登録練習場所一覧</h3>
   <div class ="row">
+    <h3>
+      登録練習場所一覧
+    </h3>
+    
     <div class ="col-10 mt-2 table-responsive mx-auto">
+      
+      <!--START 練習場所一覧表-->
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th class="no-wrap">練習場所ID</th>
-            <th class="no-wrap">住所</th>
+            <th class="no-wrap">
+              練習場所ID
+            </th>
+            <th class="no-wrap">
+              住所
+            </th>
           </tr>
         </thead>
+        
         <% @sites.each do |site| %>
-        <tbody>
-          <tr>
-            <td><%= site.id %></td>
-            <td class="space-between">
-              <%= site.site_name %>
-              <div class="space-between">
-                <%= link_to '削除',site_path(site.id), 
-                  method: :delete, 
-                  class:"btn btn-danger no-wrap" 
-                %>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+          <tbody>
+            <tr>
+              <!--練習場所ID-->
+              <td>
+                <%= site.id %>
+              </td>
+              <td class="space-between">
+                
+                <!--練習場所の住所-->
+                <%= site.site_name %>
+                
+                <!--削除ボタン-->
+                <div class="space-between">
+                  <%= link_to '削除',site_path(site.id), 
+                    method: :delete, 
+                    class:"btn btn-danger no-wrap" 
+                  %>
+                </div>
+                
+              </td>
+            </tr>
+          </tbody>
         <% end %>
       </table>
+      <!--END 練習場所一覧表-->
+      
     </div>
   </div>
 </div>

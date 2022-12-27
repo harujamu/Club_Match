@@ -1,26 +1,50 @@
 <div class="container ">
   <div class ="row">
+    
+    <!--START 退会確認メッセージ-->
     <div class="col-12 mx-auto">
-      <h2>退会します。よろしいですか？</h2>
+      
+      <h2>
+        退会します。よろしいですか？
+      </h2>
       <h4 class="mt-5">
         退会すると、会員登録情報やこれまでの募集・応募記録が閲覧できなくなります。
       </h4>
-      <h4>退会する場合は、『退会する』をクリックしてください。</h4>
+      <h4>
+        退会する場合は、『退会する』をクリックしてください。
+      </h4>
+      
+      <!--START アラートメッセージがある場合表示-->
       <% if flash.any? %>
-        <h2 class="alert mt-5"><%= flash[:alret] %></h2>
+      
+        <h2 class="alert mt-5">
+          <%= flash[:alret] %>
+        </h2>
+        
       <% end %>
+      <!--END アラートメッセージがある場合表示-->
+      
     </div>
+    <!--END 退会確認メッセージ-->
   </div>
 
   <div class ="row g-3 my-5">
     <div class="col-10 text-center mx-auto">
-      <%= link_to '退会を辞める', user_my_page_path, class:"btn btn-primary btn-lg no-wrap mt-1" %>
+      
+      <%= link_to '退会を辞める', 
+        user_my_page_path, 
+        class:"btn btn-primary btn-lg no-wrap mt-1" 
+      %>
+      
       <%= link_to '退会する',
-        user_unsubscribe_path(@user, user: {active_status: false}),
+        user_unsubscribe_path(
+          @user, 
+          user: {active_status: false}),
         method: :patch,
         "data-confirm" => "本当に退会しますか？",
         class:"btn btn-danger ml-5 btn-lg no-wrap mt-1"
       %>
+      
     </div>
   </div>
 

@@ -3,13 +3,26 @@
   <div class ="row mt-5 mx-auto">
     <h3 class="col-lg-10 col-md-10 col-sm-12 col-xs-12 mb-5">
       <%# binding.pry %>
-      <%= profile_image(@user, @user.genre, 60, 60) %>
+      <!--ユーザー画像-->
+      <%= profile_image(
+        @user, 
+        @user.genre, 
+        60, 
+        60) 
+      %>
       ユーザー情報編集
     </h3>
     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
       <%= form_with model: @user, local: true, method: :patch do |f| %>
+      
+        <!--START ユーザー情報編集エラーメッセージ-->
         <%= render 'public/shared/error_messages', resource: @user %>
+        <!--END ユーザー情報編集エラーメッセージ-->
+        
+        <!--START ユーザー情報編集フォーム-->
         <%= render 'public/shared/user_form', user: @user, f: f %>
+        <!--END ユーザー情報編集フォーム-->
+        
       <% end %>
     </div>
   </div>

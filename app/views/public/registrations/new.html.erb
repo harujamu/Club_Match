@@ -1,15 +1,23 @@
 <div class ="container">
-  <h2>ユーザー情報登録</h2>
+  <h2>
+    ユーザー情報登録
+  </h2>
   <div class ="row mt-5 mx-auto">
     
     <div class ="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-      <%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      
       <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+      
+        <!--START ユーザー登録失敗時のエラーメッセージ-->
         <%= render 'public/shared/error_messages', resource: resource %>
+        <!--END ユーザー登録失敗時のエラーメッセージ-->
+        
+        <!--START　ユーザー情報入力フォーム-->
         <%= render 'public/shared/user_form', resource: resource, f: f %>
+        <!--END ユーザー情報入力フォーム-->
+        
       <% end %>
+      
     </div>
-  
-    
   </div>
 </div>

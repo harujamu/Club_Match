@@ -2,85 +2,132 @@
 
   <div class="row mt-2">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mx-auto">
+      
+      <!--チャットルームタイトル-->
       <h3 class="border-bottom">
         <%= @room.recruit.title %>
       </h3>
+      
+      <!--START 練習条件詳細-->
       <h5 class="row g-3 no-wrap">
+        <!--参加者画像-->
         <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-1">
           参加メンバー：
           <% @users.each do |user| %>
-          <span><%= profile_image(user,user.genre,30,30) %></span>
+            <span>
+              <%= profile_image(
+                user,
+                user.genre,
+                30,
+                30) 
+              %>
+            </span>
           <% end %>
         </div>
+        
+        <!--練習日程-->
         <div class="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
-          練習日： <%= @room.recruit.date.strftime('%Y/%m/%d') %>
+          練習日：
+          <%= @room.recruit.date.strftime('%Y/%m/%d') %>
         </div>
+        
+        <!--練習会場-->
         <div class="col-lg-9 col-md-9 col-sm-12 col-12 mt-1">
-          会場： <%= @room.recruit.site.site_name %>
+          会場：
+          <%= @room.recruit.site.site_name %>
         </div>
       </h5>
+      <!--END 練習条件詳細-->
     </div>
   </div>
 
-  <!--送信フォームが高い位置にきすぎないようにstyeで最低限の高さ指定-->
+  <!--START メッセージ履歴表示-->
   <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-5 chat-room-form">
 
     <% @messages.each do |message| %>
       <div class="row g-3">
-
+        
+        <!--current_userがメッセージ主-->
         <% if message.user != current_user %>
+          <!--ユーザークラブ名-->
           <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-left">
             <small>
               <%= message.user.club_name %>
             </small>
           </div>
           
+          <!--ユーザー画像-->
           <div class="col-lg-1 col-md-1 col-sm-2 col-2">
             <%= link_to user_path(message.user), class:"text-dark" do %>
-              <%= profile_image(message.user,message.user.genre,30,30) %>
+              <%= profile_image(
+                message.user,
+                message.user.genre,
+                30,
+                30) 
+              %>
             <% end %>
           </div>
           
           <div class="col-lg-9 col-md-9 col-sm-9 col-9 border rounded-pill py-2 px-3 bg-light text-left message">
-              <%= message.message %>
+            <!--メッセージ-->
+            <%= message.message %>
           </div>
-
-
+        <!--END current_userがメッセージ主-->
+        
+        <!--START current_userがメッセージ主でない-->  
         <% else %>
+        
+        <!--メッセージ送信者のユーザークラブ名-->
           <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-right">
             <small>
               <%= message.user.club_name %>
             </small>
           </div>
           
+          <!--空欄-->
           <div class="col-lg-2 col-md-2 col-sm-1 col-0"></div>
           
+          <!--メッセージ-->
           <div class="col-lg-9 col-md-9 col-sm-9 col-9 rounded-pill py-2 px-3 text-left border message own-message-area">
               <%= message.message %>
           </div>
           
+          <!--メッセージ増進者の画像-->
           <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-right">
-            <%= profile_image(message.user,message.user.genre,30,30) %>
+            <%= profile_image(
+              message.user,
+              message.user.genre,
+              30,
+              30) 
+            %>
           </div>
         <% end %>
-
+        <!--END current_userがメッセージ主でない-->  
       </div>
     <% end %>
   </div>
+  <!--END メッセージ履歴表示-->
 
   <div class="col-lg-12 col-md-12 col-sm-12 col-12 my-5">
+    <!--START メッセージ送信フォーム-->
     <%= form_with model: @message, method: :post do |f| %>
+    
       <div class="row g-3">
         <div class="col-lg-10 col-md-10 col-sm-10 col-10">
+          <!--room_id送信-->
           <%= f.hidden_field :room_id, :value => @room.id %>
+          <!--user_id送信-->
           <%= f.hidden_field :user_id, :value => current_user.id %>
-           <%= f.text_area :message, class:"form-control" %>
+          <!--メッセージ入力-->
+          <%= f.text_area :message, class:"form-control" %>
         </div>
-
+        
+        <!--送信ボタン-->
         <div class="col-lg-2 col-md-2 col-sm-2 col-2">
           <%= f.submit '送信', class:"btn btn-primary mb-5 p-3 w-100" %>
         </div>
       </div>
     <% end %>
+    <!--END メッセージ送信フォーム-->
   </div>
 </div>

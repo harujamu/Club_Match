@@ -1,73 +1,113 @@
 <div class="container">
   <div class="row mt-5 mx-auto g-3">
-
+    
+    <!--START ユーザー操作部分-->
     <div class ="col-lg-4 col-md-4 col-sm-12 col-12 mx-auto row">
+      
       <div class="mx-auto">
-        <%= profile_image(@user,@user.genre,200,200) %>
-        <p class="mt-2 ml-5"><%= @user.club_name %></p>
+        <!--ユーザー画像-->
+        <%= profile_image(
+          @user,
+          @user.genre,
+          200,
+          200) 
+        %>
+        
+        <!--ユーザークラブ名-->
+        <p class="mt-2 ml-5">
+          <%= @user.club_name %>
+        </p>
+        
         <p class="ml-5">
+          
+          <!--ユーザー情報編集ボタン-->
           <%= link_to '編集',
             edit_user_path(@user.id),
             class:"btn btn-success btn-sm mr-2"
           %>
+          
+          <!--ユーザー退会ボタン-->
           <%= link_to '退会',
             user_unsubscribe_confirm_path(@user),
             class:"btn btn-danger btn-sm"
           %>
+          
         </p>
       </div>
 
       <div class="my-5 col-lg-12 col-md-12 col-sm-5 col-6 offset-md-0 offset-4">
+        
+        <!--START リンク-->
         <div class="row g-3">
-
+          <!--START 通知リンク-->
           <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
             <i class="fas fa-bell bell-icon"></i>
           </div>
+          
           <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
             <%= link_to notifies_path, class:"text-dark no-wrap" do %>
               通知 <%= @notifies.count %> 件
             <% end %>
           </div>
+          <!--END 通知リンク-->
 
+          <!--START 練習場所一覧リンク-->
           <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
             <i class="fas fa-map-pin"></i>
           </div>
+          
           <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
             <%= link_to '練習場所一覧',
               sites_path,
               class:"text-dark link no-wrap"
             %>
           </div>
+          <!--END 練習場所一覧リンク-->
 
+          <!--START 応募履歴リンク-->
           <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
             <i class="fas fa-thumbtack"></i>
           </div>
+          
           <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
             <%= link_to '応募履歴',
               entries_path,
               class:"text-dark link no-wrap"
             %>
           </div>
+          <!--END 応募履歴リンク-->
 
+          <!--START 募集履歴リンク-->
           <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-left">
             <i class="fas fa-bullhorn"></i>
           </div>
+          
           <div class="col-lg-10 col-md-10 col-sm-10 col-10 text-left">
             <%= link_to '募集履歴',
               recruits_path,
               class:"text-dark link no-wrap"
             %>
           </div>
-
+          <!--END 募集履歴リンク-->
         </div>
       </div>
-
+      <!--END リンク-->
+      
     </div>
+    <!--END ユーザー操作部分-->
 
-
+    <!--START ユーザー情報概要-->
     <div class="col-lg-7 col-md-8 col-sm-12 col-12 mb-5 table-responsive">
-      <%= render '/public/shared/user_information', user: @user, genre: @user.genre %>
+      
+      <!--START ユーザー情報表-->
+      <%= render '/public/shared/user_information', 
+        user: @user, 
+        genre: @user.genre 
+      %>
+      <!--END ユーザー情報表-->
+      
     </div>
+    <!--END ユーザー情報概要-->
 
   </div>
 </div>

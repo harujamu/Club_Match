@@ -1,29 +1,51 @@
 <div class="container">
   <div class = "row g-3">
     
+    <!--START 募集者情報-->
     <div class="col-lg-2 col-md-3 col-sm-6 col-5 mx-auto">
-      <%= profile_image(@user,@user.genre,180,180) %>
+      <!--募集者画像-->
+      <%= profile_image(
+        @user,
+        @user.genre,
+        180,
+        180) 
+      %>
       
       <p class="mt-2 no-wrap">
+        <!--クラブ名-->
         <%= @user.club_name %>
-        <% if user_signed_in? %>
-          <%= follow_button(@user,current_user) %>
-        <% else %>
-          <i class="fas fa-user-check"></i>
-        <% end %>
+        <!--フォローボタン-->
+        <%= follow_button(
+          @user,
+          current_user) 
+        %>
+        <!--フォロワー数表示-->
         <%= @user.follows.count %>
       </p>
     </div>
+    <!--END  募集者情報-->
     
+    
+    <!--START 募集記事詳細-->
     <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+      
+      <!--START 募集タイトル-->
       <div class="col-12">
         <h3 class="border-bottom border-secondary">
-          <%= @recruit.title %>  
+          
+          <!--タイトル-->
+          <%= @recruit.title %> 
+          
+          <!--いいねボタン、いいね数-->
           <span class="h5">
-            <%= like_button(current_user, @recruit) %>
+            <%= like_button(
+              current_user, 
+              @recruit) 
+            %>
             <%= @recruit.likes.count %>
           </span>
           
+          <!--START 公開状況、マッチ状況表示-->
           <% if @recruit.open_status == false && @recruit.match? %>
             マッチ成立済
           <% elsif @recruit.open_status == false %>
@@ -31,107 +53,154 @@
               ※公開停止中
             </span>
           <% end %>
+          <!--END 公開状況、マッチ状況表示-->
+          
         </h3>
       </div>
+      <!--END 募集タイトル-->
       
+      <!--START 募集条件-->
       <div class="col-12">
+        
+        <!--日程、場所指定-->
         <h5 class=" mt-4">
           <%= @recruit.date.strftime('%Y/%m/%d') %>に 
           @<%= @recruit.site.site_name %> で
-          『<%= practice_type(@recruit) %>』 が
-          できる相手を募集しています
+          『<%= practice_type(@recruit) %>』 ができる相手を募集しています
         </h5>
-
+        
+        <!--対象年齢層-->
         <% if @recruit.age_group_i18n != "指定なし" %>
-          <p>※この募集対象は、<%= @recruit.age_group_i18n %>に限ります。</p>
+          <p>
+            ※この募集対象は、<%= @recruit.age_group_i18n %>に限ります。
+          </p>
         <% end %>
+        
       </div>
 
       <div class="col-12 mt-4">
-        <h5 class="mb-4">練習内容</h5>
+        <h5 class="mb-4">
+          練習内容
+        </h5>
+        
+        <!--募集内容詳細-->
         <div class="border p-3 border-secondary">
           <%= @recruit.detail %>
         </div>
+        
       </div>
-
+      
+      <!--START ユーザー別操作ボタン表示-->
       <div class="col-12 mt-5 text-right">
-      <% if @user == current_user %>
-      <!--current_user が募集者の時-->
-        <span>
-          <% if @recruit.recruiting? || @recruit.having_candidates? %>
-            <%= link_to '編集する', 
-              edit_recruit_path(@recruit.id), 
-              class:"btn btn-success mr-2 col-lg-3 col-md-4 col-sm-4 col-4 mt-1" 
-            %>
-          <% end %>
-          <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: 2).any? %>
-            <%= link_to '応募受付終了', 
-              recruit_path(@recruit, 
-                recruit: {
-                  recruit_status: "match", 
-                  user_id: current_user.id, 
-                  date: @recruit.date, 
-                  title: @recruit.title, 
-                  practice_type: @recruit.practice_type, 
-                  detail: @recruit.detail, 
-                  age_group: @recruit.age_group, 
-                  open_status: false
-                }, 
-              site_id: @recruit.site_id ), 
-              method: :patch, 
-              class:"btn btn-info col-lg-3 col-md-4 col-sm-4 col-4 mt-1" 
-            %>
-          <% end %>
-        </span>
-
-      <% else %>
-      <!--current_user が募集者でない時-->
-        <% if (@entry.new_record? ) && (@recruit.recruiting? || @recruit.having_candidates?) %>
+        
+        <!--current_user が募集者の時-->
+        <% if @user == current_user %>
           <span>
-            <%= link_to '応募する', 
-              entries_path(@entry, 
-                entry: {
-                  recruit_id: @recruit.id, 
-                  user_id: current_user.id
-                }
-              ), 
-              method: :post, 
-              class:"btn btn-primary col-lg-3 col-md-4 col-sm-4 col-4" 
-            %>
+            <!--START 募集ステータスが『募集中』OR 『候補者あり』-->
+            <% if @recruit.recruiting? || @recruit.having_candidates? %>
+            <!--編集ボタン-->
+              <%= link_to '編集する', 
+                edit_recruit_path(@recruit.id), 
+                class:"btn btn-success mr-2 col-lg-3 col-md-4 col-sm-4 col-4 mt-1" 
+              %>
+            <% end %>
+            <!--END 募集ステータスが『募集中』OR 『候補者あり』-->
+            
+            <!--START 募集ステータスが『候補者あり』AND １人以上の応募者のステータスが『マッチ』-->
+            <% if @recruit.having_candidates? && @recruit.entries.where(entry_status: 2).any? %>
+              <!--応募締め切りボタン-->
+              <%= link_to '応募受付終了', 
+                recruit_path(@recruit, 
+                  recruit: {
+                    recruit_status: "match", 
+                    user_id: current_user.id, 
+                    date: @recruit.date, 
+                    title: @recruit.title, 
+                    practice_type: @recruit.practice_type, 
+                    detail: @recruit.detail, 
+                    age_group: @recruit.age_group, 
+                    open_status: false
+                  }, 
+                site_id: @recruit.site_id ), 
+                method: :patch, 
+                class:"btn btn-info col-lg-3 col-md-4 col-sm-4 col-4 mt-1" 
+              %>
+            <% end %>
+            <!--END 募集ステータスが『候補者あり』AND １人以上の応募者のステータスが『マッチ』-->
           </span>
+  
+        <!--current_user が募集者でない時-->
+        <% else %>
+          <!--START current_userの応募が初　AND 募集ステータスが『募集中』OR 『候補者あり』-->
+          <% if (@entry.new_record? ) && (@recruit.recruiting? || @recruit.having_candidates?) %>
+            <!--応募ボタン-->
+            <span>
+              <%= link_to '応募する', 
+                entries_path(@entry, 
+                  entry: {
+                    recruit_id: @recruit.id, 
+                    user_id: current_user.id
+                  }
+                ), 
+                method: :post, 
+                class:"btn btn-primary col-lg-3 col-md-4 col-sm-4 col-4" 
+              %>
+            </span>
+          <% end %>
+          <!--END current_userの応募が初　AND 募集ステータスが『募集中』OR 『候補者あり』-->
+          
+          <!--START 応募ステータスが『応募済』 AND 募集ステータスが『候補者あり』-->
+          <% if @entry.id.present? && @recruit.having_candidates? %>
+          <!--応募取り消しボタン-->
+            <span>
+              <%= link_to '応募取消', 
+                entry_path(@entry.id), 
+                method: :delete, 
+                class:"btn btn-danger col-lg-3 col-md-4 col-sm-4 col-4" 
+              %>
+            </span>
+          <% end %>
+          <!--END 応募ステータスが『応募済』 AND 募集ステータスが『候補者あり』-->
         <% end %>
-
-        <% if @entry.id.present? && @recruit.having_candidates? %>
-          <span>
-            <%= link_to '応募取消', 
-              entry_path(@entry.id), 
-              method: :delete, 
-              class:"btn btn-danger col-lg-3 col-md-4 col-sm-4 col-4" 
-            %>
-          </span>
-        <% end %>
-
-      <% end %>
+        <!--END ユーザー別操作ボタン表示-->
       </div>
     </div>
   </div>
   
-  
-  <div class = "row g-3 mb-5">
-    <% if @user == current_user %>
+  <!--START current_userが募集者の時-->
+  <% if @user == current_user %>
+    <div class = "row g-3 mb-5">
+      
+      <!--START 応募者一覧-->
       <div class="col-12">
+        
+        <!--START 募集ステータスが『候補者あり』AND １人以上の応募者のステータスが『応募済』--->
         <% if @recruit.having_candidates? && @entries.where(entry_status: 1).any? %>
-          <h5>応募者一覧(募集状況: <%= @recruit.recruit_status_i18n %>)</h5>
+          <h5>
+            応募者一覧
+            (募集状況: <%= @recruit.recruit_status_i18n %>)
+          </h5>
         <% end %>
+        <!--END 募集ステータスが『候補者あり』AND １人以上の応募者のステータスが『応募済』--->
         
         <div class="col-12 d-flex flex-wrap" >
           <% @entries.each do |entry| %>
+            
+            <!--START 募集ステータスが『候補者あり』AND 応募者のステータスが『応募済』-->
             <% if entry.recruit.having_candidates? && entry.entered? %>
               <div class="mr-5 mt-3 no-wrap">
+                <!--応募者画像-->
                 <p class="d-flex align-items-center mb-0 ml-2">
-                  <%= profile_image(entry.user,entry.user.genre,40,40) %>
+                  <%= profile_image(
+                    entry.user,
+                    entry.user.genre,
+                    40,
+                    40) 
+                  %>
                 </p>
+                
                 <p class="my-0 mr-0 ml-1 p-0">
+                  <!--START 応募ステータスをマッチに更新するボタン-->
                   <%= link_to entry_path(entry, 
                       entry: {
                         entry_status: "match", 
@@ -142,7 +211,9 @@
                   %>
                     <i class="fas fa-check-circle mr-3"></i>
                   <% end %>
+                  <!--END 応募ステータスをマッチに更新するボタン-->
                   
+                  <!--START 応募ステータスをマッチ不成立に更新するボタン-->
                   <%= link_to entry_path(entry, 
                     entry: {
                       entry_status: "match_rejected", 
@@ -152,48 +223,87 @@
                   %>
                     <i class="fas fa-times-circle reject-icon"></i>
                   <% end %>
+                  <!--END 応募ステータスをマッチ不成立に更新するボタン-->
                 </p>
+                <!--募集者のクラブ名-->
                 <small>
                   <%= entry.user.club_name.truncate(8) %>
                 </small>
+                
               </div>
             <% end %>
+            <!--END 募集ステータスが『候補者あり』AND 応募者のステータスが『応募済』-->
           <% end %>
         </div>
+        <!--END 応募者一覧-->
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+  <!--END current_userが募集者の時-->
   
   
   <div class="row g-3 mb-5">
+    
+    <!--START 参加者一覧-->
     <div class="col-12">
+      
+      <!--START １人以上の応募者のステータスが『マッチ』-->
       <% if @entries.where(entry_status: 2).any? %>  
-        <h5>参加メンバー 
+        <h5>
+          参加メンバー 
           <span>
+            <!--START 募集ステータスが『マッチ』-->
             <% if @recruit.match? %>
-              <%= room_link(@recruit.room, @recruit) %>
+              <!--チャットルームにリンク-->
+              <%= room_link(
+                @recruit.room, 
+                @recruit) 
+              %>
             <% end %>
+            <!--END 募集ステータスが『マッチ』-->
           </span>
         </h5>
         
         <div class="col-12 d-flex flex-wrap" >
           <% @entries.each do |entry| %>
+            <!--募集ステータスが『マッチ』-->
             <% if entry.match? %>
               <div class="mr-5 mt-3 ml-0">
+                
+                <!--募集者画像-->
                 <p class="d-flex align-items-center mb-0 ml-2">
-                  <%= profile_image(entry.user,entry.user.genre,40,40) %>
+                  <%= profile_image(
+                    entry.user,
+                    entry.user.genre,
+                    40,
+                    40) 
+                  %>
                 </p>
-                <small><%= entry.user.club_name.truncate(8) %></small>
+                
+                <!--募集者クラブ名-->
+                <small>
+                  <%= entry.user.club_name.truncate(8) %>
+                </small>
+                
               </div>
             <% end %>
           <% end %>
         </div>
-  
+      <!--END １人以上の応募者のステータスが『マッチ』-->
+      
+      <!--START 応募者のステータス『マッチ』がいない-->
       <% else %>
+        <!--START １件以上応募がある-->
         <% if @entry.id.present? %>
-          <p>応募状況: <%= @entry.entry_status_i18n %></p>
+          <p>
+            応募状況: <%= @entry.entry_status_i18n %>
+          </p>
         <% end %>
+        <!--END １件以上応募がある-->
       <% end %>
+      <!--END 応募者のステータス『マッチ』がいない-->
     </div>
+    <!--END 参加者一覧-->
+    
   </div>
 </div>
