@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ClubMatch</title>
+    
+    <title>
+      ClubMatch
+    </title>
+    
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body class="d-flex flex-column vh-100">
+    
+    <!--START　ヘッダー-->
     <header>
-      <!--START　ヘッダー-->
       <nav class ="navbar navbar-expand-lg navbar-light">
         <div class ="container mt-0">
-        <!--START ヘッダー共通部分-->
+        
           <!--START　ロゴ-->
           <div class ="navbar-brand ">
+            
+            <!--管理者権限でログイン時表示-->
             <% if admin_signed_in? %>
+            
               <%= link_to admin_path do %>
-                <%= image_tag'club_match_logo.png', :size => '125x125' %>
+                <%= image_tag'club_match_logo.png',
+                  :size => '125x125' 
+                %>
               <% end %>
+            
+            <!--一般ユーザーログイン時に表示-->
             <% else %>
+            
               <%= link_to root_path do %>
-                <%= image_tag'club_match_logo.png', :size => '125x125' %>
+                <%= image_tag'club_match_logo.png',
+                  :size => '125x125' 
+                %>
               <% end %>
+              
             <% end %>
           </div>
           <!--END　ロゴ-->
 
+          <!--START 画面幅縮小時のトグルボタン-->
           <button 
             class="navbar-toggler" 
             type="button" 
@@ -40,31 +59,43 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-        <!--END ヘッダー共通部分-->
+          <!--END 画面幅縮小時のトグルボタン-->
 
           <div class ="collapse navbar-collapse" id="navbarNavDropdown">
+            
             <!--START　ユーザーログイン後のヘッダー-->
             <% if user_signed_in? %>
-              <small><%= current_user.club_name %>さん、ようこそ！</small>
+              <small>
+                <%= current_user.club_name %>さん、ようこそ！
+              </small>
+              
               <ul class ="navbar-nav ml-auto">
+                
+                <!--応募履歴リンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to '応募履歴', 
                     entries_path,
                     class:"btn btn-warning btn-gradient py-2 w-100 no-wrap" 
                   %>
                 </li>
+                
+                <!--募集画面リンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to '募集する', 
                     new_recruit_path,
                     class:"btn btn-warning btn-gradient py-2 w-100  no-wrap" 
                   %>
                 </li>
+                
+                <!--マイページリンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to 'マイページ', 
                     user_my_page_path(current_user.id),
                     class:"btn btn-warning btn-gradient py-2 w-100 no-wrap"
                   %>
                 </li>
+                
+                <!--ログアウトボタン-->
                 <li class ="nav-item">
                   <%= link_to 'ログアウト', 
                     destroy_user_session_path, 
@@ -72,24 +103,32 @@
                     class:"btn btn-warning btn-gradient py-2 w-100  no-wrap" 
                   %>
                 </li>
+                
               </ul>
             <!--END ユーザーログイン後のヘッダー-->
 
             <!--START 管理者ログイン後のヘッダー-->
             <% elsif admin_signed_in? %>
+            
               <ul class ="navbar-nav ml-auto">
+                
+                <!--ジャンル管理リンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to 'ジャンル管理', 
                     admin_genres_path,
                     class:"btn btn-warning btn-gradient w-100 py-2 no-wrap"
                   %>
                 </li>
+                
+                <!--ユーザー一覧リンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to 'ユーザー一覧', 
                     admin_path,
                     class:"btn btn-warning btn-gradient w-100 py-2 no-wrap"
                   %>
                 </li>
+                
+                <!--ログアウトリンク-->
                 <li class ="nav-item">
                   <%= link_to 'ログアウト', 
                     destroy_admin_session_path,
@@ -97,48 +136,62 @@
                     class:"btn btn-warning btn-gradient w-100 py-2 no-wrap" 
                   %>
                 </li>
+                
               </ul>
             <!--END 管理者ログイン後のヘッダー-->
 
             <!--START ログアウト後(サインイン前)のヘッダー-->
             <% else %>
+            
               <ul class ="navbar-nav ml-auto">
+                
+                <!--募集一覧リンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to '募集一覧', 
                     recruits_path,
                     class:"btn btn-warning btn-gradient w-100 py-2 no-wrap"
                   %>
                 </li>
+                
+                <!--新規登録リンク-->
                 <li class ="nav-item mr-3 mb-1">
                   <%= link_to '新規登録', 
                     new_user_registration_path,
                     class: "btn btn-warning btn-gradient w-100 py-2 no-wrap"
                   %>
                 </li>
+                
+                <!--ログインリンク-->
                 <li class ="nav-item">
                   <%= link_to 'ログイン', 
                     new_user_session_path,
                     class:"btn btn-warning btn-gradient w-100 py-2 no-wrap"
                   %>
                 </li>
+                
               </ul>
             <% end %>
             <!--END ログアウト後のヘッダー-->
+            
           </div>
         </div>
       </nav>
-      <!--END　ヘッダー-->
     </header>
+    <!--END　ヘッダー-->
 
     <main class="mb-auto">
-    <%= yield %>
+      <%= yield %>
     </main>
     <%#= debug(params) if Rails.env.development? %>
     
     <!--START フッター-->
     <footer class="footer">
       <div class="bg-warning bg-gradient p-2">
-        <p class="text-light text-center m-0">ClubMatch</p>
+        
+        <p class="text-light text-center m-0">
+          ClubMatch
+        </p>
+        
       </div>
     </footer>
     <!--END フッター-->
